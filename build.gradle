@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'spring-boot'
+apply plugin: 'idea'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -9,6 +10,13 @@ description = """codeball"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
 
 repositories {
     jcenter()
@@ -20,8 +28,6 @@ dependencies {
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.3.3.RELEASE')
     compile 'org.springframework.boot:spring-boot-starter-security:1.3.3.RELEASE'
     compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.9.RELEASE'
-
-
 
     compile 'org.webjars:angularjs:1.5.5'
     compile 'org.webjars:bootstrap:3.3.6'
@@ -41,10 +47,12 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.BUILD-SNAPSHOT"
+        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
     }
 }
 
 bootRun {
     addResources = true
 }
+
