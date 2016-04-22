@@ -1,0 +1,21 @@
+codeball:
+  authorization-domain: codete.co
+
+spring:
+  resources:
+    chain:
+      enabled: true
+
+security:
+  oauth2:
+    client:
+      clientId: 645433820383-ks9c1u94qujptei3n7v6tuas2k4m9l1u.apps.googleusercontent.com
+      clientSecret: QycJ9l6BRJvKtiuJJGPfLiS2
+      accessTokenUri: https://accounts.google.com/o/oauth2/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth?hd=${codeball.authorization-domain}
+      authenticationScheme: query
+      clientAuthenticationScheme: query
+      scope: profile email
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
+      preferTokenInfo: false
