@@ -3,6 +3,8 @@ package com.example;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/")
 public class LoginController {
@@ -13,8 +15,8 @@ public class LoginController {
     }
 
     @RequestMapping("/janusz")
-    public String janusz() {
-        return "Chyba Ty!";
+    public Principal janusz(Principal principal) {
+        return principal;
     }
 
     @RequestMapping("login")
