@@ -1,10 +1,15 @@
 codeball:
   authorizationDomain: codete.co
 
+
+
 spring:
   resources:
     chain:
       enabled: true
+  data:
+    rest:
+      base-path: api/
 
 security:
   basic:
