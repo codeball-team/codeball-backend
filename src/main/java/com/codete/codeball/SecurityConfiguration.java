@@ -1,4 +1,4 @@
-package com.example;
+package com.codete.codeball;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;

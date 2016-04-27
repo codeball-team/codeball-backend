@@ -1,4 +1,4 @@
-package com.example;
+package com.codete.codeball;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
