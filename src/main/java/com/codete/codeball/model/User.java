@@ -1,29 +1,30 @@
 package com.codete.codeball.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Data
 @Entity
-public class Player {
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
-    private String description;
+    private String role;
 
-    private Player() {
+    private User() {
     }
 
-    public Player(String firstName, String lastName, String description) {
+    public User(String firstName, String lastName, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.description = description;
+        this.role = role;
     }
 
 }
