@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/test")
 public class LoginController {
 
     @RequestMapping("/")

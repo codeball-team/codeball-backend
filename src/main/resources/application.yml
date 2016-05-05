@@ -1,9 +1,9 @@
 codeball:
   authorizationDomain: codete.co
 
-
-
 spring:
+  application:
+    index: index.html
   resources:
     chain:
       enabled: true
