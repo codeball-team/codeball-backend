@@ -5,6 +5,7 @@ spring:
   resources:
     chain:
       enabled: true
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/build/,classpath:/public/
 
 security:
   basic:
