@@ -1,4 +1,5 @@
-.codeball-not-found {
-  font-size: 80px;
-  color: red;
+@import '~styles/main.scss';
+
+.not-found {
+  color: $red;
 }

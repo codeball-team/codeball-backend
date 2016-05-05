@@ -67,6 +67,10 @@ module.exports = {
         include: PATHS.app
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
       },

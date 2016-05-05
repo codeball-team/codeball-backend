@@ -52,6 +52,10 @@ module.exports = {
         include: PATHS.app
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.scss$/,
         loader: sassLoaders.join('!')
       },

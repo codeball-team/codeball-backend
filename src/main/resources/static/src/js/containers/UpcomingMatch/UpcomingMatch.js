@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { HelloWorld } from 'components';
-import './Codeball.scss';
+import { Menu, HelloWorld } from 'components';
 
-class Codeball extends Component {
+class UpcomingMatch extends Component {
   static propTypes = {
     saidHello: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
@@ -19,9 +18,15 @@ class Codeball extends Component {
 
     return (
       <div>
-        <HelloWorld
-          saidHello={saidHello}
-          sayHello={actions.sayHello} />
+        <h1>Upcoming match</h1>
+        <div>
+          <div>
+            <button onClick={actions.sayHello}>Hello!</button>
+          </div>
+          <div>
+            {`Said hello: ${saidHello}`}
+          </div>
+        </div>
       </div>
     );
   }
@@ -42,4 +47,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Codeball);
+)(UpcomingMatch);

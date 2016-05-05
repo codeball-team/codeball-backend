@@ -1,0 +1,18 @@
+@import '~styles/main.scss';
+
+.page {
+  display: flex;
+  align-items: stretch;
+
+  .page-menu {
+    flex: 0 0 auto;
+  }
+
+  .page-content {
+    background-color: $content-bg-color;
+    color: $content-fg-color;
+    opacity: $app-opacity;
+    flex: 1 1 auto;
+    padding: 40px 60px;
+  }
+}

@@ -1,0 +1,41 @@
+@import '~styles/colors.scss';
+
+$app-opacity:       0.98;
+$nav-bg-color:      $blue-dark;
+$nav-fg-color:      white;
+$content-bg-color:  darken($nav-bg-color, 5%);
+$content-fg-color:  white;
+
+html, body {
+  background-color: #F4F3F0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  background: url(http://blaugrana.pl/themes/blaugrana/img/bg_messi.jpg);
+  background-size: cover;
+
+  > #app {
+    position: relative;
+    flex: 1 1 auto;
+
+    > div > div > div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}
+
+h1 {
+  font-size: 54px;
+  font-weight: 300;
+  margin-top: 0;
+}

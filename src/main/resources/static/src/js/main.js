@@ -1,11 +1,11 @@
+import 'node-normalize-scss/_normalize.scss';
+import 'styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore  from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
-import '../styles/bootstrap.min.css';
-import '../styles/styles.scss';
 
 const store = configureStore();
 const rootElement = document.getElementById('app');
@@ -17,8 +17,8 @@ if (process.env.NODE_ENV !== 'production') {
 
   ComponentEl = (
     <div>
-      <Router history={browserHistory} routes={routes} />
-      <DevTools />
+      <Router key="router" history={browserHistory} routes={routes} />
+      <DevTools key="devtools" />
     </div>
   );
 } else {
