@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 import IconLocation from 'react-icons/lib/io/ios-location';
 import IconWorld from 'react-icons/lib/io/ios-world-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
@@ -8,6 +9,7 @@ import './MatchInfo.scss';
 
 export default class MatchInfo extends Component {
   static propTypes = {
+    className: PropTypes.string,
     dateTime: PropTypes.object.isRequired,
     duration: PropTypes.object.isRequired,
     pitchName: PropTypes.string.isRequired,
@@ -19,6 +21,7 @@ export default class MatchInfo extends Component {
 
   render() {
     const {
+      className,
       dateTime,
       duration,
       pitchName,
@@ -29,30 +32,39 @@ export default class MatchInfo extends Component {
     } = this.props;
 
     return (
-      <div className="match-info">
+      <div
+        className={classNames(
+          'match-info',
+          className
+        )}>
         <div className="title">
           {pitchName}
         </div>
+
         <div className="details">
           <IconCalendar className="icon" />
           {dateTime.format('YYYY-MM-DD, HH:mm')}
         </div>
+
         <div className="details">
           <IconClock className="icon" />
           {duration.as('minutes')} min
         </div>
+
         <div className="details">
           <IconLocation className="icon" />
           <a href={`https://www.google.com/maps/?q=${pitchAddress}`}>
             {pitchAddress}
           </a>
         </div>
+
         <div className="details">
           <IconWorld className="icon" />
           <a href={pitchUrl}>
             {pitchUrl.match(/(https?:\/\/[^/]*)/)[0]}
           </a>
         </div>
+
         <div className="details">
           <IconPeople className="icon" />
           {

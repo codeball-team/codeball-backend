@@ -32,3 +32,32 @@
       @content;
   }
 }
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin flex-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-child-stretch {
+  flex: 1 1 auto;
+}
+
+@mixin flex-child {
+  flex: 0 0 auto;
+}
+
+@mixin section-title {
+  font-size: $font-size-l;
+  padding-bottom: 10px;
+
+  @include tablet-and-smaller {
+    font-size: $font-size-m;
+  }
+}

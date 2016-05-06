@@ -32,6 +32,10 @@ html, body {
 a {
   text-decoration: none;
   color: $fg-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h1 {

@@ -2,5 +2,58 @@
 @import '~styles/mixins.scss';
 
 .match-enrollment {
-  
+  max-width: 600px;
+
+  .title {
+    @include section-title;
+  }
+
+  .match-enrollment-entries {
+    &.yes {
+      background-color: $bg-color-success;
+    }
+
+    &.no {
+      background-color: $bg-color-danger;
+      text-decoration: strikethrough;
+    }
+
+    &.maybe {
+      background-color: $bg-color-alert;
+    }
+
+    &:last-of-type {
+      .match-enrollment-entry:last-of-type {
+        border-bottom: 0;
+      }
+    }
+
+    .match-enrollment-entry {
+      @include flex-parent;
+      position: relative;
+      padding: 10px 20px;
+      border-bottom: 1px dotted rgba(255,255,255,0.4);
+
+      &:hover::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background-color: $highlight-color;
+      }
+
+      .name {
+        @include flex-child-stretch;
+        @include ellipsis;
+      }
+
+      .enrollment-status {
+        @include flex-child;
+      }
+    }
+  }
 }

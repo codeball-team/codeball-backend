@@ -14,10 +14,9 @@ const initialState = {
   },
   isEnrollmentOver: false,
   enrolledUsers: {
-    1: 'YES',
-    2: 'NO',
-    3: 'MAYBE',
-    4: 'YES'
+    yes: [1, 2],
+    no: [4],
+    maybe: [3]
   }
 };
 

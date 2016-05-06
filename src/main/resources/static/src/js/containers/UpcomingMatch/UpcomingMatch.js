@@ -29,6 +29,7 @@ class UpcomingMatch extends Component {
     return (
       <section className="upcoming-match">
         <MatchInfo
+          className="upcoming-match-info"
           dateTime={dateTime}
           duration={duration}
           pitchName={pitch.name}
@@ -36,7 +37,9 @@ class UpcomingMatch extends Component {
           pitchUrl={pitch.url}
           pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
           pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+
         <MatchEnrollment
+          className="upcoming-match-enrollment"
           users={users}
           enrolledUsers={enrolledUsers} />
       </section>

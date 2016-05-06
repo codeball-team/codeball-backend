@@ -6,10 +6,10 @@ export default class NotFound extends Component {
     return (
       <div>
         <h1 className="not-found">
-          404 :(
+          Error 404 :(
         </h1>
         <p>
-          {window.location.pathname} not found!
+          {window.location.hash} not found!
         </p>
       </div>
     );
