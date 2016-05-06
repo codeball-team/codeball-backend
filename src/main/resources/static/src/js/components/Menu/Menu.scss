@@ -11,7 +11,7 @@ nav {
   border-right: 1px solid rgba(255, 255, 255, 0.3);
 
   .menu-logo {
-    font-size: 26px;
+    font-size: $font-size-l;
     text-align: center;
     padding: 40px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -29,7 +29,7 @@ nav {
       display: block;
       text-align: left;
       cursor: pointer;
-      font-size: 16px;
+      font-size: $font-size-m;
       border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
 
       a {
@@ -46,11 +46,6 @@ nav {
         &:active {
           background-color: $nav-bg-active-color;
         }
-      }
-
-      .menu-icon {
-        margin-top: -4px;
-        margin-right: 6px;
       }
     }
   }

@@ -2,39 +2,52 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { Menu, HelloWorld } from 'components';
+import { Menu, MatchInfo, MatchEnrollment } from 'components';
+import './UpcomingMatch.scss';
 
 class UpcomingMatch extends Component {
   static propTypes = {
-    saidHello: PropTypes.bool.isRequired,
+    upcomingMatch: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
 
   render () {
     const {
-      saidHello,
+      upcomingMatch,
+      users,
       actions
     } = this.props;
 
+    const {
+      dateTime,
+      duration,
+      pitch,
+      enrolledUsers
+    } = upcomingMatch;
+
     return (
-      <div>
-        <h1>Upcoming match</h1>
-        <div>
-          <div>
-            <button onClick={actions.sayHello}>Hello!</button>
-          </div>
-          <div>
-            {`Said hello: ${saidHello}`}
-          </div>
-        </div>
-      </div>
+      <section className="upcoming-match">
+        <MatchInfo
+          dateTime={dateTime}
+          duration={duration}
+          pitchName={pitch.name}
+          pitchAddress={pitch.address}
+          pitchUrl={pitch.url}
+          pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
+          pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+        <MatchEnrollment
+          users={users}
+          enrolledUsers={enrolledUsers} />
+      </section>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    saidHello: state.saidHello
+    upcomingMatch: state.upcomingMatch,
+    users: state.users
   };
 }
 

@@ -1,10 +1,19 @@
 @import '~styles/colors.scss';
 
+$font-size-xxl:     54px;
+$font-size-xl:      34px;
+$font-size-l:       26px;
+$font-size-m:       16px;
+$font-size-s:       12px;
+$font-size-xs:      10px;
 $page-opacity:      0.98;
-$nav-bg-color:      $blue-dark;
-$nav-fg-color:      white;
-$content-bg-color:  darken($nav-bg-color, 5%);
-$content-fg-color:  white;
+$bg-color:          $blue-dark;
+$fg-color:          white;
+
+$nav-bg-color:      $bg-color;
+$nav-fg-color:      $fg-color;
+$content-bg-color:  darken($bg-color, 5%);
+$content-fg-color:  $fg-color;
 
 html, body {
   background-color: #F4F3F0;
@@ -33,9 +42,24 @@ html, body {
     }
   }
 }
+a {
+  text-decoration: none;
+  color: $fg-color;
+}
 
 h1 {
-  font-size: 54px;
+  font-size: $font-size-xxl;
   font-weight: 300;
   margin-top: 0;
+}
+
+h2 {
+  font-size: $font-size-xl;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.icon {
+  margin-top: -4px;
+  margin-right: 6px;
 }

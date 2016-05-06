@@ -3,7 +3,6 @@ import { Link, IndexLink } from 'react-router';
 import IconFootball from 'react-icons/lib/io/ios-football';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
-
 import './Menu.scss';
 
 export default class Menu extends Component {
@@ -25,7 +24,7 @@ export default class Menu extends Component {
         <ul>
           <li>
             <IndexLink activeClassName="active" to="/">
-              <IconFootball className="menu-icon" />
+              <IconFootball className="icon" />
               <span>
                 Upcoming match
               </span>
@@ -33,7 +32,7 @@ export default class Menu extends Component {
           </li>
           <li>
             <Link activeClassName="active" to="/match-history">
-              <IconCalendar className="menu-icon" />
+              <IconCalendar className="icon" />
               <span>
                 Match history
               </span>
@@ -41,7 +40,7 @@ export default class Menu extends Component {
           </li>
           <li>
             <Link activeClassName="active" to="/list-of-players" >
-              <IconPeople className="menu-icon" />
+              <IconPeople className="icon" />
               <span>
                 List of players
               </span>

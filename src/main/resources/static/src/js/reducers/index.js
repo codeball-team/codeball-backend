@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import saidHello from './saidHello';
+import upcomingMatch from './upcomingMatch';
+import users from './users';
 
 const rootReducer = combineReducers({
-  saidHello
+  upcomingMatch,
+  users
 });
 
 export default rootReducer;

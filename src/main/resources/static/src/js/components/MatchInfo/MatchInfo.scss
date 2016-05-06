@@ -1,0 +1,13 @@
+@import '~styles/main.scss';
+
+.match-info {
+  .title {
+    font-size: $font-size-l;
+    padding: 5px 0;
+  }
+
+  .details {
+    font-size: $font-size-m;
+    padding: 3px 0;
+  }
+}
