@@ -6,7 +6,7 @@ import { Menu, HelloWorld } from 'components';
 
 class UpcomingMatch extends Component {
   static propTypes = {
-    saidHello: PropTypes.object.isRequired,
+    saidHello: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired
   };
 

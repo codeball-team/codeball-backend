@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
-import Icon from '../Icon/Icon';
+import IconFootball from 'react-icons/lib/io/ios-football';
+import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
+import IconPeople from 'react-icons/lib/io/ios-people';
+
 import './Menu.scss';
 
 export default class Menu extends Component {
@@ -22,20 +25,26 @@ export default class Menu extends Component {
         <ul>
           <li>
             <IndexLink activeClassName="active" to="/">
-              <Icon name="ball" className="menu-icon" pathClassName="menu-icon-path" />
-              Upcoming match
+              <IconFootball className="menu-icon" />
+              <span>
+                Upcoming match
+              </span>
             </IndexLink>
           </li>
           <li>
             <Link activeClassName="active" to="/match-history">
-              <Icon name="calendar" className="menu-icon" pathClassName="menu-icon-path" />
-              Match history
+              <IconCalendar className="menu-icon" />
+              <span>
+                Match history
+              </span>
             </Link>
           </li>
           <li>
             <Link activeClassName="active" to="/list-of-players" >
-              <Icon name="player" className="menu-icon" pathClassName="menu-icon-path" />
-              List of players
+              <IconPeople className="menu-icon" />
+              <span>
+                List of players
+              </span>
             </Link>
           </li>
         </ul>
