@@ -1,13 +1,22 @@
-@import '~styles/main.scss';
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
 
 .match-info {
   .title {
     font-size: $font-size-l;
     padding: 5px 0;
+
+    @include tablet-and-smaller {
+      font-size: $font-size-m;
+    }
   }
 
   .details {
     font-size: $font-size-m;
     padding: 3px 0;
+
+    @include tablet-and-smaller {
+      font-size: $font-size-s;
+    }
   }
 }

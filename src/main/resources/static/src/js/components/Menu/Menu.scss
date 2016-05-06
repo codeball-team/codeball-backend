@@ -1,8 +1,5 @@
-@import '~styles/main.scss';
-
-$nav-bg-hover-color:    lighten($nav-bg-color, 5%);
-$nav-bg-active-color:   darken($nav-bg-color, 10%);
-$nav-bg-selected-color: darken($nav-bg-color, 5%);
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
 
 nav {
   height: 100%;
@@ -15,6 +12,10 @@ nav {
     text-align: center;
     padding: 40px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    @include tablet-and-smaller {
+      padding: 24px 10px;
+      font-size: $font-size-s;
+    }
   }
 
   > ul {
@@ -37,14 +38,34 @@ nav {
         padding: 20px 50px;
         text-decoration: none;
         color: $nav-fg-color;
+
         &.active {
           background-color: $nav-bg-selected-color;
         }
+
         &:hover {
           background-color: $nav-bg-hover-color;
         }
+
         &:active {
           background-color: $nav-bg-active-color;
+        }
+
+        @include tablet-and-smaller {
+          padding: 20px;
+        }
+
+        .icon {
+          @include tablet-and-smaller {
+            width: 100%;
+            margin-right: 0;
+          }
+        }
+
+        span.label {
+          @include tablet-and-smaller {
+            display: none;
+          }
         }
       }
     }

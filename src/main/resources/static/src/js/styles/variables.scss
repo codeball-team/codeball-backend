@@ -1,0 +1,24 @@
+@import '~styles/colors.scss';
+
+$screen-m:              1000px;
+$screen-s:              600px;
+
+$page-opacity:          0.98;
+
+$font-size-xxl:         54px;
+$font-size-xl:          34px;
+$font-size-l:           26px;
+$font-size-m:           18px;
+$font-size-s:           12px;
+$font-size-xs:          10px;
+
+$bg-color:              $blue-dark;
+$fg-color:              white;
+$fg-color-danger:       $red;
+$nav-bg-color:          $bg-color;
+$nav-fg-color:          $fg-color;
+$nav-bg-hover-color:    lighten($nav-bg-color, 5%);
+$nav-bg-active-color:   darken($nav-bg-color, 10%);
+$nav-bg-selected-color: darken($nav-bg-color, 5%);
+$content-bg-color:      darken($bg-color, 5%);
+$content-fg-color:      $fg-color;

@@ -1,19 +1,5 @@
-@import '~styles/colors.scss';
-
-$font-size-xxl:     54px;
-$font-size-xl:      34px;
-$font-size-l:       26px;
-$font-size-m:       16px;
-$font-size-s:       12px;
-$font-size-xs:      10px;
-$page-opacity:      0.98;
-$bg-color:          $blue-dark;
-$fg-color:          white;
-
-$nav-bg-color:      $bg-color;
-$nav-fg-color:      $fg-color;
-$content-bg-color:  darken($bg-color, 5%);
-$content-fg-color:  $fg-color;
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
 
 html, body {
   background-color: #F4F3F0;
@@ -42,6 +28,7 @@ html, body {
     }
   }
 }
+
 a {
   text-decoration: none;
   color: $fg-color;
