@@ -1,10 +1,14 @@
 package com.codete.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -14,6 +18,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@Data
+@Builder
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Game {
@@ -28,25 +34,17 @@ public class Game {
     private boolean isEnrollmentOver = false;
     @ElementCollection
     private Map<User, EnrollmentStatus> enrolledUsers = new HashMap<>();
-    @ElementCollection
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_game", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> teamA = new HashSet<>();
-    private byte teamAScore;
-    @ElementCollection
+    private int teamAScore;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_game", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> teamB = new HashSet<>();
-    private byte teamBScore;
+    private int teamBScore;
 
+    @Tolerate
     private Game() {
     }
 
-    public Game(LocalDateTime dateTime, Duration duration, Pitch pitch, boolean isEnrollmentOver, Map<User, EnrollmentStatus> enrolledUsers, Set<User> teamA, byte teamAScore, Set<User> teamB, byte teamBScore) {
-        this.dateTime = dateTime;
-        this.duration = duration;
-        this.pitch = pitch;
-        this.isEnrollmentOver = isEnrollmentOver;
-        this.enrolledUsers = enrolledUsers;
-        this.teamA = teamA;
-        this.teamAScore = teamAScore;
-        this.teamB = teamB;
-        this.teamBScore = teamBScore;
-    }
 }

@@ -1,15 +1,15 @@
 package com.codete.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Tolerate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
+@Builder
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User {
@@ -21,13 +21,8 @@ public class User {
     private String lastName;
     private String role;
 
+    @Tolerate
     private User() {
-
     }
 
-    public User(String firstName, String lastName, String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-    }
 }
