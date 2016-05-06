@@ -1,7 +1,10 @@
 package com.codete.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ public class User {
     private String role;
 
     private User() {
+
     }
 
     public User(String firstName, String lastName, String role) {
@@ -26,5 +30,4 @@ public class User {
         this.lastName = lastName;
         this.role = role;
     }
-
 }
