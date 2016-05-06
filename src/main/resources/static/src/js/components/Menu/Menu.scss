@@ -8,7 +8,6 @@ nav {
   height: 100%;
   background-color: $nav-bg-color;
   color: $nav-fg-color;
-  opacity: $app-opacity;
   border-right: 1px solid rgba(255, 255, 255, 0.3);
 
   .menu-logo {
@@ -50,12 +49,8 @@ nav {
       }
 
       .menu-icon {
-        float: left;
-        padding-right: 10px;
-
-        .menu-icon-path {
-          fill: $nav-fg-color;
-        }
+        margin-top: -4px;
+        margin-right: 6px;
       }
     }
   }
