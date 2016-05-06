@@ -2,27 +2,14 @@
 @import '~styles/mixins.scss';
 
 .match-enrollment {
-  max-width: 600px;
-
   .title {
     @include section-title;
   }
 
   .match-enrollment-entries {
-    &.yes {
-      background-color: $bg-color-success;
-    }
-
-    &.no {
-      background-color: $bg-color-danger;
-      text-decoration: strikethrough;
-    }
-
-    &.maybe {
-      background-color: $bg-color-alert;
-    }
-
     &:last-of-type {
+      margin-bottom: 20px;
+
       .match-enrollment-entry:last-of-type {
         border-bottom: 0;
       }
@@ -47,7 +34,7 @@
       }
 
       .name {
-        @include flex-child-stretch;
+        @include flex-child-grow;
         @include ellipsis;
       }
 
@@ -55,5 +42,49 @@
         @include flex-child;
       }
     }
+  }
+
+  .match-enrollment-form {
+    @include flex-parent;
+
+    .label {
+      @include flex-child;
+      margin-right: 20px;
+    }
+
+    .options {
+      @include flex-parent;
+
+      .option {
+        @include flex-child;
+        padding: 10px 30px;
+        margin: 0 10px;
+        cursor: pointer;
+
+        &.yes {
+          @include clickable-effects($bg-color-success);
+        }
+
+        &.no {
+          @include clickable-effects($bg-color-danger);
+        }
+
+        &.maybe {
+          @include clickable-effects($bg-color-alert);
+        }
+      }
+    }
+  }
+
+  .yes {
+    background-color: $bg-color-success;
+  }
+
+  .no {
+    background-color: $bg-color-danger;
+  }
+
+  .maybe {
+    background-color: $bg-color-alert;
   }
 }

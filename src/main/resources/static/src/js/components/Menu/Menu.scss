@@ -34,22 +34,11 @@ nav {
       border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
 
       a {
+        @include clickable-effects($nav-bg-color);
         display: block;
         padding: 20px 50px;
         text-decoration: none;
         color: $nav-fg-color;
-
-        &.active {
-          background-color: $nav-bg-selected-color;
-        }
-
-        &:hover {
-          background-color: $nav-bg-hover-color;
-        }
-
-        &:active {
-          background-color: $nav-bg-active-color;
-        }
 
         @include tablet-and-smaller {
           padding: 20px;

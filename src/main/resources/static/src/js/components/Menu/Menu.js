@@ -23,7 +23,7 @@ export default class Menu extends Component {
 
         <ul>
           <li>
-            <IndexLink activeClassName="active" to="/">
+            <IndexLink activeClassName="focus" to="/">
               <IconFootball className="icon" />
               <span className="label">
                 Upcoming match
@@ -31,7 +31,7 @@ export default class Menu extends Component {
             </IndexLink>
           </li>
           <li>
-            <Link activeClassName="active" to="/match-history">
+            <Link activeClassName="focus" to="/match-history">
               <IconCalendar className="icon" />
               <span className="label">
                 Match history
@@ -39,7 +39,7 @@ export default class Menu extends Component {
             </Link>
           </li>
           <li>
-            <Link activeClassName="active" to="/list-of-players" >
+            <Link activeClassName="focus" to="/list-of-players" >
               <IconPeople className="icon" />
               <span className="label">
                 List of players

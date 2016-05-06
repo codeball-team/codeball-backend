@@ -12,6 +12,7 @@ html, body {
   justify-content: stretch;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
+  font-size: $font-size-m;
   background: url(http://blaugrana.pl/themes/blaugrana/img/bg_messi.jpg);
   background-size: cover;
 
@@ -48,6 +49,19 @@ h2 {
   font-size: $font-size-xl;
   font-weight: 300;
   margin-top: 0;
+}
+
+input[type="text"] {
+  @include flex-child-grow;
+  border-image: none;
+  border: 0;
+  padding: 10px 20px;
+  font-size: $font-size-m;
+
+  &:focus {
+    outline: $focus-color solid 2px;
+    outline-offset: 0;
+  }
 }
 
 .icon {

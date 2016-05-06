@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import EnrollmentStatus from './EnrollmentStatus';
+import MatchEnrollmentStatus from './MatchEnrollmentStatus';
 
-export default class EnrollmentStatuses extends Component {
+export default class MatchEnrollmentStatuses extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollmentStatus: PropTypes.string.isRequired,
@@ -30,7 +30,7 @@ export default class EnrollmentStatuses extends Component {
           } = user;
 
           return (
-            <EnrollmentStatus
+            <MatchEnrollmentStatus
               key={id}
               name={name}
               enrollmentStatus={enrollmentStatus} />

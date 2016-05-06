@@ -2,11 +2,9 @@
 @import '~styles/mixins.scss';
 
 .upcoming-match {
-  .upcoming-match-info {
-    margin-bottom: 40px;
-  }
+  max-width: 600px;
 
-  .upcoming-match-enrollment {
+  > div {
     margin-bottom: 40px;
   }
 }

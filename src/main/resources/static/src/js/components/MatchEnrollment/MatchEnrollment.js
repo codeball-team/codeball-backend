@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import EnrollmentStatuses from './EnrollmentStatuses';
+import MatchEnrollmentStatuses from './MatchEnrollmentStatuses';
 import './MatchEnrollment.scss';
 
 const enrollmentStatusClassnames = {
@@ -42,13 +42,33 @@ export default class MatchEnrollment extends Component {
           Enrolled players ({enrolledUsers.yes.length})
         </div>
 
-        {_(enrollmentStatuses).map(enrollmentStatus => (
-          <EnrollmentStatuses
-            key={enrollmentStatus}
-            className={enrollmentStatus}
-            enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
-            enrolledUsers={_(enrolledUsers[enrollmentStatus]).map(userId => users[userId])} />
-        ))}
+        <div>
+          {_(enrollmentStatuses).map(enrollmentStatus => (
+            <MatchEnrollmentStatuses
+              key={enrollmentStatus}
+              className={enrollmentStatus}
+              enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
+              enrolledUsers={_(enrolledUsers[enrollmentStatus]).map(userId => users[userId])} />
+          ))}
+        </div>
+
+        <div className="match-enrollment-form">
+          <div className="label">
+            Are you going?
+          </div>
+
+          <div className="options">
+            <div className="option yes">
+              Yes
+            </div>
+            <div className="option maybe">
+              Maybe
+            </div>
+            <div className="option no">
+              No
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

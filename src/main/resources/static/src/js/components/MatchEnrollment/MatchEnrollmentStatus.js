@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-export default class EnrollmentStatus extends Component {
+export default class MatchEnrollmentStatus extends Component {
   static propTypes = {
     className: PropTypes.string,
     name: PropTypes.string.isRequired,
