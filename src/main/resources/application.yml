@@ -7,7 +7,7 @@ spring:
   resources:
     chain:
       enabled: true
-    static-locations: classpath:/resources/,classpath:/static/build/
+    static-locations: classpath:/resources/,classpath:/static/build/,classpath:/META-INF/resources/
   data:
     rest:
       base-path: api/
