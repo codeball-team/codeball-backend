@@ -6,7 +6,9 @@ const ICONS = require('./icons.json');
 
 export default class Icon extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    pathClassName: PropTypes.string
   };
 
   render() {

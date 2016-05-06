@@ -5,7 +5,7 @@ import './Menu.scss';
 
 export default class Menu extends Component {
   static propTypes = {
-    sayHello: PropTypes.func.isRequired
+    className: PropTypes.string
   };
 
   render() {
