@@ -1,15 +1,17 @@
 package com.codete.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
-import javax.annotation.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Data
+@Builder
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Rating {
@@ -23,5 +25,9 @@ public class Rating {
     private User voter;
     @ManyToOne
     private User player;
+
+    @Tolerate
+    private Rating() {
+    }
 
 }
