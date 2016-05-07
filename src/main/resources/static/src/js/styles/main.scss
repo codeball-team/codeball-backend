@@ -11,33 +11,15 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-size: $font-size-m;
   background: url(http://blaugrana.pl/themes/blaugrana/img/bg_messi.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: auto;
-  overflow-y: auto;
 
   @include tablet-and-smaller {
     font-size: $font-size-s;
-  }
-
-  > #app {
-    position: relative;
-    flex: 1 1 auto;
-
-    > div > div > div {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
   }
 }
 

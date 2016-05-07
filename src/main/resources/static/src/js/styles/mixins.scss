@@ -82,3 +82,11 @@
     background-color: darken($color, 10%);
   }
 }
+
+@mixin content-scrolling {
+  overflow-y: auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
+  touch-action: pan-y;
+}

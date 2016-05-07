@@ -2,19 +2,33 @@
 @import '~styles/mixins.scss';
 
 .page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: stretch;
+  min-height: 100%;
   opacity: $page-opacity;
 
   .page-menu {
+    @include content-scrolling;
     flex: 0 0 auto;
+    min-height: 100%;
   }
 
   .page-content {
+    @include content-scrolling;
+    flex: 1 1 auto;
+    min-height: 100%;
+    padding: 40px 60px;
     background-color: $content-bg-color;
     color: $content-fg-color;
-    flex: 1 1 auto;
-    padding: 40px 60px;
+
+    > div {
+      min-height: 100%;
+    }
 
     @include tablet-and-smaller {
       padding: 30px;

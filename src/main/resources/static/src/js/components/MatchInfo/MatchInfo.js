@@ -4,7 +4,7 @@ import IconLocation from 'react-icons/lib/io/ios-location';
 import IconWorld from 'react-icons/lib/io/ios-world-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
-import IconClock from 'react-icons/lib/io/clock';
+import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import './MatchInfo.scss';
 
