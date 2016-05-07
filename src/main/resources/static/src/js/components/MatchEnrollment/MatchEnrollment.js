@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import MatchEnrollmentStatuses from './MatchEnrollmentStatuses';
+import MatchEnrollmentEntries from './MatchEnrollmentEntries';
 import './MatchEnrollment.scss';
 
 const enrollmentStatusClassnames = {
@@ -44,7 +44,7 @@ export default class MatchEnrollment extends Component {
 
         <div>
           {_(enrollmentStatuses).map(enrollmentStatus => (
-            <MatchEnrollmentStatuses
+            <MatchEnrollmentEntries
               key={enrollmentStatus}
               className={enrollmentStatus}
               enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
