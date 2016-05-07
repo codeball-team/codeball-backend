@@ -45,11 +45,13 @@
   }
 
   .match-enrollment-form {
-    @include flex-parent;
+    @include flex-parent(flex-start, flex-start);
+    flex-wrap: wrap;
 
     .label {
       @include flex-child;
       margin-right: 20px;
+      padding: 10px 0;
     }
 
     .options {
@@ -58,8 +60,12 @@
       .option {
         @include flex-child;
         padding: 10px 30px;
-        margin: 0 10px;
+        margin-right: 10px;
         cursor: pointer;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
 
         &.yes {
           @include clickable-effects($bg-color-success);

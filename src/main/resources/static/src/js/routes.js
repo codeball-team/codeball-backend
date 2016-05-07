@@ -10,6 +10,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Page(UpcomingMatch)} />
     <Route path="upcoming-match" component={Page(UpcomingMatch)} />
+    <Route path="last-match" component={Page(NotFound)} />
     <Route path="match-history" component={Page(NotFound)} />
     <Route path="list-of-players" component={Page(NotFound)} />
     <Redirect from="*" to="404" />

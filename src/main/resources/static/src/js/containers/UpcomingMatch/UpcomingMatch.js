@@ -32,6 +32,7 @@ class UpcomingMatch extends Component {
           dateTime={dateTime}
           duration={duration}
           pitchName={pitch.name}
+          pitchType={pitch.type}
           pitchAddress={pitch.address}
           pitchUrl={pitch.url}
           pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}

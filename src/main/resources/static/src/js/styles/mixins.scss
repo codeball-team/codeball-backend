@@ -39,10 +39,10 @@
   text-overflow: ellipsis;
 }
 
-@mixin flex-parent {
+@mixin flex-parent($align-items: center, $justify-content: center) {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: $align-items;
+  justify-content: $justify-content;
 }
 
 @mixin flex-child-grow {

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
+import IconAlarm from 'react-icons/lib/io/ios-alarm-outline';
 import IconFootball from 'react-icons/lib/io/ios-football';
+import IconPodium from 'react-icons/lib/io/podium';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
 import './Menu.scss';
@@ -24,12 +26,22 @@ export default class Menu extends Component {
         <ul>
           <li>
             <IndexLink activeClassName="focus" to="/">
-              <IconFootball className="icon" />
+              <IconAlarm className="icon" />
               <span className="label">
                 Upcoming match
               </span>
             </IndexLink>
           </li>
+
+          <li>
+            <Link activeClassName="focus" to="/last-match">
+              <IconPodium className="icon" />
+              <span className="label">
+                Last match
+              </span>
+            </Link>
+          </li>
+
           <li>
             <Link activeClassName="focus" to="/match-history">
               <IconCalendar className="icon" />
@@ -38,6 +50,7 @@ export default class Menu extends Component {
               </span>
             </Link>
           </li>
+
           <li>
             <Link activeClassName="focus" to="/list-of-players" >
               <IconPeople className="icon" />
