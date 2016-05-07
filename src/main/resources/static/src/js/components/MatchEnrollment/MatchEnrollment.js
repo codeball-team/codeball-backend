@@ -48,7 +48,11 @@ export default class MatchEnrollment extends Component {
               key={enrollmentStatus}
               className={enrollmentStatus}
               enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
-              enrolledUsers={_(enrolledUsers[enrollmentStatus]).map(userId => users[userId])} />
+              enrolledUsers={
+                _(
+                  _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
+                ).compact()
+              } />
           ))}
         </div>
       </div>

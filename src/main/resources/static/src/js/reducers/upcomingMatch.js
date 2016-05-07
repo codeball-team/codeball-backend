@@ -1,5 +1,7 @@
+import _ from 'underscore';
 import moment from 'moment';
-import { SAY_HELLO } from 'constants/ActionTypes';
+import { reducer } from 'utils';
+import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from 'constants/ActionTypes';
 
 const pitchTypes = {
   1: 'Firm Ground',
@@ -10,8 +12,8 @@ const pitchTypes = {
 };
 
 const initialState = {
-  dateTime: moment('2016-05-11 19:00', 'YYYY-MM-DD HH:mm'),
-  duration: moment.duration(1.5, 'hours'),
+  dateTime: moment('2016-05-11 19:00', 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD, HH:mm'),
+  duration: moment.duration(1.5, 'hours').as('minutes'),
   pitch: {
     id: 1,
     name: 'Boisko - ul. Św. Filipa',
@@ -33,9 +35,4 @@ const initialState = {
   teamBScore: 19
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+export default reducer(initialState);

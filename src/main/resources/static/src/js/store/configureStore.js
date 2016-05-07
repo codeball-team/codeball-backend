@@ -3,12 +3,17 @@ import rootReducer from 'reducers';
 import { persistState } from 'redux-devtools';
 
 export default function configureStore(initialState) {
-  let middleware = applyMiddleware();
+  let middleware = applyMiddleware(
+    require('redux-thunk').default
+  );
   let enhancer;
 
   if (process.env.NODE_ENV !== 'production') {
 
-    let middlewares = [require('redux-immutable-state-invariant')()];
+    let middlewares = [
+      require('redux-thunk').default,
+      require('redux-immutable-state-invariant')()
+    ];
     middleware = applyMiddleware(...middlewares);
 
     let getDebugSessionKey = function () {

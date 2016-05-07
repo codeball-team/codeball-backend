@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Menu from 'components/Menu/Menu';
 import './Page.scss';
 
-function Page(ContentComponent) {
+function Page(GlobalSpinnerComponent, ContentComponent) {
   return class Page extends Component {
     render () {
       return (
         <div className="page">
           <Menu className="page-menu" />
           <div className="page-content">
-            <ContentComponent {...this.props} />
+            <ContentComponent />
           </div>
+          {GlobalSpinnerComponent}
         </div>
       );
     }

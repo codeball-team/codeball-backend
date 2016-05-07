@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+$spinner-size:        40px;
+
+.spinner {
+  position: fixed;
+  top: $spinner-size / 2;
+  right: $spinner-size / 2;
+  width: $spinner-size;
+  height: $spinner-size;
+
+  .spinner-image {
+    color: $fg-color;
+    width: $spinner-size;
+    height: $spinner-size;
+    animation: spin 1.4s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

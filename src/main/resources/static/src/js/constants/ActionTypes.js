@@ -1,1 +1,7 @@
-export const SAY_HELLO = 'SAY_HELLO';
+export const AJAX_START = 'AJAX_START';
+export const AJAX_SUCCESS = 'AJAX_SUCCESS';
+export const AJAX_FAILURE = 'AJAX_FAILURE';
+
+export const LOAD_USERS = 'LOAD_USERS';
+export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
+export const LOAD_USERS_FAILURE = 'LOAD_USERS_FAILURE';

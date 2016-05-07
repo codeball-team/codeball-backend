@@ -1,5 +1,7 @@
 @import '~styles/variables.scss';
 
 .not-found {
-  color: $fg-color-danger;
+  h1 {
+    color: $fg-color-danger;
+  }
 }

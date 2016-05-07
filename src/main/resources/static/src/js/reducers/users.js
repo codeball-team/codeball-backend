@@ -1,3 +1,7 @@
+import _ from 'underscore';
+import { reducer, safeGet } from 'utils';
+import { LOAD_USERS_SUCCESS } from 'constants/ActionTypes';
+
 const initialState = {
   1: {
     id: 1,
@@ -17,9 +21,18 @@ const initialState = {
   }
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
+export default reducer(initialState, {
+  [LOAD_USERS_SUCCESS]: (state, action) => {
+    const users = safeGet(action, 'response._embedded.users');
+
+    const mappedUsers = _(users || []).map(user => ({
+      id: safeGet(user, '_links.self.href'),
+      name: `${user.lastName} ${user.firstName}`
+    }));
+
+    return _.object(
+      _(mappedUsers).pluck('id'),
+      mappedUsers
+    );
   }
-}
+});

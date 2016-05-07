@@ -12,6 +12,11 @@ class UpcomingMatch extends Component {
     actions: PropTypes.object.isRequired
   };
 
+  componentWillMount = () => {
+    const { actions } = this.props;
+    actions.loadUsers();
+  };
+
   render () {
     const {
       upcomingMatch,

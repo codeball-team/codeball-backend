@@ -18,7 +18,9 @@ export default class MatchTeam extends Component {
       team
     } = this.props;
 
-    const teamUsers = _(team).map(userId => users[userId]);
+    const teamUsers = _(
+      _(team).map(userId => users[userId])
+    ).compact();
     const sortedTeamUsers = _(teamUsers).sortBy('name');
 
     return (
