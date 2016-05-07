@@ -51,24 +51,6 @@ export default class MatchEnrollment extends Component {
               enrolledUsers={_(enrolledUsers[enrollmentStatus]).map(userId => users[userId])} />
           ))}
         </div>
-
-        <div className="match-enrollment-form">
-          <div className="label">
-            Are you going?
-          </div>
-
-          <div className="options">
-            <div className="option yes">
-              Yes
-            </div>
-            <div className="option maybe">
-              Maybe
-            </div>
-            <div className="option no">
-              No
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

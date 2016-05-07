@@ -44,44 +44,6 @@
     }
   }
 
-  .match-enrollment-form {
-    @include flex-parent(flex-start, flex-start);
-    flex-wrap: wrap;
-
-    .label {
-      @include flex-child;
-      margin-right: 20px;
-      padding: 10px 0;
-    }
-
-    .options {
-      @include flex-parent;
-
-      .option {
-        @include flex-child;
-        padding: 10px 30px;
-        margin-right: 10px;
-        cursor: pointer;
-
-        &:last-of-type {
-          margin-right: 0;
-        }
-
-        &.yes {
-          @include clickable-effects($bg-color-success);
-        }
-
-        &.no {
-          @include clickable-effects($bg-color-danger);
-        }
-
-        &.maybe {
-          @include clickable-effects($bg-color-alert);
-        }
-      }
-    }
-  }
-
   .yes {
     background-color: $bg-color-success;
   }
