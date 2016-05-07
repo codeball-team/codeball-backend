@@ -19,11 +19,11 @@ export default class Spinner extends Component {
       <div
         className={classNames(
           'spinner',
+          {
+            visible: show
+          },
           className
-        )}
-        style={{
-          display: show ? 'block' : 'none'
-        }}>
+        )}>
         <IconLoad className="spinner-image" />
       </div>
     );

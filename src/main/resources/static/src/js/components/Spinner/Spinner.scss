@@ -9,6 +9,13 @@ $spinner-size:        40px;
   right: $spinner-size / 2;
   width: $spinner-size;
   height: $spinner-size;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s;
+
+  &.visible {
+    opacity: 1.0;
+  }
 
   .spinner-image {
     color: $fg-color;

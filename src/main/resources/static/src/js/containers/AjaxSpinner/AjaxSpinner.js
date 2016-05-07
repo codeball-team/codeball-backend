@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Spinner } from 'components';
-import './AjaxSpinner.scss';
 
 class AjaxSpinner extends Component {
   static propTypes = {

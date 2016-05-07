@@ -11,7 +11,7 @@ function Page(GlobalSpinnerComponent, ContentComponent) {
           <div className="page-content">
             <ContentComponent />
           </div>
-          {GlobalSpinnerComponent}
+          <GlobalSpinnerComponent />
         </div>
       );
     }

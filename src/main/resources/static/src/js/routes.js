@@ -9,7 +9,7 @@ import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
 
 function decorateComponent(Component) {
   return Page(
-    <AjaxSpinner />,
+    AjaxSpinner,
     Component
   );
 }
