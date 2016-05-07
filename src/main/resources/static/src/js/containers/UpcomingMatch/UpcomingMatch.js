@@ -28,8 +28,6 @@ class UpcomingMatch extends Component {
 
     return (
       <section className="upcoming-match">
-        <MatchEnrollmentForm />
-
         <MatchInfo
           dateTime={dateTime}
           duration={duration}
@@ -40,9 +38,13 @@ class UpcomingMatch extends Component {
           pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
           pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
 
+        <MatchEnrollmentForm />
+
         <MatchEnrollment
           users={users}
           enrolledUsers={enrolledUsers} />
+
+
       </section>
     );
   }

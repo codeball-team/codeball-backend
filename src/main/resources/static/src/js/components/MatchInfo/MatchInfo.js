@@ -56,7 +56,7 @@ export default class MatchInfo extends Component {
           {duration.as('minutes')} min
         </div>
 
-        <div className="details" title="Pitch address">
+        <div className="details ellipsis" title="Pitch address">
           <IconLocation className="icon" />
           <a href={`https://www.google.com/maps/?q=${pitchAddress}`}>
             {pitchAddress}
@@ -64,7 +64,7 @@ export default class MatchInfo extends Component {
         </div>
 
         {pitchUrl && (
-          <div className="details" title="Pitch webpage">
+          <div className="details ellipsis" title="Pitch webpage">
             <IconWorld className="icon" />
             <a href={pitchUrl}>
               {pitchUrl.match(domainRegExp)[0]}
@@ -72,7 +72,7 @@ export default class MatchInfo extends Component {
           </div>
         )}
 
-        <div className="details" title="Pitch type">
+        <div className="details ellipsis" title="Pitch type">
           <IconLayers className="icon" />
           {pitchType}
         </div>

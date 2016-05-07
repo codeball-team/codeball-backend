@@ -2,33 +2,29 @@
 
 @mixin phone {
   @media only screen
-    and (max-device-width: $screen-s - 1)
-    and (orientation: portrait) {
+    and (max-width: $screen-s - 1) {
       @content;
   }
 }
 
 @mixin tablet {
   @media only screen
-    and (min-device-width: $screen-s)
-    and (max-device-width: $screen-m - 1)
-    and (orientation: portrait) {
+    and (min-width: $screen-s)
+    and (max-width: $screen-m - 1) {
       @content;
   }
 }
 
 @mixin tablet-and-smaller {
   @media only screen
-    and (max-device-width: $screen-m - 1)
-    and (orientation: portrait) {
+    and (max-width: $screen-m - 1) {
       @content;
   }
 }
 
 @mixin desktop {
   @media only screen
-    and (min-device-width: $screen-m)
-    and (orientation: portrait) {
+    and (min-width: $screen-m) {
       @content;
   }
 }
@@ -45,8 +41,8 @@
   justify-content: $justify-content;
 }
 
-@mixin flex-child-grow {
-  flex: 1 1 auto;
+@mixin flex-child-grow($flex-basis: auto) {
+  flex: 1 1 $flex-basis;
 }
 
 @mixin flex-child {

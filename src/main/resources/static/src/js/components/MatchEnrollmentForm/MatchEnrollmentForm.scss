@@ -2,22 +2,19 @@
 @import '~styles/mixins.scss';
 
 .match-enrollment-form {
-  @include flex-parent(flex-start, flex-start);
-  flex-wrap: wrap;
-
   .label {
-    @include flex-child;
-    margin-right: 20px;
-    padding: 10px 0;
+    @include section-title;
   }
 
   .options {
-    @include flex-parent;
+    @include flex-parent(center, flex-start)
+    align-content: stretch;
 
     .option {
-      @include flex-child;
-      padding: 10px 30px;
+      @include flex-child-grow(100%);
+      padding: 10px 10px;
       margin-right: 10px;
+      text-align: center;
       cursor: pointer;
 
       &:last-of-type {
