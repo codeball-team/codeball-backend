@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.match-lineup {
+  .title {
+    @include section-title;
+  }
+
+  .lineups {
+    @include flex-parent(center, flex-start);
+
+    .team-lineup {
+      @include flex-child-grow;
+      margin-right: 20px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      .team-name {
+        background-color: $nav-bg-active-color;
+        font-size: $font-size-m;
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+        @include tablet-and-smaller {
+          font-size: $font-size-s;
+        }
+      }
+
+      .players {
+        .player {
+          @include highlight-on-hover;
+
+          padding: 10px 10px 10px 40px;
+          border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+
+          &:last-of-type {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

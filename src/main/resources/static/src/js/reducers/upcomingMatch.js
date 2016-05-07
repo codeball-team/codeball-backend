@@ -26,7 +26,11 @@ const initialState = {
     yes: [1, 2],
     no: [4],
     maybe: [3]
-  }
+  },
+  teamA: [1, 3],
+  teamAScore: 13,
+  teamB: [2, 4],
+  teamBScore: 19
 };
 
 export default function(state = initialState, action) {

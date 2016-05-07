@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { Menu, MatchInfo, MatchEnrollment, MatchEnrollmentForm } from 'components';
+import { Menu, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup } from 'components';
 import './UpcomingMatch.scss';
 
 class UpcomingMatch extends Component {
@@ -23,7 +23,11 @@ class UpcomingMatch extends Component {
       dateTime,
       duration,
       pitch,
-      enrolledUsers
+      enrolledUsers,
+      teamA,
+      teamAScore,
+      teamB,
+      teamBScore
     } = upcomingMatch;
 
     return (
@@ -44,7 +48,10 @@ class UpcomingMatch extends Component {
           users={users}
           enrolledUsers={enrolledUsers} />
 
-
+        <MatchLineup
+          users={users}
+          teamA={teamA}
+          teamB={teamB} />
       </section>
     );
   }

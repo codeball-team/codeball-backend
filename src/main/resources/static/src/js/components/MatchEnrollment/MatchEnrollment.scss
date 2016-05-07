@@ -17,21 +17,9 @@
 
     .match-enrollment-entry {
       @include flex-parent;
-      position: relative;
+      @include highlight-on-hover;
       padding: 10px 20px;
-      border-bottom: 1px dotted rgba(255,255,255,0.4);
-
-      &:hover::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        background-color: $highlight-color;
-      }
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
 
       .name {
         @include flex-child-grow;

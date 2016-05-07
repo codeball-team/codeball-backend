@@ -79,6 +79,22 @@
   }
 }
 
+@mixin highlight-on-hover {
+  position: relative;
+
+  &:hover::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: $highlight-color;
+  }
+}
+
 @mixin content-scrolling {
   overflow-y: auto;
   overflow: auto;
