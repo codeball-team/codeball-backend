@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import TeamLineup from './TeamLineup';
+import TeamLineup from '../TeamLineup/TeamLineup';
 import './MatchLineup.scss';
 
 export default class MatchLineup extends Component {

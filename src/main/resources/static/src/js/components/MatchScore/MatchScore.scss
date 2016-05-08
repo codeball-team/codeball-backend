@@ -1,0 +1,21 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.match-score {
+  .title {
+    @include section-title;
+  }
+
+  .score {
+    text-align: center;
+    font-size: $font-size-xxxl;
+
+    @include tablet-and-smaller {
+      font-size: $font-size-xxl;
+    }
+  }
+
+  .details {
+    text-align: center;
+  }
+}

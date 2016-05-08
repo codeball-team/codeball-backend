@@ -11,8 +11,8 @@ const pitchTypes = {
 };
 
 const initialState = {
-  date: moment('2016-05-11 19:00', 'YYYY-MM-DD HH:mm').format('YYYY/MM/DD'),
-  time: moment('2016-05-11 19:00', 'YYYY-MM-DD HH:mm').format('HH:mm'),
+  date: moment('2016-05-04 19:00', 'YYYY-MM-DD HH:mm').format('YYYY/MM/DD'),
+  time: moment('2016-05-04 19:00', 'YYYY-MM-DD HH:mm').format('HH:mm'),
   duration: moment.duration(1.5, 'hours').as('minutes'),
   pitch: {
     id: 1,
@@ -25,14 +25,14 @@ const initialState = {
   },
   isEnrollmentOver: true,
   enrolledUsers: {
-    yes: [1, 2],
-    no: [4],
-    maybe: [3]
+    yes: [4, 3],
+    no: [2],
+    maybe: [1]
   },
-  teamA: [1, 3],
-  teamAScore: 13,
-  teamB: [2, 4],
-  teamBScore: 19
+  teamA: [2, 3],
+  teamAScore: 6,
+  teamB: [1, 4],
+  teamBScore: 12
 };
 
 export default reducer(initialState);

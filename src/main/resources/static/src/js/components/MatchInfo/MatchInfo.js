@@ -13,7 +13,8 @@ const domainRegExp = /(https?:\/\/[^\/]*)/;
 export default class MatchInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
-    dateTime: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
     pitchName: PropTypes.string.isRequired,
     pitchType: PropTypes.string.isRequired,
@@ -26,7 +27,8 @@ export default class MatchInfo extends Component {
   render() {
     const {
       className,
-      dateTime,
+      date,
+      time,
       duration,
       pitchName,
       pitchType,
@@ -48,7 +50,7 @@ export default class MatchInfo extends Component {
 
         <div className="details" title="Match date & time">
           <IconCalendar className="icon" />
-          {dateTime}
+          {date}, {time}
         </div>
 
         <div className="details" title="Match duration">

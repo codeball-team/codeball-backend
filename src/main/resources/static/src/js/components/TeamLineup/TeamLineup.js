@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
+import './TeamLineup.scss';
 
-export default class MatchTeam extends Component {
+export default class TeamLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     teamName: PropTypes.string.isRequired,

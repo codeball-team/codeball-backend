@@ -2,14 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import {
-  Menu, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup, MatchScore
-} from 'components';
-import './UpcomingMatch.scss';
+import { MatchLineup, MatchScore } from 'components';
+import './LastMatch.scss';
 
-class UpcomingMatch extends Component {
+class LastMatch extends Component {
   static propTypes = {
-    upcomingMatch: PropTypes.object.isRequired,
+    lastMatch: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
@@ -21,7 +19,7 @@ class UpcomingMatch extends Component {
 
   render () {
     const {
-      upcomingMatch,
+      lastMatch,
       users,
       actions
     } = this.props;
@@ -29,43 +27,26 @@ class UpcomingMatch extends Component {
     const {
       date,
       time,
-      duration,
       pitch,
-      isEnrollmentOver,
-      enrolledUsers,
       teamA,
       teamAScore,
       teamB,
       teamBScore
-    } = upcomingMatch;
+    } = lastMatch;
 
     return (
       <section className="upcoming-match">
-        <MatchInfo
+        <MatchScore
+          pitchName={pitch.name}
           date={date}
           time={time}
-          duration={duration}
-          pitchName={pitch.name}
-          pitchType={pitch.type}
-          pitchAddress={pitch.address}
-          pitchUrl={pitch.url}
-          pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
-          pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+          teamAScore={teamAScore}
+          teamBScore={teamBScore} />
 
-        {!isEnrollmentOver && (
-          <MatchEnrollmentForm />
-        )}
-
-        {isEnrollmentOver && (
-          <MatchLineup
-            users={users}
-            teamA={teamA}
-            teamB={teamB} />
-        )}
-
-        <MatchEnrollment
+        <MatchLineup
           users={users}
-          enrolledUsers={enrolledUsers} />
+          teamA={teamA}
+          teamB={teamB} />
       </section>
     );
   }
@@ -73,7 +54,7 @@ class UpcomingMatch extends Component {
 
 function mapStateToProps(state) {
   return {
-    upcomingMatch: state.upcomingMatch,
+    lastMatch: state.lastMatch,
     users: state.users
   };
 }
@@ -87,4 +68,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UpcomingMatch);
+)(LastMatch);
