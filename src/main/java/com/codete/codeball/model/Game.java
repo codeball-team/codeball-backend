@@ -32,13 +32,13 @@ public class Game {
     @ManyToOne
     private Pitch pitch;
     private boolean isEnrollmentOver = false;
-    @ElementCollection
-    private Map<User, EnrollmentStatus> enrolledUsers = new HashMap<>();
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Enrollment> enrollments = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_game", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> teamA = new HashSet<>();
     private int teamAScore;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_game", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> teamB = new HashSet<>();
     private int teamBScore;
