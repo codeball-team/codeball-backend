@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import {
-  Menu, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup, MatchScore
-} from 'components';
+import { MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup } from 'components';
 import './UpcomingMatch.scss';
 
 class UpcomingMatch extends Component {

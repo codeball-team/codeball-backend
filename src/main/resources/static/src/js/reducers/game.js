@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import moment from 'moment';
 import { reducer } from 'utils';
+import { LOAD_GAME_SUCCESS } from 'constants/ActionTypes';
 
 const pitchTypes = {
   1: 'Firm Ground',
@@ -35,4 +36,20 @@ const initialState = {
   teamBScore: 19
 };
 
-export default reducer(initialState);
+export default reducer(initialState, {
+  [LOAD_GAME_SUCCESS]: (state, action) => {
+    const users = safeGet(action, 'response._embedded.users');
+
+    const mappedUsers = _(users || []).map(user => ({
+      id: safeGet(user, '_links.self.href'),
+      firstName: user.firstName,
+      lastName: user.lastName
+    }));
+
+    return _.object(
+      _(mappedUsers).pluck('id'),
+      mappedUsers
+    );
+  }
+});
+

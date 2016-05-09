@@ -5,19 +5,23 @@ import { LOAD_USERS_SUCCESS } from 'constants/ActionTypes';
 const initialState = {
   1: {
     id: 1,
-    name: 'Kazimierz Wielki'
+    firstName: 'Kazimierz',
+    lastName: 'Wielki'
   },
   2: {
     id: 2,
-    name: 'Mieszko I'
+    firstName: 'Mieszko',
+    lastName: 'I'
   },
   3: {
     id: 3,
-    name: 'Władysław Jagiełło'
+    firstName: 'Władysław',
+    lastName: 'Jagiełło'
   },
   4: {
     id: 4,
-    name: 'Bolesław Chrobry'
+    firstName: 'Bolesław',
+    lastName: 'Chrobry'
   }
 };
 
@@ -27,7 +31,8 @@ export default reducer(initialState, {
 
     const mappedUsers = _(users || []).map(user => ({
       id: safeGet(user, '_links.self.href'),
-      name: `${user.lastName} ${user.firstName}`
+      firstName: user.firstName,
+      lastName: user.lastName
     }));
 
     return _.object(

@@ -7,7 +7,7 @@ import './LastMatch.scss';
 
 class LastMatch extends Component {
   static propTypes = {
-    lastMatch: PropTypes.object.isRequired,
+    game: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
@@ -19,7 +19,7 @@ class LastMatch extends Component {
 
   render () {
     const {
-      lastMatch,
+      game,
       users,
       actions
     } = this.props;
@@ -32,7 +32,7 @@ class LastMatch extends Component {
       teamAScore,
       teamB,
       teamBScore
-    } = lastMatch;
+    } = game;
 
     return (
       <section className="upcoming-match">
@@ -54,7 +54,7 @@ class LastMatch extends Component {
 
 function mapStateToProps(state) {
   return {
-    lastMatch: state.lastMatch,
+    game: state.game,
     users: state.users
   };
 }

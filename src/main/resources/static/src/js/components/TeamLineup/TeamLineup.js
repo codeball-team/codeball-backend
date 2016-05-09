@@ -22,7 +22,9 @@ export default class TeamLineup extends Component {
     const teamUsers = _(
       _(team).map(userId => users[userId])
     ).compact();
-    const sortedTeamUsers = _(teamUsers).sortBy('name');
+    const sortedTeamUsers = _(
+      _(teamUsers).sortBy('firstName')
+    ).sortBy('lastName');
 
     return (
       <div
@@ -39,14 +41,15 @@ export default class TeamLineup extends Component {
           {_(sortedTeamUsers).map((user, index) => {
             const {
               id,
-              name
+              firstName,
+              lastName
             } = user;
 
             return (
               <div
                 key={id}
                 className="player ellipsis">
-                {name}
+                {firstName} {lastName}
               </div>
             );
           })}

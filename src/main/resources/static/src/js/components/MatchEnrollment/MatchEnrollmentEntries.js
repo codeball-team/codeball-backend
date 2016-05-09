@@ -26,13 +26,15 @@ export default class MatchEnrollmentEntries extends Component {
         {_(enrolledUsers).map(user => {
           const {
             id,
-            name
+            firstName,
+            lastName
           } = user;
 
           return (
             <MatchEnrollmentEntry
               key={id}
-              name={name}
+              firstName={firstName}
+              lastName={lastName}
               enrollmentStatus={enrollmentStatus} />
           );
         })}
