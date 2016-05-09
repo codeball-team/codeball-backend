@@ -9,7 +9,7 @@ import './UpcomingMatch.scss';
 
 class UpcomingMatch extends Component {
   static propTypes = {
-    upcomingMatch: PropTypes.object.isRequired,
+    game: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
@@ -21,7 +21,7 @@ class UpcomingMatch extends Component {
 
   render () {
     const {
-      upcomingMatch,
+      game,
       users,
       actions
     } = this.props;
@@ -37,7 +37,7 @@ class UpcomingMatch extends Component {
       teamAScore,
       teamB,
       teamBScore
-    } = upcomingMatch;
+    } = game;
 
     return (
       <section className="upcoming-match">
@@ -73,7 +73,7 @@ class UpcomingMatch extends Component {
 
 function mapStateToProps(state) {
   return {
-    upcomingMatch: state.upcomingMatch,
+    game: state.game,
     users: state.users
   };
 }

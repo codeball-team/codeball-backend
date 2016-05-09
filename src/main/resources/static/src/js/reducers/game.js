@@ -23,7 +23,7 @@ const initialState = {
     minNumberOfPlayers: 8,
     maxNumberOfPlayers: 12
   },
-  isEnrollmentOver: true,
+  isEnrollmentOver: false,
   enrolledUsers: {
     yes: [1, 2],
     no: [4],
