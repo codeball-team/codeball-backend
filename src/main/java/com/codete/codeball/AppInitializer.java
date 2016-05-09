@@ -1,13 +1,9 @@
 package com.codete.codeball;
 
-import com.codete.codeball.model.EnrollmentStatus;
-import com.codete.codeball.model.Game;
-import com.codete.codeball.model.Pitch;
-import com.codete.codeball.model.User;
+import com.codete.codeball.model.*;
 import com.codete.codeball.repositories.GameRepository;
 import com.codete.codeball.repositories.PitchRepository;
 import com.codete.codeball.repositories.UserRepository;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.HashMap;
+import java.util.Set;
 
 @Component
 public class AppInitializer implements CommandLineRunner {
@@ -71,14 +67,14 @@ public class AppInitializer implements CommandLineRunner {
                 .build();
         gameRepository.save(game1);
 
-        HashMap<User, EnrollmentStatus> enrolledUsers = Maps.newHashMap();
-        enrolledUsers.put(user1, EnrollmentStatus.YES);
+        Set<Enrollment> enrollment = Sets.newHashSet();
+        enrollment.add(Enrollment.builder().user(user1).enrollmentStatus(EnrollmentStatus.MAYBE).build());
         Game game2 = Game.builder()
                 .dateTime(LocalDateTime.of(2016, Month.JUNE, 23, 18, 0))
                 .duration(Duration.ofHours(2))
                 .pitch(pitch1)
                 .isEnrollmentOver(true)
-                .enrolledUsers(enrolledUsers)
+                .enrollments(enrollment)
                 .teamA(Sets.newHashSet(user1))
                 .teamB(Sets.newHashSet(user2))
                 .teamAScore(7)

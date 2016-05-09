@@ -1,4 +1,4 @@
-package com.codete.codeball;
+package com.codete.codeball.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +7,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/test")
-public class LoginController {
+public class AppController {
 
     @RequestMapping("/")
     public String hello() {
