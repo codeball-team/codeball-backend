@@ -2,27 +2,35 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
+import { refreshDataIfNecessary } from 'utils';
 import { MatchLineup, MatchScore } from 'components';
 import './LastMatch.scss';
 
 class LastMatch extends Component {
   static propTypes = {
-    lastMatch: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
+    gameData: PropTypes.object.isRequired,
+    usersData: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions } = this.props;
-    actions.loadUsers();
+    const {
+      actions,
+      usersData
+    } = this.props;
+
+    refreshDataIfNecessary(usersData, actions.loadUsers);
+    actions.loadGame(1);
   };
 
   render () {
     const {
-      lastMatch,
-      users,
-      actions
+      gameData,
+      usersData
     } = this.props;
+
+    const { game } = gameData;
+    const { users } = usersData;
 
     const {
       date,
@@ -32,7 +40,7 @@ class LastMatch extends Component {
       teamAScore,
       teamB,
       teamBScore
-    } = lastMatch;
+    } = game;
 
     return (
       <section className="upcoming-match">
@@ -54,8 +62,8 @@ class LastMatch extends Component {
 
 function mapStateToProps(state) {
   return {
-    lastMatch: state.lastMatch,
-    users: state.users
+    gameData: state.gameData,
+    usersData: state.usersData
   };
 }
 

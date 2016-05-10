@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 import ajaxRequests from './ajaxRequests';
-import upcomingMatch from './upcomingMatch';
-import lastMatch from './lastMatch';
-import users from './users';
+import gameData from './gameData';
+import usersData from './usersData';
 
 const rootReducer = combineReducers({
   ajaxRequests,
-  upcomingMatch,
-  lastMatch,
-  users
+  gameData,
+  usersData
 });
 
 export default rootReducer;
