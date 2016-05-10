@@ -14,9 +14,9 @@ export function loadUsers() {
   );
 }
 
-export function loadGame(gameUrl) {
+export function loadGame(gameId) {
   return ajax(
-    request('GET', gameUrl),
+    request('GET', `http://localhost:8080/api/games/${gameId}`),
     LOAD_GAME,
     LOAD_GAME_SUCCESS,
     LOAD_GAME_FAILURE
