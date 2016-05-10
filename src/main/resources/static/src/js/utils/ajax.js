@@ -1,30 +1,42 @@
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE} from 'constants/ActionTypes';
 
-export default function ajax(request, START_ACTION, SUCCESS_ACTION, FAILURE_ACTION, params) {
+export default function ajax(options) {
+  const {
+    request,
+    startAction,
+    successAction,
+    failureAction,
+    successCallback,
+    failureCallback,
+    params
+  } = options;
+
   return dispatch => {
     request
       .end((error, response) => {
         if (error || !response.ok) {
           dispatch({
-            type: FAILURE_ACTION,
+            type: failureAction,
             error,
             response
           });
 
           dispatch({ type: AJAX_FAILURE });
+          failureCallback && failureCallback();
         } else {
           dispatch({
-            type: SUCCESS_ACTION,
+            type: successAction,
             response
           });
 
           dispatch({ type: AJAX_SUCCESS });
+          successCallback && successCallback();
         }
       });
 
     dispatch({
-      type: START_ACTION,
-      ...params
+      type: startAction,
+      ...(params || {})
     });
 
     dispatch({ type: AJAX_START });
