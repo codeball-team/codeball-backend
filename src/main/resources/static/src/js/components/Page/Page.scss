@@ -18,7 +18,7 @@
     min-height: 100%;
   }
 
-  .page-content {
+  .page-content-container {
     @include content-scrolling;
     flex: 1 1 auto;
     min-height: 100%;
@@ -26,8 +26,11 @@
     background-color: $content-bg-color;
     color: $content-fg-color;
 
-    > div {
-      min-height: 100%;
+    .page-content {
+      max-width: 600px;
+      > div {
+        min-height: 100%;
+      }
     }
 
     @include tablet-and-smaller {

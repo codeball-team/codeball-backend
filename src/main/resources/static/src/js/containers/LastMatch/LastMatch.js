@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import { MatchLineup, MatchScore } from 'components';
-import './LastMatch.scss';
+import { LoadableContent, MatchLineup, MatchScore } from 'components';
 
 class LastMatch extends Component {
   static propTypes = {
     gameData: PropTypes.object.isRequired,
+    pitchesData: PropTypes.object.isRequired,
     usersData: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
@@ -16,46 +16,53 @@ class LastMatch extends Component {
   componentWillMount = () => {
     const {
       actions,
-      usersData
+      usersData,
+      pitchesData
     } = this.props;
 
     refreshDataIfNecessary(usersData, actions.loadUsers);
-    actions.loadGame(1);
+    refreshDataIfNecessary(pitchesData, actions.loadPitches);
+    actions.loadGame('http://localhost:8080/api/games/1');
   };
 
   render () {
     const {
       gameData,
+      pitchesData,
       usersData
     } = this.props;
 
     const { game } = gameData;
+    const { pitches } = pitchesData;
     const { users } = usersData;
-
     const {
       date,
       time,
-      pitch,
+      pitchId,
       teamA,
       teamAScore,
       teamB,
       teamBScore
     } = game;
+    const pitch = pitches[pitchId];
 
     return (
-      <section className="upcoming-match">
-        <MatchScore
-          pitchName={pitch.name}
-          date={date}
-          time={time}
-          teamAScore={teamAScore}
-          teamBScore={teamBScore} />
+      <LoadableContent
+        isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
+        <section>
+          <MatchScore
+            pitchName={pitch.name}
+            date={date}
+            time={time}
+            teamAScore={teamAScore}
+            teamBScore={teamBScore} />
 
-        <MatchLineup
-          users={users}
-          teamA={teamA}
-          teamB={teamB} />
-      </section>
+          <MatchLineup
+            users={users}
+            teamA={teamA}
+            teamB={teamB} />
+        </section>
+      </LoadableContent>
     );
   }
 }
@@ -63,6 +70,7 @@ class LastMatch extends Component {
 function mapStateToProps(state) {
   return {
     gameData: state.gameData,
+    pitchesData: state.pitchesData,
     usersData: state.usersData
   };
 }

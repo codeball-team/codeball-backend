@@ -8,8 +8,9 @@ const initialState = {
   users: {
     1: {
       id: 1,
-      firstName: undefined,
-      lastName: undefined
+      firstName: '',
+      lastName: '',
+      role: 'ROLE_ADMIN'
     }
   }
 };

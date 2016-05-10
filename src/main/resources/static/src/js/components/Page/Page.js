@@ -8,8 +8,10 @@ function Page(GlobalSpinnerComponent, ContentComponent) {
       return (
         <div className="page">
           <Menu className="page-menu" />
-          <div className="page-content">
-            <ContentComponent />
+          <div className="page-content-container">
+            <div className="page-content">
+              <ContentComponent />
+            </div>
           </div>
           <GlobalSpinnerComponent />
         </div>

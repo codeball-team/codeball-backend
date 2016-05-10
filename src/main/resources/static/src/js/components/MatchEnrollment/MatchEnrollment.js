@@ -47,7 +47,7 @@ export default class MatchEnrollment extends Component {
           {_(enrollmentStatuses).map(enrollmentStatus => (
             <MatchEnrollmentEntries
               key={enrollmentStatus}
-              className={enrollmentStatus}
+              className={enrollmentStatusClassnames[enrollmentStatus]}
               enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
               enrolledUsers={
                 _(
