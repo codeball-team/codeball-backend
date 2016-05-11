@@ -10,4 +10,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Long countByLastName(@Param("lastName") String lastName);
 
+    User findByEmail(@Param("email") String email);
+
 }

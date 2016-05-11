@@ -1,6 +1,9 @@
 package com.codete.codeball;
 
-import com.codete.codeball.model.*;
+import com.codete.codeball.model.EnrollmentStatus;
+import com.codete.codeball.model.Game;
+import com.codete.codeball.model.Pitch;
+import com.codete.codeball.model.User;
 import com.codete.codeball.repositories.GameRepository;
 import com.codete.codeball.repositories.PitchRepository;
 import com.codete.codeball.repositories.UserRepository;
@@ -10,10 +13,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Set;
+import java.time.ZoneOffset;
+import java.util.HashMap;
 
 @Component
 public class AppInitializer implements CommandLineRunner {
@@ -47,6 +50,7 @@ public class AppInitializer implements CommandLineRunner {
         pitchRepository.save(pitch2);
 
         User user1 = User.builder()
+                .email("jan@janusz.com")
                 .firstName("Jan")
                 .lastName("Janusz")
                 .role("ROLE_ADMIN")
@@ -54,6 +58,8 @@ public class AppInitializer implements CommandLineRunner {
         userRepository.save(user1);
 
         User user2 = User.builder()
+                .email("wincenty@pulapka")
+                .pictureUrl("https://gpkt.files.wordpress.com/2008/05/012.jpg")
                 .firstName("Wincenty")
                 .lastName("Pulapka")
                 .role("ROLE_USER")
@@ -61,19 +67,19 @@ public class AppInitializer implements CommandLineRunner {
         userRepository.save(user2);
 
         Game game1 = Game.builder()
-                .dateTime(LocalDateTime.of(2016, Month.AUGUST, 24, 19, 0))
-                .duration(Duration.ofHours(2))
+                .startTimestamp(LocalDateTime.of(2016, Month.AUGUST, 24, 19, 0).toEpochSecond(ZoneOffset.UTC))
+                .durationInMinutes(90)
                 .pitch(pitch2)
                 .build();
         gameRepository.save(game1);
 
-        Set<Enrollment> enrollment = Sets.newHashSet();
-        enrollment.add(Enrollment.builder().user(user1).enrollmentStatus(EnrollmentStatus.MAYBE).build());
+        HashMap<User, EnrollmentStatus> enrollment = new HashMap<>();
+        enrollment.put(user1, EnrollmentStatus.MAYBE);
         Game game2 = Game.builder()
-                .dateTime(LocalDateTime.of(2016, Month.JUNE, 23, 18, 0))
-                .duration(Duration.ofHours(2))
+                .startTimestamp(LocalDateTime.of(2016, Month.JUNE, 23, 18, 0).toEpochSecond(ZoneOffset.UTC))
+                .durationInMinutes(120)
                 .pitch(pitch1)
-                .isEnrollmentOver(true)
+                .enrollmentOver(true)
                 .enrollments(enrollment)
                 .teamA(Sets.newHashSet(user1))
                 .teamB(Sets.newHashSet(user2))

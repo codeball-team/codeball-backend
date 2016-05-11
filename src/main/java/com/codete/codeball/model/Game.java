@@ -1,15 +1,11 @@
 package com.codete.codeball.model;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,19 +20,20 @@ public class Game {
     @Id
     @GeneratedValue
     private Long id;
-    private LocalDateTime dateTime;
-    private Duration duration;
+    private long startTimestamp;
+    private int durationInMinutes;
     @JsonProperty("pitchId")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     private Pitch pitch;
-    private boolean isEnrollmentOver = false;
+    @JsonProperty("isEnrollmentOver")
+    private boolean enrollmentOver = false;
+    @ElementCollection
     @JsonProperty("enrollmentIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Enrollment> enrollments = new HashSet<>();
+    private Map<User, EnrollmentStatus> enrollments = new HashMap<>();
     @JsonProperty("teamAIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
