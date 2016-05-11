@@ -10,7 +10,9 @@ spring:
     static-locations: classpath:/resources/,classpath:/static/build/,classpath:/META-INF/resources/
   data:
     rest:
-      base-path: api/
+      base-path: api-jpa/
+
+
 
 security:
   basic:
@@ -30,3 +32,5 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
       preferTokenInfo: false
+server:
+  context-path: /
