@@ -6,6 +6,7 @@ import IconPeople from 'react-icons/lib/io/ios-people';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
+import { PITCH_TYPE_STRING } from 'constants/Configuration';
 import './MatchInfo.scss';
 
 const domainRegExp = /(https?:\/\/[^\/]*)/;
@@ -17,7 +18,7 @@ export default class MatchInfo extends Component {
     time: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
     pitchName: PropTypes.string.isRequired,
-    pitchType: PropTypes.string.isRequired,
+    pitchType: PropTypes.number,
     pitchAddress: PropTypes.string.isRequired,
     pitchUrl: PropTypes.string,
     pitchMinNumberOfPlayers: PropTypes.number.isRequired,
@@ -74,10 +75,12 @@ export default class MatchInfo extends Component {
           </div>
         )}
 
-        <div className="details ellipsis" title="Pitch type">
-          <IconLayers className="icon" />
-          {pitchType}
-        </div>
+        {PITCH_TYPE_STRING[pitchType] && (
+          <div className="details ellipsis" title="Pitch type">
+            <IconLayers className="icon" />
+            {PITCH_TYPE_STRING[pitchType]}
+          </div>
+        )}
 
         <div className="details" title="Pitch capacity">
           <IconPeople className="icon" />

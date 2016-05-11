@@ -1,19 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
+import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import MatchEnrollmentEntries from './MatchEnrollmentEntries';
 import './MatchEnrollment.scss';
 
 const enrollmentStatusClassnames = {
-  yes: 'yes',
-  maybe: 'maybe',
-  no: 'no'
+  [ENROLLMENT_STATUS_YES]: 'yes',
+  [ENROLLMENT_STATUS_MAYBE]: 'maybe',
+  [ENROLLMENT_STATUS_NO]: 'no'
 };
 
 const enrollmentStatusText = {
-  yes: 'Going',
-  maybe: 'Unsure',
-  no: 'Not going'
+  [ENROLLMENT_STATUS_YES]: 'Going',
+  [ENROLLMENT_STATUS_MAYBE]: 'Unsure',
+  [ENROLLMENT_STATUS_NO]: 'Not going'
 };
 
 const enrollmentStatuses = _(enrollmentStatusText).keys();
@@ -39,14 +40,14 @@ export default class MatchEnrollment extends Component {
           className
         )}>
         <div className="title">
-          Enrolled players ({enrolledUsers.yes.length})
+          Enrolled players ({enrolledUsers[ENROLLMENT_STATUS_YES].length})
         </div>
 
         <div>
           {_(enrollmentStatuses).map(enrollmentStatus => (
             <MatchEnrollmentEntries
               key={enrollmentStatus}
-              className={enrollmentStatus}
+              className={enrollmentStatusClassnames[enrollmentStatus]}
               enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
               enrolledUsers={
                 _(

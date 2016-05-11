@@ -4,14 +4,16 @@ import classNames from 'classnames';
 export default class MatchEnrollmentEntry extends Component {
   static propTypes = {
     className: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
     enrollmentStatus: PropTypes.string.isRequired
   };
 
   render() {
     const {
       className,
-      name,
+      firstName,
+      lastName,
       enrollmentStatus
     } = this.props;
 
@@ -22,7 +24,7 @@ export default class MatchEnrollmentEntry extends Component {
           className
         )}>
         <div className="name">
-          {name}
+          {firstName} {lastName}
         </div>
          <div className="enrollment-status">
           {enrollmentStatus}

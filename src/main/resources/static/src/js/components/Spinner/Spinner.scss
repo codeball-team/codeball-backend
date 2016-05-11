@@ -4,17 +4,26 @@
 $spinner-size:        40px;
 
 .spinner {
-  position: fixed;
-  top: $spinner-size / 2;
-  right: $spinner-size / 2;
-  width: $spinner-size;
-  height: $spinner-size;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
   transition: opacity 0.8s;
 
+  &.fixed {
+    position: fixed;
+    width: $spinner-size;
+    height: $spinner-size;
+    top: $spinner-size / 2;
+    right: $spinner-size / 2;
+  }
+
+  &.relative {
+    position: relative;
+    text-align: center;
+    margin: $spinner-size;
+  }
+
   &.visible {
-    opacity: 1.0;
+    opacity: 1;
   }
 
   .spinner-image {

@@ -2,79 +2,95 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
+import { refreshDataIfNecessary } from 'utils';
 import {
-  Menu, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup, MatchScore
+  LoadableContent, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup
 } from 'components';
-import './UpcomingMatch.scss';
 
 class UpcomingMatch extends Component {
   static propTypes = {
-    upcomingMatch: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
+    gameData: PropTypes.object.isRequired,
+    pitchesData: PropTypes.object.isRequired,
+    usersData: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions } = this.props;
-    actions.loadUsers();
+    const {
+      actions,
+      usersData
+    } = this.props;
+
+    refreshDataIfNecessary(usersData, actions.loadUsers);
+    actions.loadGame('http://localhost:8080/api/games/2');
   };
 
   render () {
     const {
-      upcomingMatch,
-      users,
+      gameData,
+      pitchesData,
+      usersData,
       actions
     } = this.props;
+
+    const { game } = gameData;
+    const { pitches } = pitchesData;
+    const { users } = usersData;
 
     const {
       date,
       time,
       duration,
-      pitch,
+      pitchId,
       isEnrollmentOver,
       enrolledUsers,
       teamA,
       teamAScore,
       teamB,
       teamBScore
-    } = upcomingMatch;
+    } = game;
+    const pitch = pitches[pitchId];
 
     return (
-      <section className="upcoming-match">
-        <MatchInfo
-          date={date}
-          time={time}
-          duration={duration}
-          pitchName={pitch.name}
-          pitchType={pitch.type}
-          pitchAddress={pitch.address}
-          pitchUrl={pitch.url}
-          pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
-          pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+      <LoadableContent
+        isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
+        <section>
+          <MatchInfo
+            date={date}
+            time={time}
+            duration={duration}
+            pitchName={pitch.name}
+            pitchType={pitch.type}
+            pitchAddress={pitch.address}
+            pitchUrl={pitch.url}
+            pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
+            pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
 
-        {!isEnrollmentOver && (
-          <MatchEnrollmentForm />
-        )}
+          {!isEnrollmentOver && (
+            <MatchEnrollmentForm />
+          )}
 
-        {isEnrollmentOver && (
-          <MatchLineup
+          {isEnrollmentOver && (
+            <MatchLineup
+              users={users}
+              teamA={teamA}
+              teamB={teamB} />
+          )}
+
+          <MatchEnrollment
             users={users}
-            teamA={teamA}
-            teamB={teamB} />
-        )}
-
-        <MatchEnrollment
-          users={users}
-          enrolledUsers={enrolledUsers} />
-      </section>
+            enrolledUsers={enrolledUsers} />
+        </section>
+      </LoadableContent>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    upcomingMatch: state.upcomingMatch,
-    users: state.users
+    gameData: state.gameData,
+    pitchesData: state.pitchesData,
+    usersData: state.usersData
   };
 }
 

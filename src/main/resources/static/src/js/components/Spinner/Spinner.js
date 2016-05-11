@@ -6,12 +6,14 @@ import './Spinner.scss';
 export default class Spinner extends Component {
   static propTypes = {
     className: PropTypes.string,
+    placement: PropTypes.oneOf(['fixed', 'relative']),
     show: PropTypes.bool.isRequired
   };
 
   render() {
     const {
       className,
+      placement,
       show
     } = this.props;
 
@@ -19,6 +21,7 @@ export default class Spinner extends Component {
       <div
         className={classNames(
           'spinner',
+          placement,
           {
             visible: show
           },

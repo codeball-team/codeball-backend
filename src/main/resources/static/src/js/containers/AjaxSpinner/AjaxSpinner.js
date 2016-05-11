@@ -12,7 +12,9 @@ class AjaxSpinner extends Component {
     const { ajaxRequests } = this.props;
 
     return (
-      <Spinner show={ajaxRequests > 0} />
+      <Spinner
+        placement="fixed"
+        show={ajaxRequests > 0} />
     );
   }
 }
