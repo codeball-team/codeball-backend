@@ -29,6 +29,8 @@ public class Game {
     private Pitch pitch;
     @JsonProperty("isEnrollmentOver")
     private boolean enrollmentOver = false;
+    @JsonProperty("isGameOver")
+    private boolean gameOver = false;
     @ElementCollection
     @JsonProperty("enrollmentIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

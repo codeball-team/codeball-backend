@@ -4,6 +4,7 @@ import com.codete.codeball.model.User;
 import com.codete.codeball.model.UserRole;
 import com.codete.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,11 @@ public class ContextUtils {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
+    public User getCurrentUser() {
+        return getUser((Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    }
+
+
     public User getUser(Principal principal) {
         String userEmail = this.extractEmail(principal);
         User user = userRepository.findByEmail(userEmail);

@@ -80,6 +80,7 @@ public class AppInitializer implements CommandLineRunner {
                 .durationInMinutes(120)
                 .pitch(pitch1)
                 .enrollmentOver(true)
+                .gameOver(true)
                 .enrollments(enrollment)
                 .teamA(Sets.newHashSet(user1))
                 .teamB(Sets.newHashSet(user2))

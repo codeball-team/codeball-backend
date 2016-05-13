@@ -24,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public User getCurrentUser(Principal principal) {
-        return contextUtils.getUser(principal);
+        return contextUtils.getCurrentUser();
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
