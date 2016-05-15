@@ -35,7 +35,7 @@ public class AppInitializer implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         Pitch pitch1 = Pitch.builder()
                 .name("Piastowska")
-                .address("Piastowska 69")
+                .address("ul. Piastowska 69, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(6)
                 .build();
@@ -43,7 +43,7 @@ public class AppInitializer implements CommandLineRunner {
 
         Pitch pitch2 = Pitch.builder()
                 .name("Dywan na Filipa")
-                .address("sw. Filipa 7")
+                .address("ul. Św. Filipa 15, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(10)
                 .build();
@@ -66,22 +66,25 @@ public class AppInitializer implements CommandLineRunner {
                 .build();
         userRepository.save(user2);
 
+        HashMap<User, EnrollmentStatus> enrollment = new HashMap<>();
+        enrollment.put(user1, EnrollmentStatus.MAYBE);
+        enrollment.put(user2, EnrollmentStatus.YES);
         Game game1 = Game.builder()
-                .startTimestamp(LocalDateTime.of(2016, Month.AUGUST, 24, 19, 0).toEpochSecond(ZoneOffset.UTC))
-                .durationInMinutes(90)
-                .pitch(pitch2)
+                .startTimestamp(LocalDateTime.of(2016, Month.JUNE, 23, 19, 0).toEpochSecond(ZoneOffset.UTC))
+                .durationInMinutes(120)
+                .pitch(pitch1)
+                .enrollmentOver(false)
+                .gameOver(false)
+                .enrollments(enrollment)
                 .build();
         gameRepository.save(game1);
 
-        HashMap<User, EnrollmentStatus> enrollment = new HashMap<>();
-        enrollment.put(user1, EnrollmentStatus.MAYBE);
         Game game2 = Game.builder()
-                .startTimestamp(LocalDateTime.of(2016, Month.JUNE, 23, 18, 0).toEpochSecond(ZoneOffset.UTC))
-                .durationInMinutes(120)
-                .pitch(pitch1)
+                .startTimestamp(LocalDateTime.of(2016, Month.AUGUST, 24, 19, 0).toEpochSecond(ZoneOffset.UTC))
+                .durationInMinutes(90)
+                .pitch(pitch2)
                 .enrollmentOver(true)
                 .gameOver(true)
-                .enrollments(enrollment)
                 .teamA(Sets.newHashSet(user1))
                 .teamB(Sets.newHashSet(user2))
                 .teamAScore(7)

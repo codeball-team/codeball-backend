@@ -30,7 +30,7 @@
       }
 
       &.maybe {
-        @include clickable-effects($bg-color-alert);
+        @include clickable-effects($bg-color-default-alert);
       }
     }
   }

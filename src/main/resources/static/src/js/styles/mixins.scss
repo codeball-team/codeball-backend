@@ -67,7 +67,8 @@
   }
 
   &.inactive {
-    background-color: gray;
+    background-color: desaturate($color, 30%);
+    opacity: 0.25;
   }
 
   &:hover {

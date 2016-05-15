@@ -24,24 +24,24 @@ export default reducer(initialState, {
   },
 
   [LOAD_USERS_SUCCESS]: (state, action) => {
-    const responseUsers = safeGet(action, 'response.body._embedded.users', []);
+    const users = safeGet(action, 'response.body', []);
 
-    const mappedUsers = _(responseUsers).map(user => ({
+    const mappedUsers = _(users).map(user => ({
       id: user.id,
+      email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      role: user.role
+      role: user.role,
+      pictureUrl: user.pictureUrl
     }));
-
-    const users = _.object(
-      _(mappedUsers).pluck('id'),
-      mappedUsers
-    );
 
     return {
       lastUpdate: now(),
       isLoading: false,
-      users
+      users: _.object(
+        _(mappedUsers).pluck('id'),
+        mappedUsers
+      )
     };
   },
 

@@ -27,7 +27,7 @@ export default reducer(initialState, {
   },
 
   [LOAD_PITCHES_SUCCESS]: (state, action) => {
-    const responsePitches = safeGet(action, 'response.body._embedded.pitches', []);
+    const responsePitches = safeGet(action, 'response.body', []);
 
     const mappedPitches = _(responsePitches).map(pitch => ({
       id: pitch.id,

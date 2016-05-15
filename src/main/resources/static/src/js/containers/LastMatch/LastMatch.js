@@ -10,6 +10,7 @@ class LastMatch extends Component {
     gameData: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired,
     usersData: PropTypes.object.isRequired,
+    currentUserData: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
 
@@ -17,12 +18,14 @@ class LastMatch extends Component {
     const {
       actions,
       usersData,
+      currentUserData,
       pitchesData
     } = this.props;
 
     refreshDataIfNecessary(usersData, actions.loadUsers);
+    refreshDataIfNecessary(usersData, actions.loadCurrentUser);
     refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    actions.loadGame('http://localhost:8080/api/games/1');
+    actions.loadGame('last');
   };
 
   render () {
@@ -71,7 +74,8 @@ function mapStateToProps(state) {
   return {
     gameData: state.gameData,
     pitchesData: state.pitchesData,
-    usersData: state.usersData
+    usersData: state.usersData,
+    currentUserData: state.currentUserData
   };
 }
 

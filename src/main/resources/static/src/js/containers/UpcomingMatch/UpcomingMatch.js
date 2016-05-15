@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
 import {
@@ -12,17 +14,22 @@ class UpcomingMatch extends Component {
     gameData: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired,
     usersData: PropTypes.object.isRequired,
+    currentUserData: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
     const {
       actions,
-      usersData
+      usersData,
+      currentUserData,
+      pitchesData
     } = this.props;
 
     refreshDataIfNecessary(usersData, actions.loadUsers);
-    actions.loadGame('http://localhost:8080/api/games/2');
+    refreshDataIfNecessary(usersData, actions.loadCurrentUser);
+    refreshDataIfNecessary(pitchesData, actions.loadPitches);
+    actions.loadGame(1);
   };
 
   render () {
@@ -30,14 +37,17 @@ class UpcomingMatch extends Component {
       gameData,
       pitchesData,
       usersData,
+      currentUserData,
       actions
     } = this.props;
 
     const { game } = gameData;
     const { pitches } = pitchesData;
     const { users } = usersData;
-
+    const { currentUser } = currentUserData;
+    const { id: userId } = currentUser;
     const {
+      id: gameId,
       date,
       time,
       duration,
@@ -50,6 +60,10 @@ class UpcomingMatch extends Component {
       teamBScore
     } = game;
     const pitch = pitches[pitchId];
+
+    const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, enrollmentStatus) => {
+      return _(userIds).contains(userId) ? enrollmentStatus : selectedEnrollmentStatus;
+    }, undefined);
 
     return (
       <LoadableContent
@@ -67,7 +81,9 @@ class UpcomingMatch extends Component {
             pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
 
           {!isEnrollmentOver && (
-            <MatchEnrollmentForm />
+            <MatchEnrollmentForm
+              value={selectedEnrollmentStatus}
+              onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
           )}
 
           {isEnrollmentOver && (
@@ -90,7 +106,8 @@ function mapStateToProps(state) {
   return {
     gameData: state.gameData,
     pitchesData: state.pitchesData,
-    usersData: state.usersData
+    usersData: state.usersData,
+    currentUserData: state.currentUserData
   };
 }
 

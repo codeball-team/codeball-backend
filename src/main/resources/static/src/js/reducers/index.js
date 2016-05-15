@@ -3,12 +3,14 @@ import ajaxRequests from './ajaxRequests';
 import gameData from './gameData';
 import pitchesData from './pitchesData';
 import usersData from './usersData';
+import currentUserData from './currentUserData';
 
 const rootReducer = combineReducers({
   ajaxRequests,
   gameData,
   pitchesData,
-  usersData
+  usersData,
+  currentUserData
 });
 
 export default rootReducer;

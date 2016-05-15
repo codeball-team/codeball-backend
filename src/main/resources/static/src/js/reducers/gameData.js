@@ -1,7 +1,14 @@
 import _ from 'underscore';
+import moment from 'moment';
 import { now, reducer, safeGet } from 'utils';
-import { LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE } from 'constants/ActionTypes';
-import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
+import {
+  LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
+  CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE
+} from 'constants/ActionTypes';
+import {
+  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
+  DATE_FORMAT, TIME_FORMAT
+} from 'constants/Configuration';
 
 const initialState = {
   isLoading: false,
@@ -33,14 +40,11 @@ export default reducer(initialState, {
   },
 
   [LOAD_GAME_SUCCESS]: (state, action) => {
-    const responseGame = safeGet(action, 'response.body', []);
+    const game = safeGet(action, 'response.body', {});
 
-    const enrolledUsers = _(responseGame.enrollments).reduce(
-      (sum, enrollment) => { /* TODO */
-        const { enrollmentStatus } = enrollment;
-        const href = safeGet(enrollment, '_links.user.href');
-        sum[enrollmentStatus].push(href);
-
+    const enrolledUsers = _(game.enrollmentIds).reduce(
+      (sum, enrollmentStatus, userId) => {
+        sum[enrollmentStatus].push(Number(userId));
         return sum;
       },
 
@@ -51,24 +55,25 @@ export default reducer(initialState, {
       }
     );
 
-    const game = {
-      id: responseGame.id,
-      date: '2016/05/04', /* TODO */
-      time: '19:00', /* TODO */
-      duration: responseGame.duration.seconds / 60, /* TODO */
-      pitchId: 1, /* TODO */
-      isEnrollmentOver: responseGame.isEnrollmentOver,
-      enrolledUsers,
-      teamAScore: responseGame.teamAScore,
-      teamA: [], /* TODO */
-      teamBScore: responseGame.teamBScore,
-      teamB: [] /* TODO */
-    };
+    const startDate = moment(game.startTimestamp * 1000);
 
     return {
       lastUpdate: now(),
       isLoading: false,
-      game
+      game: {
+        id: game.id,
+        date: startDate.format(DATE_FORMAT),
+        time: startDate.format(TIME_FORMAT),
+        duration: game.durationInMinutes,
+        pitchId: game.pitchId,
+        isEnrollmentOver: game.isEnrollmentOver,
+        isGameOver: game.isGameOver,
+        enrolledUsers,
+        teamAScore: game.teamAScore,
+        teamA: game.teamAIds,
+        teamBScore: game.teamBScore,
+        teamB: game.teamBIds,
+      }
     };
   },
 
@@ -76,6 +81,42 @@ export default reducer(initialState, {
     return {
       ...state,
       isLoading: false
+    };
+  },
+
+  [CHANGE_ENROLLMENT_STATUS]: (state, action) => {
+    const { game } = state;
+    const { id, enrolledUsers } = game;
+    const { gameId, userId, enrollmentStatus } = action;
+
+    if (id === gameId) {
+      const newEnrolledUsers = _(enrolledUsers).reduce((users, userIds, status) => {
+        users[status] = _(userIds).without(userId);
+        return users;
+      }, {});
+      newEnrolledUsers[enrollmentStatus].push(userId);
+
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          enrolledUsers: newEnrolledUsers
+        }
+      };
+    }
+
+    return state;
+  },
+
+  [CHANGE_ENROLLMENT_STATUS_SUCCESS]: (state, action) => {
+    return {
+      ...state
+    };
+  },
+
+  [CHANGE_ENROLLMENT_STATUS_FAILURE]: (state, action) => {
+    return {
+      ...state
     };
   }
 });

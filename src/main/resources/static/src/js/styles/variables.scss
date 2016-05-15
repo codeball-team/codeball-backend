@@ -1,33 +1,33 @@
 @import '~styles/colors.scss';
 
 /* constants */
-$screen-m:              1000px;
-$screen-s:              600px;
+$screen-m:                  1000px;
+$screen-s:                  600px;
 
-$page-opacity:          0.98;
-$highlight-color:       rgba(255, 255, 255, 0.1);
-$focus-color:           darken($blue-light, 15%);
+$page-opacity:              0.98;
+$highlight-color:           rgba(255, 255, 255, 0.1);
+$focus-color:               darken($blue-light, 15%);
 
-$font-size-xxxl:        85px;
-$font-size-xxl:         54px;
-$font-size-xl:          34px;
-$font-size-l:           26px;
-$font-size-m:           18px;
-$font-size-s:           16px;
-$font-size-xs:          12px;
+$font-size-xxxl:            85px;
+$font-size-xxl:             54px;
+$font-size-xl:              34px;
+$font-size-l:               26px;
+$font-size-m:               18px;
+$font-size-s:               16px;
+$font-size-xs:              12px;
 
-$bg-color:              $blue-dark;
-$bg-color-danger:       #B74A4A;
-$bg-color-alert:        gray;
-$bg-color-success:      #56B74A;
-$fg-color:              white;
-$fg-color-danger:       $red;
+$bg-color:                  $blue-dark;
+$bg-color-danger:           #B74A4A;
+$bg-color-default-alert:    gray;
+$bg-color-success:          #56B74A;
+$fg-color:                  white;
+$fg-color-danger:           $red;
 
 /* computed from constants */
-$nav-bg-color:          $bg-color;
-$nav-fg-color:          $fg-color;
-$nav-bg-hover-color:    lighten($nav-bg-color, 5%);
-$nav-bg-active-color:   darken($nav-bg-color, 10%);
-$nav-bg-selected-color: darken($nav-bg-color, 5%);
-$content-bg-color:      darken($bg-color, 5%);
-$content-fg-color:      $fg-color;
+$nav-bg-color:              $bg-color;
+$nav-fg-color:              $fg-color;
+$nav-bg-hover-color:        lighten($nav-bg-color, 5%);
+$nav-bg-active-color:       darken($nav-bg-color, 10%);
+$nav-bg-selected-color:     darken($nav-bg-color, 5%);
+$content-bg-color:          darken($bg-color, 5%);
+$content-fg-color:          $fg-color;

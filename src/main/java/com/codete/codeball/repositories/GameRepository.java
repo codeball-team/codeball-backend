@@ -11,7 +11,7 @@ public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
     Game findTop1ByGameOverOrderByStartTimestampDesc(boolean gameOver);
 
     default Game findLastGame() {
-        return this.findTop1ByGameOverOrderByStartTimestampDesc(false);
+        return this.findTop1ByGameOverOrderByStartTimestampDesc(true);
     }
 
 }
