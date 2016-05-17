@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-export default class MatchEnrollmentFormOption extends Component {
+export default class GameEnrollmentFormOption extends Component {
   static propTypes = {
     className: PropTypes.string,
     text: PropTypes.string.isRequired,

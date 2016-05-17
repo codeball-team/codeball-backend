@@ -1,15 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import {
-  LoadableContent, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup
-} from 'components';
+import { LoadableContent, GameLineup, GameScore } from 'components';
 
-class UpcomingMatch extends Component {
+class LastGame extends Component {
   static propTypes = {
     gameData: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired,
@@ -29,31 +25,23 @@ class UpcomingMatch extends Component {
     refreshDataIfNecessary(usersData, actions.loadUsers);
     refreshDataIfNecessary(usersData, actions.loadCurrentUser);
     refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    actions.loadGame(1);
+    actions.loadGame('last');
   };
 
   render () {
     const {
       gameData,
       pitchesData,
-      usersData,
-      currentUserData,
-      actions
+      usersData
     } = this.props;
 
     const { game } = gameData;
     const { pitches } = pitchesData;
     const { users } = usersData;
-    const { currentUser } = currentUserData;
-    const { id: userId } = currentUser;
     const {
-      id: gameId,
       date,
       time,
-      duration,
       pitchId,
-      isEnrollmentOver,
-      enrolledUsers,
       teamA,
       teamAScore,
       teamB,
@@ -61,41 +49,21 @@ class UpcomingMatch extends Component {
     } = game;
     const pitch = pitches[pitchId];
 
-    const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, enrollmentStatus) => {
-      return _(userIds).contains(userId) ? enrollmentStatus : selectedEnrollmentStatus;
-    }, undefined);
-
     return (
       <LoadableContent
         isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
         <section>
-          <MatchInfo
+          <GameScore
+            pitchName={pitch.name}
             date={date}
             time={time}
-            duration={duration}
-            pitchName={pitch.name}
-            pitchType={pitch.type}
-            pitchAddress={pitch.address}
-            pitchUrl={pitch.url}
-            pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
-            pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+            teamAScore={teamAScore}
+            teamBScore={teamBScore} />
 
-          {!isEnrollmentOver && (
-            <MatchEnrollmentForm
-              value={selectedEnrollmentStatus}
-              onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
-          )}
-
-          {isEnrollmentOver && (
-            <MatchLineup
-              users={users}
-              teamA={teamA}
-              teamB={teamB} />
-          )}
-
-          <MatchEnrollment
+          <GameLineup
             users={users}
-            enrolledUsers={enrolledUsers} />
+            teamA={teamA}
+            teamB={teamB} />
         </section>
       </LoadableContent>
     );
@@ -120,4 +88,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UpcomingMatch);
+)(LastGame);

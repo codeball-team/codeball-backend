@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
 import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
-import MatchEnrollmentEntries from './MatchEnrollmentEntries';
-import './MatchEnrollment.scss';
+import GameEnrollmentEntries from './GameEnrollmentEntries';
+import './GameEnrollment.scss';
 
 const enrollmentStatusClassnames = {
   [ENROLLMENT_STATUS_YES]: 'yes',
@@ -19,7 +19,7 @@ const enrollmentStatusText = {
 
 const enrollmentStatuses = _(enrollmentStatusText).keys();
 
-export default class MatchEnrollment extends Component {
+export default class GameEnrollment extends Component {
   static propTypes = {
     className: PropTypes.string,
     users: PropTypes.object.isRequired,
@@ -36,7 +36,7 @@ export default class MatchEnrollment extends Component {
     return (
       <div
         className={classNames(
-          'match-enrollment',
+          'game-enrollment',
           className
         )}>
         <div className="title">
@@ -45,7 +45,7 @@ export default class MatchEnrollment extends Component {
 
         <div>
           {_(enrollmentStatuses).map(enrollmentStatus => (
-            <MatchEnrollmentEntries
+            <GameEnrollmentEntries
               key={enrollmentStatus}
               className={enrollmentStatusClassnames[enrollmentStatus]}
               enrollmentStatus={enrollmentStatusText[enrollmentStatus]}

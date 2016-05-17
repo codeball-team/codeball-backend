@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import MatchEnrollmentEntry from './MatchEnrollmentEntry';
+import GameEnrollmentEntry from './GameEnrollmentEntry';
 
-export default class MatchEnrollmentEntries extends Component {
+export default class GameEnrollmentEntries extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollmentStatus: PropTypes.string.isRequired,
@@ -20,7 +20,7 @@ export default class MatchEnrollmentEntries extends Component {
     return (
       <div
         className={classNames(
-          'match-enrollment-entries',
+          'game-enrollment-entries',
           className
         )}>
         {_(enrolledUsers).map(user => {
@@ -31,7 +31,7 @@ export default class MatchEnrollmentEntries extends Component {
           } = user;
 
           return (
-            <MatchEnrollmentEntry
+            <GameEnrollmentEntry
               key={id}
               firstName={firstName}
               lastName={lastName}
