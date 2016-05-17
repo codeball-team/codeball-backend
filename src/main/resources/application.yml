@@ -12,8 +12,6 @@ spring:
     rest:
       base-path: api-jpa/
 
-
-
 security:
   basic:
     enabled: false
@@ -32,5 +30,16 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
       preferTokenInfo: false
+
 server:
   context-path: /
+
+development:
+  securityContext:
+    enabled: true
+  user:
+    email: development@codeball.com
+    firstName: Codeball
+    lastName: Developer
+    pictureUrl: https://gpkt.files.wordpress.com/2008/05/012.jpg
+    role: ROLE_USER
