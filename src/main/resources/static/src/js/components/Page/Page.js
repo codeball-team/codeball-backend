@@ -10,7 +10,7 @@ function Page(GlobalSpinnerComponent, ContentComponent) {
           <Menu className="page-menu" />
           <div className="page-content-container">
             <div className="page-content">
-              <ContentComponent />
+              <ContentComponent {...this.props} />
             </div>
           </div>
           <GlobalSpinnerComponent />

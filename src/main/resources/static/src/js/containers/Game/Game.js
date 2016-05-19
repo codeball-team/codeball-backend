@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import { LoadableContent, GameLineup, GameScore } from 'components';
+import { LoadableContent, Game as GameComponent } from 'components';
 
-class LastGame extends Component {
+class Game extends Component {
   static propTypes = {
+    actions: PropTypes.object.isRequired,
+    gameId: PropTypes.any,
+    currentUserData: PropTypes.object.isRequired,
     gameData: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired,
-    currentUserData: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
@@ -19,51 +21,49 @@ class LastGame extends Component {
       actions,
       usersData,
       currentUserData,
+      params,
       pitchesData
     } = this.props;
 
+    if (params) {
+      actions.loadGame(params.gameId);
+    }
+
+    refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
     refreshDataIfNecessary(usersData, actions.loadUsers);
-    refreshDataIfNecessary(usersData, actions.loadCurrentUser);
     refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    actions.loadGame('last');
   };
 
   render () {
     const {
+      currentUserData,
       gameData,
       pitchesData,
       usersData
     } = this.props;
 
+    const { currentUser } = currentUserData;
     const { game } = gameData;
     const { pitches } = pitchesData;
     const { users } = usersData;
-    const {
-      date,
-      time,
-      pitchId,
-      teamA,
-      teamAScore,
-      teamB,
-      teamBScore
-    } = game;
+    const { pitchId } = game;
     const pitch = pitches[pitchId];
 
-    return (
-      <LoadableContent
-        isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
-        <section>
-          <GameScore
-            pitchName={pitch.name}
-            date={date}
-            time={time}
-            teamAScore={teamAScore}
-            teamBScore={teamBScore} />
+    const isContentLoading = _.any([
+      gameData.isLoading,
+      pitchesData.isLoading,
+      usersData.isLoading,
+      currentUserData.isLoading
+    ]);
 
-          <GameLineup
-            users={users}
-            teamA={teamA}
-            teamB={teamB} />
+    return (
+      <LoadableContent isLoading={isContentLoading}>
+        <section>
+          <GameComponent
+            currentUser={currentUser}
+            game={game}
+            pitch={pitch}
+            users={users} />
         </section>
       </LoadableContent>
     );
@@ -72,10 +72,10 @@ class LastGame extends Component {
 
 function mapStateToProps(state) {
   return {
+    currentUserData: state.currentUserData,
     gameData: state.gameData,
     pitchesData: state.pitchesData,
-    usersData: state.usersData,
-    currentUserData: state.currentUserData
+    usersData: state.usersData
   };
 }
 
@@ -88,4 +88,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LastGame);
+)(Game);

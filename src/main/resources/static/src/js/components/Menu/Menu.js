@@ -34,7 +34,7 @@ export default class Menu extends Component {
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/last-game">
+            <Link activeClassName="focus" to="/games/last">
               <IconPodium className="icon" />
               <span className="label">
                 Last game
@@ -43,7 +43,7 @@ export default class Menu extends Component {
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/game-history">
+            <Link activeClassName="focus" to="/games">
               <IconCalendar className="icon" />
               <span className="label">
                 Game history

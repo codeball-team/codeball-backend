@@ -1,20 +1,33 @@
 import request from 'superagent';
 import { ajax } from 'utils';
 import {
-  LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE,
+  CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
   LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE,
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
-  CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
-  LOAD_PITCHES, LOAD_PITCHES_SUCCESS, LOAD_PITCHES_FAILURE
+  LOAD_GAMES, LOAD_GAMES_SUCCESS, LOAD_GAMES_FAILURE,
+  LOAD_PITCHES, LOAD_PITCHES_SUCCESS, LOAD_PITCHES_FAILURE,
+  LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE
 } from 'constants/ActionTypes';
-import { usersUrl, currentUserUrl, gameUrl, changeEnrollmentStatusUrl, pitchesUrl } from 'constants/Api';
+import {
+  changeEnrollmentStatusUrl,
+  currentUserUrl,
+  gameUrl,
+  gamesUrl,
+  pitchesUrl,
+  usersUrl
+} from 'constants/Api';
 
-export function loadUsers() {
+export function changeEnrollmentStatus(gameId, userId, enrollmentStatus) {
   return ajax({
-    request: request('GET', usersUrl()),
-    startAction: LOAD_USERS,
-    successAction: LOAD_USERS_SUCCESS,
-    failureAction: LOAD_USERS_FAILURE
+    request: request('GET', changeEnrollmentStatusUrl(gameId, enrollmentStatus)),
+    startAction: CHANGE_ENROLLMENT_STATUS,
+    successAction: CHANGE_ENROLLMENT_STATUS_SUCCESS,
+    failureAction: CHANGE_ENROLLMENT_STATUS_FAILURE,
+    params: {
+      gameId,
+      userId,
+      enrollmentStatus
+    }
   });
 }
 
@@ -39,17 +52,12 @@ export function loadGame(gameId) {
   });
 }
 
-export function changeEnrollmentStatus(gameId, userId, enrollmentStatus) {
+export function loadGames() {
   return ajax({
-    request: request('GET', changeEnrollmentStatusUrl(gameId, enrollmentStatus)),
-    startAction: CHANGE_ENROLLMENT_STATUS,
-    successAction: CHANGE_ENROLLMENT_STATUS_SUCCESS,
-    failureAction: CHANGE_ENROLLMENT_STATUS_FAILURE,
-    params: {
-      gameId,
-      userId,
-      enrollmentStatus
-    }
+    request: request('GET', gamesUrl()),
+    startAction: LOAD_GAMES,
+    successAction: LOAD_GAMES_SUCCESS,
+    failureAction: LOAD_GAMES_FAILURE
   });
 }
 
@@ -59,5 +67,14 @@ export function loadPitches() {
     startAction: LOAD_PITCHES,
     successAction: LOAD_PITCHES_SUCCESS,
     failureAction: LOAD_PITCHES_FAILURE
+  });
+}
+
+export function loadUsers() {
+  return ajax({
+    request: request('GET', usersUrl()),
+    startAction: LOAD_USERS,
+    successAction: LOAD_USERS_SUCCESS,
+    failureAction: LOAD_USERS_FAILURE
   });
 }
