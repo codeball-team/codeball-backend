@@ -4,125 +4,142 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import * as CodeballActions from 'actions/CodeballActions';
-import { refreshDataIfNecessary } from 'utils';
+import { refreshDataIfNecessary, safeGet } from 'utils';
 import {
   LoadableContent, GameInfo, GameEnrollment, GameEnrollmentForm, GameLineup
 } from 'components';
 
-class UpcomingGame extends Component {
-  static propTypes = {
-    gameData: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired,
-    currentUserData: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
-  };
+export default function GenerateUpcomingGame(constantGameId) {
+  class UpcomingGame extends Component {
+    static propTypes = {
+      actions: PropTypes.object.isRequired,
+      params: PropTypes.object.isRequired,
+      gameData: PropTypes.object.isRequired,
+      pitchesData: PropTypes.object.isRequired,
+      usersData: PropTypes.object.isRequired,
+      currentUserData: PropTypes.object.isRequired
+    };
 
-  componentWillMount = () => {
-    const {
-      actions,
-      usersData,
-      currentUserData,
-      pitchesData
-    } = this.props;
+    componentWillMount = () => {
+      this.updateData(this.props);
+    };
 
-    refreshDataIfNecessary(usersData, actions.loadUsers);
-    refreshDataIfNecessary(usersData, actions.loadCurrentUser);
-    refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    actions.loadGame(1);
-  };
+    componentWillReceiveProps = (newProps) => {
+      if (safeGet(newProps, 'params.gameId') !== safeGet(this.props, 'params.gameId')) {
+        this.updateData(newProps);
+      }
+    };
 
-  render () {
-    const {
-      gameData,
-      pitchesData,
-      usersData,
-      currentUserData,
-      actions
-    } = this.props;
+    updateData = (props) => {
+      const {
+        actions,
+        params,
+        currentUserData,
+        pitchesData,
+        usersData
+      } = this.props;
 
-    const { game } = gameData;
-    const { pitches } = pitchesData;
-    const { users } = usersData;
-    const { currentUser } = currentUserData;
-    const { id: userId } = currentUser;
-    const {
-      id: gameId,
-      date,
-      time,
-      duration,
-      pitchId,
-      isEnrollmentOver,
-      enrolledUsers,
-      teamA,
-      teamAScore,
-      teamB,
-      teamBScore
-    } = game;
-    const pitch = pitches[pitchId];
+      if (params) {
+        actions.loadGame(constantGameId || params.gameId);
+      }
 
-    const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, enrollmentStatus) => {
-      return _(userIds).contains(userId) ? enrollmentStatus : selectedEnrollmentStatus;
-    }, undefined);
+      refreshDataIfNecessary(usersData, actions.loadUsers);
+      refreshDataIfNecessary(usersData, actions.loadCurrentUser);
+      refreshDataIfNecessary(pitchesData, actions.loadPitches);
+    };
 
-    const isContentLoading = _([
-      gameData.isLoading,
-      usersData.isLoading,
-      pitchesData.isLoading
-    ]).any();
+    render () {
+      const {
+        gameData,
+        pitchesData,
+        usersData,
+        currentUserData,
+        actions
+      } = this.props;
 
-    return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section>
-          <GameInfo
-            date={date}
-            time={time}
-            duration={duration}
-            pitchName={pitch.name}
-            pitchType={pitch.type}
-            pitchAddress={pitch.address}
-            pitchUrl={pitch.url}
-            pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
-            pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+      const { game } = gameData;
+      const { pitches } = pitchesData;
+      const { users } = usersData;
+      const { currentUser } = currentUserData;
+      const { id: userId } = currentUser;
+      const {
+        id: gameId,
+        date,
+        time,
+        duration,
+        pitchId,
+        isEnrollmentOver,
+        enrolledUsers,
+        teamA,
+        teamAScore,
+        teamB,
+        teamBScore
+      } = game;
+      const pitch = pitches[pitchId];
 
-          {!isEnrollmentOver && (
-            <GameEnrollmentForm
-              value={selectedEnrollmentStatus}
-              onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
-          )}
+      const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
+        return _(userIds).contains(userId) ? status : selectedEnrollmentStatus;
+      }, undefined);
 
-          {isEnrollmentOver && (
-            <GameLineup
+      const isContentLoading = _([
+        gameData.isLoading,
+        usersData.isLoading,
+        pitchesData.isLoading
+      ]).any();
+
+      return (
+        <LoadableContent isLoading={isContentLoading}>
+          <section>
+            <GameInfo
+              date={date}
+              time={time}
+              duration={duration}
+              pitchName={pitch.name}
+              pitchType={pitch.type}
+              pitchAddress={pitch.address}
+              pitchUrl={pitch.url}
+              pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
+              pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+
+            {!isEnrollmentOver && (
+              <GameEnrollmentForm
+                value={selectedEnrollmentStatus}
+                onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+            )}
+
+            {isEnrollmentOver && (
+              <GameLineup
+                users={users}
+                teamA={teamA}
+                teamB={teamB} />
+            )}
+
+            <GameEnrollment
               users={users}
-              teamA={teamA}
-              teamB={teamB} />
-          )}
-
-          <GameEnrollment
-            users={users}
-            enrolledUsers={enrolledUsers} />
-        </section>
-      </LoadableContent>
-    );
+              enrolledUsers={enrolledUsers} />
+          </section>
+        </LoadableContent>
+      );
+    }
   }
-}
 
-function mapStateToProps(state) {
-  return {
-    gameData: state.gameData,
-    pitchesData: state.pitchesData,
-    usersData: state.usersData,
-    currentUserData: state.currentUserData
-  };
-}
+  function mapStateToProps(state) {
+    return {
+      gameData: state.gameData,
+      pitchesData: state.pitchesData,
+      usersData: state.usersData,
+      currentUserData: state.currentUserData
+    };
+  }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(CodeballActions, dispatch)
-  };
-}
+  function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(CodeballActions, dispatch)
+    };
+  }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpcomingGame);
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UpcomingGame);
+}

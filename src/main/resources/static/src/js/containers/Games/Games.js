@@ -50,7 +50,7 @@ class Games extends Component {
       users
     };
     const sortedGames = _(games).sortBy('date').reverse();
-    const futureGames = _(sortedGames).filter(game => !game.isGameOver);
+    const upcomingGames = _(sortedGames).filter(game => !game.isGameOver);
     const previousGames = _(sortedGames).filter(game => game.isGameOver);
 
     const isContentLoading = _.any([
@@ -64,13 +64,15 @@ class Games extends Component {
       <LoadableContent isLoading={isContentLoading}>
         <section className="games">
           <GamesList
-            className="future-games"
-            title="Future games"
-            games={futureGames}
+            className="upcoming-games"
+            title="Upcoming games"
+            formatUrl={id => `games/upcoming/${id}`}
+            games={upcomingGames}
             {...gamesListProps} />
 
           <GamesList
             title="Previous games"
+            formatUrl={id => `games/previous/${id}`}
             games={previousGames}
             {...gamesListProps} />
         </section>

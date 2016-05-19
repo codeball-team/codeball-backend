@@ -8,13 +8,19 @@ import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
 import NotFound from 'containers/NotFound/NotFound';
 
-export default (
+export default ([
+  <Redirect from="/" to="upcoming-game" />,
+
   <Route path="/" component={App}>
-    <IndexRoute component={UpcomingGame} />
-    <Route path="upcoming-game" component={UpcomingGame} />
-    <Route path="games" component={Games} />
-    <Route path="games/:gameId" component={Game} />
-    <Route path="list-of-players" component={NotFound} />
+    <Route path="upcoming-game" component={UpcomingGame('upcoming')} />
+    <Route path="last-game" component={Game('last')} />
+    <Route path="games">
+      <IndexRoute component={Games} />
+      <Route path="previous/:gameId" component={Game()} />
+      <Route path="upcoming/:gameId" component={UpcomingGame()} />
+    </Route>
+    <Route path="players" component={NotFound} />
+
     <Redirect from="*" to="404" />
   </Route>
-);
+]);

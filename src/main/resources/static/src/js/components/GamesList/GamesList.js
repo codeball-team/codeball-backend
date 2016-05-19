@@ -8,6 +8,7 @@ export default class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
+    formatUrl: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
     games: PropTypes.array.isRequired,
     pitches: PropTypes.object.isRequired,
@@ -18,6 +19,7 @@ export default class GamesList extends Component {
     const {
       className,
       title,
+      formatUrl,
       currentUser,
       games,
       pitches,
@@ -49,7 +51,7 @@ export default class GamesList extends Component {
             const pitch = pitches[pitchId];
 
             return (
-              <Link key={id} to={`games/${id}`}>
+              <Link key={id} to={formatUrl(id)}>
                 <div className="game-entry">
                   <div className="date-time">
                     {date} {time}

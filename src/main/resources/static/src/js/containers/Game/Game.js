@@ -3,89 +3,115 @@ import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { refreshDataIfNecessary } from 'utils';
-import { LoadableContent, Game as GameComponent } from 'components';
+import { refreshDataIfNecessary, safeGet } from 'utils';
+import { LoadableContent, GameLineup, GameScore } from 'components';
 
-class Game extends Component {
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-    gameId: PropTypes.any,
-    currentUserData: PropTypes.object.isRequired,
-    gameData: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired
-  };
+export default function GenerateGame(constantGameId) {
+  class Game extends Component {
+    static propTypes = {
+      actions: PropTypes.object.isRequired,
+      params: PropTypes.object.isRequired,
+      currentUserData: PropTypes.object.isRequired,
+      gameData: PropTypes.object.isRequired,
+      pitchesData: PropTypes.object.isRequired,
+      usersData: PropTypes.object.isRequired
+    };
 
-  componentWillMount = () => {
-    const {
-      actions,
-      usersData,
-      currentUserData,
-      params,
-      pitchesData
-    } = this.props;
+    componentWillMount = () => {
+      this.updateData(this.props);
+    };
 
-    if (params) {
-      actions.loadGame(params.gameId);
+    componentWillReceiveProps = (newProps) => {
+      if (safeGet(newProps, 'params.gameId') !== safeGet(this.props, 'params.gameId')) {
+        this.updateData(newProps);
+      }
+    };
+
+    updateData = (props) => {
+      const {
+        actions,
+        params,
+        currentUserData,
+        pitchesData,
+        usersData
+      } = props;
+
+      if (params) {
+        actions.loadGame(constantGameId || params.gameId);
+      }
+
+      refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
+      refreshDataIfNecessary(pitchesData, actions.loadPitches);
+      refreshDataIfNecessary(usersData, actions.loadUsers);
+    };
+
+    render () {
+      const {
+        currentUserData,
+        gameData,
+        pitchesData,
+        usersData
+      } = this.props;
+
+      const { currentUser } = currentUserData;
+      const { game } = gameData;
+      const { pitches } = pitchesData;
+      const { users } = usersData;
+      const { pitchId } = game;
+      const pitch = pitches[pitchId];
+      const {
+        date,
+        time,
+        teamA,
+        teamAScore,
+        teamB,
+        teamBScore
+      } = game;
+
+      const isContentLoading = _.any([
+        gameData.isLoading,
+        pitchesData.isLoading,
+        usersData.isLoading,
+        currentUserData.isLoading
+      ]);
+
+      return (
+        <LoadableContent isLoading={isContentLoading}>
+          <section>
+            <GameScore
+              date={date}
+              time={time}
+              pitchName={pitch.name}
+              teamAScore={teamAScore}
+              teamBScore={teamBScore} />
+
+            <GameLineup
+              teamA={teamA}
+              teamB={teamB}
+              users={users} />
+          </section>
+        </LoadableContent>
+      );
     }
-
-    refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
-    refreshDataIfNecessary(usersData, actions.loadUsers);
-    refreshDataIfNecessary(pitchesData, actions.loadPitches);
-  };
-
-  render () {
-    const {
-      currentUserData,
-      gameData,
-      pitchesData,
-      usersData
-    } = this.props;
-
-    const { currentUser } = currentUserData;
-    const { game } = gameData;
-    const { pitches } = pitchesData;
-    const { users } = usersData;
-    const { pitchId } = game;
-    const pitch = pitches[pitchId];
-
-    const isContentLoading = _.any([
-      gameData.isLoading,
-      pitchesData.isLoading,
-      usersData.isLoading,
-      currentUserData.isLoading
-    ]);
-
-    return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section>
-          <GameComponent
-            currentUser={currentUser}
-            game={game}
-            pitch={pitch}
-            users={users} />
-        </section>
-      </LoadableContent>
-    );
   }
-}
 
-function mapStateToProps(state) {
-  return {
-    currentUserData: state.currentUserData,
-    gameData: state.gameData,
-    pitchesData: state.pitchesData,
-    usersData: state.usersData
-  };
-}
+  function mapStateToProps(state) {
+    return {
+      currentUserData: state.currentUserData,
+      gameData: state.gameData,
+      pitchesData: state.pitchesData,
+      usersData: state.usersData
+    };
+  }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(CodeballActions, dispatch)
-  };
-}
+  function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(CodeballActions, dispatch)
+    };
+  }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Game);
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Game);
+}

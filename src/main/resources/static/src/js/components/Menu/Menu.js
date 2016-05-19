@@ -25,7 +25,7 @@ export default class Menu extends Component {
 
         <ul>
           <li>
-            <IndexLink activeClassName="focus" to="/">
+            <IndexLink activeClassName="focus" to="/upcoming-game">
               <IconAlarm className="icon" />
               <span className="label">
                 Upcoming game
@@ -34,7 +34,7 @@ export default class Menu extends Component {
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/games/last">
+            <Link activeClassName="focus" to="/last-game">
               <IconPodium className="icon" />
               <span className="label">
                 Last game
@@ -52,7 +52,7 @@ export default class Menu extends Component {
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/list-of-players" >
+            <Link activeClassName="focus" to="/players" >
               <IconPeople className="icon" />
               <span className="label">
                 List of players
