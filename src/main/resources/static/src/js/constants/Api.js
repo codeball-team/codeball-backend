@@ -13,10 +13,6 @@ export function gameUrl(gameId) {
   return `${gamesUrl()}/${gameId}`;
 }
 
-export function changeEnrollmentStatusUrl(gameId, enrollmentStatus) {
-  return `${gameUrl(gameId)}?enrollmentStatus=${enrollmentStatus}`;
-}
-
 export function pitchesUrl() {
   return `${BASE_API_URL}/${PITCHES}`;
 }

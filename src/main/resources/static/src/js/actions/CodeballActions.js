@@ -9,7 +9,6 @@ import {
   LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE
 } from 'constants/ActionTypes';
 import {
-  changeEnrollmentStatusUrl,
   currentUserUrl,
   gameUrl,
   gamesUrl,
@@ -19,7 +18,9 @@ import {
 
 export function changeEnrollmentStatus(gameId, userId, enrollmentStatus) {
   return ajax({
-    request: request('GET', changeEnrollmentStatusUrl(gameId, enrollmentStatus)),
+    request: request('PUT', gameUrl(gameId))
+      .set('Content-Type', 'application/json')
+      .send(`"${enrollmentStatus}"`),
     startAction: CHANGE_ENROLLMENT_STATUS,
     successAction: CHANGE_ENROLLMENT_STATUS_SUCCESS,
     failureAction: CHANGE_ENROLLMENT_STATUS_FAILURE,
