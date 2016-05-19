@@ -7,6 +7,7 @@ import './GamesList.scss';
 export default class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
+    title: PropTypes.string.isRequired,
     currentUser: PropTypes.object.isRequired,
     games: PropTypes.array.isRequired,
     pitches: PropTypes.object.isRequired,
@@ -16,6 +17,7 @@ export default class GamesList extends Component {
   render() {
     const {
       className,
+      title,
       currentUser,
       games,
       pitches,
@@ -23,29 +25,48 @@ export default class GamesList extends Component {
     } = this.props;
 
     return (
-      <div>
-        {games.map((game) => {
-          const {
-            id,
-            date,
-            time,
-            pitchId,
-            teamA,
-            teamAScore,
-            teamB,
-            teamBScore
-          } = game;
-          const pitch = pitches[pitchId];
+      <div
+        className={classNames(
+          'games-list',
+          className
+        )}>
+        <div className="title">
+          {title}
+        </div>
 
-          return (
-            <div
-              key={id}>
-              <Link to={`games/${id}`}>
-                {date} {time}
+        <div className="game-entries">
+          {games.map((game) => {
+            const {
+              id,
+              date,
+              time,
+              pitchId,
+              teamA,
+              teamAScore,
+              teamB,
+              teamBScore
+            } = game;
+            const pitch = pitches[pitchId];
+
+            return (
+              <Link key={id} to={`games/${id}`}>
+                <div className="game-entry">
+                  <div className="date-time">
+                    {date} {time}
+                  </div>
+
+                  <div className="pitch ellipsis">
+                    {pitch.name}
+                  </div>
+
+                  <div className="score">
+                    {teamAScore} : {teamBScore}
+                  </div>
+                </div>
               </Link>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     );
   }

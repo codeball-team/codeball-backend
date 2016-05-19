@@ -23,7 +23,7 @@ export default class GameEnrollmentEntry extends Component {
           'game-enrollment-entry',
           className
         )}>
-        <div className="name">
+        <div className="name ellipsis">
           {firstName} {lastName}
         </div>
          <div className="enrollment-status">

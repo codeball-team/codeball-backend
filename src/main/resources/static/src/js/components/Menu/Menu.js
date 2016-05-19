@@ -46,7 +46,7 @@ export default class Menu extends Component {
             <Link activeClassName="focus" to="/games">
               <IconCalendar className="icon" />
               <span className="label">
-                Game history
+                Games list
               </span>
             </Link>
           </li>

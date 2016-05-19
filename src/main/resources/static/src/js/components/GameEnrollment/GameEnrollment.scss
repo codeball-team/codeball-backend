@@ -19,7 +19,6 @@
 
       .name {
         @include flex-child-grow;
-        @include ellipsis;
       }
 
       .enrollment-status {

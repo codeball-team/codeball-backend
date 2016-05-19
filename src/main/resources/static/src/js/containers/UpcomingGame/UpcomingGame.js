@@ -65,9 +65,14 @@ class UpcomingGame extends Component {
       return _(userIds).contains(userId) ? enrollmentStatus : selectedEnrollmentStatus;
     }, undefined);
 
+    const isContentLoading = _([
+      gameData.isLoading,
+      usersData.isLoading,
+      pitchesData.isLoading
+    ]).any();
+
     return (
-      <LoadableContent
-        isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
+      <LoadableContent isLoading={isContentLoading}>
         <section>
           <GameInfo
             date={date}

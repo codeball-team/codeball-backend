@@ -1,0 +1,37 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.games-list {
+  .title {
+    @include section-title;
+  }
+
+  .game-entries {
+    a {
+      text-decoration: none;
+    }
+    .game-entry {
+      @include flex-parent;
+      @include highlight-on-hover;
+      padding: 10px 20px;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+
+      .score {
+        @include flex-child;
+      }
+
+      .pitch {
+        @include flex-child-grow;
+        margin: 0 20px;
+      }
+
+      .date-time {
+        @include flex-child;
+      }
+    }
+  }
+}

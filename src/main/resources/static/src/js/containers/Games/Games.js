@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
 import { LoadableContent, GamesList } from 'components';
+import './Games.scss';
 
 class Games extends Component {
   static propTypes = {
@@ -43,6 +44,15 @@ class Games extends Component {
     const { pitches } = pitchesData;
     const { users } = usersData;
 
+    const gamesListProps = {
+      currentUser,
+      pitches,
+      users
+    };
+    const sortedGames = _(games).sortBy('date').reverse();
+    const futureGames = _(sortedGames).filter(game => !game.isGameOver);
+    const previousGames = _(sortedGames).filter(game => game.isGameOver);
+
     const isContentLoading = _.any([
       currentUserData.isLoading,
       gamesData.isLoading,
@@ -52,12 +62,17 @@ class Games extends Component {
 
     return (
       <LoadableContent isLoading={isContentLoading}>
-        <section>
+        <section className="games">
           <GamesList
-            currentUser={currentUser}
-            games={games}
-            pitches={pitches}
-            users={users} />
+            className="future-games"
+            title="Future games"
+            games={futureGames}
+            {...gamesListProps} />
+
+          <GamesList
+            title="Previous games"
+            games={previousGames}
+            {...gamesListProps} />
         </section>
       </LoadableContent>
     );
