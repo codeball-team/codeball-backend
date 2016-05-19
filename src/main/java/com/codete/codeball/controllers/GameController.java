@@ -1,14 +1,17 @@
 package com.codete.codeball.controllers;
 
+import com.codete.codeball.model.EnrollmentStatus;
 import com.codete.codeball.model.Game;
+import com.codete.codeball.model.User;
 import com.codete.codeball.repositories.GameRepository;
+import com.codete.codeball.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/games")
@@ -16,6 +19,9 @@ public class GameController {
 
     @Autowired
     private GameRepository gameRepository;
+
+    @Autowired
+    private ContextUtils contextUtils;
 
     @RequestMapping(value = "/last", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Game getLastGame() {
@@ -30,6 +36,15 @@ public class GameController {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<Game> getGames() {
         return gameRepository.findAll(new Sort(Sort.Direction.DESC, "startTimestamp"));
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
+        User currentUser = contextUtils.getUser(principal);
+        Game game = gameRepository.findOne(gameId);
+        game.getEnrollments().put(currentUser, status);
+        return game;
     }
 
 }
