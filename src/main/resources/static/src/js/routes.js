@@ -3,8 +3,9 @@ import { Route, IndexRoute, Redirect } from 'react-router';
 
 import App from 'components/App';
 import { Page } from 'components';
-import UpcomingMatch from 'containers/UpcomingMatch/UpcomingMatch';
-import LastMatch from 'containers/LastMatch/LastMatch';
+import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
+import Game from 'containers/Game/Game';
+import Games from 'containers/Games/Games';
 import NotFound from 'containers/NotFound/NotFound';
 import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
 
@@ -17,10 +18,10 @@ function decorateComponent(Component) {
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={decorateComponent(UpcomingMatch)} />
-    <Route path="upcoming-match" component={decorateComponent(UpcomingMatch)} />
-    <Route path="last-match" component={decorateComponent(LastMatch)} />
-    <Route path="match-history" component={decorateComponent(NotFound)} />
+    <IndexRoute component={decorateComponent(UpcomingGame)} />
+    <Route path="upcoming-game" component={decorateComponent(UpcomingGame)} />
+    <Route path="games" component={decorateComponent(Games)} />
+    <Route path="games/:gameId" component={decorateComponent(Game)} />
     <Route path="list-of-players" component={decorateComponent(NotFound)} />
     <Redirect from="*" to="404" />
   </Route>

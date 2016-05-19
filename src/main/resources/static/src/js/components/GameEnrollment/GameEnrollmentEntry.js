@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-export default class MatchEnrollmentEntry extends Component {
+export default class GameEnrollmentEntry extends Component {
   static propTypes = {
     className: PropTypes.string,
     firstName: PropTypes.string.isRequired,
@@ -20,7 +20,7 @@ export default class MatchEnrollmentEntry extends Component {
     return (
       <div
         className={classNames(
-          'match-enrollment-entry',
+          'game-enrollment-entry',
           className
         )}>
         <div className="name">

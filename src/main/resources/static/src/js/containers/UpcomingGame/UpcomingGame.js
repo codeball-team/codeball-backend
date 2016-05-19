@@ -6,10 +6,10 @@ import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } 
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
 import {
-  LoadableContent, MatchInfo, MatchEnrollment, MatchEnrollmentForm, MatchLineup
+  LoadableContent, GameInfo, GameEnrollment, GameEnrollmentForm, GameLineup
 } from 'components';
 
-class UpcomingMatch extends Component {
+class UpcomingGame extends Component {
   static propTypes = {
     gameData: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired,
@@ -69,7 +69,7 @@ class UpcomingMatch extends Component {
       <LoadableContent
         isLoading={gameData.isLoading || usersData.isLoading || pitchesData.isLoading}>
         <section>
-          <MatchInfo
+          <GameInfo
             date={date}
             time={time}
             duration={duration}
@@ -81,19 +81,19 @@ class UpcomingMatch extends Component {
             pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
 
           {!isEnrollmentOver && (
-            <MatchEnrollmentForm
+            <GameEnrollmentForm
               value={selectedEnrollmentStatus}
               onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
           )}
 
           {isEnrollmentOver && (
-            <MatchLineup
+            <GameLineup
               users={users}
               teamA={teamA}
               teamB={teamB} />
           )}
 
-          <MatchEnrollment
+          <GameEnrollment
             users={users}
             enrolledUsers={enrolledUsers} />
         </section>
@@ -120,4 +120,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UpcomingMatch);
+)(UpcomingGame);

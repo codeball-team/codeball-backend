@@ -1,17 +1,17 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
 
-.match-enrollment {
+.game-enrollment {
   .title {
     @include section-title;
   }
 
-  .match-enrollment-entries {
+  .game-enrollment-entries {
     &:last-of-type {
       margin-bottom: 20px;
     }
 
-    .match-enrollment-entry {
+    .game-enrollment-entry {
       @include flex-parent;
       @include highlight-on-hover;
       padding: 10px 20px;

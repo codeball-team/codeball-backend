@@ -28,25 +28,25 @@ export default class Menu extends Component {
             <IndexLink activeClassName="focus" to="/">
               <IconAlarm className="icon" />
               <span className="label">
-                Upcoming match
+                Upcoming game
               </span>
             </IndexLink>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/last-match">
+            <Link activeClassName="focus" to="/games/last">
               <IconPodium className="icon" />
               <span className="label">
-                Last match
+                Last game
               </span>
             </Link>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/match-history">
+            <Link activeClassName="focus" to="/games">
               <IconCalendar className="icon" />
               <span className="label">
-                Match history
+                Game history
               </span>
             </Link>
           </li>

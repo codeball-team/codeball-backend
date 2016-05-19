@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import TeamLineup from '../TeamLineup/TeamLineup';
-import './MatchLineup.scss';
+import './GameLineup.scss';
 
-export default class MatchLineup extends Component {
+export default class GameLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     users: PropTypes.object.isRequired,
@@ -22,7 +22,7 @@ export default class MatchLineup extends Component {
     return (
       <div
         className={classNames(
-          'match-lineup',
+          'game-lineup',
           className
         )}>
         <div className="title">

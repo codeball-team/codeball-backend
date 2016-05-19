@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import './MatchScore.scss';
+import './GameScore.scss';
 
-export default class MatchScore extends Component {
+export default class GameScore extends Component {
   static propTypes = {
     className: PropTypes.string,
     pitchName: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ export default class MatchScore extends Component {
     return (
       <div
         className={classNames(
-          'match-score',
+          'game-score',
           className
         )}>
         <div className="title">

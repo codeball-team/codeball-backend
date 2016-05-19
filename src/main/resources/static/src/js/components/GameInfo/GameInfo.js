@@ -7,11 +7,11 @@ import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import { PITCH_TYPE_STRING } from 'constants/Configuration';
-import './MatchInfo.scss';
+import './GameInfo.scss';
 
 const domainRegExp = /(https?:\/\/[^\/]*)/;
 
-export default class MatchInfo extends Component {
+export default class GameInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
     date: PropTypes.string.isRequired,
@@ -42,19 +42,19 @@ export default class MatchInfo extends Component {
     return (
       <div
         className={classNames(
-          'match-info',
+          'game-info',
           className
         )}>
         <div className="title">
           {pitchName}
         </div>
 
-        <div className="details" title="Match date & time">
+        <div className="details" title="Game date & time">
           <IconCalendar className="icon" />
           {date}, {time}
         </div>
 
-        <div className="details" title="Match duration">
+        <div className="details" title="Game duration">
           <IconClock className="icon" />
           {duration} min
         </div>
