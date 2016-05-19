@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
+import { Page } from 'components';
 
 export default class App extends Component {
   static propTypes = {
@@ -10,7 +12,9 @@ export default class App extends Component {
 
     return (
       <div>
-        {children}
+        <Page GlobalSpinnerComponent={AjaxSpinner}>
+          {children}
+        </Page>
       </div>
     );
   }
