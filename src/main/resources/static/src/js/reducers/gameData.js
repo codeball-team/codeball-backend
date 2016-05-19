@@ -51,7 +51,7 @@ export default reducer(initialState, {
     return {
       ...state,
       isLoading: true
-    }
+    };
   },
 
   [CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
