@@ -1,5 +1,6 @@
 package com.codete.codeball.controllers;
 
+import com.codete.codeball.exceptions.EnrollmentOverException;
 import com.codete.codeball.model.EnrollmentStatus;
 import com.codete.codeball.model.Game;
 import com.codete.codeball.model.User;
@@ -28,6 +29,11 @@ public class GameController {
         return gameRepository.findLastGame();
     }
 
+    @RequestMapping(value = "/upcoming", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    public Game getUpcomingGame() {
+        return gameRepository.findUpcomingGame();
+    }
+
     @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Game getGameById(@PathVariable long id) {
         return gameRepository.findOne(id);
@@ -43,6 +49,9 @@ public class GameController {
     public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
         User currentUser = contextUtils.getUser(principal);
         Game game = gameRepository.findOne(gameId);
+        if (game.isEnrollmentOver()) {
+            throw new EnrollmentOverException(gameId);
+        }
         game.getEnrollments().put(currentUser, status);
         return game;
     }
