@@ -47,21 +47,11 @@ export default reducer(initialState, {
     };
   },
 
-  [CHANGE_ENROLLMENT_STATUS]: (state, action) => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+  [CHANGE_ENROLLMENT_STATUS]: (state) => state,
 
   [CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
-  [CHANGE_ENROLLMENT_STATUS_FAILURE]: (state, action) => {
-    return {
-      ...state,
-      isLoading: false
-    };
-  }
+  [CHANGE_ENROLLMENT_STATUS_FAILURE]: (state) => state
 });
 
 function gameLoaded(state, action) {

@@ -53,7 +53,7 @@ export default class GamesList extends Component {
             return (
               <Link key={id} to={formatUrl(id)}>
                 <div className="game-entry">
-                  <div className="date-time">
+                  <div className="date-time ellipsis">
                     {date} {time}
                   </div>
 

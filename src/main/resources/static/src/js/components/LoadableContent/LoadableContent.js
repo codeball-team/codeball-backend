@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Spinner from '../Spinner/Spinner';
+import classNames from 'classnames';
+import './LoadableContent.scss';
 
 export default class LoadableContent extends Component {
   static propTypes = {
@@ -16,16 +17,15 @@ export default class LoadableContent extends Component {
     } = this.props;
 
     return (
-      <div className={className}>
-        {isLoading && (
-          <Spinner
-            placement="relative"
-            show={true} />
-        )}
-
-        {!isLoading && (
-          children
-        )}
+      <div
+        className={classNames(
+          'loadable-content',
+          {
+            'is-loading': isLoading
+          },
+          className
+        )}>
+        {children}
       </div>
     );
   }

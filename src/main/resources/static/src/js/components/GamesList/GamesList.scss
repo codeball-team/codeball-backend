@@ -20,8 +20,8 @@
         border-bottom: 0;
       }
 
-      .score {
-        @include flex-child;
+      .date-time {
+        flex: 0 1 auto;
       }
 
       .pitch {
@@ -29,7 +29,7 @@
         margin: 0 20px;
       }
 
-      .date-time {
+      .score {
         @include flex-child;
       }
     }

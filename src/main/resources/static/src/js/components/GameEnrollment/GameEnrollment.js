@@ -44,17 +44,21 @@ export default class GameEnrollment extends Component {
         </div>
 
         <div>
-          {_(enrollmentStatuses).map(enrollmentStatus => (
-            <GameEnrollmentEntries
-              key={enrollmentStatus}
-              className={enrollmentStatusClassnames[enrollmentStatus]}
-              enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
-              enrolledUsers={
-                _(
-                  _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
-                ).compact()
-              } />
-          ))}
+          {_(enrollmentStatuses).map(enrollmentStatus => {
+            const enrollmentStatusUsers = _(
+              _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
+            ).compact();
+
+            return (enrollmentStatusUsers.length === 0)
+              ? null
+              : (
+                <GameEnrollmentEntries
+                  key={enrollmentStatus}
+                  className={enrollmentStatusClassnames[enrollmentStatus]}
+                  enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
+                  enrolledUsers={enrollmentStatusUsers} />
+              );
+          })}
         </div>
       </div>
     );
