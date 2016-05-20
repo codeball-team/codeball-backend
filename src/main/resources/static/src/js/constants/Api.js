@@ -1,4 +1,4 @@
-const BASE_API_URL = 'http://localhost:8080';
+const BASE_API_URL = 'http://localhost:8080/api';
 
 const GAMES = 'games';
 const PITCHES = 'pitches';

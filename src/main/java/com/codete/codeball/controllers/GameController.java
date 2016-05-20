@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping(value = "/games")
+@RequestMapping(value = "/api/games")
 public class GameController {
 
     @Autowired
