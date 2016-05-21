@@ -22,11 +22,18 @@
 
       .date-time {
         flex: 0 1 auto;
+        @include phone {
+          @include flex-child-grow;
+        }
       }
 
       .pitch {
         @include flex-child-grow;
         margin: 0 20px;
+
+        @include phone {
+          display: none;
+        }
       }
 
       .score {

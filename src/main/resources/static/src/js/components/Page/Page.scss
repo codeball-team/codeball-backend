@@ -27,9 +27,24 @@
     color: $content-fg-color;
 
     .page-content {
+      position: relative;
       max-width: 600px;
+
       > div {
         min-height: 100%;
+      }
+
+      .back-button {
+        position: absolute;
+        display: inline-block;
+        display: none;
+        top: 0;
+        right: 0;
+        font-size: $font-size-s;
+
+        @include tablet-and-smaller {
+          display: none;
+        }
       }
     }
 

@@ -8,6 +8,16 @@ export default class Page extends Component {
     GlobalSpinnerComponent: PropTypes.any.isRequired
   };
 
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  onBackClick = (event) => {
+    const { router } = this.context;
+    event.preventDefault();
+    router.goBack();
+  }
+
   render () {
     const {
       children,
@@ -20,6 +30,10 @@ export default class Page extends Component {
         <div className="page-content-container">
           <div className="page-content">
             {children}
+
+            <a href="#" className="back-button" onClick={this.onBackClick}>
+              &laquo; back
+            </a>
           </div>
         </div>
         <GlobalSpinnerComponent />

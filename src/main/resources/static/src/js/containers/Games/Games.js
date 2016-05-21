@@ -63,18 +63,22 @@ class Games extends Component {
     return (
       <LoadableContent isLoading={isContentLoading}>
         <section className="games">
-          <GamesList
-            className="upcoming-games"
-            title="Upcoming games"
-            formatUrl={id => `games/upcoming/${id}`}
-            games={upcomingGames}
-            {...gamesListProps} />
+          {upcomingGames.length > 0 && (
+            <GamesList
+              className="upcoming-games"
+              title="Upcoming games"
+              formatUrl={id => `games/upcoming/${id}`}
+              games={upcomingGames}
+              {...gamesListProps} />
+          )}
 
-          <GamesList
-            title="Previous games"
-            formatUrl={id => `games/previous/${id}`}
-            games={previousGames}
-            {...gamesListProps} />
+          {upcomingGames.length > 0 && (
+            <GamesList
+              title="Previous games"
+              formatUrl={id => `games/previous/${id}`}
+              games={previousGames}
+              {...gamesListProps} />
+          )}
         </section>
       </LoadableContent>
     );
