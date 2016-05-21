@@ -2,7 +2,7 @@
 @import '~styles/mixins.scss';
 
 .game-info {
-  .details {
-    margin: 3px 0;
+  > div {
+    margin-bottom: 10px;
   }
 }

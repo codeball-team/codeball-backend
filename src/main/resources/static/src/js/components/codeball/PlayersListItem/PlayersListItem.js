@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { USER_MISSING_PICTURE_URL } from 'constants/Configuration';
 import { ListItem } from 'components/ui';
 import './PlayersListItem.scss';
-
-const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
 
 export default class PlayersListItem extends Component {
   static propTypes = {
@@ -27,7 +26,7 @@ export default class PlayersListItem extends Component {
     } = user;
 
     return (
-      <Link key={id} to={`players/${id}`}>
+      <Link key={id} to={`/players/${id}`}>
         <ListItem className="players-list-item">
           <div
             className="picture"

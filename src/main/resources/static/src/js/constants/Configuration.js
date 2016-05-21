@@ -23,3 +23,9 @@ export const PITCH_TYPE_STRING = {
 
 export const ROLE_ADMIN = 'ROLE_ADMIN';
 export const ROLE_USER = 'ROLE_USER';
+export const ROLE_STRING = {
+  [ROLE_ADMIN]: 'Admin',
+  [ROLE_USER]: 'User'
+};
+
+export const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';

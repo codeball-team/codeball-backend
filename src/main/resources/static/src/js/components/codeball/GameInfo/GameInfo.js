@@ -47,17 +47,17 @@ export default class GameInfo extends Component {
           'game-info',
           className
         )}>
-        <div className="details" title="Game date & time">
+        <div title="Game date & time">
           <IconCalendar className="icon" />
           {date}, {time}
         </div>
 
-        <div className="details" title="Game duration">
+        <div title="Game duration">
           <IconClock className="icon" />
           {duration} min
         </div>
 
-        <div className="details ellipsis" title="Pitch address">
+        <div className="ellipsis" title="Pitch address">
           <IconLocation className="icon" />
           <a href={`https://www.google.com/maps/?q=${pitchAddress}`}>
             {pitchAddress}
@@ -65,7 +65,7 @@ export default class GameInfo extends Component {
         </div>
 
         {pitchUrl && (
-          <div className="details ellipsis" title="Pitch webpage">
+          <div className="ellipsis" title="Pitch webpage">
             <IconWorld className="icon" />
             <a href={pitchUrl}>
               {pitchUrl.match(domainRegExp)[0]}
@@ -74,13 +74,13 @@ export default class GameInfo extends Component {
         )}
 
         {PITCH_TYPE_STRING[pitchType] && (
-          <div className="details ellipsis" title="Pitch type">
+          <div className="ellipsis" title="Pitch type">
             <IconLayers className="icon" />
             {PITCH_TYPE_STRING[pitchType]}
           </div>
         )}
 
-        <div className="details" title="Pitch capacity">
+        <div title="Pitch capacity">
           <IconPeople className="icon" />
           {
             pitchMinNumberOfPlayers === pitchMaxNumberOfPlayers

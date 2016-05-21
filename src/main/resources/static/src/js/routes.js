@@ -5,6 +5,7 @@ import App from 'components/App';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
+import Player from 'containers/Player/Player';
 import Players from 'containers/Players/Players';
 import NotFound from 'containers/NotFound/NotFound';
 
@@ -21,6 +22,7 @@ export default ([
     </Route>
     <Route path="players">
       <IndexRoute component={Players} />
+      <Route path=":userId" component={Player} />
     </Route>
     <Route path="players" component={NotFound} />
 
