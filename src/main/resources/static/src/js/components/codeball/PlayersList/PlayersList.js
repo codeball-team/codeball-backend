@@ -10,9 +10,9 @@ const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
 export default class PlayersList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired
+    users: PropTypes.any.isRequired
   };
 
   render() {

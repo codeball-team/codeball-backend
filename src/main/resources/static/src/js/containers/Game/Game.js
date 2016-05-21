@@ -86,6 +86,7 @@ export default function GenerateGame(constantGameId) {
             <GameLineup
               teamA={teamA}
               teamB={teamB}
+              currentUser={currentUser}
               users={users} />
           </section>
         </LoadableContent>

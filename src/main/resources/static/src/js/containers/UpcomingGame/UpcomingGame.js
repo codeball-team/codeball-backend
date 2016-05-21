@@ -108,6 +108,7 @@ export default function GenerateUpcomingGame(constantGameId) {
 
             {isEnrollmentOver && (
               <GameLineup
+                currentUser={currentUser}
                 users={users}
                 teamA={teamA}
                 teamB={teamB} />

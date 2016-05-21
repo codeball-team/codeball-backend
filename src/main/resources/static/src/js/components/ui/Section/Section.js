@@ -6,7 +6,7 @@ export default class Section extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.any,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
   };
 
   render() {
@@ -22,9 +22,11 @@ export default class Section extends Component {
           'section',
           className
         )}>
-        <div className="section-title">
-          {title}
-        </div>
+        {title && (
+          <div className="section-title">
+            {title}
+          </div>
+        )}
 
         {children}
       </div>

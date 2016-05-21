@@ -7,6 +7,7 @@ import './GameLineup.scss';
 export default class GameLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
+    currentUser: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
     teamA: PropTypes.array.isRequired,
     teamB: PropTypes.array.isRequired
@@ -15,6 +16,7 @@ export default class GameLineup extends Component {
   render() {
     const {
       className,
+      currentUser,
       users,
       teamA,
       teamB
@@ -30,11 +32,13 @@ export default class GameLineup extends Component {
         <div className="lineups">
           <TeamLineup
             teamName="Team A"
+            currentUser={currentUser}
             users={users}
             team={teamA} />
 
           <TeamLineup
             teamName="Team B"
+            currentUser={currentUser}
             users={users}
             team={teamB} />
         </div>
