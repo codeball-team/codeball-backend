@@ -34,21 +34,23 @@ export default class PlayerProfile extends Component {
           'player-profile',
           className
         )}>
-        <div
-          className="picture"
-          style={{
-            backgroundImage: `url("${pictureUrl || USER_MISSING_PICTURE_URL}")`
-          }} />
+        <a href={pictureUrl}>
+          <div
+            className="picture"
+            style={{
+              backgroundImage: `url("${pictureUrl || USER_MISSING_PICTURE_URL}")`
+            }} />
+        </a>
 
         <div className="info">
           <div>
-            <IconEmail className="icon" />
-            <a href={`mailto:${email}`}>{email}</a>
-          </div>
-
-          <div>
             <IconAccessLevel className="icon" />
             {ROLE_STRING[role]}
+          </div>
+
+          <div className="ellipsis">
+            <IconEmail className="icon" />
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
       </Section>

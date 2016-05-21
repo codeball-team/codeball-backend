@@ -1,12 +1,17 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
 .player-profile {
   .picture {
     display: inline-block;
     width: 128px;
     height: 128px;
     margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: $highlight-color;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: top center;
+    background-position: 50%;
   }
 
   .info {

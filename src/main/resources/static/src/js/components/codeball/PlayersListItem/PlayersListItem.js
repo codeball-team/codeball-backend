@@ -26,7 +26,7 @@ export default class PlayersListItem extends Component {
     } = user;
 
     return (
-      <Link key={id} to={`/players/${id}`}>
+      <Link className={className} key={id} to={`/players/${id}`}>
         <ListItem className="players-list-item">
           <div
             className="picture"

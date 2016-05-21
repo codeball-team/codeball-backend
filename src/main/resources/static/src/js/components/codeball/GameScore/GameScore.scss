@@ -5,6 +5,7 @@
   .score {
     text-align: center;
     font-size: $font-size-xxxl;
+    margin-bottom: 10px;
 
     @include tablet-and-smaller {
       font-size: $font-size-xxl;
@@ -13,5 +14,6 @@
 
   .details {
     text-align: center;
+    margin-bottom: 10px;
   }
 }
