@@ -6,6 +6,7 @@ import { Page } from 'components';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
+import Players from 'containers/Players/Players';
 import NotFound from 'containers/NotFound/NotFound';
 
 export default ([
@@ -18,6 +19,9 @@ export default ([
       <IndexRoute component={Games} />
       <Route path="previous/:gameId" component={Game()} />
       <Route path="upcoming/:gameId" component={UpcomingGame()} />
+    </Route>
+    <Route path="players">
+      <IndexRoute component={Players} />
     </Route>
     <Route path="players" component={NotFound} />
 

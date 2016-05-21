@@ -25,8 +25,8 @@ class Games extends Component {
       usersData
     } = this.props;
 
+    actions.loadGames();
     refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
-    refreshDataIfNecessary(gamesData, actions.loadGames);
     refreshDataIfNecessary(pitchesData, actions.loadPitches);
     refreshDataIfNecessary(usersData, actions.loadUsers);
   };

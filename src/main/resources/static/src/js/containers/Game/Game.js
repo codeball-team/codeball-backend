@@ -36,10 +36,7 @@ export default function GenerateGame(constantGameId) {
         usersData
       } = props;
 
-      if (params) {
-        actions.loadGame(constantGameId || params.gameId);
-      }
-
+      actions.loadGame(constantGameId || params.gameId);
       refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
       refreshDataIfNecessary(pitchesData, actions.loadPitches);
       refreshDataIfNecessary(usersData, actions.loadUsers);

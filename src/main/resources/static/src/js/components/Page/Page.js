@@ -16,7 +16,7 @@ export default class Page extends Component {
     const { router } = this.context;
     event.preventDefault();
     router.goBack();
-  }
+  };
 
   render () {
     const {
