@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
+import { Section } from 'components';
 import './GameScore.scss';
 
 export default class GameScore extends Component {
@@ -24,15 +25,12 @@ export default class GameScore extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title="Result"
         className={classNames(
           'game-score',
           className
         )}>
-        <div className="title">
-          Result
-        </div>
-
         <div className="score">
           {this.renderScore(teamAScore)} : {this.renderScore(teamBScore)}
         </div>
@@ -48,7 +46,7 @@ export default class GameScore extends Component {
         <div className="details">
           {time}
         </div>
-      </div>
+      </Section>
     );
   }
 

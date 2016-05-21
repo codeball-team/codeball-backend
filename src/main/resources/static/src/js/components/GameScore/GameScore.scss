@@ -2,10 +2,6 @@
 @import '~styles/mixins.scss';
 
 .game-score {
-  .title {
-    @include section-title;
-  }
-
   .score {
     text-align: center;
     font-size: $font-size-xxxl;

@@ -2,10 +2,6 @@
 @import '~styles/mixins.scss';
 
 .game-enrollment-form {
-  .label {
-    @include section-title;
-  }
-
   .options {
     @include flex-parent(center, flex-start)
     align-content: stretch;

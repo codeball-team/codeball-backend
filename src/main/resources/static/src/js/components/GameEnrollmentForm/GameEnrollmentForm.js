@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
+import {
+  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
+} from 'constants/Configuration';
+import { Section } from 'components';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 
@@ -42,15 +45,12 @@ export default class GameEnrollmentForm extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title="Are you going?"
         className={classNames(
           'game-enrollment-form',
           className
         )}>
-        <div className="label">
-          Are you going?
-        </div>
-
         <div className="options">
           {_(gameEnrollmentFormOptions).map(option => (
             <GameEnrollmentFormOption
@@ -60,7 +60,7 @@ export default class GameEnrollmentForm extends Component {
               {...option} />
           ))}
         </div>
-      </div>
+      </Section>
     );
   }
 }

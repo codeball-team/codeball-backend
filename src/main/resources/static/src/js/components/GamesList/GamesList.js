@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import { List, ListItem, Section } from 'components';
 import './GamesList.scss';
 
 export default class GamesList extends Component {
@@ -27,16 +28,13 @@ export default class GamesList extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title={title}
         className={classNames(
           'games-list',
           className
         )}>
-        <div className="title">
-          {title}
-        </div>
-
-        <div className="game-entries">
+        <List className="game-entries">
           {games.map((game) => {
             const {
               id,
@@ -52,7 +50,7 @@ export default class GamesList extends Component {
 
             return (
               <Link key={id} to={formatUrl(id)}>
-                <div className="game-entry">
+                <ListItem className="game-entry">
                   <div className="date-time ellipsis">
                     {date} {time}
                   </div>
@@ -64,12 +62,12 @@ export default class GamesList extends Component {
                   <div className="score">
                     {teamAScore} : {teamBScore}
                   </div>
-                </div>
+                </ListItem>
               </Link>
             );
           })}
-        </div>
-      </div>
+        </List>
+      </Section>
     );
   }
 }

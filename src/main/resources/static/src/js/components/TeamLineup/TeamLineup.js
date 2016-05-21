@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
+import { List, ListItem } from 'components';
 import './TeamLineup.scss';
 
 export default class TeamLineup extends Component {
@@ -33,11 +34,11 @@ export default class TeamLineup extends Component {
           'ellipsis',
           className
         )}>
-        <div className="team-name">
+        <div className="team-name ellipsis">
           {teamName}
         </div>
 
-        <div className="players">
+        <List>
           {_(sortedTeamUsers).map((user, index) => {
             const {
               id,
@@ -46,14 +47,14 @@ export default class TeamLineup extends Component {
             } = user;
 
             return (
-              <div
+              <ListItem
                 key={id}
-                className="player ellipsis">
+                className="ellipsis">
                 {firstName} {lastName}
-              </div>
+              </ListItem>
             );
           })}
-        </div>
+        </List>
       </div>
     );
   }

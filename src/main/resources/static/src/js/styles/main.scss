@@ -71,3 +71,15 @@ input[type="text"] {
 .ellipsis {
   @include ellipsis;
 }
+
+.bg-success {
+  background-color: $bg-color-success;
+}
+
+.bg-default-alert {
+  background-color: $bg-color-default-alert;
+}
+
+.bg-danger {
+  background-color: $bg-color-danger;
+}

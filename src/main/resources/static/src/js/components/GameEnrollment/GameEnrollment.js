@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
+import {
+  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
+} from 'constants/Configuration';
+import { Section } from 'components';
 import GameEnrollmentEntries from './GameEnrollmentEntries';
 import './GameEnrollment.scss';
 
 const enrollmentStatusClassnames = {
-  [ENROLLMENT_STATUS_YES]: 'yes',
-  [ENROLLMENT_STATUS_MAYBE]: 'maybe',
-  [ENROLLMENT_STATUS_NO]: 'no'
+  [ENROLLMENT_STATUS_YES]: 'bg-success',
+  [ENROLLMENT_STATUS_MAYBE]: 'bg-default-alert',
+  [ENROLLMENT_STATUS_NO]: 'bg-danger'
 };
 
 const enrollmentStatusText = {
@@ -34,33 +37,28 @@ export default class GameEnrollment extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title={`Enrolled players (${enrolledUsers[ENROLLMENT_STATUS_YES].length})`}
         className={classNames(
           'game-enrollment',
           className
         )}>
-        <div className="title">
-          Enrolled players ({enrolledUsers[ENROLLMENT_STATUS_YES].length})
-        </div>
+        {_(enrollmentStatuses).map(enrollmentStatus => {
+          const enrollmentStatusUsers = _(
+            _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
+          ).compact();
 
-        <div>
-          {_(enrollmentStatuses).map(enrollmentStatus => {
-            const enrollmentStatusUsers = _(
-              _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
-            ).compact();
-
-            return (enrollmentStatusUsers.length === 0)
-              ? null
-              : (
-                <GameEnrollmentEntries
-                  key={enrollmentStatus}
-                  className={enrollmentStatusClassnames[enrollmentStatus]}
-                  enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
-                  enrolledUsers={enrollmentStatusUsers} />
-              );
-          })}
-        </div>
-      </div>
+          return (enrollmentStatusUsers.length === 0)
+            ? null
+            : (
+              <GameEnrollmentEntries
+                key={enrollmentStatus}
+                className={enrollmentStatusClassnames[enrollmentStatus]}
+                enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
+                enrolledUsers={enrollmentStatusUsers} />
+            );
+        })}
+      </Section>
     );
   }
 }

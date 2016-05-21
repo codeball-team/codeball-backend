@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { Section } from 'components';
 import TeamLineup from '../TeamLineup/TeamLineup';
 import './GameLineup.scss';
 
@@ -20,15 +21,12 @@ export default class GameLineup extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title="Lineups"
         className={classNames(
           'game-lineup',
           className
         )}>
-        <div className="title">
-          Lineups
-        </div>
-
         <div className="lineups">
           <TeamLineup
             teamName="Team A"
@@ -40,7 +38,7 @@ export default class GameLineup extends Component {
             users={users}
             team={teamB} />
         </div>
-      </div>
+      </Section>
     );
   }
 }

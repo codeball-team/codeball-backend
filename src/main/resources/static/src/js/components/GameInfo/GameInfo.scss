@@ -2,16 +2,7 @@
 @import '~styles/mixins.scss';
 
 .game-info {
-  .title {
-    @include section-title;
-  }
-
   .details {
-    font-size: $font-size-m;
-    padding: 3px 0;
-
-    @include tablet-and-smaller {
-      font-size: $font-size-s;
-    }
+    margin: 3px 0;
   }
 }

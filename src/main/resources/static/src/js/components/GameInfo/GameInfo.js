@@ -7,6 +7,7 @@ import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import { PITCH_TYPE_STRING } from 'constants/Configuration';
+import { Section } from 'components';
 import './GameInfo.scss';
 
 const domainRegExp = /(https?:\/\/[^\/]*)/;
@@ -40,15 +41,12 @@ export default class GameInfo extends Component {
     } = this.props;
 
     return (
-      <div
+      <Section
+        title={pitchName}
         className={classNames(
           'game-info',
           className
         )}>
-        <div className="title">
-          {pitchName}
-        </div>
-
         <div className="details" title="Game date & time">
           <IconCalendar className="icon" />
           {date}, {time}
@@ -90,7 +88,7 @@ export default class GameInfo extends Component {
               : `${pitchMinNumberOfPlayers} - ${pitchMaxNumberOfPlayers}`
           }
         </div>
-      </div>
+      </Section>
     );
   }
 }

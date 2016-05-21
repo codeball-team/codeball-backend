@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
+import { List } from 'components';
 import GameEnrollmentEntry from './GameEnrollmentEntry';
 
 export default class GameEnrollmentEntries extends Component {
@@ -18,7 +19,7 @@ export default class GameEnrollmentEntries extends Component {
     } = this.props;
 
     return (
-      <div
+      <List
         className={classNames(
           'game-enrollment-entries',
           className
@@ -38,7 +39,7 @@ export default class GameEnrollmentEntries extends Component {
               enrollmentStatus={enrollmentStatus} />
           );
         })}
-      </div>
+      </List>
     );
   }
 }

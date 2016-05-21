@@ -2,27 +2,15 @@
 @import '~styles/mixins.scss';
 
 .game-enrollment {
-  .title {
-    @include section-title;
-  }
-
   .game-enrollment-entries {
     border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
 
     &:last-of-type {
-      margin-bottom: 20px;
       border-bottom: 0;
     }
 
     .game-enrollment-entry {
       @include flex-parent;
-      @include highlight-on-hover;
-      padding: 10px 20px;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
-
-      &:last-of-type {
-        border-bottom: 0;
-      }
 
       .name {
         @include flex-child-grow;
@@ -33,17 +21,5 @@
         margin-left: 10px;
       }
     }
-  }
-
-  .yes {
-    background-color: $bg-color-success;
-  }
-
-  .no {
-    background-color: $bg-color-danger;
-  }
-
-  .maybe {
-    background-color: $bg-color-default-alert;
   }
 }
