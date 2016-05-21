@@ -28,6 +28,7 @@ class Players extends Component {
 
     const { currentUser } = currentUserData;
     const { users } = usersData;
+    const numberOfUsers =_(users).keys().length;
 
     const isContentLoading = _.any([
       currentUserData.isLoading,
@@ -37,9 +38,9 @@ class Players extends Component {
     return (
       <LoadableContent isLoading={isContentLoading}>
         <section className="players">
-          {_(users).keys().length > 0 && (
+          {numberOfUsers > 0 && (
             <PlayersList
-              title="Players"
+              title={`Players (${numberOfUsers})`}
               currentUser={currentUser}
               users={users} />
           )}

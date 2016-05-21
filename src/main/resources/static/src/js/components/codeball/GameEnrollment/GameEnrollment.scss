@@ -3,12 +3,6 @@
 
 .game-enrollment {
   .game-enrollment-entries {
-    border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
-
-    &:last-of-type {
-      border-bottom: 0;
-    }
-
     .game-enrollment-entry {
       @include flex-parent;
 

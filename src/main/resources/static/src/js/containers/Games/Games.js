@@ -67,7 +67,7 @@ class Games extends Component {
           {upcomingGames.length > 0 && (
             <GamesList
               className="upcoming-games"
-              title="Upcoming games"
+              title={`Upcoming games (${upcomingGames.length})`}
               formatUrl={id => `games/upcoming/${id}`}
               games={upcomingGames}
               {...gamesListProps} />
@@ -75,7 +75,7 @@ class Games extends Component {
 
           {upcomingGames.length > 0 && (
             <GamesList
-              title="Previous games"
+              title={`Previous games (${previousGames.length})`}
               formatUrl={id => `games/previous/${id}`}
               games={previousGames}
               {...gamesListProps} />
