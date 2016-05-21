@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { List, ListItem, Section } from 'components';
+import { List, ListItem, Section } from 'components/ui';
 import './PlayersList.scss';
 
 const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';

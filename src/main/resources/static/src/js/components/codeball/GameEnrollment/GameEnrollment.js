@@ -4,7 +4,7 @@ import _ from 'underscore';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants/Configuration';
-import { Section } from 'components';
+import { Section } from 'components/ui';
 import GameEnrollmentEntries from './GameEnrollmentEntries';
 import './GameEnrollment.scss';
 

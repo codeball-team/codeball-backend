@@ -7,7 +7,7 @@ import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import { PITCH_TYPE_STRING } from 'constants/Configuration';
-import { Section } from 'components';
+import { Section } from 'components/ui';
 import './GameInfo.scss';
 
 const domainRegExp = /(https?:\/\/[^\/]*)/;

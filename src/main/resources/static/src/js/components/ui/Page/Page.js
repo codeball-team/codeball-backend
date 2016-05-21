@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Menu from 'components/Menu/Menu';
+import Menu from '../Menu/Menu';
 import './Page.scss';
 
 export default class Page extends Component {

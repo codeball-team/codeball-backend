@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
-import { Page } from 'components';
+import { Page } from 'components/ui';
 
 export default class App extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import { List, ListItem } from 'components';
+import { List, ListItem } from 'components/ui';
 import './TeamLineup.scss';
 
 export default class TeamLineup extends Component {

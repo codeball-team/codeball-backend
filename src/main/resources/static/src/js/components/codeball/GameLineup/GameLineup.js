@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { Section } from 'components';
+import { Section } from 'components/ui';
 import TeamLineup from '../TeamLineup/TeamLineup';
 import './GameLineup.scss';
 

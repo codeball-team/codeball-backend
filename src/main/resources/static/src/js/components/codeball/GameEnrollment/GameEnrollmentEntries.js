@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import { List } from 'components';
+import { List } from 'components/ui';
 import GameEnrollmentEntry from './GameEnrollmentEntry';
 
 export default class GameEnrollmentEntries extends Component {

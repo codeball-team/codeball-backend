@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants/Configuration';
-import { Section } from 'components';
+import { Section } from 'components/ui';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 

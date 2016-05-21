@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import { LoadableContent, PlayersList } from 'components';
+import { LoadableContent }  from 'components/ui';
+import { PlayersList } from 'components/codeball';
 
 class Players extends Component {
   static propTypes = {

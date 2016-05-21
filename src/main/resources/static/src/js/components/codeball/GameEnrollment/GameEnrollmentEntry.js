@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ListItem } from 'components';
+import { ListItem } from 'components/ui';
 import classNames from 'classnames';
 
 export default class GameEnrollmentEntry extends Component {

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
-import { LoadableContent, GameLineup, GameScore } from 'components';
+import { LoadableContent } from 'components/ui';
+import { GameLineup, GameScore } from 'components/codeball';
 
 export default function GenerateGame(constantGameId) {
   class Game extends Component {

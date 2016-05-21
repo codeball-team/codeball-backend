@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
 
 import App from 'components/App';
-import { Page } from 'components';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';

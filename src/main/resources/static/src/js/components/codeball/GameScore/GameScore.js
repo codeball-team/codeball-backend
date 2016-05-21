@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import { Section } from 'components';
+import { Section } from 'components/ui';
 import './GameScore.scss';
 
 export default class GameScore extends Component {

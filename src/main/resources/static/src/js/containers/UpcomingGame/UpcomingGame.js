@@ -5,9 +5,8 @@ import { bindActionCreators } from 'redux';
 import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
-import {
-  LoadableContent, GameInfo, GameEnrollment, GameEnrollmentForm, GameLineup
-} from 'components';
+import { LoadableContent }  from 'components/ui';
+import { GameInfo, GameEnrollment, GameEnrollmentForm, GameLineup } from 'components/codeball';
 
 export default function GenerateUpcomingGame(constantGameId) {
   class UpcomingGame extends Component {

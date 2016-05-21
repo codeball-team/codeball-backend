@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { List, ListItem, Section } from 'components';
+import { List, ListItem, Section } from 'components/ui';
 import './GamesList.scss';
 
 export default class GamesList extends Component {
