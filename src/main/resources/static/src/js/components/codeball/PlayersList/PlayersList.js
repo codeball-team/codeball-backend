@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import classNames from 'classnames';
-import { Link } from 'react-router';
-import { List, ListItem, Section } from 'components/ui';
-import './PlayersList.scss';
-
-const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
+import { List, Section } from 'components/ui';
+import PlayersListItem from '../PlayersListItem/PlayersListItem';
 
 export default class PlayersList extends Component {
   static propTypes = {
@@ -26,34 +22,13 @@ export default class PlayersList extends Component {
     return (
       <Section
         title={title}
-        className={classNames(
-          'players-list',
-          className
-        )}>
-        <List className="player-entries">
-          {_(users).map((user) => {
-            const {
-              id,
-              firstName,
-              lastName,
-              pictureUrl,
-              email
-            } = user;
+        className={className}>
+        <List className="players-list">
+          {_(users).map(user => {
+            const { id } = user;
 
             return (
-              <Link key={id} to={`players/${id}`}>
-                <ListItem className="player-entry">
-                  <div
-                    className="picture"
-                    style={{
-                      backgroundImage: `url("${pictureUrl || USER_MISSING_PICTURE_URL}")`
-                    }} />
-
-                  <div className="name ellipsis">
-                    {firstName} {lastName}
-                  </div>
-                </ListItem>
-              </Link>
+              <PlayersListItem key={id} user={user} />
             );
           })}
         </List>

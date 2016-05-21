@@ -1,36 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { ListItem } from 'components/ui';
+import PlayersListItem from '../PlayersListItem/PlayersListItem';
 import classNames from 'classnames';
 
-export default class GameEnrollmentEntry extends Component {
+export default class GameEnrollmentListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
     enrollmentStatus: PropTypes.string.isRequired
   };
 
   render() {
     const {
       className,
-      firstName,
-      lastName,
+      user,
       enrollmentStatus
     } = this.props;
 
     return (
-      <ListItem
+      <PlayersListItem
+        user={user}
         className={classNames(
-          'game-enrollment-entry',
+          'game-enrollment-list-item',
           className
         )}>
-        <div className="name ellipsis">
-          {firstName} {lastName}
-        </div>
-         <div className="enrollment-status">
+        <div className="enrollment-status">
           {enrollmentStatus}
         </div>
-      </ListItem>
+      </PlayersListItem>
     );
   }
 }

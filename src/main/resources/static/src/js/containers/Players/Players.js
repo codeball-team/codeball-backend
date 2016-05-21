@@ -28,7 +28,7 @@ class Players extends Component {
 
     const { currentUser } = currentUserData;
     const { users } = usersData;
-    const numberOfUsers =_(users).keys().length;
+    const numberOfUsers = _(users).keys().length;
 
     const isContentLoading = _.any([
       currentUserData.isLoading,

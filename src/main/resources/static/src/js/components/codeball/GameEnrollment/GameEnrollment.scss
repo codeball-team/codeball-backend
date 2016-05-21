@@ -2,14 +2,8 @@
 @import '~styles/mixins.scss';
 
 .game-enrollment {
-  .game-enrollment-entries {
-    .game-enrollment-entry {
-      @include flex-parent;
-
-      .name {
-        @include flex-child-grow;
-      }
-
+  .game-enrollment-list {
+    .game-enrollment-list-item {
       .enrollment-status {
         @include flex-child;
         margin-left: 10px;

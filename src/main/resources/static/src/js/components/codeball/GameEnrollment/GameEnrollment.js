@@ -5,7 +5,7 @@ import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants/Configuration';
 import { Section } from 'components/ui';
-import GameEnrollmentEntries from './GameEnrollmentEntries';
+import GameEnrollmentListItems from './GameEnrollmentListItems';
 import './GameEnrollment.scss';
 
 const enrollmentStatusClassnames = {
@@ -51,7 +51,7 @@ export default class GameEnrollment extends Component {
           return (enrollmentStatusUsers.length === 0)
             ? null
             : (
-              <GameEnrollmentEntries
+              <GameEnrollmentListItems
                 key={enrollmentStatus}
                 className={enrollmentStatusClassnames[enrollmentStatus]}
                 enrollmentStatus={enrollmentStatusText[enrollmentStatus]}

@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
 import { List } from 'components/ui';
-import GameEnrollmentEntry from './GameEnrollmentEntry';
+import GameEnrollmentListItem from './GameEnrollmentListItem';
 
-export default class GameEnrollmentEntries extends Component {
+export default class GameEnrollmentListItems extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollmentStatus: PropTypes.string.isRequired,
@@ -21,21 +21,16 @@ export default class GameEnrollmentEntries extends Component {
     return (
       <List
         className={classNames(
-          'game-enrollment-entries',
+          'game-enrollment-list',
           className
         )}>
         {_(enrolledUsers).map(user => {
-          const {
-            id,
-            firstName,
-            lastName
-          } = user;
+          const { id } = user;
 
           return (
-            <GameEnrollmentEntry
+            <GameEnrollmentListItem
               key={id}
-              firstName={firstName}
-              lastName={lastName}
+              user={user}
               enrollmentStatus={enrollmentStatus} />
           );
         })}
