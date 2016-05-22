@@ -7,10 +7,9 @@ import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import { PITCH_TYPE_STRING } from 'constants/Configuration';
+import { getDomain } from 'constants/RegExps';
 import { Section } from 'components/ui';
 import './GameInfo.scss';
-
-const domainRegExp = /(https?:\/\/[^\/]*)/;
 
 export default class GameInfo extends Component {
   static propTypes = {
@@ -68,7 +67,7 @@ export default class GameInfo extends Component {
           <div className="ellipsis" title="Pitch webpage">
             <IconWorld className="icon" />
             <a href={pitchUrl}>
-              {pitchUrl.match(domainRegExp)[0]}
+              {getDomain(pitchUrl)}
             </a>
           </div>
         )}

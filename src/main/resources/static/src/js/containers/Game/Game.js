@@ -79,6 +79,7 @@ export default function GenerateGame(constantGameId) {
             <GameScore
               date={date}
               time={time}
+              pitchId={pitch.id}
               pitchName={pitch.name}
               teamAScore={teamAScore}
               teamBScore={teamBScore} />

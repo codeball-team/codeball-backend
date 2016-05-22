@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router';
 import { Section } from 'components/ui';
 import './GameScore.scss';
 
 export default class GameScore extends Component {
   static propTypes = {
     className: PropTypes.string,
+    pitchId: PropTypes.number.isRequired,
     pitchName: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
@@ -16,6 +18,7 @@ export default class GameScore extends Component {
   render() {
     const {
       className,
+      pitchId,
       pitchName,
       date,
       time,
@@ -35,7 +38,9 @@ export default class GameScore extends Component {
         </div>
 
         <div className="details">
-          {pitchName}
+          <Link to={`/pitches/${pitchId}`}>
+            {pitchName}
+          </Link>
         </div>
 
         <div className="details">

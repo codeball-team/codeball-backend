@@ -5,6 +5,7 @@ import App from 'components/App';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
+import Pitch from 'containers/Pitch/Pitch';
 import Pitches from 'containers/Pitches/Pitches';
 import Player from 'containers/Player/Player';
 import Players from 'containers/Players/Players';
@@ -23,6 +24,7 @@ export default ([
     </Route>
     <Route path="pitches">
       <IndexRoute component={Pitches} />
+      <Route path=":pitchId" component={Pitch} />
     </Route>
     <Route path="players">
       <IndexRoute component={Players} />

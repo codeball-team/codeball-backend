@@ -4,6 +4,7 @@ export GameInfo from './GameInfo/GameInfo';
 export GameLineup from './GameLineup/GameLineup';
 export GameScore from './GameScore/GameScore';
 export GamesList from './GamesList/GamesList';
+export Pitch from './Pitch/Pitch';
 export PitchesList from './PitchesList/PitchesList';
 export PitchesListItem from './PitchesListItem/PitchesListItem';
 export PlayerProfile from './PlayerProfile/PlayerProfile';

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import './NotFound.scss';
 
 export default class NotFound extends Component {
   render() {
     return (
-      <section className="not-found">
-        <h1>
+      <section>
+        <h1 className="fg-danger">
           Error 404 :(
         </h1>
         <p>

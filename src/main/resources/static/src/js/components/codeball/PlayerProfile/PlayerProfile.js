@@ -34,13 +34,11 @@ export default class PlayerProfile extends Component {
           'player-profile',
           className
         )}>
-        <a href={pictureUrl}>
-          <div
-            className="picture"
-            style={{
-              backgroundImage: `url("${pictureUrl || USER_MISSING_PICTURE_URL}")`
-            }} />
-        </a>
+        <div
+          className="picture"
+          style={{
+            backgroundImage: `url("${pictureUrl || USER_MISSING_PICTURE_URL}")`
+          }} />
 
         <div className="info">
           <div>

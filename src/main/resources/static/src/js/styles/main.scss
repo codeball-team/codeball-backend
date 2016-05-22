@@ -66,6 +66,10 @@ input[type="text"] {
   @include ellipsis;
 }
 
+.fg-danger {
+  color: $fg-color-danger;
+}
+
 .bg-success {
   background-color: $bg-color-success;
 }
