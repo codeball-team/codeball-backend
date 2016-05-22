@@ -7,6 +7,11 @@ export const DATA_INVALIDATION_TIME = 5 * 60 * 1000 * 1000;
 export const ENROLLMENT_STATUS_YES = 'YES';
 export const ENROLLMENT_STATUS_MAYBE = 'MAYBE';
 export const ENROLLMENT_STATUS_NO = 'NO';
+export const ENROLLMENT_STATUS_STRING = {
+  [ENROLLMENT_STATUS_YES]: 'Going',
+  [ENROLLMENT_STATUS_MAYBE]: 'Unsure',
+  [ENROLLMENT_STATUS_NO]: 'Not going'
+};
 
 export const PITCH_TYPE_FIRM_GROUND = 1;
 export const PITCH_TYPE_HARD_GROUND = 2;

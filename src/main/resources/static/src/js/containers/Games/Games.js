@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
 import { LoadableContent }  from 'components/ui';
-import { GamesList } from 'components/codeball';
+import { GamesListSection } from 'components/sections';
 import './Games.scss';
 
 class Games extends Component {
@@ -64,7 +64,7 @@ class Games extends Component {
       <LoadableContent isLoading={isContentLoading}>
         <section className="games">
           {upcomingGames.length > 0 && (
-            <GamesList
+            <GamesListSection
               className="upcoming-games"
               title={`Upcoming games (${upcomingGames.length})`}
               formatUrl={id => `games/upcoming/${id}`}
@@ -73,7 +73,7 @@ class Games extends Component {
           )}
 
           {upcomingGames.length > 0 && (
-            <GamesList
+            <GamesListSection
               title={`Previous games (${previousGames.length})`}
               formatUrl={id => `games/previous/${id}`}
               games={previousGames}

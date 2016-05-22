@@ -2,32 +2,30 @@
 @import '~styles/mixins.scss';
 
 .game-enrollment-form {
-  .options {
-    @include flex-parent(center, flex-start)
-    align-content: stretch;
+  @include flex-parent(center, flex-start)
+  align-content: stretch;
 
-    .option {
-      @include flex-child-grow(100%);
-      padding: 10px 10px;
-      margin-right: 10px;
-      text-align: center;
-      cursor: pointer;
+  .option {
+    @include flex-child-grow(100%);
+    padding: 10px 10px;
+    margin-right: 10px;
+    text-align: center;
+    cursor: pointer;
 
-      &:last-of-type {
-        margin-right: 0;
-      }
+    &:last-of-type {
+      margin-right: 0;
+    }
 
-      &.yes {
-        @include clickable-effects($bg-color-success);
-      }
+    &.yes {
+      @include clickable-effects($bg-color-success);
+    }
 
-      &.no {
-        @include clickable-effects($bg-color-danger);
-      }
+    &.no {
+      @include clickable-effects($bg-color-danger);
+    }
 
-      &.maybe {
-        @include clickable-effects($bg-color-default-alert);
-      }
+    &.maybe {
+      @include clickable-effects($bg-color-default-alert);
     }
   }
 }

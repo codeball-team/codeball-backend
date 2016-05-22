@@ -11,22 +11,22 @@ import './PitchInfo.scss';
 export default class PitchInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
-    address: PropTypes.string.isRequired,
-    url: PropTypes.string,
-    type: PropTypes.number,
-    minNumberOfPlayers: PropTypes.number.isRequired,
-    maxNumberOfPlayers: PropTypes.number.isRequired
+    pitch: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
+      pitch
+    } = this.props;
+
+    const {
       address,
       url,
       type,
       minNumberOfPlayers,
       maxNumberOfPlayers
-    } = this.props;
+    } = pitch;
 
     return (
       <div

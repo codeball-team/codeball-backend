@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { LoadableContent }  from 'components/ui';
-import { PitchesList } from 'components/codeball';
+import { PitchesListSection } from 'components/sections';
 
 class Pitches extends Component {
   static propTypes = {
@@ -30,7 +30,7 @@ class Pitches extends Component {
       <LoadableContent isLoading={isContentLoading}>
         <section className="pitches">
           {numberOfPitches > 0 && (
-            <PitchesList
+            <PitchesListSection
               title={`Pitches (${numberOfPitches})`}
               pitches={pitches} />
           )}

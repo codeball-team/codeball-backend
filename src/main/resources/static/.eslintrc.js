@@ -66,9 +66,20 @@ module.exports = {
     "valid-jsdoc": "off",
     "valid-typeof": "error",
 
+    "react/jsx-boolean-value": ["error", "always"],
+    "react/sort-comp": ["error", {
+      order: [
+        'static-methods',
+        'lifecycle',
+        '/^on.+$/',
+        'everything-else',
+        'render',
+        '/^render.+/'
+      ]
+    }],
+
     "react/wrap-multilines": "error",
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
-    "react/jsx-boolean-value": "warn",
     "react/jsx-closing-bracket-location": "off",
     "react/jsx-curly-spacing": "warn",
     "react/jsx-indent-props": "off",
@@ -83,16 +94,6 @@ module.exports = {
     "react/no-set-state": "off",
     "react/prefer-es6-class": "warn",
     "react/require-extension": "warn",
-    "react/self-closing-comp": "warn",
-    "react/sort-comp": ["error", {
-      order: [
-        'static-methods',
-        'lifecycle',
-        '/^on.+$/',
-        'everything-else',
-        'render',
-        '/^render.+/'
-      ]
-    }]
+    "react/self-closing-comp": "warn"
   }
 }

@@ -3,33 +3,28 @@ import classNames from 'classnames';
 import IconEmail from 'react-icons/lib/io/ios-email-outline';
 import IconAccessLevel from 'react-icons/lib/io/key';
 import { ROLE_STRING, USER_MISSING_PICTURE_URL } from 'constants/Configuration';
-import { Section } from 'components/ui';
 import './PlayerProfile.scss';
 
 export default class PlayerProfile extends Component {
   static propTypes = {
     className: PropTypes.string,
-    id: PropTypes.number.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    pictureUrl: PropTypes.string,
-    role: PropTypes.string.isRequired
+    user: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
-      firstName,
-      lastName,
+      user
+    } = this.props;
+
+    const {
       email,
       pictureUrl,
       role
-    } = this.props;
+    } = user;
 
     return (
-      <Section
-        title={`${firstName} ${lastName}`}
+      <div
         className={classNames(
           'player-profile',
           className
@@ -51,7 +46,7 @@ export default class PlayerProfile extends Component {
             <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
-      </Section>
+      </div>
     );
   }
 }

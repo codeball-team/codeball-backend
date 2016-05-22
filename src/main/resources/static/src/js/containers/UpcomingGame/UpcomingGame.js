@@ -4,8 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
+import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
 import { LoadableContent }  from 'components/ui';
-import { GameInfo, GameEnrollment, GameEnrollmentForm, GameLineup } from 'components/codeball';
+import {
+  GameEnrollmentSection,
+  GameEnrollmentFormSection,
+  GameInfoSection,
+  GameLineupSection
+} from 'components/sections';
 
 export default function GenerateUpcomingGame(constantGameId) {
   class UpcomingGame extends Component {
@@ -76,6 +82,8 @@ export default function GenerateUpcomingGame(constantGameId) {
         return _(userIds).contains(userId) ? status : selectedEnrollmentStatus;
       }, undefined);
 
+      const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
+
       const isContentLoading = _([
         gameData.isLoading,
         usersData.isLoading,
@@ -85,32 +93,31 @@ export default function GenerateUpcomingGame(constantGameId) {
       return (
         <LoadableContent isLoading={isContentLoading}>
           <section>
-            <GameInfo
+            <GameInfoSection
+              title={pitch.name}
               date={date}
               time={time}
               duration={duration}
-              pitchName={pitch.name}
-              pitchType={pitch.type}
-              pitchAddress={pitch.address}
-              pitchUrl={pitch.url}
-              pitchMinNumberOfPlayers={pitch.minNumberOfPlayers}
-              pitchMaxNumberOfPlayers={pitch.maxNumberOfPlayers} />
+              pitch={pitch} />
 
             {!isEnrollmentOver && (
-              <GameEnrollmentForm
+              <GameEnrollmentFormSection
+                title="Are you going?"
                 value={selectedEnrollmentStatus}
                 onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
             )}
 
             {isEnrollmentOver && (
-              <GameLineup
+              <GameLineupSection
+                title="Lineups"
                 currentUser={currentUser}
                 users={users}
                 teamA={teamA}
                 teamB={teamB} />
             )}
 
-            <GameEnrollment
+            <GameEnrollmentSection
+              title={`Enrolled players (${numberOfEnrolledPlayers})`}
               users={users}
               enrolledUsers={enrolledUsers} />
           </section>

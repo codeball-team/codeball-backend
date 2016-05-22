@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
 import {
-  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
+  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
+  ENROLLMENT_STATUS_STRING
 } from 'constants/Configuration';
-import { Section } from 'components/ui';
 import GameEnrollmentListItems from './GameEnrollmentListItems';
 import './GameEnrollment.scss';
 
@@ -14,13 +14,7 @@ const enrollmentStatusClassnames = {
   [ENROLLMENT_STATUS_NO]: 'bg-danger'
 };
 
-const enrollmentStatusText = {
-  [ENROLLMENT_STATUS_YES]: 'Going',
-  [ENROLLMENT_STATUS_MAYBE]: 'Unsure',
-  [ENROLLMENT_STATUS_NO]: 'Not going'
-};
-
-const enrollmentStatuses = _(enrollmentStatusText).keys();
+const enrollmentStatuses = _(ENROLLMENT_STATUS_STRING).keys();
 
 export default class GameEnrollment extends Component {
   static propTypes = {
@@ -37,8 +31,7 @@ export default class GameEnrollment extends Component {
     } = this.props;
 
     return (
-      <Section
-        title={`Enrolled players (${enrolledUsers[ENROLLMENT_STATUS_YES].length})`}
+      <div
         className={classNames(
           'game-enrollment',
           className
@@ -54,11 +47,11 @@ export default class GameEnrollment extends Component {
               <GameEnrollmentListItems
                 key={enrollmentStatus}
                 className={enrollmentStatusClassnames[enrollmentStatus]}
-                enrollmentStatus={enrollmentStatusText[enrollmentStatus]}
+                enrollmentStatus={ENROLLMENT_STATUS_STRING[enrollmentStatus]}
                 enrolledUsers={enrollmentStatusUsers} />
             );
         })}
-      </Section>
+      </div>
     );
   }
 }

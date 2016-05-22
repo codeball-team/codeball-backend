@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import PitchInfo from '../PitchInfo/PitchInfo';
-import { Section } from 'components/ui';
 import './GameInfo.scss';
 
 export default class GameInfo extends Component {
@@ -12,12 +11,7 @@ export default class GameInfo extends Component {
     date: PropTypes.string.isRequired,
     time: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
-    pitchName: PropTypes.string.isRequired,
-    pitchType: PropTypes.number,
-    pitchAddress: PropTypes.string.isRequired,
-    pitchUrl: PropTypes.string,
-    pitchMinNumberOfPlayers: PropTypes.number.isRequired,
-    pitchMaxNumberOfPlayers: PropTypes.number.isRequired
+    pitch: PropTypes.object.isRequired
   };
 
   render() {
@@ -26,17 +20,11 @@ export default class GameInfo extends Component {
       date,
       time,
       duration,
-      pitchName,
-      pitchType,
-      pitchAddress,
-      pitchUrl,
-      pitchMinNumberOfPlayers,
-      pitchMaxNumberOfPlayers
+      pitch
     } = this.props;
 
     return (
-      <Section
-        title={pitchName}
+      <div
         className={classNames(
           'game-info',
           className
@@ -51,13 +39,8 @@ export default class GameInfo extends Component {
           {duration} min
         </div>
 
-        <PitchInfo
-          address={pitchAddress}
-          url={pitchUrl}
-          type={pitchType}
-          minNumberOfPlayers={pitchMinNumberOfPlayers}
-          maxNumberOfPlayers={pitchMaxNumberOfPlayers} />
-      </Section>
+        <PitchInfo pitch={pitch} />
+      </div>
     );
   }
 }

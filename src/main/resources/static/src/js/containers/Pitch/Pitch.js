@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { safeGet } from 'utils';
-import { LoadableContent, Section }  from 'components/ui';
-import { PitchInfo }  from 'components/codeball';
+import { LoadableContent }  from 'components/ui';
+import { PitchInfoSection }  from 'components/sections';
 
 class Pitch extends Component {
   static propTypes = {
@@ -36,14 +36,7 @@ class Pitch extends Component {
     } = this.props;
     const { pitches } = pitchesData;
     const pitch = pitches[params.pitchId];
-    const {
-      name,
-      address,
-      url,
-      type,
-      minNumberOfPlayers,
-      maxNumberOfPlayers
-    } = pitch;
+    const { name } = pitch;
 
     const isContentLoading = _.any([
       pitchesData.isLoading
@@ -52,16 +45,9 @@ class Pitch extends Component {
     return (
       <LoadableContent isLoading={isContentLoading}>
         <section className="pitch">
-          <Section
+          <PitchInfoSection
             title={name}
-            className="pitch">
-            <PitchInfo
-              address={address}
-              url={url}
-              type={type}
-              minNumberOfPlayers={minNumberOfPlayers}
-              maxNumberOfPlayers={maxNumberOfPlayers} />
-          </Section>
+            pitch={pitch} />
         </section>
       </LoadableContent>
     );

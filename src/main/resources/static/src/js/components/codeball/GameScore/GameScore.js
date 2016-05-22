@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { Section } from 'components/ui';
 import './GameScore.scss';
 
 export default class GameScore extends Component {
@@ -27,8 +26,7 @@ export default class GameScore extends Component {
     } = this.props;
 
     return (
-      <Section
-        title="Result"
+      <div
         className={classNames(
           'game-score',
           className
@@ -50,7 +48,7 @@ export default class GameScore extends Component {
         <div className="details">
           {time}
         </div>
-      </Section>
+      </div>
     );
   }
 

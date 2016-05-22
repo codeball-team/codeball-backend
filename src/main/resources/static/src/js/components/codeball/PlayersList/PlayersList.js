@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 import _ from 'underscore';
-import { List, Section } from 'components/ui';
+import { List } from 'components/ui';
 import PlayersListItem from '../PlayersListItem/PlayersListItem';
 
 export default class PlayersList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    title: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
     users: PropTypes.array.isRequired
   };
@@ -14,24 +14,23 @@ export default class PlayersList extends Component {
   render() {
     const {
       className,
-      title,
       users
     } = this.props;
 
     return (
-      <Section
-        title={title}
-        className={className}>
-        <List className="players-list">
-          {_(users).map(user => {
-            const { id } = user;
+      <List
+        className={classNames(
+          'players-list',
+          className
+        )}>
+        {_(users).map(user => {
+          const { id } = user;
 
-            return (
-              <PlayersListItem key={id} user={user} />
-            );
-          })}
-        </List>
-      </Section>
+          return (
+            <PlayersListItem key={id} user={user} />
+          );
+        })}
+      </List>
     );
   }
 }

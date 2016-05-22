@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { safeGet } from 'utils';
 import { LoadableContent }  from 'components/ui';
-import { PlayerProfile }  from 'components/codeball';
+import { PlayerProfileSection }  from 'components/sections';
 
 class Player extends Component {
   static propTypes = {
@@ -37,12 +37,8 @@ class Player extends Component {
     const { users } = usersData;
     const user = users[params.userId];
     const {
-      id,
       firstName,
-      lastName,
-      email,
-      pictureUrl,
-      role
+      lastName
     } = user;
 
     const isContentLoading = _.any([
@@ -52,13 +48,9 @@ class Player extends Component {
     return (
       <LoadableContent isLoading={isContentLoading}>
         <section className="player">
-          <PlayerProfile
-            id={id}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            pictureUrl={pictureUrl}
-            role={role} />
+          <PlayerProfileSection
+            title={`${firstName} ${lastName}`}
+            user={user} />
         </section>
       </LoadableContent>
     );

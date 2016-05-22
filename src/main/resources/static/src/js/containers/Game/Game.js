@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
-import { GameLineup, GameScore } from 'components/codeball';
+import { GameLineupSection, GameScoreSection } from 'components/sections';
 
 export default function GenerateGame(constantGameId) {
   class Game extends Component {
@@ -76,7 +76,8 @@ export default function GenerateGame(constantGameId) {
       return (
         <LoadableContent isLoading={isContentLoading}>
           <section>
-            <GameScore
+            <GameScoreSection
+              title="Result"
               date={date}
               time={time}
               pitchId={pitch.id}
@@ -84,7 +85,8 @@ export default function GenerateGame(constantGameId) {
               teamAScore={teamAScore}
               teamBScore={teamBScore} />
 
-            <GameLineup
+            <GameLineupSection
+              title="Lineups"
               teamA={teamA}
               teamB={teamB}
               currentUser={currentUser}

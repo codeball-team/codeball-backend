@@ -2,23 +2,21 @@
 @import '~styles/mixins.scss';
 
 .game-lineup {
-  .lineups {
-    @include flex-parent(center, flex-start);
+  @include flex-parent(center, flex-start);
 
-    @include phone {
-      flex-direction: column;
-    }
+  @include phone {
+    flex-direction: column;
+  }
 
-    .team-lineup {
-      width: 100%;
+  .team-lineup {
+    width: 100%;
 
-      &:first-of-type {
-        margin-right: 20px;
+    &:first-of-type {
+      margin-right: 20px;
 
-        @include phone {
-          margin-right: 0;
-          margin-bottom: 20px;
-        }
+      @include phone {
+        margin-right: 0;
+        margin-bottom: 20px;
       }
     }
   }

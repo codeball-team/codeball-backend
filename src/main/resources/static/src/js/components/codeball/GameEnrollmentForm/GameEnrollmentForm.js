@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants/Configuration';
-import { Section } from 'components/ui';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 
@@ -45,22 +44,19 @@ export default class GameEnrollmentForm extends Component {
     } = this.props;
 
     return (
-      <Section
-        title="Are you going?"
+      <div
         className={classNames(
           'game-enrollment-form',
           className
         )}>
-        <div className="options">
-          {_(gameEnrollmentFormOptions).map(option => (
-            <GameEnrollmentFormOption
-              key={option.value}
-              inactive={value !== undefined && option.value !== value}
-              onClick={() => onChange(option.value)}
-              {...option} />
-          ))}
-        </div>
-      </Section>
+        {_(gameEnrollmentFormOptions).map(option => (
+          <GameEnrollmentFormOption
+            key={option.value}
+            inactive={value !== undefined && option.value !== value}
+            onClick={() => onChange(option.value)}
+            {...option} />
+        ))}
+      </div>
     );
   }
 }

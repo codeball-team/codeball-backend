@@ -12,6 +12,6 @@ export default createDevTools(
     changeMonitorKey="ctrl-m"
     defaultPosition="right">
     <LogMonitor theme="nicinabox" />
-    <SliderMonitor keyboardEnabled />
+    <SliderMonitor keyboardEnabled={true} />
   </DockMonitor>
 );
