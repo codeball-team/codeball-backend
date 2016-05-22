@@ -4,18 +4,16 @@ import IconLocation from 'react-icons/lib/io/ios-location';
 import IconWorld from 'react-icons/lib/io/ios-world-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
 import IconLayers from 'react-icons/lib/io/social-buffer';
-import { PITCH_TYPE_STRING } from 'constants/Configuration';
+import { PITCH_TYPE_STRING, mapsUrl } from 'constants/Configuration';
 import { getDomain } from 'constants/RegExps';
-import { Section } from 'components/ui';
-import './Pitch.scss';
+import './PitchInfo.scss';
 
-export default class Pitch extends Component {
+export default class PitchInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
-    name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     url: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.number,
     minNumberOfPlayers: PropTypes.number.isRequired,
     maxNumberOfPlayers: PropTypes.number.isRequired
   };
@@ -23,7 +21,6 @@ export default class Pitch extends Component {
   render() {
     const {
       className,
-      name,
       address,
       url,
       type,
@@ -32,19 +29,20 @@ export default class Pitch extends Component {
     } = this.props;
 
     return (
-      <Section
-        title={name}
+      <div
         className={classNames(
           'pitch',
           className
         )}>
-        <div>
+        <div className="ellipsis" title="Pitch address">
           <IconLocation className="icon" />
-          {address}
+          <a href={mapsUrl(address)}>
+            {address}
+          </a>
         </div>
 
         {url && (
-          <div>
+          <div className="ellipsis" title="Pitch webpage">
             <IconWorld className="icon" />
             <a href={url}>
               {getDomain(url)}
@@ -53,13 +51,13 @@ export default class Pitch extends Component {
         )}
 
         {PITCH_TYPE_STRING[type] && (
-          <div>
+          <div className="ellipsis" title="Pitch type">
             <IconLayers className="icon" />
             {PITCH_TYPE_STRING[type]}
           </div>
         )}
 
-        <div>
+        <div title="Pitch capacity">
           <IconPeople className="icon" />
           {
             minNumberOfPlayers === maxNumberOfPlayers
@@ -67,7 +65,7 @@ export default class Pitch extends Component {
               : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`
           }
         </div>
-      </Section>
+      </div>
     );
   }
 }

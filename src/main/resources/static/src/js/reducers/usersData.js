@@ -8,8 +8,10 @@ const initialState = {
   users: {
     1: {
       id: 1,
-      firstName: '',
-      lastName: '',
+      firstName: 'Codeball',
+      lastName: 'Developer',
+      email: 'development@codeball.com',
+      pictureUrl: '',
       role: 'ROLE_ADMIN'
     }
   }

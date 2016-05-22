@@ -29,3 +29,7 @@ export const ROLE_STRING = {
 };
 
 export const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
+
+export function mapsUrl(address) {
+  return `https://www.google.com/maps/?q=${address}`;
+}

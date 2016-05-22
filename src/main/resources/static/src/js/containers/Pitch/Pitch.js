@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { safeGet } from 'utils';
-import { LoadableContent }  from 'components/ui';
-import { Pitch as PitchComponent }  from 'components/codeball';
+import { LoadableContent, Section }  from 'components/ui';
+import { PitchInfo }  from 'components/codeball';
 
-class Player extends Component {
+class Pitch extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     params: PropTypes.object,
@@ -51,14 +51,17 @@ class Player extends Component {
 
     return (
       <LoadableContent isLoading={isContentLoading}>
-        <section className="player">
-          <PitchComponent
-            name={name}
-            address={address}
-            url={url}
-            type={type}
-            minNumberOfPlayers={minNumberOfPlayers}
-            maxNumberOfPlayers={maxNumberOfPlayers} />
+        <section className="pitch">
+          <Section
+            title={name}
+            className="pitch">
+            <PitchInfo
+              address={address}
+              url={url}
+              type={type}
+              minNumberOfPlayers={minNumberOfPlayers}
+              maxNumberOfPlayers={maxNumberOfPlayers} />
+          </Section>
         </section>
       </LoadableContent>
     );
@@ -80,4 +83,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Player);
+)(Pitch);
