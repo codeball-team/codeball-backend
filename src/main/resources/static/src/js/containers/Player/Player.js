@@ -10,20 +10,21 @@ import { PlayerProfile }  from 'components/codeball';
 class Player extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    params: PropTypes.object,
     usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    this.updateData(this.props);
+    this.updateData();
   };
 
   componentWillReceiveProps = (newProps) => {
     if (safeGet(newProps, 'params.userId') !== safeGet(this.props, 'params.userId')) {
-      this.updateData(newProps);
+      this.updateData();
     }
   };
 
-  updateData = (props) => {
+  updateData = () => {
     const { actions } = this.props;
     actions.loadUsers();
   };

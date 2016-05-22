@@ -21,7 +21,6 @@ class Games extends Component {
     const {
       actions,
       currentUserData,
-      gamesData,
       pitchesData,
       usersData
     } = this.props;

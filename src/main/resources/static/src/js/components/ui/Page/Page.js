@@ -5,7 +5,7 @@ import './Page.scss';
 export default class Page extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    GlobalSpinnerComponent: PropTypes.any.isRequired
+    GlobalSpinnerComponent: PropTypes.func.isRequired
   };
 
   static contextTypes = {

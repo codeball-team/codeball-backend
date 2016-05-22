@@ -5,7 +5,7 @@ import './Section.scss';
 export default class Section extends Component {
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.any,
+    children: PropTypes.node,
     title: PropTypes.string
   };
 

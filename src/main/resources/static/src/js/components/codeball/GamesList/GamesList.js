@@ -21,10 +21,8 @@ export default class GamesList extends Component {
       className,
       title,
       formatUrl,
-      currentUser,
       games,
-      pitches,
-      users
+      pitches
     } = this.props;
 
     return (
@@ -35,15 +33,13 @@ export default class GamesList extends Component {
           className
         )}>
         <List className="game-entries">
-          {games.map((game) => {
+          {_(games).map((game) => {
             const {
               id,
               date,
               time,
               pitchId,
-              teamA,
               teamAScore,
-              teamB,
               teamBScore
             } = game;
             const pitch = pitches[pitchId];

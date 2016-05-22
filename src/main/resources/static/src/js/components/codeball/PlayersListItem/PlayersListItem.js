@@ -7,7 +7,7 @@ import './PlayersListItem.scss';
 export default class PlayersListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.any,
+    children: PropTypes.element,
     user: PropTypes.object.isRequired
   };
 

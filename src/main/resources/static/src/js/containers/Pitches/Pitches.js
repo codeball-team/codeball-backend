@@ -4,44 +4,35 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { LoadableContent }  from 'components/ui';
-import { PlayersList } from 'components/codeball';
+import { PitchesList } from 'components/codeball';
 
-class Players extends Component {
+class Pitches extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    currentUserData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired
+    pitchesData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
     const { actions } = this.props;
-    actions.loadCurrentUser();
-    actions.loadUsers();
+    actions.loadPitches();
   };
 
   render () {
-    const {
-      currentUserData,
-      usersData
-    } = this.props;
-
-    const { currentUser } = currentUserData;
-    const { users } = usersData;
-    const numberOfUsers = _(users).keys().length;
+    const { pitchesData } = this.props;
+    const { pitches } = pitchesData;
+    const numberOfPitches = _(pitches).keys().length;
 
     const isContentLoading = _.any([
-      currentUserData.isLoading,
-      usersData.isLoading
+      pitchesData.isLoading
     ]);
 
     return (
       <LoadableContent isLoading={isContentLoading}>
-        <section className="players">
-          {numberOfUsers > 0 && (
-            <PlayersList
-              title={`Players (${numberOfUsers})`}
-              currentUser={currentUser}
-              users={_(users).values()} />
+        <section className="pitches">
+          {numberOfPitches > 0 && (
+            <PitchesList
+              title={`Pitches (${numberOfPitches})`}
+              pitches={pitches} />
           )}
         </section>
       </LoadableContent>
@@ -51,8 +42,7 @@ class Players extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUserData: state.currentUserData,
-    usersData: state.usersData
+    pitchesData: state.pitchesData
   };
 }
 
@@ -65,4 +55,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Players);
+)(Pitches);

@@ -9,7 +9,7 @@ import './PlayerProfile.scss';
 export default class PlayerProfile extends Component {
   static propTypes = {
     className: PropTypes.string,
-    id: PropTypes.any.isRequired,
+    id: PropTypes.number.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,

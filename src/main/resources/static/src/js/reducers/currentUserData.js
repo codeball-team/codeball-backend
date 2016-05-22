@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { now, reducer, safeGet } from 'utils';
 import { LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE } from 'constants/ActionTypes';
 
@@ -14,7 +13,7 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_CURRENT_USER]: (state, action) => {
+  [LOAD_CURRENT_USER]: (state) => {
     return {
       ...state,
       isLoading: true
@@ -38,7 +37,7 @@ export default reducer(initialState, {
     };
   },
 
-  [LOAD_CURRENT_USER_FAILURE]: (state, action) => {
+  [LOAD_CURRENT_USER_FAILURE]: (state) => {
     return {
       ...state,
       isLoading: false

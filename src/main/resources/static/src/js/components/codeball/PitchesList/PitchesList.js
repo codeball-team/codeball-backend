@@ -1,33 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { List, Section } from 'components/ui';
-import PlayersListItem from '../PlayersListItem/PlayersListItem';
+import PitchesListItem from '../PitchesListItem/PitchesListItem';
 
-export default class PlayersList extends Component {
+export default class PitchesList extends Component {
   static propTypes = {
     className: PropTypes.string,
     title: PropTypes.string,
-    currentUser: PropTypes.object.isRequired,
-    users: PropTypes.array.isRequired
+    pitches: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
       title,
-      users
+      pitches
     } = this.props;
 
     return (
       <Section
         title={title}
         className={className}>
-        <List className="players-list">
-          {_(users).map(user => {
-            const { id } = user;
+        <List className="pitches-list">
+          {_(pitches).map(pitch => {
+            const { id } = pitch;
 
             return (
-              <PlayersListItem key={id} user={user} />
+              <PitchesListItem key={id} pitch={pitch} />
             );
           })}
         </List>

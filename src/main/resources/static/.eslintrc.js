@@ -28,21 +28,44 @@ module.exports = {
     "define": true
   },
 
+  "import/ignore": [
+    "\\.(scss|less|css)$"
+  ],
+
   "rules": {
-    "strict": ["error", "global"],
-    "no-unused-vars": ["error", { "vars": "all", "args": "all", "caughtErrors": "none" }],
-    "no-console": ["error", { allow: ["warn", "error"] }],
-    "camelcase": ["error", { "properties": "always" }],
-    "consistent-return": "error",
-    "arrow-spacing": "error",
-    "arrow-parens": ["error", "always"],
-    "arrow-body-style": ["error", "as-needed"],
-    "semi": ["error", "always"],
-    "no-confusing-arrow": ["error", { "allowParens": false }],
+    "comma-dangle": "error",
+    "no-cond-assign": "error",
+    "no-console": "warn",
     "no-constant-condition": "error",
-    "no-labels": "error",
-    "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 1 }],
-    "func-style": "off",
+    "no-control-regex": "error",
+    "no-debugger": "warn",
+    "no-dupe-args": "error",
+    "no-dupe-keys": "error",
+    "no-duplicate-case": "error",
+    "no-empty": "error",
+    "no-empty-character-class": "error",
+    "no-ex-assign": "error",
+    "no-extra-boolean-cast": "error",
+    "no-extra-parens": "off",
+    "no-extra-semi": "error",
+    "no-func-assign": "error",
+    "no-inner-declarations": "error",
+    "no-invalid-regexp": "error",
+    "no-irregular-whitespace": ["error", {
+      "skipStrings": true,
+      "skipTemplates": true
+    }],
+    "no-negated-in-lhs": "error",
+    "no-obj-calls": "error",
+    "no-regex-spaces": "error",
+    "no-sparse-arrays": "error",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "error",
+    "no-unsafe-finally": "error",
+    "use-isnan": "error",
+    "valid-jsdoc": "off",
+    "valid-typeof": "error",
+
     "react/wrap-multilines": "error",
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-boolean-value": "warn",
@@ -61,6 +84,15 @@ module.exports = {
     "react/prefer-es6-class": "warn",
     "react/require-extension": "warn",
     "react/self-closing-comp": "warn",
-    "react/sort-comp": "warn"
+    "react/sort-comp": ["error", {
+      order: [
+        'static-methods',
+        'lifecycle',
+        '/^on.+$/',
+        'everything-else',
+        'render',
+        '/^render.+/'
+      ]
+    }]
   }
 }

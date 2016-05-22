@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import _ from 'underscore';
-import { List, ListItem } from 'components/ui';
 import PlayersList from '../PlayersList/PlayersList';
 import './TeamLineup.scss';
 

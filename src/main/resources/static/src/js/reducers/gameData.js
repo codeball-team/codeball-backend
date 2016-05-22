@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { mapGame } from 'api';
 import { now, reducer, safeGet } from 'utils';
 import {
@@ -31,7 +30,7 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_GAME]: (state, action) => {
+  [LOAD_GAME]: (state) => {
     return {
       ...state,
       isLoading: true
@@ -40,7 +39,7 @@ export default reducer(initialState, {
 
   [LOAD_GAME_SUCCESS]: gameLoaded,
 
-  [LOAD_GAME_FAILURE]: (state, action) => {
+  [LOAD_GAME_FAILURE]: (state) => {
     return {
       ...state,
       isLoading: false

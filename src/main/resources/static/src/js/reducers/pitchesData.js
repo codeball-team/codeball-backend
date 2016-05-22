@@ -19,7 +19,7 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_PITCHES]: (state, action) => {
+  [LOAD_PITCHES]: (state) => {
     return {
       ...state,
       isLoading: true
@@ -51,7 +51,7 @@ export default reducer(initialState, {
     };
   },
 
-  [LOAD_PITCHES_FAILURE]: (state, action) => {
+  [LOAD_PITCHES_FAILURE]: (state) => {
     return {
       ...state,
       isLoading: false

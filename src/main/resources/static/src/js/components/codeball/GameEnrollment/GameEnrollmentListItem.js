@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { ListItem } from 'components/ui';
 import PlayersListItem from '../PlayersListItem/PlayersListItem';
 import classNames from 'classnames';
 

@@ -1,0 +1,16 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.pitches-list-item {
+  @include flex-parent;
+
+  .name {
+    @include flex-child;
+    margin-right: 20px;
+  }
+
+  .address {
+    @include flex-child-grow;
+    text-align: right;
+  }
+}

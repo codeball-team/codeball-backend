@@ -5,7 +5,7 @@ import './List.scss';
 export default class List extends Component {
   static propTypes = {
     className: PropTypes.string,
-    children: PropTypes.any
+    children: PropTypes.node
   };
 
   render() {

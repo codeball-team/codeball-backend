@@ -16,7 +16,7 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_USERS]: (state, action) => {
+  [LOAD_USERS]: (state) => {
     return {
       ...state,
       isLoading: true
@@ -45,7 +45,7 @@ export default reducer(initialState, {
     };
   },
 
-  [LOAD_USERS_FAILURE]: (state, action) => {
+  [LOAD_USERS_FAILURE]: (state) => {
     return {
       ...state,
       isLoading: false

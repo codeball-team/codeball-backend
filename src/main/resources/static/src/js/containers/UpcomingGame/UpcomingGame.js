@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO } from 'constants/Configuration';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent }  from 'components/ui';
@@ -33,10 +32,9 @@ export default function GenerateUpcomingGame(constantGameId) {
       const {
         actions,
         params,
-        currentUserData,
         pitchesData,
         usersData
-      } = this.props;
+      } = props;
 
       if (params) {
         actions.loadGame(constantGameId || params.gameId);
@@ -70,9 +68,7 @@ export default function GenerateUpcomingGame(constantGameId) {
         isEnrollmentOver,
         enrolledUsers,
         teamA,
-        teamAScore,
-        teamB,
-        teamBScore
+        teamB
       } = game;
       const pitch = pitches[pitchId];
 

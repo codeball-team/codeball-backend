@@ -4,6 +4,7 @@ import classNames from 'classnames';
 export default class GameEnrollmentFormOption extends Component {
   static propTypes = {
     className: PropTypes.string,
+    inactive: PropTypes.bool,
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
   };
