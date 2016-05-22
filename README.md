@@ -7,5 +7,5 @@ Location: `src/main/resources/static/`
 `npm run build` will prepare a clean build in `src/main/resources/static/build/`
 ### Development server
 `npm start` will start a server at `localhost:3000`
-### Code style check
-`npm run jscs`
+### eslint + jscs
+`npm run lint`
