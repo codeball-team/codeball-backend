@@ -16,12 +16,14 @@ export default class GameScore extends Component {
 
   onGameScoreAChanged = (teamAScore) => {
     const { onEditGameScoreA } = this.props;
-    onEditGameScoreA(Number(teamAScore));
+    const score = teamAScore ? Number(teamAScore) : undefined;
+    onEditGameScoreA(score);
   };
 
   onGameScoreBChanged = (teamBScore) => {
     const { onEditGameScoreB } = this.props;
-    onEditGameScoreB(Number(teamBScore));
+    const score = teamBScore ? Number(teamBScore) : undefined;
+    onEditGameScoreB(score);
   };
 
   render() {
@@ -54,7 +56,7 @@ export default class GameScore extends Component {
           <EditableText
             className="team-score score-a"
             isEditing={isEditing}
-            text={String(teamAScore || '')}
+            text={String(teamAScore === undefined ? '' : teamAScore)}
             maxLength="2"
             onChange={this.onGameScoreAChanged} />
 
@@ -63,7 +65,7 @@ export default class GameScore extends Component {
           <EditableText
             className="team-score score-b"
             isEditing={isEditing}
-            text={String(teamBScore || '')}
+            text={String(teamBScore === undefined ? '' : teamBScore)}
             maxLength="2"
             onChange={this.onGameScoreBChanged} />
         </div>

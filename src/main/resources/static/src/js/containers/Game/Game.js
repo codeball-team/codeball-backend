@@ -79,7 +79,7 @@ export default function GenerateGame(constantGameId) {
               isEditable={true}
               isEditing={isEditingGame}
               pitch={pitch}
-              game={isEditingGame ? _({}).defaults(editedGame, game) : game}
+              game={isEditingGame ? Object.assign({}, game, editedGame) : game}
               onEdit={actions.editGame}
               onCancel={actions.cancelEditGame}
               onSave={() => actions.saveGame(gameId, editedGame)}
