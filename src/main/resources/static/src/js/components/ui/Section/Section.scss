@@ -13,13 +13,16 @@
     }
 
     .section-editable {
-      font-size: $font-size-xs;
-      float: right;
+      font-size: $font-size-m;
       vertical-align: middle;
       line-height: 32px;
 
       @include tablet-and-smaller {
-        line-height: 22px;
+        font-size: $font-size-s;
+      }
+
+      a {
+        margin-right: 20px;
       }
     }
   }

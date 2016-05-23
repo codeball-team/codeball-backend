@@ -6,7 +6,6 @@ export default class EditableText extends Component {
   static propTypes = {
     className: PropTypes.string,
     isEditing: PropTypes.bool,
-    inputType: PropTypes.string,
     text: PropTypes.string,
     onChange: PropTypes.func
   };
@@ -26,15 +25,15 @@ export default class EditableText extends Component {
     const {
       className,
       isEditing,
-      inputType,
-      text
+      text,
+      ...childProps
     } = this.props;
 
     if (isEditing) {
       return (
         <input
+          {...childProps}
           value={text}
-          type={inputType}
           onChange={this.onChange}
           className={classNames(
             'editable-text-input',

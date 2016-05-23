@@ -46,7 +46,7 @@ export default class Menu extends Component {
             <Link activeClassName="focus" to="/games">
               <IconCalendar className="icon" />
               <span className="label">
-                List of games
+                Games
               </span>
             </Link>
           </li>
@@ -55,7 +55,7 @@ export default class Menu extends Component {
             <Link activeClassName="focus" to="/players" >
               <IconPeople className="icon" />
               <span className="label">
-                List of players
+                Players
               </span>
             </Link>
           </li>
@@ -64,7 +64,7 @@ export default class Menu extends Component {
             <Link activeClassName="focus" to="/pitches" >
               <IconLocation className="icon" />
               <span className="label">
-                List of pitches
+                Pitches
               </span>
             </Link>
           </li>

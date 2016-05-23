@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
+import IconCancel from 'react-icons/lib/io/ios-close-outline';
+import IconEdit from 'react-icons/lib/io/ios-compose-outline';
+import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import './Section.scss';
 
 export default function SectionDecorator(ChildComponent) {
@@ -70,6 +73,7 @@ export default function SectionDecorator(ChildComponent) {
               <div className="section-editable">
                 {!isEditing && (
                   <a href="#" onClick={this.onEditClick}>
+                    <IconEdit className="icon" />
                     edit
                   </a>
                 )}
@@ -77,10 +81,11 @@ export default function SectionDecorator(ChildComponent) {
                 {isEditing && (
                   <span>
                     <a href="#" onClick={this.onCancelClick}>
+                      <IconCancel className="icon" />
                       cancel
                     </a>
-                    <span>&nbsp;</span>
                     <a href="#" onClick={this.onSaveClick}>
+                      <IconSave className="icon" />
                       save
                     </a>
                   </span>

@@ -44,22 +44,10 @@ h2 {
   margin-top: 0;
 }
 
-input[type="text"] {
-  @include flex-child-grow;
-  border-image: none;
-  border: 0;
-  padding: 10px 20px;
-  font-size: $font-size-m;
-
-  &:focus {
-    outline: $focus-color solid 2px;
-    outline-offset: 0;
-  }
-}
-
 .icon {
   margin-top: -4px;
   margin-right: 6px;
+  font-size: $font-size-m;
 }
 
 .ellipsis {
@@ -68,6 +56,10 @@ input[type="text"] {
 
 .fg-danger {
   color: $fg-color-danger;
+}
+
+.fg-success {
+  color: $bg-color-success;
 }
 
 .bg-success {

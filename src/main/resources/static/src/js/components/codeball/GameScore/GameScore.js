@@ -54,15 +54,17 @@ export default class GameScore extends Component {
           <EditableText
             className="team-score score-a"
             isEditing={isEditing}
-            inputType="number"
             text={String(teamAScore || '')}
+            maxLength="2"
             onChange={this.onGameScoreAChanged} />
+
           <span> : </span>
+
           <EditableText
             className="team-score score-b"
             isEditing={isEditing}
-            inputType="number"
             text={String(teamBScore || '')}
+            maxLength="2"
             onChange={this.onGameScoreBChanged} />
         </div>
 

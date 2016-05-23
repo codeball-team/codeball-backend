@@ -73,9 +73,7 @@ export default reducer(initialState, {
 
   [SAVE_GAME]: (state) => {
     return {
-      ...state,
-      editedGame: {},
-      isEditing: false
+      ...state
     };
   },
 
@@ -117,6 +115,7 @@ function gameLoaded(state, action) {
   return {
     lastUpdate: now(),
     isLoading: false,
+    isEditing: false,
     game: mapGame(game),
     editedGame: {}
   };

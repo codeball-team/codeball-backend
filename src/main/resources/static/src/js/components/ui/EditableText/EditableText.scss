@@ -3,15 +3,18 @@
 
 .editable-text-input {
   display: inline-block;
-  background-color: transparent;
+  background-color: $fg-color;
   border: 0;
   border-image: 0;
   padding: 0;
-  outline: 1px dashed $fg-color;
-  color: $fg-color;
+  color: $bg-color;
   text-indent: 0px;
   text-shadow: none;
   text-align: start;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .editable-text {
