@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { LoadableContent }  from 'components/ui';
+import { LoadableContent } from 'components/ui';
 import { PitchesListSection } from 'components/sections';
 
 class Pitches extends Component {

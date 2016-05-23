@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { safeGet } from 'utils';
-import { LoadableContent }  from 'components/ui';
-import { PitchInfoSection }  from 'components/sections';
+import { LoadableContent } from 'components/ui';
+import { PitchInfoSection } from 'components/sections';
 
 class Pitch extends Component {
   static propTypes = {

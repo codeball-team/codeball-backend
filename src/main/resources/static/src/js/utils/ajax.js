@@ -12,27 +12,24 @@ export default function ajax(options) {
   } = options;
 
   return dispatch => {
-    request
-      .end((error, response) => {
-        if (error || !response.ok) {
-          dispatch({
-            type: failureAction,
-            error,
-            response
-          });
+    request.end((error, response) => {
+      if (error || !response.ok) {
+        dispatch({
+          type: failureAction,
+          error,
+          response
+        });
 
-          dispatch({ type: AJAX_FAILURE });
-          failureCallback && failureCallback();
-        } else {
-          dispatch({
-            type: successAction,
-            response
-          });
+        ajaxCompleted(dispatch, AJAX_FAILURE, failureCallback);
+      } else {
+        dispatch({
+          type: successAction,
+          response
+        });
 
-          dispatch({ type: AJAX_SUCCESS });
-          successCallback && successCallback();
-        }
-      });
+        ajaxCompleted(dispatch, AJAX_SUCCESS, successCallback);
+      }
+    });
 
     dispatch({
       type: startAction,
@@ -43,4 +40,11 @@ export default function ajax(options) {
 
     return request;
   };
+}
+
+function ajaxCompleted(dispatch, ACTION_TYPE, callback) {
+  dispatch({ type: ACTION_TYPE });
+  if (callback) {
+    callback();
+  }
 }

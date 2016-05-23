@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import { LoadableContent }  from 'components/ui';
+import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
 import './Games.scss';
 

@@ -41,15 +41,15 @@ export default class GameEnrollment extends Component {
             _(enrolledUsers[enrollmentStatus]).map(userId => users[userId])
           ).compact();
 
-          return (enrollmentStatusUsers.length === 0)
-            ? null
-            : (
+          return enrollmentStatusUsers.length
+            ? (
               <GameEnrollmentListItems
                 key={enrollmentStatus}
                 className={enrollmentStatusClassnames[enrollmentStatus]}
                 enrollmentStatus={ENROLLMENT_STATUS_STRING[enrollmentStatus]}
                 enrolledUsers={enrollmentStatusUsers} />
-            );
+            )
+            : null;
         })}
       </div>
     );

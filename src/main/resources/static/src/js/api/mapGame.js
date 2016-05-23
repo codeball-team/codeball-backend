@@ -2,7 +2,8 @@ import _ from 'underscore';
 import moment from 'moment';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
-  DATE_FORMAT, TIME_FORMAT
+  DATE_FORMAT, TIME_FORMAT,
+  javaToUnixTimestamp
 } from 'constants/Configuration';
 
 export default function mapGame(game) {
@@ -19,7 +20,7 @@ export default function mapGame(game) {
     }
   );
 
-  const startDate = moment(game.startTimestamp * 1000);
+  const startDate = moment(javaToUnixTimestamp(game.startTimestamp));
 
   return {
     id: game.id,

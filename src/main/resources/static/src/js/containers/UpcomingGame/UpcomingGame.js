@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
-import { LoadableContent }  from 'components/ui';
+import { LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection,
   GameEnrollmentFormSection,
