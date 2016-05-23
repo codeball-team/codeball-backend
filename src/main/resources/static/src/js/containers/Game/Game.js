@@ -45,6 +45,7 @@ export default function GenerateGame(constantGameId) {
 
     render () {
       const {
+        actions,
         currentUserData,
         gameData,
         pitchesData,
@@ -52,18 +53,15 @@ export default function GenerateGame(constantGameId) {
       } = this.props;
 
       const { currentUser } = currentUserData;
-      const { game } = gameData;
+      const { game, isEditing: isEditingGame, editedGame } = gameData;
       const { pitches } = pitchesData;
       const { users } = usersData;
       const { pitchId } = game;
       const pitch = pitches[pitchId];
       const {
-        date,
-        time,
+        id: gameId,
         teamA,
-        teamAScore,
-        teamB,
-        teamBScore
+        teamB
       } = game;
 
       const isContentLoading = _.any([
@@ -78,12 +76,15 @@ export default function GenerateGame(constantGameId) {
           <section>
             <GameScoreSection
               title="Result"
-              date={date}
-              time={time}
-              pitchId={pitch.id}
-              pitchName={pitch.name}
-              teamAScore={teamAScore}
-              teamBScore={teamBScore} />
+              isEditable={true}
+              isEditing={isEditingGame}
+              pitch={pitch}
+              game={isEditingGame ? _({}).defaults(editedGame, game) : game}
+              onEdit={actions.editGame}
+              onCancel={actions.cancelEditGame}
+              onSave={() => actions.saveGame(gameId, editedGame)}
+              onEditGameScoreA={actions.editGameScoreA}
+              onEditGameScoreB={actions.editGameScoreB} />
 
             <GameLineupSection
               title="Lineups"

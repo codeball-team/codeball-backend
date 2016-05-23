@@ -79,7 +79,7 @@ export default function SectionDecorator(ChildComponent) {
                     <a href="#" onClick={this.onCancelClick}>
                       cancel
                     </a>
-
+                    <span>&nbsp;</span>
                     <a href="#" onClick={this.onSaveClick}>
                       save
                     </a>

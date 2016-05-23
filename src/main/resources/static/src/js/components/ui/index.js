@@ -1,3 +1,4 @@
+export EditableText from './EditableText/EditableText';
 export List from './List/List';
 export ListItem from './ListItem/ListItem';
 export LoadableContent from './LoadableContent/LoadableContent';

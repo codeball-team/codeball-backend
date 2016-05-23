@@ -1,0 +1,20 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.editable-text-input {
+  display: inline-block;
+  background-color: transparent;
+  border: 0;
+  border-image: 0;
+  padding: 0;
+  outline: 1px dashed $fg-color;
+  color: $fg-color;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+}
+
+.editable-text {
+  display: inline-block;
+  padding: 0;
+}

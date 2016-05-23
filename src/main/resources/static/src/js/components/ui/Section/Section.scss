@@ -16,10 +16,10 @@
       font-size: $font-size-xs;
       float: right;
       vertical-align: middle;
-      line-height: $font-size-l;
+      line-height: 32px;
 
       @include tablet-and-smaller {
-        line-height: $font-size-m;
+        line-height: 22px;
       }
     }
   }

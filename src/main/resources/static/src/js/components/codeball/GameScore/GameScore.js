@@ -1,29 +1,48 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import { EditableText } from 'components/ui';
 import './GameScore.scss';
 
 export default class GameScore extends Component {
   static propTypes = {
     className: PropTypes.string,
-    pitchId: PropTypes.number.isRequired,
-    pitchName: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    teamAScore: PropTypes.number,
-    teamBScore: PropTypes.number
+    isEditing: PropTypes.bool,
+    game: PropTypes.object.isRequired,
+    pitch: PropTypes.object.isRequired,
+    onEditGameScoreA: PropTypes.func,
+    onEditGameScoreB: PropTypes.func
+  };
+
+  onGameScoreAChanged = (teamAScore) => {
+    const { onEditGameScoreA } = this.props;
+    onEditGameScoreA(Number(teamAScore));
+  };
+
+  onGameScoreBChanged = (teamBScore) => {
+    const { onEditGameScoreB } = this.props;
+    onEditGameScoreB(Number(teamBScore));
   };
 
   render() {
     const {
       className,
-      pitchId,
-      pitchName,
+      isEditing,
+      game,
+      pitch
+    } = this.props;
+
+    const {
       date,
       time,
       teamAScore,
       teamBScore
-    } = this.props;
+    } = game;
+
+    const {
+      id: pitchId,
+      name: pitchName
+    } = pitch;
 
     return (
       <div
@@ -32,7 +51,19 @@ export default class GameScore extends Component {
           className
         )}>
         <div className="score">
-          {this.renderScore(teamAScore)} : {this.renderScore(teamBScore)}
+          <EditableText
+            className="team-score score-a"
+            isEditing={isEditing}
+            inputType="number"
+            text={String(teamAScore || '')}
+            onChange={this.onGameScoreAChanged} />
+          <span> : </span>
+          <EditableText
+            className="team-score score-b"
+            isEditing={isEditing}
+            inputType="number"
+            text={String(teamBScore || '')}
+            onChange={this.onGameScoreBChanged} />
         </div>
 
         <div className="details">

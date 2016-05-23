@@ -7,6 +7,24 @@
     font-size: $font-size-xxxl;
     margin-bottom: 10px;
 
+    .team-score {
+      font-size: $font-size-xxxl;
+      width: $font-size-xxxl * 2;
+
+      &.score-a {
+        text-align: right;
+      }
+
+      &.score-b {
+        text-align: left;
+      }
+
+      @include tablet-and-smaller {
+        font-size: $font-size-xxl;
+        width: $font-size-xxl * 2;
+      }
+    }
+
     @include tablet-and-smaller {
       font-size: $font-size-xxl;
     }
