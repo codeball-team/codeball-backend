@@ -16,12 +16,17 @@ export const LOAD_GAME_FAILURE = 'LOAD_GAME_FAILURE';
 
 export const EDIT_GAME = 'EDIT_GAME';
 export const CANCEL_EDIT_GAME = 'CANCEL_EDIT_GAME';
+export const EDIT_GAME_SCORE_A = 'EDIT_GAME_SCORE_A';
+export const EDIT_GAME_SCORE_B = 'EDIT_GAME_SCORE_B';
+export const ADD_GAME = 'ADD_GAME';
+export const ADD_GAME_SUCCESS = 'ADD_GAME_SUCCESS';
+export const ADD_GAME_FAILURE = 'ADD_GAME_FAILURE';
 export const SAVE_GAME = 'SAVE_GAME';
 export const SAVE_GAME_SUCCESS = 'SAVE_GAME_SUCCESS';
 export const SAVE_GAME_FAILURE = 'SAVE_GAME_FAILURE';
 
-export const EDIT_GAME_SCORE_A = 'EDIT_GAME_SCORE_A';
-export const EDIT_GAME_SCORE_B = 'EDIT_GAME_SCORE_B';
+export const EDIT_GAMES = 'EDIT_GAMES';
+export const CANCEL_EDIT_GAMES = 'CANCEL_EDIT_GAMES';
 
 export const LOAD_GAMES = 'LOAD_GAMES';
 export const LOAD_GAMES_SUCCESS = 'LOAD_GAMES_SUCCESS';

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
+import { Pitch } from 'models';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
 import { LoadableContent } from 'components/ui';
 import {
@@ -76,7 +77,7 @@ export default function GenerateUpcomingGame(constantGameId) {
         teamA,
         teamB
       } = game;
-      const pitch = pitches[pitchId];
+      const pitch = Pitch(pitches[pitchId]);
 
       const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
         return _(userIds).contains(userId) ? status : selectedEnrollmentStatus;

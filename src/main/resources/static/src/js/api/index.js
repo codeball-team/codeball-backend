@@ -1,1 +1,0 @@
-export mapGame from './mapGame';

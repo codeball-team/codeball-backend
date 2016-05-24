@@ -53,7 +53,7 @@ export default function GenerateGame(constantGameId) {
       } = this.props;
 
       const { currentUser } = currentUserData;
-      const { game, isEditing: isEditingGame, editedGame } = gameData;
+      const { game, isEditing, editedGame } = gameData;
       const { pitches } = pitchesData;
       const { users } = usersData;
       const { pitchId } = game;
@@ -77,9 +77,9 @@ export default function GenerateGame(constantGameId) {
             <GameScoreSection
               title="Result"
               isEditable={true}
-              isEditing={isEditingGame}
+              isEditing={isEditing}
               pitch={pitch}
-              game={isEditingGame ? Object.assign({}, game, editedGame) : game}
+              game={isEditing ? Object.assign({}, game, editedGame) : game}
               onEdit={actions.editGame}
               onCancel={actions.cancelEditGame}
               onSave={() => actions.saveGame(gameId, editedGame)}

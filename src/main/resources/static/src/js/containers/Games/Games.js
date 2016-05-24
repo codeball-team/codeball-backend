@@ -40,7 +40,7 @@ class Games extends Component {
     } = this.props;
 
     const { currentUser } = currentUserData;
-    const { games } = gamesData;
+    const { games, isEditing } = gamesData;
     const { pitches } = pitchesData;
     const { users } = usersData;
 
@@ -65,6 +65,8 @@ class Games extends Component {
         <section className="games">
           {upcomingGames.length > 0 && (
             <GamesListSection
+              isEditable={true}
+              isEditing={isEditing}
               className="upcoming-games"
               title={`Upcoming games (${upcomingGames.length})`}
               formatUrl={id => `games/upcoming/${id}`}

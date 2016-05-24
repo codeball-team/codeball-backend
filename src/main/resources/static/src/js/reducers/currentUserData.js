@@ -1,17 +1,11 @@
 import { now, reducer, safeGet } from 'utils';
+import { mapUser, userExample } from 'models/user';
 import { LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE } from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
   lastUpdate: undefined,
-  currentUser: {
-    id: 1,
-    firstName: 'Codeball',
-    lastName: 'Developer',
-    email: 'development@codeball.com',
-    pictureUrl: '',
-    role: 'ROLE_ADMIN'
-  }
+  currentUser: userExample()
 };
 
 export default reducer(initialState, {
@@ -23,19 +17,13 @@ export default reducer(initialState, {
   },
 
   [LOAD_CURRENT_USER_SUCCESS]: (state, action) => {
-    const currentUser = safeGet(action, 'response.body', {});
+    const responseUser = safeGet(action, 'response.body', {});
+    const currentUser = mapUser(responseUser);
 
     return {
       lastUpdate: now(),
       isLoading: false,
-      currentUser: {
-        id: currentUser.id,
-        email: currentUser.email,
-        firstName: currentUser.firstName,
-        lastName: currentUser.lastName,
-        role: currentUser.role,
-        pictureUrl: currentUser.pictureUrl
-      }
+      currentUser
     };
   },
 

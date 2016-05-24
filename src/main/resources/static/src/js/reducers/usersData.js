@@ -1,19 +1,13 @@
 import _ from 'underscore';
 import { now, reducer, safeGet } from 'utils';
+import { mapUser, userExample } from 'models/user';
 import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
   lastUpdate: undefined,
   users: {
-    1: {
-      id: 1,
-      firstName: 'Codeball',
-      lastName: 'Developer',
-      email: 'development@codeball.com',
-      pictureUrl: '',
-      role: 'ROLE_ADMIN'
-    }
+    [userExample().id]: userExample()
   }
 };
 
@@ -26,24 +20,17 @@ export default reducer(initialState, {
   },
 
   [LOAD_USERS_SUCCESS]: (state, action) => {
-    const users = safeGet(action, 'response.body', []);
-
-    const mappedUsers = _(users).map(user => ({
-      id: user.id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      role: user.role,
-      pictureUrl: user.pictureUrl
-    }));
+    const responseUsers = safeGet(action, 'response.body', []);
+    const mappedUsers = _(responseUsers).map(mapUser);
+    const users = _.object(
+      _(mappedUsers).pluck('id'),
+      mappedUsers
+    );
 
     return {
+      ...initialState,
       lastUpdate: now(),
-      isLoading: false,
-      users: _.object(
-        _(mappedUsers).pluck('id'),
-        mappedUsers
-      )
+      users
     };
   },
 

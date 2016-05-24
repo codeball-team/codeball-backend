@@ -6,23 +6,38 @@ import {
   javaToUnixTimestamp
 } from 'constants/Configuration';
 
-export default function mapGame(game) {
+export default function Game(game) {
+  return _({ ...game }).defaults({
+    date: '',
+    time: '',
+    duration: 0,
+    pitchId: 0,
+    isEnrollmentOver: false,
+    enrolledUsers: {
+      [ENROLLMENT_STATUS_YES]: [],
+      [ENROLLMENT_STATUS_MAYBE]: [],
+      [ENROLLMENT_STATUS_NO]: []
+    },
+    teamA: [],
+    teamAScore: 0,
+    teamB: [],
+    teamBScore: 0
+  });
+}
+
+export function mapGame(game) {
   const enrolledUsers = _(game.enrollmentIds || {}).reduce(
     (sum, enrollmentStatus, userId) => {
       sum[enrollmentStatus].push(Number(userId));
       return sum;
     },
 
-    {
-      [ENROLLMENT_STATUS_YES]: [],
-      [ENROLLMENT_STATUS_MAYBE]: [],
-      [ENROLLMENT_STATUS_NO]: []
-    }
+    Game().enrolledUsers
   );
 
   const startDate = moment(javaToUnixTimestamp(game.startTimestamp));
 
-  return {
+  return Game({
     id: game.id,
     date: startDate.format(DATE_FORMAT),
     time: startDate.format(TIME_FORMAT),
@@ -35,5 +50,26 @@ export default function mapGame(game) {
     teamA: game.teamAIds,
     teamBScore: game.teamBScore,
     teamB: game.teamBIds
-  };
+  });
+}
+
+export function gameExample() {
+  return Game({
+    id: 1,
+    date: '2016/06/01',
+    time: '19:00',
+    duration: 90,
+    pitchId: 1,
+    isEnrollmentOver: true,
+    isGameOver: true,
+    enrolledUsers: {
+      [ENROLLMENT_STATUS_YES]: [1],
+      [ENROLLMENT_STATUS_MAYBE]: [],
+      [ENROLLMENT_STATUS_NO]: []
+    },
+    teamAScore: 13,
+    teamA: [],
+    teamBScore: 7,
+    teamB: [1]
+  });
 }

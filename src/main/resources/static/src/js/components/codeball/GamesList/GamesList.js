@@ -8,6 +8,7 @@ import './GamesList.scss';
 export default class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
+    isEditing: PropTypes.bool,
     formatUrl: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
     games: PropTypes.array.isRequired,
@@ -18,6 +19,7 @@ export default class GamesList extends Component {
   render() {
     const {
       className,
+      isEditing,
       formatUrl,
       games,
       pitches
@@ -58,6 +60,14 @@ export default class GamesList extends Component {
             </Link>
           );
         })}
+
+        {isEditing && (
+          <Link to="games/add">
+            <ListItem className="">
+              Add new game
+            </ListItem>
+          </Link>
+        )}
       </List>
     );
   }

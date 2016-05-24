@@ -1,33 +1,17 @@
 import _ from 'underscore';
-import { mapGame } from 'api';
 import { now, reducer, safeGet } from 'utils';
+import { mapGame, gameExample } from 'models/game';
 import {
-  LOAD_GAMES, LOAD_GAMES_SUCCESS, LOAD_GAMES_FAILURE
+  LOAD_GAMES, LOAD_GAMES_SUCCESS, LOAD_GAMES_FAILURE,
+  EDIT_GAMES, CANCEL_EDIT_GAMES
 } from 'constants/ActionTypes';
-import {
-  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
-} from 'constants/Configuration';
 
 const initialState = {
   isLoading: false,
+  isEditing: false,
   lastUpdate: undefined,
   games: [
-    {
-      date: '2016/05/04',
-      time: '19:00',
-      duration: 90,
-      pitchId: 1,
-      isEnrollmentOver: false,
-      enrolledUsers: {
-        [ENROLLMENT_STATUS_YES]: [],
-        [ENROLLMENT_STATUS_MAYBE]: [],
-        [ENROLLMENT_STATUS_NO]: []
-      },
-      teamA: [],
-      teamAScore: undefined,
-      teamB: [],
-      teamBScore: undefined
-    }
+    gameExample()
   ]
 };
 
@@ -40,12 +24,13 @@ export default reducer(initialState, {
   },
 
   [LOAD_GAMES_SUCCESS]: (state, action) => {
-    const games = safeGet(action, 'response.body', []);
+    const responseGames = safeGet(action, 'response.body', []);
+    const games = _(responseGames).map(mapGame);
 
     return {
+      ...initialState,
       lastUpdate: now(),
-      isLoading: false,
-      games: _(games).map(mapGame)
+      games
     };
   },
 
@@ -53,6 +38,20 @@ export default reducer(initialState, {
     return {
       ...state,
       isLoading: false
+    };
+  },
+
+  [EDIT_GAMES]: (state) => {
+    return {
+      ...state,
+      isEditing: true
+    };
+  },
+
+  [CANCEL_EDIT_GAMES]: (state) => {
+    return {
+      ...state,
+      isEditing: false
     };
   }
 });
