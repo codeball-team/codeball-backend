@@ -1,14 +1,12 @@
 package com.codete.codeball.controllers;
 
 import com.codete.codeball.model.User;
+import com.codete.codeball.model.UserRole;
 import com.codete.codeball.repositories.UserRepository;
 import com.codete.codeball.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -35,6 +33,13 @@ public class UserController {
     @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public User getUser(@PathVariable long id) {
         return userRepository.findOne(id);
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    public User createUser(@RequestBody User user) {
+        user.setId(null);
+        user.setRole(UserRole.ROLE_USER.name());
+        return userRepository.save(user);
     }
 
 }

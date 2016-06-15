@@ -25,6 +25,7 @@ public class AdminUserController {
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
+        user.setId(null);
         return userRepository.save(user);
     }
 
