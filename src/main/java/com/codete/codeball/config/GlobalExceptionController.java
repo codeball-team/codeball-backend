@@ -1,6 +1,7 @@
 package com.codete.codeball.config;
 
 import com.codete.codeball.exceptions.EnrollmentOverException;
+import com.codete.codeball.exceptions.GameOverException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,7 +32,7 @@ public class GlobalExceptionController {
      * Logs bad request exceptions
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({EnrollmentOverException.class})
+    @ExceptionHandler({EnrollmentOverException.class, GameOverException.class})
     @ResponseBody
     public MessageWrapper logThirdPartyAuthenticationException(HttpServletRequest request, Exception exception) {
         LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));
