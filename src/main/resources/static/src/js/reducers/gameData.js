@@ -1,4 +1,4 @@
-import { now, reducer, safeGet } from 'utils';
+import { now, reducer, safeGet, parseNumber } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
@@ -91,7 +91,7 @@ export default reducer(initialState, {
       ...state,
       editedGame: {
         ...state.editedGame,
-        teamAScore
+        teamAScore: parseNumber(teamAScore)
       }
     };
   },
@@ -102,7 +102,7 @@ export default reducer(initialState, {
       ...state,
       editedGame: {
         ...state.editedGame,
-        teamBScore
+        teamBScore: parseNumber(teamBScore)
       }
     };
   }

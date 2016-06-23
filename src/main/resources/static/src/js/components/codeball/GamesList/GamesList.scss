@@ -27,4 +27,12 @@
       @include flex-child;
     }
   }
+
+  &.upcoming-games {
+    .games-list-item {
+      .score {
+        display: none;
+      }
+    }
+  }
 }

@@ -6,7 +6,6 @@ import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
-import './Games.scss';
 
 class Games extends Component {
   static propTypes = {
@@ -33,6 +32,7 @@ class Games extends Component {
 
   render () {
     const {
+      actions,
       currentUserData,
       gamesData,
       pitchesData,
@@ -40,7 +40,7 @@ class Games extends Component {
     } = this.props;
 
     const { currentUser } = currentUserData;
-    const { games, isEditing } = gamesData;
+    const { games } = gamesData;
     const { pitches } = pitchesData;
     const { users } = usersData;
 
@@ -49,7 +49,10 @@ class Games extends Component {
       pitches,
       users
     };
-    const sortedGames = _(games).sortBy('date').reverse();
+
+    const sortedGames = _(
+      _(games).values()
+    ).sortBy('date').reverse();
     const upcomingGames = _(sortedGames).filter(game => !game.isGameOver);
     const previousGames = _(sortedGames).filter(game => game.isGameOver);
 
@@ -61,28 +64,29 @@ class Games extends Component {
     ]);
 
     return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section className="games">
-          {upcomingGames.length > 0 && (
-            <GamesListSection
-              isEditable={true}
-              isEditing={isEditing}
-              className="upcoming-games"
-              title={`Upcoming games (${upcomingGames.length})`}
-              formatUrl={id => `games/upcoming/${id}`}
-              games={upcomingGames}
-              {...gamesListProps} />
-          )}
+      <LoadableContent
+        isLoading={isContentLoading}
+        render={() => (
+          <section className="games">
+            {upcomingGames.length > 0 && (
+              <GamesListSection
+                className="upcoming-games"
+                showAddButton={true}
+                title={`Upcoming games (${upcomingGames.length})`}
+                formatUrl={id => `games/upcoming/${id}`}
+                games={upcomingGames}
+                {...gamesListProps} />
+            )}
 
-          {upcomingGames.length > 0 && (
-            <GamesListSection
-              title={`Previous games (${previousGames.length})`}
-              formatUrl={id => `games/previous/${id}`}
-              games={previousGames}
-              {...gamesListProps} />
-          )}
-        </section>
-      </LoadableContent>
+            {upcomingGames.length > 0 && (
+              <GamesListSection
+                title={`Previous games (${previousGames.length})`}
+                formatUrl={id => `games/previous/${id}`}
+                games={previousGames}
+                {...gamesListProps} />
+            )}
+          </section>
+        )} />
     );
   }
 }

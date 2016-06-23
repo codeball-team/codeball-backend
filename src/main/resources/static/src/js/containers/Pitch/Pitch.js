@@ -43,13 +43,15 @@ class Pitch extends Component {
     ]);
 
     return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section className="pitch">
-          <PitchInfoSection
-            title={name}
-            pitch={pitch} />
-        </section>
-      </LoadableContent>
+      <LoadableContent
+        isLoading={isContentLoading}
+        render={() => (
+          <section className="pitch">
+            <PitchInfoSection
+              title={name}
+              pitch={pitch} />
+          </section>
+        )} />
     );
   }
 }

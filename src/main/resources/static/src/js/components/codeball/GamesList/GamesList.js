@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import IconAdd from 'react-icons/lib/io/plus';
 import { List, ListItem } from 'components/ui';
 import './GamesList.scss';
 
 export default class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    isEditing: PropTypes.bool,
+    showAddButton: PropTypes.bool,
     formatUrl: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
     games: PropTypes.array.isRequired,
@@ -16,10 +17,14 @@ export default class GamesList extends Component {
     users: PropTypes.object.isRequired
   };
 
+  static defaultProps = {
+    showAddButton: false
+  };
+
   render() {
     const {
       className,
-      isEditing,
+      showAddButton,
       formatUrl,
       games,
       pitches
@@ -31,6 +36,15 @@ export default class GamesList extends Component {
           'games-list',
           className
         )}>
+        {showAddButton && (
+          <Link to="games/new">
+            <ListItem className="bg-success">
+              <IconAdd className="icon" />
+              Add new game
+            </ListItem>
+          </Link>
+        )}
+
         {_(games).map((game) => {
           const {
             id,
@@ -60,14 +74,6 @@ export default class GamesList extends Component {
             </Link>
           );
         })}
-
-        {isEditing && (
-          <Link to="games/add">
-            <ListItem className="">
-              Add new game
-            </ListItem>
-          </Link>
-        )}
       </List>
     );
   }

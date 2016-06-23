@@ -27,15 +27,17 @@ class Pitches extends Component {
     ]);
 
     return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section className="pitches">
-          {numberOfPitches > 0 && (
-            <PitchesListSection
-              title={`Pitches (${numberOfPitches})`}
-              pitches={pitches} />
-          )}
-        </section>
-      </LoadableContent>
+      <LoadableContent
+        isLoading={isContentLoading}
+        render={() => (
+          <section className="pitches">
+            {numberOfPitches > 0 && (
+              <PitchesListSection
+                title={`Pitches (${numberOfPitches})`}
+                pitches={pitches} />
+            )}
+          </section>
+        )} />
     );
   }
 }

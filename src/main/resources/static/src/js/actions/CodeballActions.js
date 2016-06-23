@@ -55,12 +55,6 @@ export function loadGame(gameId) {
   });
 }
 
-export function editGame() {
-  return {
-    type: EDIT_GAME
-  };
-}
-
 export function saveGame(gameId, data) {
   return ajax({
     request: request('PUT', gameUrl(gameId))
@@ -70,6 +64,12 @@ export function saveGame(gameId, data) {
     successAction: SAVE_GAME_SUCCESS,
     failureAction: SAVE_GAME_FAILURE
   });
+}
+
+export function editGame() {
+  return {
+    type: EDIT_GAME
+  };
 }
 
 export function cancelEditGame() {

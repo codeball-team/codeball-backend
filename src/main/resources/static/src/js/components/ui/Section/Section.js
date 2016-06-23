@@ -9,7 +9,6 @@ import './Section.scss';
 export default function SectionDecorator(ChildComponent) {
   return class Section extends Component {
     static propTypes = {
-      className: PropTypes.string,
       title: PropTypes.string.isRequired,
       isEditable: PropTypes.bool,
       isEditing: PropTypes.bool,
@@ -19,7 +18,6 @@ export default function SectionDecorator(ChildComponent) {
     };
 
     static defaultProps = {
-      className: '',
       isEditable: false,
       isEditing: false,
       onEdit: _.noop,
@@ -47,7 +45,6 @@ export default function SectionDecorator(ChildComponent) {
 
     render() {
       const {
-        className,
         title,
         isEditable,
         isEditing
@@ -59,11 +56,7 @@ export default function SectionDecorator(ChildComponent) {
       };
 
       return (
-        <div
-          className={classNames(
-            'section',
-            className
-          )}>
+        <div className="section">
           <div className="section-title">
             <span>
               {title}

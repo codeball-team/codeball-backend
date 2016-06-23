@@ -2,7 +2,7 @@
 @import '~styles/mixins.scss';
 
 .game-lineup {
-  @include flex-parent(center, flex-start);
+  @include flex-parent(flex-start, flex-start);
 
   @include phone {
     flex-direction: column;

@@ -5,6 +5,7 @@ import App from 'components/App';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
+import NewGame from 'containers/NewGame/NewGame';
 import Pitch from 'containers/Pitch/Pitch';
 import Pitches from 'containers/Pitches/Pitches';
 import Player from 'containers/Player/Player';
@@ -16,10 +17,11 @@ export default ([
 
   <Route key="app" path="/" component={App}>
     <Route path="upcoming-game" component={UpcomingGame('upcoming')} />
-    <Route path="last-game" component={Game('last')} />
+    <Route path="last-game" component={Game(() => 'last')} />
     <Route path="games">
       <IndexRoute component={Games} />
-      <Route path="previous/:gameId" component={Game()} />
+      <Route path="new" component={NewGame} />
+      <Route path="previous/:gameId" component={Game(props => props.params.gameId)} />
       <Route path="upcoming/:gameId" component={UpcomingGame()} />
     </Route>
     <Route path="pitches">

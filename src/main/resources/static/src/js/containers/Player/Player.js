@@ -46,13 +46,15 @@ class Player extends Component {
     ]);
 
     return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section className="player">
-          <PlayerProfileSection
-            title={`${firstName} ${lastName}`}
-            user={user} />
-        </section>
-      </LoadableContent>
+      <LoadableContent
+        isLoading={isContentLoading}
+        render={() => (
+          <section className="player">
+            <PlayerProfileSection
+              title={`${firstName} ${lastName}`}
+              user={user} />
+          </section>
+        )} />
     );
   }
 }

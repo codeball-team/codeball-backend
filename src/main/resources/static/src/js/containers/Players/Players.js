@@ -35,16 +35,18 @@ class Players extends Component {
     ]);
 
     return (
-      <LoadableContent isLoading={isContentLoading}>
-        <section className="players">
-          {numberOfUsers > 0 && (
-            <PlayersListSection
-              title={`Players (${numberOfUsers})`}
-              currentUser={currentUser}
-              users={_(users).values()} />
-          )}
-        </section>
-      </LoadableContent>
+      <LoadableContent
+        isLoading={isContentLoading}
+        render={() => (
+          <section className="players">
+            {numberOfUsers > 0 && (
+              <PlayersListSection
+                title={`Players (${numberOfUsers})`}
+                currentUser={currentUser}
+                users={_(users).values()} />
+            )}
+          </section>
+        )} />
     );
   }
 }

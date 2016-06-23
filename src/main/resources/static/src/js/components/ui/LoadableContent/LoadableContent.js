@@ -6,14 +6,14 @@ export default class LoadableContent extends Component {
   static propTypes = {
     className: PropTypes.string,
     isLoading: PropTypes.bool.isRequired,
-    children: PropTypes.element.isRequired
+    render: PropTypes.func.isRequired
   };
 
   render() {
     const {
       className,
       isLoading,
-      children
+      render
     } = this.props;
 
     return (
@@ -25,7 +25,7 @@ export default class LoadableContent extends Component {
           },
           className
         )}>
-        {children}
+        {!isLoading && render()}
       </div>
     );
   }

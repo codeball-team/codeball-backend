@@ -16,14 +16,12 @@ export default class GameScore extends Component {
 
   onGameScoreAChanged = (teamAScore) => {
     const { onEditGameScoreA } = this.props;
-    const score = teamAScore ? Number(teamAScore) : undefined;
-    onEditGameScoreA(score);
+    onEditGameScoreA(teamAScore);
   };
 
   onGameScoreBChanged = (teamBScore) => {
     const { onEditGameScoreB } = this.props;
-    const score = teamBScore ? Number(teamBScore) : undefined;
-    onEditGameScoreB(score);
+    onEditGameScoreB(teamBScore);
   };
 
   render() {

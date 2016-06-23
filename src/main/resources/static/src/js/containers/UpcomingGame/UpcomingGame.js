@@ -92,37 +92,39 @@ export default function GenerateUpcomingGame(constantGameId) {
       ]).any();
 
       return (
-        <LoadableContent isLoading={isContentLoading}>
-          <section>
-            <GameInfoSection
-              title={pitch.name}
-              date={date}
-              time={time}
-              duration={duration}
-              pitch={pitch} />
+        <LoadableContent
+          isLoading={isContentLoading}
+          render={() => (
+            <section>
+              <GameInfoSection
+                title={pitch.name}
+                date={date}
+                time={time}
+                duration={duration}
+                pitch={pitch} />
 
-            {!isEnrollmentOver && (
-              <GameEnrollmentFormSection
-                title="Are you going?"
-                value={selectedEnrollmentStatus}
-                onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
-            )}
+              {!isEnrollmentOver && (
+                <GameEnrollmentFormSection
+                  title="Are you going?"
+                  value={selectedEnrollmentStatus}
+                  onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+              )}
 
-            {isEnrollmentOver && (
-              <GameLineupSection
-                title="Lineups"
-                currentUser={currentUser}
+              {isEnrollmentOver && (
+                <GameLineupSection
+                  title="Lineups"
+                  currentUser={currentUser}
+                  users={users}
+                  teamA={teamA}
+                  teamB={teamB} />
+              )}
+
+              <GameEnrollmentSection
+                title={`Enrolled players (${numberOfEnrolledPlayers})`}
                 users={users}
-                teamA={teamA}
-                teamB={teamB} />
-            )}
-
-            <GameEnrollmentSection
-              title={`Enrolled players (${numberOfEnrolledPlayers})`}
-              users={users}
-              enrolledUsers={enrolledUsers} />
-          </section>
-        </LoadableContent>
+                enrolledUsers={enrolledUsers} />
+            </section>
+          )} />
       );
     }
   }

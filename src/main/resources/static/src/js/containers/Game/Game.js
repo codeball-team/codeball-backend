@@ -7,7 +7,7 @@ import { refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 
-export default function GenerateGame(constantGameId) {
+export default function GenerateGame(getGameId) {
   class Game extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
@@ -18,8 +18,18 @@ export default function GenerateGame(constantGameId) {
       usersData: PropTypes.object.isRequired
     };
 
+    constructor(props, context) {
+      super(props, context);
+    }
+
     componentWillMount = () => {
-      this.updateData(this.props);
+      this.updateData({
+        ...this.props,
+        params: {
+          ...this.props.params,
+          gameId: getGameId(this.props)
+        }
+      });
     };
 
     componentWillReceiveProps = (newProps) => {
@@ -37,7 +47,7 @@ export default function GenerateGame(constantGameId) {
         usersData
       } = props;
 
-      actions.loadGame(constantGameId || params.gameId);
+      actions.loadGame(params.gameId);
       refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
       refreshDataIfNecessary(pitchesData, actions.loadPitches);
       refreshDataIfNecessary(usersData, actions.loadUsers);
@@ -72,28 +82,30 @@ export default function GenerateGame(constantGameId) {
       ]);
 
       return (
-        <LoadableContent isLoading={isContentLoading}>
-          <section>
-            <GameScoreSection
-              title="Result"
-              isEditable={true}
-              isEditing={isEditing}
-              pitch={pitch}
-              game={isEditing ? Object.assign({}, game, editedGame) : game}
-              onEdit={actions.editGame}
-              onCancel={actions.cancelEditGame}
-              onSave={() => actions.saveGame(gameId, editedGame)}
-              onEditGameScoreA={actions.editGameScoreA}
-              onEditGameScoreB={actions.editGameScoreB} />
+        <LoadableContent
+          isLoading={isContentLoading}
+          render={() => (
+            <section>
+              <GameScoreSection
+                title="Result"
+                isEditable={true}
+                isEditing={isEditing}
+                pitch={pitch}
+                game={isEditing ? Object.assign({}, game, editedGame) : game}
+                onEdit={actions.editGame}
+                onCancel={actions.cancelEditGame}
+                onSave={() => actions.saveGame(gameId, editedGame)}
+                onEditGameScoreA={actions.editGameScoreA}
+                onEditGameScoreB={actions.editGameScoreB} />
 
-            <GameLineupSection
-              title="Lineups"
-              teamA={teamA}
-              teamB={teamB}
-              currentUser={currentUser}
-              users={users} />
-          </section>
-        </LoadableContent>
+              <GameLineupSection
+                title="Lineups"
+                teamA={teamA}
+                teamB={teamB}
+                currentUser={currentUser}
+                users={users} />
+            </section>
+          )} />
       );
     }
   }
