@@ -4,9 +4,4 @@
 .list-item {
   @include highlight-on-hover;
   padding: 10px 20px;
-
-  .icon {
-    margin-top: -5px;
-    margin-right: 10px;
-  }
 }

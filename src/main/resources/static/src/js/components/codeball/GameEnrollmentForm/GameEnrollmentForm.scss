@@ -7,14 +7,6 @@
 
   .option {
     @include flex-child-grow(100%);
-    padding: 10px 10px;
-    margin-right: 10px;
-    text-align: center;
-    cursor: pointer;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
 
     &.yes {
       @include clickable-effects($bg-color-success);

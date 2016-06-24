@@ -1,0 +1,14 @@
+.buttons-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+section {
+  .buttons-panel {
+    padding-bottom: 30px;
+
+    &:empty {
+      padding: 0;
+    }
+  }
+}

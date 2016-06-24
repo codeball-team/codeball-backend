@@ -8,6 +8,10 @@
     font-size: $font-size-l;
     padding-bottom: 15px;
 
+    &:empty {
+      padding: 0;
+    }
+
     @include tablet-and-smaller {
       font-size: $font-size-m;
     }

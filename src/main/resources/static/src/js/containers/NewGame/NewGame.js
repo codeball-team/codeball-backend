@@ -3,36 +3,46 @@ import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
-import { Link } from 'react-router';
-import IconAdd from 'react-icons/lib/io/plus';
-import { Button, ButtonsPanel, LoadableContent } from 'components/ui';
-import { PlayersListSection } from 'components/sections';
+import { refreshDataIfNecessary } from 'utils';
+import { LoadableContent } from 'components/ui';
+//import { NewGameSection } from 'components/sections';
 
-class Players extends Component {
+class NewGame extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     currentUserData: PropTypes.object.isRequired,
+    pitchesData: PropTypes.object.isRequired,
     usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions } = this.props;
-    actions.loadCurrentUser();
-    actions.loadUsers();
+    const {
+      actions,
+      currentUserData,
+      pitchesData,
+      usersData
+    } = this.props;
+
+    refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
+    refreshDataIfNecessary(pitchesData, actions.loadPitches);
+    refreshDataIfNecessary(usersData, actions.loadUsers);
   };
 
   render () {
     const {
+      actions,
       currentUserData,
+      pitchesData,
       usersData
     } = this.props;
 
     const { currentUser } = currentUserData;
+    const { pitches } = pitchesData;
     const { users } = usersData;
-    const numberOfUsers = _(users).keys().length;
 
     const isContentLoading = _.any([
       currentUserData.isLoading,
+      pitchesData.isLoading,
       usersData.isLoading
     ]);
 
@@ -40,22 +50,8 @@ class Players extends Component {
       <LoadableContent
         isLoading={isContentLoading}
         render={() => (
-          <section className="players">
-            <ButtonsPanel>
-              <Link to="players/new">
-                <Button className="bg-success">
-                  <IconAdd className="icon" />
-                  Add
-                </Button>
-              </Link>
-            </ButtonsPanel>
-
-            {numberOfUsers > 0 && (
-              <PlayersListSection
-                title={`Players (${numberOfUsers})`}
-                currentUser={currentUser}
-                users={_(users).values()} />
-            )}
+          <section className="new-game">
+            new game
           </section>
         )} />
     );
@@ -65,6 +61,7 @@ class Players extends Component {
 function mapStateToProps(state) {
   return {
     currentUserData: state.currentUserData,
+    pitchesData: state.pitchesData,
     usersData: state.usersData
   };
 }
@@ -78,4 +75,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Players);
+)(NewGame);

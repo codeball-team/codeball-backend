@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { Button } from 'components/ui';
 
 export default class GameEnrollmentFormOption extends Component {
   static propTypes = {
@@ -18,17 +19,17 @@ export default class GameEnrollmentFormOption extends Component {
     } = this.props;
 
     return (
-      <div
+      <Button
+        onClick={() => onClick()}
         className={classNames(
           'option',
           className,
           {
             inactive
           }
-        )}
-        onClick={() => onClick()}>
+        )}>
         {text}
-      </div>
+      </Button>
     );
   }
 }

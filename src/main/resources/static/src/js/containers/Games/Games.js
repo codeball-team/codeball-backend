@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary } from 'utils';
-import { LoadableContent } from 'components/ui';
+import { Link } from 'react-router';
+import IconAdd from 'react-icons/lib/io/plus';
+import { Button, ButtonsPanel, LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
 
 class Games extends Component {
@@ -68,10 +70,18 @@ class Games extends Component {
         isLoading={isContentLoading}
         render={() => (
           <section className="games">
+            <ButtonsPanel>
+              <Link to="games/new">
+                <Button className="bg-success">
+                  <IconAdd className="icon" />
+                  Add
+                </Button>
+              </Link>
+            </ButtonsPanel>
+
             {upcomingGames.length > 0 && (
               <GamesListSection
                 className="upcoming-games"
-                showAddButton={true}
                 title={`Upcoming games (${upcomingGames.length})`}
                 formatUrl={id => `games/upcoming/${id}`}
                 games={upcomingGames}

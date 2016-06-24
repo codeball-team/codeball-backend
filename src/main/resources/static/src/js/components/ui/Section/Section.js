@@ -9,7 +9,7 @@ import './Section.scss';
 export default function SectionDecorator(ChildComponent) {
   return class Section extends Component {
     static propTypes = {
-      title: PropTypes.string.isRequired,
+      title: PropTypes.node.isRequired,
       isEditable: PropTypes.bool,
       isEditing: PropTypes.bool,
       onEdit: PropTypes.func,
