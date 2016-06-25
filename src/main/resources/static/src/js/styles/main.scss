@@ -54,6 +54,14 @@ h2 {
   @include ellipsis;
 }
 
+.fg-success {
+  color: $bg-color-success;
+}
+
+.fg-default-alert {
+  color: $bg-color-default-alert;
+}
+
 .fg-danger {
   color: $fg-color-danger;
 }

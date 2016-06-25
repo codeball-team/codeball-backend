@@ -1,5 +1,12 @@
 @import '~styles/variables.scss';
 
+@mixin small-phone {
+  @media only screen
+    and (max-width: $screen-xs - 1) {
+      @content;
+  }
+}
+
 @mixin phone {
   @media only screen
     and (max-width: $screen-s - 1) {
@@ -53,10 +60,6 @@
   background-color: $color;
   user-select: none;
 
-  &.focus {
-    background-color: darken($color, 5%);
-  }
-
   &.inactive {
     background-color: desaturate($color, 30%);
     opacity: 0.25;
@@ -68,6 +71,24 @@
 
   &:active {
     background-color: darken($color, 10%);
+  }
+}
+
+@mixin transparent-clickable-effects() {
+  background-color: transparent;
+  user-select: none;
+
+  &.inactive {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 0.25;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 

@@ -2,20 +2,42 @@
 @import '~styles/mixins.scss';
 
 .button {
-  @include highlight-on-hover;
+  @include transparent-clickable-effects();
   display: inline-block;
-  padding: 10px;
+  padding: 0px 10px;
   margin-right: 10px;
   text-align: center;
   cursor: pointer;
-  font-size: $font-size-s;
+  font-size: $font-size-l;
 
   &:last-of-type {
     margin-right: 0;
   }
 
   .icon {
+    font-size: $font-size-m;
     margin-top: -5px;
     margin-right: 10px;
+  }
+
+  @include tablet-and-smaller {
+    padding: 0 5px;
+    font-size: $font-size-m;
+
+    .icon {
+      font-size: $font-size-s;
+      margin-right: 5px;
+    }
+  }
+
+  @include small-phone {
+    .icon {
+      font-size: $font-size-m;
+      margin-right: 0;
+    }
+
+    .label {
+      display: none;
+    }
   }
 }

@@ -6,6 +6,8 @@ import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
 import NewGame from 'containers/NewGame/NewGame';
+import NewPitch from 'containers/NewPitch/NewPitch';
+import NewPlayer from 'containers/NewPlayer/NewPlayer';
 import Pitch from 'containers/Pitch/Pitch';
 import Pitches from 'containers/Pitches/Pitches';
 import Player from 'containers/Player/Player';
@@ -26,10 +28,12 @@ export default ([
     </Route>
     <Route path="pitches">
       <IndexRoute component={Pitches} />
+      <Route path="new" component={NewPitch} />
       <Route path=":pitchId" component={Pitch} />
     </Route>
     <Route path="players">
       <IndexRoute component={Players} />
+      <Route path="new" component={NewPlayer} />
       <Route path=":userId" component={Player} />
     </Route>
     <Route path="players" component={NotFound} />

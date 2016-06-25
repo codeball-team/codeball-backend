@@ -7,6 +7,9 @@
 
   .option {
     @include flex-child-grow(100%);
+    padding: 10px;
+    border: 0;
+    font-size: $font-size-m;
 
     &.yes {
       @include clickable-effects($bg-color-success);
