@@ -3,7 +3,7 @@
 
 .section {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: $spacing-xl;
 
   .section-bar {
     @include flex-parent(flex-start, flex-start);
@@ -11,8 +11,8 @@
     .section-title {
       flex: 0 1 auto;
       font-size: $font-size-l;
-      padding-bottom: 15px;
-      margin-right: 20px;
+      padding-bottom: $spacing-m;
+      margin-right: $spacing-l;
 
       &:empty {
         padding: 0;

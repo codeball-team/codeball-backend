@@ -6,7 +6,7 @@
     .game-enrollment-list-item {
       .enrollment-status {
         @include flex-child;
-        margin-left: 10px;
+        margin-left: $spacing-s;
 
         @include phone {
           display: none;

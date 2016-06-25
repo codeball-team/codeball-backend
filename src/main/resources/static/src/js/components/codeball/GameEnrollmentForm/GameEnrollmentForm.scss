@@ -7,7 +7,7 @@
 
   .option {
     @include flex-child-grow(100%);
-    padding: 10px;
+    padding: $spacing-s;
     border: 0;
     font-size: $font-size-m;
 

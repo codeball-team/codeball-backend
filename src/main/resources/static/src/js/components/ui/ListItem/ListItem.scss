@@ -3,5 +3,5 @@
 
 .list-item {
   @include highlight-on-hover;
-  padding: 10px 20px;
+  padding: $spacing-s $spacing-l;
 }

@@ -12,11 +12,11 @@
     width: 100%;
 
     &:first-of-type {
-      margin-right: 20px;
+      margin-right: $spacing-l;
 
       @include phone {
         margin-right: 0;
-        margin-bottom: 20px;
+        margin-bottom: $spacing-l;
       }
     }
   }

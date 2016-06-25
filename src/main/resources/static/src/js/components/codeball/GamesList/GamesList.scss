@@ -7,7 +7,7 @@
 
     .date-time {
       flex: 0 1 auto;
-      margin-right: 20px;
+      margin-right: $spacing-l;
 
       @include phone {
         @include flex-child-grow;
@@ -16,7 +16,7 @@
 
     .pitch {
       @include flex-child-grow;
-      margin-left: 20px;
+      margin-left: $spacing-l;
 
       @include phone {
         display: none;

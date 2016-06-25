@@ -6,7 +6,7 @@
 
   .name {
     @include flex-child;
-    margin-right: 20px;
+    margin-right: $spacing-l;
   }
 
   .address {
