@@ -34,7 +34,6 @@ class Games extends Component {
 
   render () {
     const {
-      actions,
       currentUserData,
       gamesData,
       pitchesData,

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import classNames from 'classnames';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconEdit from 'react-icons/lib/io/ios-compose-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
@@ -50,6 +49,7 @@ export default function SectionDecorator(ChildComponent) {
             <div className="section-title ellipsis">
               {title}
             </div>
+
             <ButtonsPanel>
               {isEditable && (
                 <div>
