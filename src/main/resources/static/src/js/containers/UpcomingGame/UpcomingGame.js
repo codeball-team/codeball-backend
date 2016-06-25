@@ -14,7 +14,7 @@ import {
   GameLineupSection
 } from 'components/sections';
 
-export default function GenerateUpcomingGame(constantGameId) {
+export default function GenerateUpcomingGame(getGameId) {
   class UpcomingGame extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
@@ -26,7 +26,13 @@ export default function GenerateUpcomingGame(constantGameId) {
     };
 
     componentWillMount = () => {
-      this.updateData(this.props);
+      this.updateData({
+        ...this.props,
+        params: {
+          ...this.props.params,
+          gameId: getGameId(this.props)
+        }
+      });
     };
 
     componentWillReceiveProps = (newProps) => {
@@ -43,10 +49,7 @@ export default function GenerateUpcomingGame(constantGameId) {
         usersData
       } = props;
 
-      if (params) {
-        actions.loadGame(constantGameId || params.gameId);
-      }
-
+      actions.loadGame(params.gameId);
       refreshDataIfNecessary(usersData, actions.loadUsers);
       refreshDataIfNecessary(usersData, actions.loadCurrentUser);
       refreshDataIfNecessary(pitchesData, actions.loadPitches);

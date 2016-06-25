@@ -18,13 +18,13 @@ export default ([
   <Redirect key="initial-redirect" from="/" to="upcoming-game" />,
 
   <Route key="app" path="/" component={App}>
-    <Route path="upcoming-game" component={UpcomingGame('upcoming')} />
+    <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
     <Route path="last-game" component={Game(() => 'last')} />
     <Route path="games">
       <IndexRoute component={Games} />
       <Route path="new" component={NewGame} />
       <Route path="previous/:gameId" component={Game(props => props.params.gameId)} />
-      <Route path="upcoming/:gameId" component={UpcomingGame()} />
+      <Route path="upcoming/:gameId" component={UpcomingGame(props => props.params.gameId)} />
     </Route>
     <Route path="pitches">
       <IndexRoute component={Pitches} />
