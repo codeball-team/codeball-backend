@@ -6,6 +6,7 @@
 *.iml
 build
 .gradle
+*.log
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
