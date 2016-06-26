@@ -6,7 +6,8 @@ import * as CodeballActions from 'actions/CodeballActions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { Pitch } from 'models';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
-import { LoadableContent } from 'components/ui';
+import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { Button, LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection,
   GameEnrollmentFormSection,
@@ -104,7 +105,15 @@ export default function GenerateUpcomingGame(getGameId) {
                 date={date}
                 time={time}
                 duration={duration}
-                pitch={pitch} />
+                pitch={pitch}
+                buttons={[
+                  <Button
+                    key="close-enrollment"
+                    onClick={() => actions.closeEnrollment(gameId)}>
+                    <IconSave className="icon" />
+                    <span className="label">Close enrollment</span>
+                  </Button>
+                ]} />
 
               {!isEnrollmentOver && (
                 <GameEnrollmentFormSection

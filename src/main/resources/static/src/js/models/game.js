@@ -35,7 +35,7 @@ export function mapGame(game) {
     Game().enrolledUsers
   );
 
-  const date = moment(javaToUnixTimestamp(game.date));
+  const date = moment(javaToUnixTimestamp(game.startTimestamp));
 
   return Game({
     id: game.id,

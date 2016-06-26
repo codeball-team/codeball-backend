@@ -56,10 +56,10 @@ module.exports = {
   },
   resolve: {
     root: PATHS.app,
+    modulesDirectories: ['node_modules'],
     extensions: ['', '.js', '.jsx', '.scss']
   },
   module: {
-    noParse: /\.min\.js$/,
     loaders: [
       {
         test: /\.jsx?$/,
@@ -76,7 +76,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: PATHS.styles,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
       },
       {

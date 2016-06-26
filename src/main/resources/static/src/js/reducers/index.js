@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import ajaxRequests from './ajaxRequests';
 import currentUserData from './currentUserData';
 import gameData from './gameData';
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   gamesData,
   newGame,
   pitchesData,
-  usersData
+  usersData,
+  routing: routerReducer
 });
 
 export default rootReducer;

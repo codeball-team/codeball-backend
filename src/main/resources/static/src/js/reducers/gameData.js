@@ -2,6 +2,7 @@ import { now, reducer, safeGet, parseNumber } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
+  CLOSE_ENROLLMENT_STATUS_SUCCESS,
   CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
   EDIT_GAME, CANCEL_EDIT_GAME, SAVE_GAME, SAVE_GAME_SUCCESS, SAVE_GAME_FAILURE,
   ADD_GAME, ADD_GAME_SUCCESS, ADD_GAME_FAILURE,
@@ -38,6 +39,8 @@ export default reducer(initialState, {
   [CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
   [CHANGE_ENROLLMENT_STATUS_FAILURE]: (state) => state,
+
+  [CLOSE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
   [EDIT_GAME]: (state) => {
     return {

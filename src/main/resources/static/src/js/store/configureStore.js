@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from 'reducers';
+import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState, history) {
   let enhancer;
 
   if (process.env.NODE_ENV !== 'production') {
     let middleware = applyMiddleware(
+      routerMiddleware(history),
       require('redux-thunk').default,
       require('redux-immutable-state-invariant')()
     );

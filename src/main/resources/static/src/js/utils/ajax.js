@@ -1,17 +1,18 @@
+import _ from 'underscore';
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE} from 'constants/ActionTypes';
 
-export default function ajax(options) {
-  const {
-    request,
-    startAction,
-    successAction,
-    failureAction,
-    successCallback,
-    failureCallback,
-    params
-  } = options;
-
+export default function ajax(getOptions) {
   return dispatch => {
+    const {
+      request,
+      startAction,
+      successAction,
+      failureAction,
+      successCallback,
+      failureCallback,
+      params
+    } = getOptions(dispatch);
+
     request.end((error, response) => {
       if (error || !response.ok) {
         dispatch({
@@ -42,9 +43,7 @@ export default function ajax(options) {
   };
 }
 
-function ajaxCompleted(dispatch, ACTION_TYPE, callback) {
+function ajaxCompleted(dispatch, ACTION_TYPE, callback = _.noop) {
   dispatch({ type: ACTION_TYPE });
-  if (callback) {
-    callback();
-  }
+  callback();
 }

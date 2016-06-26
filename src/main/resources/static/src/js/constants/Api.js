@@ -5,6 +5,10 @@ const PITCHES = 'pitches';
 const USERS = 'users';
 const CURRENT_USER = 'me';
 
+export function enrollmentUrl(gameId) {
+  return `${gamesUrl()}/enrollment/${gameId}`;
+}
+
 export function gamesUrl() {
   return `${BASE_API_URL}/${GAMES}`;
 }
