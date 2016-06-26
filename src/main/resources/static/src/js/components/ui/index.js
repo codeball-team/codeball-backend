@@ -1,3 +1,4 @@
+export BodyBackground from './BodyBackground/BodyBackground';
 export Button from './Button/Button';
 export ButtonsPanel from './ButtonsPanel/ButtonsPanel';
 export EditableText from './EditableText/EditableText';

@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { BodyBackground } from 'components/ui';
 import routes from './routes';
 
 const store = configureStore(undefined, browserHistory);
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   ComponentEl = (
     <div>
+      <BodyBackground />
       <Router key="router" history={history} routes={routes} />
       <DevTools key="devtools" />
     </div>
@@ -27,6 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   ComponentEl = (
     <div>
+      <BodyBackground />
       <Router history={history} routes={routes} />
     </div>
   );
