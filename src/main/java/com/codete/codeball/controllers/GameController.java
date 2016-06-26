@@ -1,10 +1,13 @@
 package com.codete.codeball.controllers;
 
 import com.codete.codeball.exceptions.EnrollmentOverException;
+import com.codete.codeball.exceptions.GameOverException;
 import com.codete.codeball.model.EnrollmentStatus;
 import com.codete.codeball.model.Game;
+import com.codete.codeball.model.TeamAssignment;
 import com.codete.codeball.model.User;
 import com.codete.codeball.repositories.GameRepository;
+import com.codete.codeball.services.teams.TeamAssigner;
 import com.codete.codeball.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,6 +23,9 @@ public class GameController {
 
     @Autowired
     private GameRepository gameRepository;
+
+    @Autowired
+    private TeamAssigner teamAssigner;
 
     @Autowired
     private ContextUtils contextUtils;
@@ -56,4 +62,22 @@ public class GameController {
         return game;
     }
 
-}
+    @RequestMapping(value = "/{id}/team", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public Game drawTeams(@PathVariable("id") long gameId) {
+        Game game = gameRepository.findOne(gameId);
+        if (game.isGameOver()) {
+            throw new GameOverException(gameId);
+        }
+        TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
+        game.assignTeams(teamAssignment);
+        return gameRepository.save(game);
+    }
+
+    @RequestMapping(value = "/enrollment/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public Game finishEnrollment(@PathVariable("id") long gameId) {
+        Game game = gameRepository.findOne(gameId);
+        game.setEnrollmentOver(true);
+        return gameRepository.save(game);
+    }
+
+    }

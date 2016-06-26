@@ -1,29 +1,17 @@
-package com.codete.codeball.controllers;
+package com.codete.codeball.controllers.admin;
 
 import com.codete.codeball.model.User;
-import com.codete.codeball.model.UserRole;
 import com.codete.codeball.repositories.UserRepository;
-import com.codete.codeball.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @RestController
-@RequestMapping(value = "/api/users")
-public class UserController {
-
-    @Autowired
-    private ContextUtils contextUtils;
+@RequestMapping(value = "/api/admin/user")
+public class AdminUserController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @RequestMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public User getCurrentUser(Principal principal) {
-        return contextUtils.getUser(principal);
-    }
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     public Iterable<User> getUsers() {
@@ -38,8 +26,18 @@ public class UserController {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         user.setId(null);
-        user.setRole(UserRole.ROLE_USER.name());
         return userRepository.save(user);
+    }
+
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public User updateUser(@PathVariable long id, @RequestBody User user) {
+        user.setId(id);
+        return userRepository.save(user);
+    }
+
+    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable long id) {
+        userRepository.delete(id);
     }
 
 }

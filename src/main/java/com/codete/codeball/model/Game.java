@@ -6,10 +6,8 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -53,6 +51,19 @@ public class Game {
 
     @Tolerate
     private Game() {
+    }
+
+    @JsonIgnore
+    public List<User> getEnrolledUsers() {
+        return enrollments.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(EnrollmentStatus.YES))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+    public void assignTeams(TeamAssignment teamAssignment) {
+        this.teamA = teamAssignment.getTeamA();
+        this.teamB = teamAssignment.getTeamB();
     }
 
 }
