@@ -1,5 +1,6 @@
 import request from 'superagent';
 import { ajax } from 'utils';
+import { newGameToServerFormat } from 'models/newGame';
 import {
   CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
   LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE,
@@ -8,12 +9,15 @@ import {
   EDIT_GAME_SCORE_A, EDIT_GAME_SCORE_B,
   LOAD_GAMES, LOAD_GAMES_SUCCESS, LOAD_GAMES_FAILURE,
   LOAD_PITCHES, LOAD_PITCHES_SUCCESS, LOAD_PITCHES_FAILURE,
-  LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE
+  LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE,
+  NEW_GAME_RESET, NEW_GAME_CHANGE_DATE, NEW_GAME_CHANGE_DURATION,
+  NEW_GAME_CHANGE_HOUR, NEW_GAME_CHANGE_MINUTE, NEW_GAME_CHANGE_PITCH_ID
 } from 'constants/ActionTypes';
 import {
   currentUserUrl,
   gameUrl,
   gamesUrl,
+  newGameUrl,
   pitchesUrl,
   usersUrl
 } from 'constants/Api';
@@ -58,6 +62,18 @@ export function loadGame(gameId) {
 export function saveGame(gameId, data) {
   return ajax({
     request: request('PUT', gameUrl(gameId))
+      .set('Content-Type', 'application/json')
+      .send(data),
+    startAction: SAVE_GAME,
+    successAction: SAVE_GAME_SUCCESS,
+    failureAction: SAVE_GAME_FAILURE
+  });
+}
+
+export function addGame(newGame) {
+  const data = newGameToServerFormat(newGame);
+  return ajax({
+    request: request('PUT', newGameUrl())
       .set('Content-Type', 'application/json')
       .send(data),
     startAction: SAVE_GAME,
@@ -117,4 +133,45 @@ export function loadUsers() {
     successAction: LOAD_USERS_SUCCESS,
     failureAction: LOAD_USERS_FAILURE
   });
+}
+
+export function newGameReset() {
+  return {
+    type: NEW_GAME_RESET
+  };
+}
+
+export function newGameChangeDate(date) {
+  return {
+    type: NEW_GAME_CHANGE_DATE,
+    date
+  };
+}
+
+export function newGameChangeDuration(duration) {
+  return {
+    type: NEW_GAME_CHANGE_DURATION,
+    duration
+  };
+}
+
+export function newGameChangeHour(hour) {
+  return {
+    type: NEW_GAME_CHANGE_HOUR,
+    hour
+  };
+}
+
+export function newGameChangeMinute(minute) {
+  return {
+    type: NEW_GAME_CHANGE_MINUTE,
+    minute
+  };
+}
+
+export function newGameChangePitchId(pitchId) {
+  return {
+    type: NEW_GAME_CHANGE_PITCH_ID,
+    pitchId
+  };
 }

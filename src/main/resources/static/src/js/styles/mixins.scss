@@ -92,7 +92,7 @@
   }
 }
 
-@mixin highlight-on-hover {
+@mixin highlight-on-hover($color: $highlight-color) {
   position: relative;
 
   &:hover::after {
@@ -104,7 +104,7 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
-    background-color: $highlight-color;
+    background-color: $color;
   }
 }
 
@@ -114,4 +114,29 @@
   -webkit-overflow-scrolling: touch;
   -webkit-backface-visibility: hidden;
   touch-action: pan-y;
+}
+
+@mixin input {
+  display: block;
+  width: 100%;
+  line-height: 26px;
+  height: 36px;
+  background-color: $fg-color;
+  padding: $spacing-xs $spacing-s;
+  border: 0;
+  border-radius: 0;
+  border-image: 0;
+  font-size: $font-size-m;
+  color: $bg-color;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+
+  &:focus {
+    outline: 0;
+  }
+
+  @include tablet-and-smaller {
+    font-size: $font-size-s;
+  }
 }

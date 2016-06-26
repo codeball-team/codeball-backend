@@ -1,6 +1,7 @@
 export Button from './Button/Button';
 export ButtonsPanel from './ButtonsPanel/ButtonsPanel';
 export EditableText from './EditableText/EditableText';
+export InputWrapper from './InputWrapper/InputWrapper';
 export List from './List/List';
 export ListItem from './ListItem/ListItem';
 export LoadableContent from './LoadableContent/LoadableContent';

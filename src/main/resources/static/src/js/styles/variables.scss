@@ -5,10 +5,6 @@ $screen-m:                  1000px;
 $screen-s:                  600px;
 $screen-xs:                 400px;
 
-$page-opacity:              0.98;
-$highlight-color:           rgba(255, 255, 255, 0.1);
-$focus-color:               darken($blue-light, 15%);
-
 $font-size-xxxl:            85px;
 $font-size-xxl:             54px;
 $font-size-xl:              34px;
@@ -25,14 +21,23 @@ $spacing-xl:                30px;
 $spacing-xxl:               40px;
 $spacing-xxxl:              60px;
 
+$page-opacity:              0.98;
+$highlight-color:           rgba(255, 255, 255, 0.1);
+$shadow:                    3px 3px 3px 0px rgba(0, 0, 0, 0.2);
+
 $bg-color:                  $blue-dark;
 $bg-color-danger:           #B74A4A;
 $bg-color-default-alert:    gray;
 $bg-color-success:          #56B74A;
 $fg-color:                  white;
 $fg-color-danger:           $red;
+$fg-color-inactive:         $highlight-color;
+
 
 /* computed from constants */
+$highlight-color-dark:      transparentize($bg-color, 0.9);
+$focus-color:               darken($blue-light, 15%);
+
 $nav-bg-color:              $bg-color;
 $nav-fg-color:              $fg-color;
 $nav-bg-hover-color:        lighten($nav-bg-color, 5%);
@@ -40,3 +45,6 @@ $nav-bg-active-color:       darken($nav-bg-color, 10%);
 $nav-bg-selected-color:     darken($nav-bg-color, 5%);
 $content-bg-color:          darken($bg-color, 5%);
 $content-fg-color:          $fg-color;
+
+$border-solid:              1px solid rgba(255, 255, 255, 0.3);
+$border-dotted:             1px dotted rgba(255, 255, 255, 0.3);

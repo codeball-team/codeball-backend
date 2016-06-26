@@ -15,7 +15,7 @@ import Players from 'containers/Players/Players';
 import NotFound from 'containers/NotFound/NotFound';
 
 export default ([
-  <Redirect key="initial-redirect" from="/" to="upcoming-game" />,
+  <Redirect key="initial-redirect" from="/" to="/upcoming-game" />,
 
   <Route key="app" path="/" component={App}>
     <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
@@ -38,6 +38,6 @@ export default ([
     </Route>
     <Route path="players" component={NotFound} />
 
-    <Redirect from="*" to="404" />
+    <Redirect from="*" to="/404" />
   </Route>
 ]);

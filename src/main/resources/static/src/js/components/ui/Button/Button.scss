@@ -14,6 +14,11 @@
     margin-right: 0;
   }
 
+  &.is-disabled {
+    pointer-events: none;
+    color: $fg-color-inactive;
+  }
+
   .icon {
     font-size: $font-size-m;
     margin-top: -$spacing-xs;

@@ -13,6 +13,10 @@ export function gameUrl(gameId) {
   return `${gamesUrl()}/${gameId}`;
 }
 
+export function newGameUrl() {
+  return `${gamesUrl()}/new`;
+}
+
 export function pitchesUrl() {
   return `${BASE_API_URL}/${PITCHES}`;
 }

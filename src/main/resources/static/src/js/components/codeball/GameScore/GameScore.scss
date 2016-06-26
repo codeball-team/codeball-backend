@@ -8,8 +8,11 @@
     margin-bottom: $spacing-s;
 
     .team-score {
+      display: inline-block;
       font-size: $font-size-xxxl;
       line-height: $font-size-xxxl;
+      height: $font-size-xxxl;
+      padding: 0;
       width: 100px;
 
       &.score-a {

@@ -69,30 +69,26 @@ class Games extends Component {
         isLoading={isContentLoading}
         render={() => (
           <section className="games">
-            {upcomingGames.length > 0 && (
-              <GamesListSection
-                className="upcoming-games"
-                title={`Upcoming games (${upcomingGames.length})`}
-                formatUrl={id => `games/upcoming/${id}`}
-                games={upcomingGames}
-                buttons={[
-                  <Link key="new" to="games/new">
-                    <Button>
-                      <IconAdd className="icon" />
-                      <span className="label">Add</span>
-                    </Button>
-                  </Link>
-                ]}
-                {...gamesListProps} />
-            )}
+            <GamesListSection
+              className="upcoming-games"
+              title={`Upcoming games (${upcomingGames.length})`}
+              formatUrl={id => `/games/upcoming/${id}`}
+              games={upcomingGames}
+              buttons={[
+                <Link key="new" to="/games/new">
+                  <Button>
+                    <IconAdd className="icon" />
+                    <span className="label">Add</span>
+                  </Button>
+                </Link>
+              ]}
+              {...gamesListProps} />
 
-            {upcomingGames.length > 0 && (
-              <GamesListSection
-                title={`Previous games (${previousGames.length})`}
-                formatUrl={id => `games/previous/${id}`}
-                games={previousGames}
-                {...gamesListProps} />
-            )}
+            <GamesListSection
+              title={`Previous games (${previousGames.length})`}
+              formatUrl={id => `/games/previous/${id}`}
+              games={previousGames}
+              {...gamesListProps} />
           </section>
         )} />
     );

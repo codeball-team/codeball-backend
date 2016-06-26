@@ -9,7 +9,7 @@
     background-color: $nav-bg-active-color;
     font-size: $font-size-m;
     padding: $spacing-s;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: $border-solid;
 
     @include tablet-and-smaller {
       font-size: $font-size-s;

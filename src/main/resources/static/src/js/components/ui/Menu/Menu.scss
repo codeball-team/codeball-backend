@@ -5,13 +5,13 @@ nav {
   min-height: 100%;
   background-color: $nav-bg-color;
   color: $nav-fg-color;
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: $border-solid;
 
   .menu-logo {
     font-size: $font-size-l;
     text-align: center;
     padding: 40px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: $border-solid;
 
     @include tablet-and-smaller {
       display: none;
@@ -31,7 +31,7 @@ nav {
       text-align: left;
       cursor: pointer;
       font-size: $font-size-m;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+      border-bottom: $border-dotted;
 
       a {
         @include clickable-effects($nav-bg-color);

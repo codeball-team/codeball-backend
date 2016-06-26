@@ -35,12 +35,12 @@ export function mapGame(game) {
     Game().enrolledUsers
   );
 
-  const startDate = moment(javaToUnixTimestamp(game.startTimestamp));
+  const date = moment(javaToUnixTimestamp(game.date));
 
   return Game({
     id: game.id,
-    date: startDate.format(DATE_FORMAT),
-    time: startDate.format(TIME_FORMAT),
+    date: date.format(DATE_FORMAT),
+    time: date.format(TIME_FORMAT),
     duration: game.durationInMinutes,
     pitchId: game.pitchId,
     isEnrollmentOver: game.isEnrollmentOver,

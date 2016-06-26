@@ -1,0 +1,33 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.input-wrapper {
+  padding-bottom: $spacing-l;
+
+  .label {
+    padding-bottom: $spacing-xs;
+  }
+
+  .content {
+    display: flex;
+
+
+    .field {
+      flex: 1 0 auto;
+      margin-right: $spacing-l;
+    }
+
+    .validation {
+      flex: 0 1 auto;
+      font-size: $font-size-l;
+
+      &.valid {
+        color: $bg-color-success;
+      }
+
+      &.invalid {
+        color: $bg-color-danger;
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import 'node-normalize-scss/_normalize.scss';
+// import 'react-select/dist/react-select.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import 'styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';

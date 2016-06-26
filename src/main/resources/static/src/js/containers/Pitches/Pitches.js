@@ -33,19 +33,17 @@ class Pitches extends Component {
         isLoading={isContentLoading}
         render={() => (
           <section className="pitches">
-            {numberOfPitches > 0 && (
-              <PitchesListSection
-                title={`Pitches (${numberOfPitches})`}
-                pitches={pitches}
-                buttons={[
-                  <Link key="new" to="pitches/new">
-                    <Button>
-                      <IconAdd className="icon" />
-                      <span className="label">Add</span>
-                    </Button>
-                  </Link>
-                ]} />
-            )}
+            <PitchesListSection
+              title={`Pitches (${numberOfPitches})`}
+              pitches={pitches}
+              buttons={[
+                <Link key="new" to="pitches/new">
+                  <Button>
+                    <IconAdd className="icon" />
+                    <span className="label">Add</span>
+                  </Button>
+                </Link>
+              ]} />
           </section>
         )} />
     );

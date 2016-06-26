@@ -7,10 +7,12 @@ export default class Button extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    isDisabled: PropTypes.bool,
     onClick: PropTypes.func
   };
 
   static defaultProps = {
+    isDisabled: false,
     onClick: _.noop
   };
 
@@ -18,6 +20,7 @@ export default class Button extends Component {
     const {
       className,
       children,
+      isDisabled,
       onClick
     } = this.props;
 
@@ -26,6 +29,9 @@ export default class Button extends Component {
         onClick={() => onClick()}
         className={classNames(
           'button',
+          {
+            'is-disabled': isDisabled
+          },
           className
         )}>
         {children}

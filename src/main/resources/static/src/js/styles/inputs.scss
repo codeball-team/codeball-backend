@@ -1,0 +1,67 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.Select {
+  position: relative;
+
+  &:focus {
+    outline: 0;
+  }
+
+  .Select-control {
+    @include input;
+    line-height: auto;
+
+    .Select-value, .Select-placeholder {
+      padding-right: $spacing-l;
+      @include ellipsis;
+      @include tablet-and-smaller {
+        font-size: $font-size-s;
+      }
+    }
+
+    .Select-arrow-zone {
+      position: absolute;
+      right: $spacing-s;
+      top: $spacing-xs + 1px;
+      transform: rotate(90deg);
+
+      &:after {
+        content: ">";
+        font: 18px "Consolas", monospace;
+      }
+    }
+  }
+
+  .Select-menu-outer {
+    top: 36px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    box-shadow: $shadow;
+
+    .Select-menu {
+      border-top: $border-solid;
+      max-height: 200px;
+      overflow: auto;
+
+      .Select-option {
+        @include input;
+        @include highlight-on-hover($highlight-color-dark);
+        background-color: white;
+      }
+    }
+  }
+}
+
+.react-datepicker__input-container {
+  display: block;
+}
+
+input {
+  @include input;
+}
+
+::-webkit-input-placeholder {
+  opacity: 1;
+}
