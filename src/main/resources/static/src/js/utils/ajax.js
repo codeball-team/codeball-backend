@@ -11,7 +11,11 @@ export default function ajax(getOptions) {
       successCallback,
       failureCallback,
       params
-    } = getOptions(dispatch);
+    } = {
+      successCallback: _.noop,
+      failureCallback: _.noop,
+      ...getOptions(dispatch)
+    };
 
     request.end((error, response) => {
       if (error || !response.ok) {
@@ -20,15 +24,15 @@ export default function ajax(getOptions) {
           error,
           response
         });
-
-        ajaxCompleted(dispatch, AJAX_FAILURE, failureCallback);
+        dispatch({ type: AJAX_FAILURE });
+        failureCallback(response);
       } else {
         dispatch({
           type: successAction,
           response
         });
-
-        ajaxCompleted(dispatch, AJAX_SUCCESS, successCallback);
+        dispatch({ type: AJAX_SUCCESS });
+        successCallback(response);
       }
     });
 
@@ -41,9 +45,4 @@ export default function ajax(getOptions) {
 
     return request;
   };
-}
-
-function ajaxCompleted(dispatch, ACTION_TYPE, callback = _.noop) {
-  dispatch({ type: ACTION_TYPE });
-  callback();
 }

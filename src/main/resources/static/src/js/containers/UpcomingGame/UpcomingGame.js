@@ -7,6 +7,7 @@ import { refreshDataIfNecessary, safeGet } from 'utils';
 import { Pitch } from 'models';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import IconShuffle from 'react-icons/lib/io/shuffle';
 import { Button, LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection,
@@ -77,6 +78,7 @@ export default function GenerateUpcomingGame(getGameId) {
         duration,
         pitchId,
         isEnrollmentOver,
+        isGameOver,
         enrolledUsers,
         teamA,
         teamB
@@ -106,14 +108,32 @@ export default function GenerateUpcomingGame(getGameId) {
                 time={time}
                 duration={duration}
                 pitch={pitch}
-                buttons={[
-                  <Button
-                    key="close-enrollment"
-                    onClick={() => actions.closeEnrollment(gameId)}>
-                    <IconSave className="icon" />
-                    <span className="label">Close enrollment</span>
-                  </Button>
-                ]} />
+                buttons={_([
+                  !isEnrollmentOver && (
+                    <Button
+                      key="close-enrollment"
+                      onClick={() => actions.closeEnrollment(gameId)}>
+                      <IconSave className="icon" />
+                      <span className="label">Close enrollment</span>
+                    </Button>
+                  ),
+                  isEnrollmentOver && !isGameOver && (
+                    <Button
+                      key="draw-teams"
+                      onClick={() => actions.drawTeams(gameId)}>
+                      <IconShuffle className="icon" />
+                      <span className="label">Draw teams</span>
+                    </Button>
+                  ),
+                  isEnrollmentOver && !isGameOver && (
+                    <Button
+                      key="end-game"
+                      onClick={() => actions.endGame(gameId)}>
+                      <IconSave className="icon" />
+                      <span className="label">End game</span>
+                    </Button>
+                  )
+                ]).compact()} />
 
               {!isEnrollmentOver && (
                 <GameEnrollmentFormSection

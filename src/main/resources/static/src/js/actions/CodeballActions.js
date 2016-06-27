@@ -1,10 +1,12 @@
 import request from 'superagent';
-import { ajax } from 'utils';
+import { ajax, safeGet } from 'utils';
 import { push } from 'react-router-redux';
 import { newGameToServerFormat } from 'models/newGame';
 import {
   CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
   CLOSE_ENROLLMENT_STATUS, CLOSE_ENROLLMENT_STATUS_SUCCESS, CLOSE_ENROLLMENT_STATUS_FAILURE,
+  DRAW_TEAMS, DRAW_TEAMS_SUCCESS, DRAW_TEAMS_FAILURE,
+  END_GAME, END_GAME_SUCCESS, END_GAME_FAILURE,
   LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE,
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
   EDIT_GAME, CANCEL_EDIT_GAME, SAVE_GAME, SAVE_GAME_SUCCESS, SAVE_GAME_FAILURE,
@@ -17,10 +19,11 @@ import {
 } from 'constants/ActionTypes';
 import {
   currentUserUrl,
+  drawTeamsUrl,
   enrollmentUrl,
   gameUrl,
   gamesUrl,
-  newGameUrl,
+  adminGameUrl,
   pitchesUrl,
   usersUrl
 } from 'constants/Api';
@@ -42,12 +45,39 @@ export function changeEnrollmentStatus(gameId, userId, enrollmentStatus) {
 }
 
 export function closeEnrollment(gameId) {
-  return ajax((dispatch) => ({
+  return ajax(() => ({
     request: request('PUT', enrollmentUrl(gameId))
       .set('Content-Type', 'application/json'),
     startAction: CLOSE_ENROLLMENT_STATUS,
     successAction: CLOSE_ENROLLMENT_STATUS_SUCCESS,
     failureAction: CLOSE_ENROLLMENT_STATUS_FAILURE,
+    params: {
+      gameId
+    }
+  }));
+}
+
+export function drawTeams(gameId) {
+  return ajax(() => ({
+    request: request('PUT', drawTeamsUrl(gameId))
+      .set('Content-Type', 'application/json'),
+    startAction: DRAW_TEAMS,
+    successAction: DRAW_TEAMS_SUCCESS,
+    failureAction: DRAW_TEAMS_FAILURE,
+    params: {
+      gameId
+    }
+  }));
+}
+
+export function endGame(gameId) {
+  return ajax((dispatch) => ({
+    request: request('PUT', adminGameUrl(gameId))
+      .set('Content-Type', 'application/json')
+      .send({ isGameOver: true }),
+    startAction: END_GAME,
+    successAction: END_GAME_SUCCESS,
+    failureAction: END_GAME_FAILURE,
     successCallback: () => {
       dispatch(push(`/games/previous/${gameId}`));
     },
@@ -91,13 +121,17 @@ export function saveGame(gameId, data) {
 
 export function addGame(newGame) {
   const data = newGameToServerFormat(newGame);
-  return ajax(() => ({
-    request: request('PUT', newGameUrl())
+  return ajax((dispatch) => ({
+    request: request('POST', adminGameUrl())
       .set('Content-Type', 'application/json')
       .send(data),
     startAction: SAVE_GAME,
     successAction: SAVE_GAME_SUCCESS,
-    failureAction: SAVE_GAME_FAILURE
+    failureAction: SAVE_GAME_FAILURE,
+    successCallback: (response) => {
+      const gameId = safeGet(response, 'body.gameId');
+      dispatch(push(`/games/upcoming/${gameId}`));
+    }
   }));
 }
 

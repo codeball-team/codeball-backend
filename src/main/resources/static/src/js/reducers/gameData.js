@@ -2,9 +2,9 @@ import { now, reducer, safeGet, parseNumber } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
-  CLOSE_ENROLLMENT_STATUS_SUCCESS,
+  CLOSE_ENROLLMENT_STATUS_SUCCESS, DRAW_TEAMS_SUCCESS, END_GAME_SUCCESS,
   CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
-  EDIT_GAME, CANCEL_EDIT_GAME, SAVE_GAME, SAVE_GAME_SUCCESS, SAVE_GAME_FAILURE,
+  EDIT_GAME, CANCEL_EDIT_GAME, SAVE_GAME_SUCCESS, SAVE_GAME_FAILURE,
   ADD_GAME, ADD_GAME_SUCCESS, ADD_GAME_FAILURE,
   EDIT_GAME_SCORE_A, EDIT_GAME_SCORE_B
 } from 'constants/ActionTypes';
@@ -42,6 +42,10 @@ export default reducer(initialState, {
 
   [CLOSE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
+  [DRAW_TEAMS_SUCCESS]: gameLoaded,
+
+  [END_GAME_SUCCESS]: gameLoaded,
+
   [EDIT_GAME]: (state) => {
     return {
       ...state,
@@ -54,12 +58,6 @@ export default reducer(initialState, {
       ...state,
       editedGame: {},
       isEditing: false
-    };
-  },
-
-  [SAVE_GAME]: (state) => {
-    return {
-      ...state
     };
   },
 

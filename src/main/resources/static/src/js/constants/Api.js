@@ -4,6 +4,11 @@ const GAMES = 'games';
 const PITCHES = 'pitches';
 const USERS = 'users';
 const CURRENT_USER = 'me';
+const ADMIN = 'admin';
+
+export function drawTeamsUrl(gameId) {
+  return `${gameUrl(gameId)}/team`;
+}
 
 export function enrollmentUrl(gameId) {
   return `${gamesUrl()}/enrollment/${gameId}`;
@@ -17,8 +22,11 @@ export function gameUrl(gameId) {
   return `${gamesUrl()}/${gameId}`;
 }
 
-export function newGameUrl() {
-  return `${gamesUrl()}/new`;
+export function adminGameUrl(gameId) {
+  if (gameId) {
+    return `${BASE_API_URL}/${ADMIN}/game/${gameId}`;
+  }
+  return `${BASE_API_URL}/${ADMIN}/game`;
 }
 
 export function pitchesUrl() {

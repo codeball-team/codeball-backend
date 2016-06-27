@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import moment from 'moment';
+import { unixToJavaTimestamp } from 'constants/Configuration';
 
 export default function NewGame(newGame) {
   return _({ ...newGame }).defaults({
@@ -24,9 +25,11 @@ export function newGameToServerFormat(newGame) {
     pitchId
   } = newGame;
 
+  const startTimestamp = moment(date).add('hours', hour).add('minutes', minute).valueOf();
+
   return {
-    startTimestamp: moment(date).add('hours', hour).add('minutes', minute).valueOf(),
-    duration,
+    startTimestamp: unixToJavaTimestamp(startTimestamp),
+    durationInMinutes: duration,
     pitchId
   };
 }

@@ -13,8 +13,10 @@
     line-height: auto;
 
     .Select-value, .Select-placeholder {
-      padding-right: $spacing-l;
       @include ellipsis;
+      padding-right: $spacing-l;
+      cursor: default;
+
       @include tablet-and-smaller {
         font-size: $font-size-s;
       }

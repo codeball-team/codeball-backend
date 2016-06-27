@@ -13,6 +13,7 @@ export default function Game(game) {
     duration: 0,
     pitchId: 0,
     isEnrollmentOver: false,
+    isGameOver: false,
     enrolledUsers: {
       [ENROLLMENT_STATUS_YES]: [],
       [ENROLLMENT_STATUS_MAYBE]: [],
@@ -47,9 +48,9 @@ export function mapGame(game) {
     isGameOver: game.isGameOver,
     enrolledUsers,
     teamAScore: game.teamAScore,
-    teamA: game.teamAIds,
+    teamA: [...game.teamAIds],
     teamBScore: game.teamBScore,
-    teamB: game.teamBIds
+    teamB: [...game.teamBIds]
   });
 }
 

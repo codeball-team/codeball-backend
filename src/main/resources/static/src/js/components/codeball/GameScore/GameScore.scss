@@ -26,6 +26,7 @@
       @include tablet-and-smaller {
         font-size: $font-size-xxl;
         line-height: $font-size-xxl;
+        height: $font-size-xxl;
         width: 64px;
       }
     }
