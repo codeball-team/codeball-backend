@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import { now, reducer, safeGet } from 'utils';
+import { reducer, safeGet } from 'utils';
 import { mapPitch, pitchExample } from 'models/pitch';
 import { LOAD_PITCHES, LOAD_PITCHES_SUCCESS, LOAD_PITCHES_FAILURE } from 'constants/ActionTypes';
 
@@ -20,6 +20,7 @@ export default reducer(initialState, {
   },
 
   [LOAD_PITCHES_SUCCESS]: (state, action) => {
+    const { time: lastUpdate } = action;
     const responsePitches = safeGet(action, 'response.body', []);
     const mappedPitches = _(responsePitches).map(mapPitch);
     const pitches = _.object(
@@ -29,7 +30,7 @@ export default reducer(initialState, {
 
     return {
       ...initialState,
-      lastUpdate: now(),
+      lastUpdate,
       pitches
     };
   },

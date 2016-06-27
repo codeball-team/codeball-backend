@@ -1,19 +1,23 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'underscore';
 import classNames from 'classnames';
 import './EditableText.scss';
 
 export default class EditableText extends Component {
   static propTypes = {
     className: PropTypes.string,
+    isDisabled: PropTypes.bool,
     isEditing: PropTypes.bool,
     text: PropTypes.string,
     onChange: PropTypes.func
   };
 
   static defaultProps = {
+    isDisabled: false,
     isEditing: false,
     inputType: 'text',
-    text: ''
+    text: '',
+    onChange: _.noop
   };
 
   onChange = (event) => {
@@ -24,6 +28,7 @@ export default class EditableText extends Component {
   render() {
     const {
       className,
+      isDisabled,
       isEditing,
       text,
       ...childProps
@@ -35,6 +40,7 @@ export default class EditableText extends Component {
           {...childProps}
           value={text}
           onChange={this.onChange}
+          disabled={isDisabled}
           className={classNames(
             'editable-text-input',
             className

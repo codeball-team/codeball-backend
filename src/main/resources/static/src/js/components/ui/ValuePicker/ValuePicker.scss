@@ -1,0 +1,20 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.value-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .value-picker-option {
+    @include transparent-clickable-effects;
+    padding: $spacing-xs $spacing-s;
+    margin: $spacing-xs;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &.is-selected {
+      border: $border-solid;
+    }
+  }
+}

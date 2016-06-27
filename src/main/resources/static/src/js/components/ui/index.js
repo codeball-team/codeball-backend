@@ -10,3 +10,5 @@ export Menu from './Menu/Menu';
 export Page from './Page/Page';
 export Section from './Section/Section';
 export Spinner from './Spinner/Spinner';
+export TimePicker from './TimePicker/TimePicker';
+export ValuePicker from './ValuePicker/ValuePicker';

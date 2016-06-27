@@ -1,0 +1,29 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.time-picker {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  .hour-picker {
+    flex: 1 1 auto;
+    margin: $spacing-xs;
+    margin-right: $spacing-l;
+  }
+
+  .minute-picker {
+    margin: $spacing-xs;
+    flex: 1 0 auto;
+  }
+
+  @include phone {
+    .hour-picker {
+      flex: 0 1 auto;
+    }
+
+    .minute-picker {
+      flex: 1 1 auto;
+    }
+  }
+}

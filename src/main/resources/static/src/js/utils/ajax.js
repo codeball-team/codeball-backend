@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import { now } from 'utils';
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE} from 'constants/ActionTypes';
 
 export default function ajax(getOptions) {
@@ -17,10 +18,13 @@ export default function ajax(getOptions) {
       ...getOptions(dispatch)
     };
 
+    const time = now();
+
     request.end((error, response) => {
       if (error || !response.ok) {
         dispatch({
           type: failureAction,
+          time,
           error,
           response
         });
@@ -29,6 +33,7 @@ export default function ajax(getOptions) {
       } else {
         dispatch({
           type: successAction,
+          time,
           response
         });
         dispatch({ type: AJAX_SUCCESS });

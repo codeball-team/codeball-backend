@@ -11,8 +11,8 @@ import {
 const initialState = {
   date: undefined,
   duration: undefined,
-  hour: undefined,
-  minute: undefined,
+  hour: 18,
+  minute: 0,
   pitchId: undefined
 };
 

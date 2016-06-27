@@ -1,4 +1,4 @@
-import { now, reducer, safeGet, parseNumber } from 'utils';
+import { reducer, safeGet, parseNumber } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
   LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
@@ -110,12 +110,13 @@ export default reducer(initialState, {
 });
 
 function gameLoaded(state, action) {
+  const { time: lastUpdate } = action;
   const responseGame = safeGet(action, 'response.body', {});
   const game = mapGame(responseGame);
 
   return {
     ...initialState,
-    lastUpdate: now(),
+    lastUpdate,
     game
   };
 }

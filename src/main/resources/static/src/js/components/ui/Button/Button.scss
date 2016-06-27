@@ -2,17 +2,12 @@
 @import '~styles/mixins.scss';
 
 .button {
-  @include transparent-clickable-effects();
+  @include transparent-clickable-effects;
   display: inline-block;
   padding: 0px $spacing-s;
-  margin-right: $spacing-s;
   text-align: center;
   cursor: pointer;
   font-size: $font-size-l;
-
-  &:last-of-type {
-    margin-right: 0;
-  }
 
   &.is-disabled {
     pointer-events: none;
@@ -23,6 +18,10 @@
     font-size: $font-size-m;
     margin-top: -$spacing-xs;
     margin-right: $spacing-s;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   @include tablet-and-smaller {

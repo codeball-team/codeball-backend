@@ -1,3 +1,3 @@
-export default function parseNumber(score) {
-  return score ? Number(score) || 0 : undefined;
+export default function parseNumber(value) {
+  return value ? Number(value) || 0 : undefined;
 }

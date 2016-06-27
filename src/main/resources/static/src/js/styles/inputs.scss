@@ -3,6 +3,7 @@
 
 .Select {
   position: relative;
+  cursor: default;
 
   &:focus {
     outline: 0;

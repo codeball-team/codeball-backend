@@ -1,0 +1,22 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.number-picker {
+  display: flex;
+  align-items: center;
+
+  .subtract {
+    display: inline-block;
+    margin-right: $spacing-xs;
+  }
+
+  .add {
+    display: inline-block;
+    margin-left: $spacing-xs;
+  }
+
+  .value {
+    display: inline-block;
+    width: 42px;
+  }
+}

@@ -4,9 +4,9 @@ import moment from 'moment';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import {
-  DATE_FORMAT, DURATION_OPTIONS, HOURS_OPTIONS, MINUTES_OPTIONS
+  DATE_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS
 } from 'constants/Configuration';
-import { InputWrapper } from 'components/ui';
+import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
 import './NewGame.scss';
 
 export default class NewGame extends Component {
@@ -23,21 +23,6 @@ export default class NewGame extends Component {
     onMinuteChange: PropTypes.func.isRequired,
     onPitchIdChange: PropTypes.func.isRequired,
     onDateChange: PropTypes.func.isRequired
-  };
-
-  onDurationChange = ({ value }) => {
-    const { onDurationChange } = this.props;
-    onDurationChange(value);
-  };
-
-  onHourChange = ({ value }) => {
-    const { onHourChange } = this.props;
-    onHourChange(value);
-  };
-
-  onMinuteChange = ({ value }) => {
-    const { onMinuteChange } = this.props;
-    onMinuteChange(value);
   };
 
   onPitchIdChange = ({ value }) => {
@@ -58,7 +43,10 @@ export default class NewGame extends Component {
       hour,
       minute,
       pitches,
-      pitchId
+      pitchId,
+      onMinuteChange,
+      onHourChange,
+      onDurationChange
     } = this.props;
 
     const pitchesOptions = pitches.map(({ id, name }) => ({
@@ -89,36 +77,23 @@ export default class NewGame extends Component {
           label="Start time"
           isValid={Number.isInteger(hour) && Number.isInteger(minute)}>
           <div className="date-input">
-            <Select
-              className="hour-input"
-              placeholder="Select hour..."
-              options={HOURS_OPTIONS}
-              value={hour}
-              searchable={false}
-              clearable={false}
-              onChange={this.onHourChange} />
-
-            <Select
-              className="minute-input"
-              placeholder="Select minute..."
-              options={MINUTES_OPTIONS}
-              value={minute}
-              searchable={false}
-              clearable={false}
-              onChange={this.onMinuteChange} />
+            <TimePicker
+              hour={hour}
+              hourOptions={HOUR_OPTIONS}
+              minute={minute}
+              minuteOptions={MINUTE_OPTIONS}
+              onHourChange={onHourChange}
+              onMinuteChange={onMinuteChange} />
           </div>
         </InputWrapper>
 
         <InputWrapper
           label="Duration"
           isValid={Boolean(duration)}>
-          <Select
-            placeholder="Select duration..."
+          <ValuePicker
             options={DURATION_OPTIONS}
             value={duration}
-            searchable={false}
-            clearable={false}
-            onChange={this.onDurationChange} />
+            onChange={onDurationChange} />
         </InputWrapper>
 
         <InputWrapper

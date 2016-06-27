@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import { now, reducer, safeGet } from 'utils';
+import { reducer, safeGet } from 'utils';
 import { mapUser, userExample } from 'models/user';
 import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from 'constants/ActionTypes';
 
@@ -20,6 +20,7 @@ export default reducer(initialState, {
   },
 
   [LOAD_USERS_SUCCESS]: (state, action) => {
+    const { time: lastUpdate } = action;
     const responseUsers = safeGet(action, 'response.body', []);
     const mappedUsers = _(responseUsers).map(mapUser);
     const users = _.object(
@@ -29,7 +30,7 @@ export default reducer(initialState, {
 
     return {
       ...initialState,
-      lastUpdate: now(),
+      lastUpdate,
       users
     };
   },
