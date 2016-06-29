@@ -5,16 +5,20 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  align-items: center;
 
   .hour-picker {
     flex: 1 1 auto;
-    margin: $spacing-xs;
-    margin-right: $spacing-l;
+    margin-right: $spacing-s;
   }
 
   .minute-picker {
-    margin: $spacing-xs;
+    margin-left: $spacing-s;
     flex: 1 0 auto;
+  }
+
+  .separator {
+    font-size: $font-size-m;
   }
 
   @include phone {

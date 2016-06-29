@@ -7,16 +7,28 @@
 
   .subtract {
     display: inline-block;
-    margin-right: $spacing-xs;
+    margin: 0 $spacing-xs;
   }
 
   .add {
     display: inline-block;
-    margin-left: $spacing-xs;
+    margin: 0 $spacing-xs;
   }
 
   .value {
     display: inline-block;
-    width: 42px;
+    width: 40px;
+  }
+
+  &.vertical {
+    flex-direction: column-reverse;
+
+    .subtract {
+      margin: $spacing-xs 0;
+    }
+
+    .add {
+      margin: $spacing-xs 0;
+    }
   }
 }

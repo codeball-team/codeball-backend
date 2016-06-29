@@ -10,13 +10,15 @@ export default class NumberPicker extends Component {
   static propTypes = {
     className: PropTypes.string,
     formatter: PropTypes.func,
+    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
     value: PropTypes.number.isRequired,
     values: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    formatter: String
+    formatter: String,
+    orientation: 'horizontal'
   };
 
   onAdd = () => {
@@ -40,6 +42,7 @@ export default class NumberPicker extends Component {
     const {
       className,
       formatter,
+      orientation,
       value
     } = this.props;
 
@@ -47,6 +50,9 @@ export default class NumberPicker extends Component {
       <div
         className={classNames(
           'number-picker',
+          {
+            vertical: orientation === 'vertical'
+          },
           className
         )}>
         <Button className="subtract" onClick={this.onSubtract}>

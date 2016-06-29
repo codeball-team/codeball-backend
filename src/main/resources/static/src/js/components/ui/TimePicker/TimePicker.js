@@ -36,13 +36,17 @@ export default class TimePicker extends Component {
         )}>
         <NumberPicker
           className="hour-picker"
+          orientation="vertical"
           values={hourOptions}
           value={hour}
           formatter={formatter}
           onChange={onHourChange} />
 
+        <span className="separator"> : </span>
+
         <NumberPicker
           className="minute-picker"
+          orientation="vertical"
           values={minuteOptions}
           value={minute}
           formatter={formatter}

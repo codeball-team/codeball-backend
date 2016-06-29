@@ -9,7 +9,16 @@
     @include flex-child-grow(100%);
     padding: $spacing-s;
     border: 0;
-    font-size: $font-size-m;
+    font-size: $font-size-s;
+    margin-right: $spacing-m;
+
+    @include small-phone {
+      margin-right: $spacing-s;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &.yes {
       @include clickable-effects($bg-color-success);
