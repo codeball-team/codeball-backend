@@ -1,5 +1,6 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
+@import '~styles/datepicker.scss';
 
 .Select {
   position: relative;
@@ -55,10 +56,6 @@
       }
     }
   }
-}
-
-.react-datepicker__input-container {
-  display: block;
 }
 
 input {

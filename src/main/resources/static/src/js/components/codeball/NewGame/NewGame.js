@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'underscore';
 import classNames from 'classnames';
 import moment from 'moment';
 import Select from 'react-select';
-import DatePicker from 'react-datepicker';
+import Calendar from 'react-datepicker/lib/calendar';
 import {
   DATE_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS
 } from 'constants/Configuration';
+import { renderConditionally } from 'utils';
 import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
 import './NewGame.scss';
 
@@ -61,42 +63,6 @@ export default class NewGame extends Component {
           className
         )}>
         <InputWrapper
-          label="Start date"
-          isValid={Boolean(date)}>
-          <DatePicker
-            className="editable-text-input"
-            dateFormat={DATE_FORMAT}
-            locale="en-GB"
-            minDate={moment()}
-            placeholderText="Select start date..."
-            selected={date && moment(date)}
-            onChange={this.onDateChange} />
-        </InputWrapper>
-
-        <InputWrapper
-          label="Start time"
-          isValid={Number.isInteger(hour) && Number.isInteger(minute)}>
-          <div className="date-input">
-            <TimePicker
-              hour={hour}
-              hourOptions={HOUR_OPTIONS}
-              minute={minute}
-              minuteOptions={MINUTE_OPTIONS}
-              onHourChange={onHourChange}
-              onMinuteChange={onMinuteChange} />
-          </div>
-        </InputWrapper>
-
-        <InputWrapper
-          label="Duration"
-          isValid={Boolean(duration)}>
-          <ValuePicker
-            options={DURATION_OPTIONS}
-            value={duration}
-            onChange={onDurationChange} />
-        </InputWrapper>
-
-        <InputWrapper
           label="Pitch"
           isValid={Boolean(pitchId)}>
           <Select
@@ -107,6 +73,54 @@ export default class NewGame extends Component {
             clearable={false}
             onChange={this.onPitchIdChange} />
         </InputWrapper>
+
+        {renderConditionally({
+          when: pitchId,
+          what: (
+            <InputWrapper
+              label="Duration"
+              isValid={Boolean(duration)}>
+              <ValuePicker
+                options={DURATION_OPTIONS}
+                value={duration}
+                onChange={onDurationChange} />
+            </InputWrapper>
+          )
+        })}
+
+        {renderConditionally({
+          when: duration,
+          what: [
+            <InputWrapper
+              key="time"
+              label="Start time"
+              isValid={Number.isInteger(hour) && Number.isInteger(minute)}>
+              <div className="date-input">
+                <TimePicker
+                  hour={hour}
+                  hourOptions={HOUR_OPTIONS}
+                  minute={minute}
+                  minuteOptions={MINUTE_OPTIONS}
+                  onHourChange={onHourChange}
+                  onMinuteChange={onMinuteChange} />
+              </div>
+            </InputWrapper>,
+
+            <InputWrapper
+              key="date"
+              label="Start date"
+              isValid={Boolean(date)}>
+              <Calendar
+                className="editable-text-input"
+                dateFormat={DATE_FORMAT}
+                locale="en-GB"
+                minDate={moment()}
+                selected={date && moment(date)}
+                onClickOutside={_.noop}
+                onSelect={this.onDateChange} />
+            </InputWrapper>
+          ]
+        })}
       </div>
     );
   }

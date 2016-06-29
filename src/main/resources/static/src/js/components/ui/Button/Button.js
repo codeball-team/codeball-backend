@@ -29,6 +29,7 @@ export default class Button extends Component {
         onClick={() => onClick()}
         className={classNames(
           'button',
+          'ellipsis',
           {
             'is-disabled': isDisabled
           },

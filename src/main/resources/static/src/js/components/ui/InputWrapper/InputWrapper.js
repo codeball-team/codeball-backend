@@ -27,12 +27,10 @@ export default class InputWrapper extends Component {
           className
         )}>
         <div className="label">
-          {label}
-        </div>
-        <div className="content">
-          <div className="field">
-            {children}
+          <div className="title">
+            {label}
           </div>
+
           <div
             className={classNames(
               'validation',
@@ -48,6 +46,10 @@ export default class InputWrapper extends Component {
               <IconCancel className="icon" />
             )}
           </div>
+        </div>
+
+        <div className="content">
+          {children}
         </div>
       </div>
     );

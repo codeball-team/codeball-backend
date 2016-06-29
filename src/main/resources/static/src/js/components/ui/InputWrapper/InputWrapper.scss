@@ -5,21 +5,17 @@
   padding-bottom: $spacing-l;
 
   .label {
-    padding-bottom: $spacing-xs;
-  }
-
-  .content {
     display: flex;
+    align-items: center;
+    padding-bottom: $spacing-s;
 
-
-    .field {
+    .title {
       flex: 1 1 auto;
       margin-right: $spacing-l;
     }
 
     .validation {
       flex: 0 1 auto;
-      font-size: $font-size-l;
 
       &.valid {
         color: $bg-color-success;
@@ -27,6 +23,10 @@
 
       &.invalid {
         color: $bg-color-danger;
+      }
+
+      .icon {
+        margin-right: 0;
       }
     }
   }

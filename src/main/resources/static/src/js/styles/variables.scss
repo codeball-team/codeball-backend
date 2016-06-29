@@ -3,7 +3,7 @@
 /* constants */
 $screen-m:                  1000px;
 $screen-s:                  600px;
-$screen-xs:                 400px;
+$screen-xs:                 460px;
 
 $font-size-xxxl:            85px;
 $font-size-xxl:             54px;
@@ -22,7 +22,7 @@ $spacing-xxl:               40px;
 $spacing-xxxl:              60px;
 
 $page-opacity:              0.98;
-$highlight-color:           rgba(255, 255, 255, 0.1);
+$highlight-color:           rgba(255, 255, 255, 0.2);
 $shadow:                    3px 3px 3px 0px rgba(0, 0, 0, 0.2);
 
 $bg-color:                  $blue-dark;
@@ -48,3 +48,4 @@ $content-fg-color:          $fg-color;
 
 $border-solid:              1px solid rgba(255, 255, 255, 0.3);
 $border-dotted:             1px dotted rgba(255, 255, 255, 0.3);
+$border-transparent:        1px solid transparent;

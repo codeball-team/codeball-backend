@@ -1,0 +1,106 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.react-datepicker {
+  $days-in-a-week: 7;
+  $cell-size: $spacing-xxl;
+  $cell-size-small: $spacing-xl;
+  $calendar-size: $days-in-a-week * $cell-size;
+  $calendar-size-small: $days-in-a-week * $cell-size-small;
+
+  display: inline-block;
+  width: $calendar-size;
+
+  .react-datepicker__header {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .react-datepicker__current-month {
+    padding: $spacing-xs 0;
+  }
+
+  .react-datepicker__month {
+    display: inline-block;
+  }
+
+  .react-datepicker__week {
+    display: inline-block;
+  }
+
+  .react-datepicker__day-name, .react-datepicker__day {
+    display: table-cell;
+    width: $cell-size;
+    height: $cell-size;
+    vertical-align: middle;
+    text-align: center;
+    border: $border-transparent;
+  }
+
+  .react-datepicker__day {
+    @include transparent-clickable-effects;
+    cursor: pointer;
+
+    &.react-datepicker__day--today {
+      font-weight: bold;
+    }
+
+    &.react-datepicker__day--weekend {
+      color: $yellow;
+    }
+
+    &.react-datepicker__day--selected {
+      border: $border-solid;
+    }
+
+    &.react-datepicker__day--disabled {
+      pointer-events: none;
+      cursor: default;
+      color: $fg-color-inactive;
+    }
+  }
+
+  .react-datepicker__navigation {
+    &.react-datepicker__navigation--previous, &.react-datepicker__navigation--next {
+      @include transparent-clickable-effects;
+      text-decoration: none;
+      position: absolute;
+      top: 0;
+
+      &:before, &:after {
+        cursor: pointer;
+        padding: $spacing-xs $spacing-s;
+        font-size: $font-size-s;
+        vertical-align: middle;
+        line-height: 29px;
+      }
+    }
+
+    &.react-datepicker__navigation--previous {
+      left: 0;
+
+      &:before {
+        content: "\2190";
+      }
+    }
+
+    &.react-datepicker__navigation--next {
+      right: 0;
+
+      &:after {
+        content: "\2192";
+      }
+    }
+  }
+
+  @include small-phone {
+    width: $calendar-size-small;
+
+    .react-datepicker__day-name, .react-datepicker__day {
+      width: $cell-size-small;
+      height: $cell-size-small;
+    }
+  }
+}
+

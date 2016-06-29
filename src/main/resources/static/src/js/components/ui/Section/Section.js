@@ -51,29 +51,26 @@ export default function SectionDecorator(ChildComponent) {
             </div>
 
             <ButtonsPanel>
-              {isEditable && (
-                <div>
-                  {!isEditing && (
-                    <Button onClick={onEdit}>
-                      <IconEdit className="icon" />
-                      <span className="label">Edit</span>
-                    </Button>
-                  )}
-
-                  {isEditing && [
-                    <Button key="cancel" onClick={onCancel}>
-                      <IconCancel className="icon" />
-                      <span className="label">Cancel</span>
-                    </Button>,
-                    <Button key="save" onClick={onSave}>
-                      <IconSave className="icon" />
-                      <span className="label">Save</span>
-                    </Button>
-                  ]}
-
-                </div>
-              )}
-
+              {isEditable && [
+                !isEditing && (
+                  <Button key="edit" onClick={onEdit}>
+                    <IconEdit className="icon" />
+                    <span className="label">Edit</span>
+                  </Button>
+                ),
+                isEditing && (
+                  <Button key="cancel" onClick={onCancel}>
+                    <IconCancel className="icon" />
+                    <span className="label">Cancel</span>
+                  </Button>
+                ),
+                isEditing && (
+                  <Button key="save" onClick={onSave}>
+                    <IconSave className="icon" />
+                    <span className="label">Save</span>
+                  </Button>
+                )
+              ].filter(Boolean)}
               {buttons}
             </ButtonsPanel>
           </div>
