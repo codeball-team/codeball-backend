@@ -2,6 +2,6 @@
 @import '~styles/mixins.scss';
 
 .list-item {
-  @include highlight-on-hover;
+  @include transparent-clickable-effects;
   padding: $spacing-s $spacing-l;
 }

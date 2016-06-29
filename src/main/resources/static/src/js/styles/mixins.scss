@@ -66,7 +66,7 @@
   }
 
   &:hover {
-    background-color: lighten($color, 5%);
+    background-color: lighten($color, 10%);
   }
 
   &:active {
@@ -84,11 +84,11 @@
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   &:active {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
