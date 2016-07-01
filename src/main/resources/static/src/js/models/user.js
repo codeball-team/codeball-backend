@@ -2,12 +2,12 @@ import _ from 'underscore';
 
 export default function User(user) {
   return _({ ...user }).defaults({
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: '',
-    pictureUrl: '',
-    role: ''
+    id: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    email: undefined,
+    pictureUrl: undefined,
+    role: undefined
   });
 }
 

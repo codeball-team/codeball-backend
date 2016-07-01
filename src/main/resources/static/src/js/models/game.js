@@ -8,21 +8,21 @@ import {
 
 export default function Game(game) {
   return _({ ...game }).defaults({
-    date: '',
-    time: '',
-    duration: 0,
-    pitchId: 0,
-    isEnrollmentOver: false,
-    isGameOver: false,
+    date: undefined,
+    time: undefined,
+    duration: undefined,
+    pitchId: undefined,
+    isEnrollmentOver: undefined,
+    isGameOver: undefined,
     enrolledUsers: {
       [ENROLLMENT_STATUS_YES]: [],
       [ENROLLMENT_STATUS_MAYBE]: [],
       [ENROLLMENT_STATUS_NO]: []
     },
     teamA: [],
-    teamAScore: 0,
+    teamAScore: undefined,
     teamB: [],
-    teamBScore: 0
+    teamBScore: undefined
   });
 }
 

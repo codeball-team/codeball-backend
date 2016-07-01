@@ -1,3 +1,3 @@
-export default function renderConditionally({ when, what }) {
-  return when ? what : undefined;
+export default function renderConditionally({ when, render }) {
+  return when ? render() : undefined;
 }

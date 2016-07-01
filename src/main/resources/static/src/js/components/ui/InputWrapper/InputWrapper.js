@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { renderConditionally } from 'utils';
 import './InputWrapper.scss';
 
 export default class InputWrapper extends Component {
@@ -39,12 +40,19 @@ export default class InputWrapper extends Component {
                 'invalid': !isValid
               }
             )}>
-            {isValid && (
-              <IconSave className="icon" />
-            )}
-            {!isValid && (
-              <IconCancel className="icon" />
-            )}
+            {renderConditionally({
+              when: isValid,
+              render: () => (
+                <IconSave className="icon" />
+              )
+            })}
+
+            {renderConditionally({
+              when: !isValid,
+              render: () => (
+                <IconCancel className="icon" />
+              )
+            })}
           </div>
         </div>
 

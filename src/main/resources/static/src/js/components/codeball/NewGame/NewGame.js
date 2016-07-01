@@ -56,6 +56,11 @@ export default class NewGame extends Component {
       value: id
     }));
 
+    const isPitchSelected = !_.isUndefined(pitchId);
+    const isDurationSelected = !_.isUndefined(duration);
+    const isStartTimeSelected = !_.isUndefined(hour) && !_.isUndefined(minute);
+    const isStartDateSelected = !_.isUndefined(date);
+
     return (
       <div
         className={classNames(
@@ -64,7 +69,7 @@ export default class NewGame extends Component {
         )}>
         <InputWrapper
           label="Pitch"
-          isValid={Boolean(pitchId)}>
+          isValid={isPitchSelected}>
           <Select
             placeholder="Select pitch..."
             options={pitchesOptions}
@@ -75,11 +80,11 @@ export default class NewGame extends Component {
         </InputWrapper>
 
         {renderConditionally({
-          when: pitchId,
-          what: (
+          when: isPitchSelected,
+          render: () => (
             <InputWrapper
               label="Duration"
-              isValid={Boolean(duration)}>
+              isValid={isDurationSelected}>
               <ValuePicker
                 options={DURATION_OPTIONS}
                 value={duration}
@@ -89,12 +94,12 @@ export default class NewGame extends Component {
         })}
 
         {renderConditionally({
-          when: duration,
-          what: [
+          when: isDurationSelected,
+          render: () => [
             <InputWrapper
               key="time"
               label="Start time"
-              isValid={Number.isInteger(hour) && Number.isInteger(minute)}>
+              isValid={isStartTimeSelected}>
               <div className="date-input">
                 <TimePicker
                   hour={hour}
@@ -109,7 +114,7 @@ export default class NewGame extends Component {
             <InputWrapper
               key="date"
               label="Start date"
-              isValid={Boolean(date)}>
+              isValid={isStartDateSelected}>
               <Calendar
                 className="editable-text-input"
                 dateFormat={DATE_FORMAT}

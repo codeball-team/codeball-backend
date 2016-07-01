@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as codeballActions from 'actions';
-import { refreshDataIfNecessary, safeGet } from 'utils';
+import { refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
 import { Pitch } from 'models';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
@@ -108,48 +108,65 @@ export default function GenerateUpcomingGame(getGameId) {
                 time={time}
                 duration={duration}
                 pitch={pitch}
-                buttons={_([
-                  !isEnrollmentOver && (
-                    <Button
-                      key="close-enrollment"
-                      onClick={() => actions.gameCloseEnrollment(gameId)}>
-                      <IconSave className="icon" />
-                      <span className="label">Close enrollment</span>
-                    </Button>
-                  ),
-                  isEnrollmentOver && !isGameOver && (
-                    <Button
-                      key="draw-teams"
-                      onClick={() => actions.gameDrawTeams(gameId)}>
-                      <IconShuffle className="icon" />
-                      <span className="label">Draw teams</span>
-                    </Button>
-                  ),
-                  isEnrollmentOver && !isGameOver && (
-                    <Button
-                      key="end-game"
-                      onClick={() => actions.gameEnd(gameId)}>
-                      <IconSave className="icon" />
-                      <span className="label">End game</span>
-                    </Button>
-                  )
-                ]).compact()} />
+                buttons={
+                  [
+                    renderConditionally({
+                      when: !isEnrollmentOver,
+                      render: () => (
+                        <Button
+                          key="close-enrollment"
+                          onClick={() => actions.gameCloseEnrollment(gameId)}>
+                          <IconSave className="icon" />
+                          <span className="label">Close enrollment</span>
+                        </Button>
+                      )
+                    }),
+                    renderConditionally({
+                      when: isEnrollmentOver && !isGameOver,
+                      render: () => (
+                        <Button
+                          key="draw-teams"
+                          onClick={() => actions.gameDrawTeams(gameId)}>
+                          <IconShuffle className="icon" />
+                          <span className="label">Draw teams</span>
+                        </Button>
+                      )
+                    }),
+                    renderConditionally({
+                      when: isEnrollmentOver && !isGameOver,
+                      render: () => (
+                        <Button
+                          key="end-game"
+                          onClick={() => actions.gameEnd(gameId)}>
+                          <IconSave className="icon" />
+                          <span className="label">End game</span>
+                        </Button>
+                      )
+                    })
+                  ].filter(Boolean)
+                } />
 
-              {!isEnrollmentOver && (
-                <GameEnrollmentFormSection
-                  title="Are you going?"
-                  value={selectedEnrollmentStatus}
-                  onChange={enrollmentStatus => actions.gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
-              )}
+              {renderConditionally({
+                when: !isEnrollmentOver,
+                render: () => (
+                  <GameEnrollmentFormSection
+                    title="Are you going?"
+                    value={selectedEnrollmentStatus}
+                    onChange={enrollmentStatus => actions.gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+                )
+              })}
 
-              {isEnrollmentOver && (
-                <GameLineupSection
-                  title="Lineups"
-                  currentUser={currentUser}
-                  users={users}
-                  teamA={teamA}
-                  teamB={teamB} />
-              )}
+              {renderConditionally({
+                when: isEnrollmentOver,
+                render: () => (
+                  <GameLineupSection
+                    title="Lineups"
+                    currentUser={currentUser}
+                    users={users}
+                    teamA={teamA}
+                    teamB={teamB} />
+                )
+              })}
 
               <GameEnrollmentSection
                 title={`Enrolled players (${numberOfEnrolledPlayers})`}

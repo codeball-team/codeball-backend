@@ -84,10 +84,4 @@ export default class GameScore extends Component {
       </div>
     );
   }
-
-  renderScore(score) {
-    return (score !== undefined && score !== null)
-      ? score
-      : '-';
-  }
 }

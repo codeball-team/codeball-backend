@@ -5,6 +5,7 @@ import IconEdit from 'react-icons/lib/io/ios-compose-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import Button from '../Button/Button';
 import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
+import { renderConditionally } from 'utils';
 import './Section.scss';
 
 export default function SectionDecorator(ChildComponent) {
@@ -51,26 +52,39 @@ export default function SectionDecorator(ChildComponent) {
             </div>
 
             <ButtonsPanel>
-              {isEditable && [
-                !isEditing && (
-                  <Button key="edit" onClick={onEdit}>
-                    <IconEdit className="icon" />
-                    <span className="label">Edit</span>
-                  </Button>
-                ),
-                isEditing && (
-                  <Button key="cancel" onClick={onCancel}>
-                    <IconCancel className="icon" />
-                    <span className="label">Cancel</span>
-                  </Button>
-                ),
-                isEditing && (
-                  <Button key="save" onClick={onSave}>
-                    <IconSave className="icon" />
-                    <span className="label">Save</span>
-                  </Button>
-                )
-              ].filter(Boolean)}
+              {renderConditionally({
+                when: isEditable,
+                render: () => [
+                  renderConditionally({
+                    when: !isEditing,
+                    render: () => (
+                      <Button key="edit" onClick={onEdit}>
+                        <IconEdit className="icon" />
+                        <span className="label">Edit</span>
+                      </Button>
+                    )
+                  }),
+                  renderConditionally({
+                    when: isEditing,
+                    render: () => (
+                      <Button key="cancel" onClick={onCancel}>
+                        <IconCancel className="icon" />
+                        <span className="label">Cancel</span>
+                      </Button>
+                    )
+                  }),
+                  renderConditionally({
+                    when: isEditing,
+                    render: () => (
+                      <Button key="save" onClick={onSave}>
+                        <IconSave className="icon" />
+                        <span className="label">Save</span>
+                      </Button>
+                    )
+                  })
+                ].filter(Boolean)
+              })}
+
               {buttons}
             </ButtonsPanel>
           </div>

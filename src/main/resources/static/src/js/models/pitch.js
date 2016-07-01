@@ -2,13 +2,13 @@ import _ from 'underscore';
 
 export default function Pitch(pitch) {
   return _({ ...pitch }).defaults({
-    id: 0,
-    name: '',
-    type: '',
-    address: '',
-    url: '',
-    minNumberOfPlayers: 0,
-    maxNumberOfPlayers: 0
+    id: undefined,
+    name: undefined,
+    type: undefined,
+    address: undefined,
+    url: undefined,
+    minNumberOfPlayers: undefined,
+    maxNumberOfPlayers: undefined
   });
 }
 

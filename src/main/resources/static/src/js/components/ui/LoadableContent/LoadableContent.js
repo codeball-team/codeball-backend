@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { renderConditionally } from 'utils';
 import './LoadableContent.scss';
 
 export default class LoadableContent extends Component {
@@ -25,7 +26,10 @@ export default class LoadableContent extends Component {
           },
           className
         )}>
-        {!isLoading && render()}
+        {renderConditionally({
+          when: !isLoading,
+          render
+        })}
       </div>
     );
   }
