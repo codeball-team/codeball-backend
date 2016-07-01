@@ -3,14 +3,23 @@
 
 .pitches-list-item {
   @include flex-parent;
+  justify-content: flex-start;
 
   .name {
     @include flex-child;
     margin-right: $spacing-l;
+
+    @include small-phone {
+      text-align: left;
+    }
   }
 
   .address {
     @include flex-child-grow;
     text-align: right;
+
+    @include small-phone {
+      display: none;
+    }
   }
 }
