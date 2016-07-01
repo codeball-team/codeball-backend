@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { refreshDataIfNecessary } from 'utils';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
@@ -26,10 +26,10 @@ class Games extends Component {
       usersData
     } = this.props;
 
-    actions.loadGames();
-    refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
-    refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    refreshDataIfNecessary(usersData, actions.loadUsers);
+    actions.gamesLoad();
+    refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
+    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
+    refreshDataIfNecessary(usersData, actions.usersLoad);
   };
 
   render () {
@@ -106,7 +106,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CodeballActions, dispatch)
+    actions: bindActionCreators(codeballActions, dispatch)
   };
 }
 

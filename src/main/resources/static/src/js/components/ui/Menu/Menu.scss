@@ -27,6 +27,7 @@ nav {
     -webkit-padding-start: 0;
 
     > li {
+      position: relative;
       display: block;
       text-align: left;
       cursor: pointer;
@@ -46,6 +47,8 @@ nav {
 
         .icon {
           @include tablet-and-smaller {
+            position: relative;
+            top: -$spacing-s;
             width: 100%;
             margin-right: 0;
           }
@@ -53,7 +56,13 @@ nav {
 
         span.label {
           @include tablet-and-smaller {
-            display: none;
+            @include ellipsis;
+            position: absolute;
+            font-size: 12px;
+            bottom: $spacing-s;
+            left: $spacing-xs;
+            right: $spacing-xs;
+            text-align: center;
           }
         }
       }

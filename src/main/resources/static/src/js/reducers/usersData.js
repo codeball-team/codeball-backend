@@ -1,7 +1,9 @@
 import _ from 'underscore';
 import { reducer, safeGet } from 'utils';
 import { mapUser, userExample } from 'models/user';
-import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from 'constants/ActionTypes';
+import {
+  USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
+} from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
@@ -12,14 +14,21 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_USERS]: (state) => {
+  [USERS_LOAD]: (state) => {
     return {
       ...state,
       isLoading: true
     };
   },
 
-  [LOAD_USERS_SUCCESS]: (state, action) => {
+  [USERS_LOAD_FAILURE]: (state) => {
+    return {
+      ...state,
+      isLoading: false
+    };
+  },
+
+  [USERS_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
     const responseUsers = safeGet(action, 'response.body', []);
     const mappedUsers = _(responseUsers).map(mapUser);
@@ -32,13 +41,6 @@ export default reducer(initialState, {
       ...initialState,
       lastUpdate,
       users
-    };
-  },
-
-  [LOAD_USERS_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
     };
   }
 });

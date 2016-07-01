@@ -1,7 +1,9 @@
 import _ from 'underscore';
 import { reducer, safeGet } from 'utils';
 import { mapPitch, pitchExample } from 'models/pitch';
-import { LOAD_PITCHES, LOAD_PITCHES_SUCCESS, LOAD_PITCHES_FAILURE } from 'constants/ActionTypes';
+import {
+  PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
+} from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
@@ -12,14 +14,21 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_PITCHES]: (state) => {
+  [PITCHES_LOAD]: (state) => {
     return {
       ...state,
       isLoading: true
     };
   },
 
-  [LOAD_PITCHES_SUCCESS]: (state, action) => {
+  [PITCHES_LOAD_FAILURE]: (state) => {
+    return {
+      ...state,
+      isLoading: false
+    };
+  },
+
+  [PITCHES_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
     const responsePitches = safeGet(action, 'response.body', []);
     const mappedPitches = _(responsePitches).map(mapPitch);
@@ -32,13 +41,6 @@ export default reducer(initialState, {
       ...initialState,
       lastUpdate,
       pitches
-    };
-  },
-
-  [LOAD_PITCHES_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
     };
   }
 });

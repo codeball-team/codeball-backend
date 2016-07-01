@@ -1,5 +1,7 @@
 import { reducer } from 'utils';
-import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE} from 'constants/ActionTypes';
+import {
+  AJAX_START, AJAX_FAILURE, AJAX_SUCCESS
+} from 'constants/ActionTypes';
 
 const initialState = 0;
 
@@ -8,11 +10,11 @@ export default reducer(initialState, {
     return state + 1;
   },
 
-  [AJAX_SUCCESS]: (state) => {
+  [AJAX_FAILURE]: (state) => {
     return state - 1;
   },
 
-  [AJAX_FAILURE]: (state) => {
+  [AJAX_SUCCESS]: (state) => {
     return state - 1;
   }
 });

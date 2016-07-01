@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
@@ -47,10 +47,10 @@ export default function GenerateGame(getGameId) {
         usersData
       } = props;
 
-      actions.loadGame(params.gameId);
-      refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
-      refreshDataIfNecessary(pitchesData, actions.loadPitches);
-      refreshDataIfNecessary(usersData, actions.loadUsers);
+      actions.gameLoad(params.gameId);
+      refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
+      refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
+      refreshDataIfNecessary(usersData, actions.usersLoad);
     };
 
     render () {
@@ -92,11 +92,11 @@ export default function GenerateGame(getGameId) {
                 isEditing={isEditing}
                 pitch={pitch}
                 game={isEditing ? Object.assign({}, game, editedGame) : game}
-                onEdit={actions.editGame}
-                onCancel={actions.cancelEditGame}
-                onSave={() => actions.saveGame(gameId, editedGame)}
-                onEditGameScoreA={actions.editGameScoreA}
-                onEditGameScoreB={actions.editGameScoreB} />
+                onEdit={actions.gameEdit}
+                onCancel={actions.gameEditCancel}
+                onSave={() => actions.gameSave(gameId, editedGame)}
+                onEditGameScoreA={actions.gameEditScoreA}
+                onEditGameScoreB={actions.gameEditScoreB} />
 
               <GameLineupSection
                 title="Lineups"
@@ -121,7 +121,7 @@ export default function GenerateGame(getGameId) {
 
   function mapDispatchToProps(dispatch) {
     return {
-      actions: bindActionCreators(CodeballActions, dispatch)
+      actions: bindActionCreators(codeballActions, dispatch)
     };
   }
 

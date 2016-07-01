@@ -1,12 +1,12 @@
 import { reducer, safeGet, parseNumber } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
-  LOAD_GAME, LOAD_GAME_SUCCESS, LOAD_GAME_FAILURE,
-  CLOSE_ENROLLMENT_STATUS_SUCCESS, DRAW_TEAMS_SUCCESS, END_GAME_SUCCESS,
-  CHANGE_ENROLLMENT_STATUS, CHANGE_ENROLLMENT_STATUS_SUCCESS, CHANGE_ENROLLMENT_STATUS_FAILURE,
-  EDIT_GAME, CANCEL_EDIT_GAME, SAVE_GAME_SUCCESS, SAVE_GAME_FAILURE,
-  ADD_GAME, ADD_GAME_SUCCESS, ADD_GAME_FAILURE,
-  EDIT_GAME_SCORE_A, EDIT_GAME_SCORE_B
+  GAME_CHANGE_ENROLLMENT_STATUS, GAME_CHANGE_ENROLLMENT_STATUS_FAILURE, GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
+  GAME_CLOSE_ENROLLMENT_SUCCESS, GAME_DRAW_TEAMS_SUCCESS, GAME_EDIT,
+  GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B, GAME_END_SUCCESS,
+  GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
+  GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
+  NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
 } from 'constants/ActionTypes';
 
 const initialState = {
@@ -18,42 +18,24 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_GAME]: (state) => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+  [GAME_CHANGE_ENROLLMENT_STATUS]: (state) => state,
 
-  [LOAD_GAME_SUCCESS]: gameLoaded,
+  [GAME_CHANGE_ENROLLMENT_STATUS_FAILURE]: (state) => state,
 
-  [LOAD_GAME_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
-    };
-  },
+  [GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
-  [CHANGE_ENROLLMENT_STATUS]: (state) => state,
+  [GAME_CLOSE_ENROLLMENT_SUCCESS]: gameLoaded,
 
-  [CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
+  [GAME_DRAW_TEAMS_SUCCESS]: gameLoaded,
 
-  [CHANGE_ENROLLMENT_STATUS_FAILURE]: (state) => state,
-
-  [CLOSE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
-
-  [DRAW_TEAMS_SUCCESS]: gameLoaded,
-
-  [END_GAME_SUCCESS]: gameLoaded,
-
-  [EDIT_GAME]: (state) => {
+  [GAME_EDIT]: (state) => {
     return {
       ...state,
       isEditing: true
     };
   },
 
-  [CANCEL_EDIT_GAME]: (state) => {
+  [GAME_EDIT_CANCEL]: (state) => {
     return {
       ...state,
       editedGame: {},
@@ -61,32 +43,7 @@ export default reducer(initialState, {
     };
   },
 
-  [SAVE_GAME_SUCCESS]: gameLoaded,
-
-  [SAVE_GAME_FAILURE]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
-
-  [ADD_GAME]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
-
-  [ADD_GAME_SUCCESS]: gameLoaded,
-
-  [ADD_GAME_FAILURE]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
-
-  [EDIT_GAME_SCORE_A]: (state, action) => {
+  [GAME_EDIT_SCORE_A]: (state, action) => {
     const { teamAScore } = action;
     return {
       ...state,
@@ -97,7 +54,7 @@ export default reducer(initialState, {
     };
   },
 
-  [EDIT_GAME_SCORE_B]: (state, action) => {
+  [GAME_EDIT_SCORE_B]: (state, action) => {
     const { teamBScore } = action;
     return {
       ...state,
@@ -106,7 +63,50 @@ export default reducer(initialState, {
         teamBScore: parseNumber(teamBScore)
       }
     };
-  }
+  },
+
+  [GAME_END_SUCCESS]: gameLoaded,
+
+  [GAME_LOAD]: (state) => {
+    return {
+      ...state,
+      isLoading: true
+    };
+  },
+
+  [GAME_LOAD_FAILURE]: (state) => {
+    return {
+      ...state,
+      isLoading: false
+    };
+  },
+
+  [GAME_LOAD_SUCCESS]: gameLoaded,
+
+  [GAME_SAVE_FAILURE]: (state) => {
+    return {
+      ...state,
+      isEditing: true
+    };
+  },
+
+  [GAME_SAVE_SUCCESS]: gameLoaded,
+
+  [NEW_GAME_SUBMIT]: (state) => {
+    return {
+      ...state,
+      isEditing: true
+    };
+  },
+
+  [NEW_GAME_SUBMIT_FAILURE]: (state) => {
+    return {
+      ...state,
+      isEditing: true
+    };
+  },
+
+  [NEW_GAME_SUBMIT_SUCCESS]: gameLoaded
 });
 
 function gameLoaded(state, action) {

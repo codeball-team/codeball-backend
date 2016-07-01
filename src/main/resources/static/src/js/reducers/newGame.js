@@ -1,11 +1,7 @@
 import { reducer } from 'utils';
 import {
-  NEW_GAME_RESET,
-  NEW_GAME_CHANGE_DATE,
-  NEW_GAME_CHANGE_DURATION,
-  NEW_GAME_CHANGE_HOUR,
-  NEW_GAME_CHANGE_MINUTE,
-  NEW_GAME_CHANGE_PITCH_ID
+  NEW_GAME_CHANGE_DATE, NEW_GAME_CHANGE_DURATION, NEW_GAME_CHANGE_HOUR,
+  NEW_GAME_CHANGE_MINUTE, NEW_GAME_CHANGE_PITCH_ID, NEW_GAME_RESET
 } from 'constants/ActionTypes';
 
 const initialState = {
@@ -17,10 +13,6 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [NEW_GAME_RESET]: () => {
-    return initialState;
-  },
-
   [NEW_GAME_CHANGE_DATE]: (state, action) => {
     const { date } = action;
     return {
@@ -59,5 +51,9 @@ export default reducer(initialState, {
       ...state,
       pitchId
     };
+  },
+
+  [NEW_GAME_RESET]: () => {
+    return initialState;
   }
 });

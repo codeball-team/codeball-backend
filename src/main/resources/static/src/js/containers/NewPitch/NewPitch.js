@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { refreshDataIfNecessary } from 'utils';
 import { LoadableContent } from 'components/ui';
 //import { NewPitchSection } from 'components/sections';
@@ -23,9 +23,9 @@ class NewPitch extends Component {
       usersData
     } = this.props;
 
-    refreshDataIfNecessary(currentUserData, actions.loadCurrentUser);
-    refreshDataIfNecessary(pitchesData, actions.loadPitches);
-    refreshDataIfNecessary(usersData, actions.loadUsers);
+    refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
+    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
+    refreshDataIfNecessary(usersData, actions.usersLoad);
   };
 
   render () {
@@ -68,7 +68,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CodeballActions, dispatch)
+    actions: bindActionCreators(codeballActions, dispatch)
   };
 }
 

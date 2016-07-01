@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { refreshDataIfNecessary } from 'utils';
 import { isNewGameValid } from 'models/newGame';
 import { Link } from 'react-router';
@@ -25,7 +25,7 @@ class NewGame extends Component {
     } = this.props;
 
     actions.newGameReset();
-    refreshDataIfNecessary(pitchesData, actions.loadPitches);
+    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
   };
 
   render () {
@@ -95,7 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CodeballActions, dispatch)
+    actions: bindActionCreators(codeballActions, dispatch)
   };
 }
 

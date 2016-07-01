@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
@@ -26,7 +26,7 @@ class Pitch extends Component {
 
   updateData = () => {
     const { actions } = this.props;
-    actions.loadPitches();
+    actions.pitchesLoad();
   };
 
   render () {
@@ -64,7 +64,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CodeballActions, dispatch)
+    actions: bindActionCreators(codeballActions, dispatch)
   };
 }
 

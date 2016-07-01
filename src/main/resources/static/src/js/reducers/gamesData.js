@@ -2,27 +2,34 @@ import _ from 'underscore';
 import { reducer, safeGet } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
-  LOAD_GAMES, LOAD_GAMES_SUCCESS, LOAD_GAMES_FAILURE
+  GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
 } from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
   isEditing: false,
   lastUpdate: undefined,
-  games: [
-    gameExample()
-  ]
+  games: {
+    [gameExample().id]: gameExample()
+  }
 };
 
 export default reducer(initialState, {
-  [LOAD_GAMES]: (state) => {
+  [GAMES_LOAD]: (state) => {
     return {
       ...state,
       isLoading: true
     };
   },
 
-  [LOAD_GAMES_SUCCESS]: (state, action) => {
+  [GAMES_LOAD_FAILURE]: (state) => {
+    return {
+      ...state,
+      isLoading: false
+    };
+  },
+
+  [GAMES_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
     const responseGames = safeGet(action, 'response.body', []);
     const mappedGames = _(responseGames).map(mapGame);
@@ -35,13 +42,6 @@ export default reducer(initialState, {
       ...initialState,
       lastUpdate,
       games
-    };
-  },
-
-  [LOAD_GAMES_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
     };
   }
 });

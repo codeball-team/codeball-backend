@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as CodeballActions from 'actions/CodeballActions';
+import * as codeballActions from 'actions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
 import { Pitch } from 'models';
 import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
@@ -51,10 +51,10 @@ export default function GenerateUpcomingGame(getGameId) {
         usersData
       } = props;
 
-      actions.loadGame(params.gameId);
-      refreshDataIfNecessary(usersData, actions.loadUsers);
-      refreshDataIfNecessary(usersData, actions.loadCurrentUser);
-      refreshDataIfNecessary(pitchesData, actions.loadPitches);
+      actions.gameLoad(params.gameId);
+      refreshDataIfNecessary(usersData, actions.usersLoad);
+      refreshDataIfNecessary(usersData, actions.currentUserLoad);
+      refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
     };
 
     render () {
@@ -112,7 +112,7 @@ export default function GenerateUpcomingGame(getGameId) {
                   !isEnrollmentOver && (
                     <Button
                       key="close-enrollment"
-                      onClick={() => actions.closeEnrollment(gameId)}>
+                      onClick={() => actions.gameCloseEnrollment(gameId)}>
                       <IconSave className="icon" />
                       <span className="label">Close enrollment</span>
                     </Button>
@@ -120,7 +120,7 @@ export default function GenerateUpcomingGame(getGameId) {
                   isEnrollmentOver && !isGameOver && (
                     <Button
                       key="draw-teams"
-                      onClick={() => actions.drawTeams(gameId)}>
+                      onClick={() => actions.gameDrawTeams(gameId)}>
                       <IconShuffle className="icon" />
                       <span className="label">Draw teams</span>
                     </Button>
@@ -128,7 +128,7 @@ export default function GenerateUpcomingGame(getGameId) {
                   isEnrollmentOver && !isGameOver && (
                     <Button
                       key="end-game"
-                      onClick={() => actions.endGame(gameId)}>
+                      onClick={() => actions.gameEnd(gameId)}>
                       <IconSave className="icon" />
                       <span className="label">End game</span>
                     </Button>
@@ -139,7 +139,7 @@ export default function GenerateUpcomingGame(getGameId) {
                 <GameEnrollmentFormSection
                   title="Are you going?"
                   value={selectedEnrollmentStatus}
-                  onChange={enrollmentStatus => actions.changeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+                  onChange={enrollmentStatus => actions.gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
               )}
 
               {isEnrollmentOver && (
@@ -172,7 +172,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
   function mapDispatchToProps(dispatch) {
     return {
-      actions: bindActionCreators(CodeballActions, dispatch)
+      actions: bindActionCreators(codeballActions, dispatch)
     };
   }
 

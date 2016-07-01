@@ -1,6 +1,8 @@
 import { reducer, safeGet } from 'utils';
 import { mapUser, userExample } from 'models/user';
-import { LOAD_CURRENT_USER, LOAD_CURRENT_USER_SUCCESS, LOAD_CURRENT_USER_FAILURE } from 'constants/ActionTypes';
+import {
+  CURRENT_USER_LOAD, CURRENT_USER_LOAD_FAILURE, CURRENT_USER_LOAD_SUCCESS
+} from 'constants/ActionTypes';
 
 const initialState = {
   isLoading: false,
@@ -9,14 +11,21 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [LOAD_CURRENT_USER]: (state) => {
+  [CURRENT_USER_LOAD]: (state) => {
     return {
       ...state,
       isLoading: true
     };
   },
 
-  [LOAD_CURRENT_USER_SUCCESS]: (state, action) => {
+  [CURRENT_USER_LOAD_FAILURE]: (state) => {
+    return {
+      ...state,
+      isLoading: false
+    };
+  },
+
+  [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
     const responseUser = safeGet(action, 'response.body', {});
     const currentUser = mapUser(responseUser);
@@ -25,13 +34,6 @@ export default reducer(initialState, {
       ...initialState,
       lastUpdate,
       currentUser
-    };
-  },
-
-  [LOAD_CURRENT_USER_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
     };
   }
 });
