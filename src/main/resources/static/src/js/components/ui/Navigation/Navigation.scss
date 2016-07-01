@@ -1,7 +1,7 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
 
-nav {
+nav.navigation {
   min-height: 100%;
   background-color: $nav-bg-color;
   color: $nav-fg-color;
@@ -40,6 +40,10 @@ nav {
         padding: $spacing-l $spacing-xxl;
         text-decoration: none;
         color: $nav-fg-color;
+
+        &.focus {
+          background-color: darken($nav-bg-color, 10%);
+        }
 
         @include tablet-and-smaller {
           padding: $spacing-l;

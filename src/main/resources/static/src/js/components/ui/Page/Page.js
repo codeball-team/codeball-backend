@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Menu from '../Menu/Menu';
+import Navigation from '../Navigation/Navigation';
 import './Page.scss';
 
 export default class Page extends Component {
@@ -26,7 +26,7 @@ export default class Page extends Component {
 
     return (
       <div className="page">
-        <Menu className="page-menu" />
+        <Navigation className="page-menu" />
         <div className="page-content-container">
           <div className="page-content">
             {children}
