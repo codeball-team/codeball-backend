@@ -1,10 +1,9 @@
-import { ajaxReducer, safeGet } from 'utils';
+import { ajaxReducer, ajaxReducerInitialState, safeGet } from 'utils';
 import { UserModel } from 'models';
 import { CURRENT_USER_LOAD, CURRENT_USER_LOAD_FAILURE, CURRENT_USER_LOAD_SUCCESS } from 'constants/actionTypes';
 
 const initialState = {
-  isLoading: false,
-  lastUpdate: undefined,
+  ...ajaxReducerInitialState,
   currentUser: UserModel.example()
 };
 
@@ -17,15 +16,9 @@ export default ajaxReducer(
   },
   {
     [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
-      const { time: lastUpdate } = action;
       const responseUser = safeGet(action, ['response', 'body'], {});
       const currentUser = UserModel.fromServerFormat(responseUser);
-
-      return {
-        ...initialState,
-        lastUpdate,
-        currentUser
-      };
+      return { ...initialState, currentUser };
     }
   }
 );

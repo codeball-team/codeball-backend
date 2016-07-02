@@ -1,12 +1,17 @@
 import _ from 'underscore';
 import reducer from './reducer';
 
+export const ajaxReducerInitialState = {
+  isLoading: false,
+  lastUpdate: undefined
+};
+
 export default function ajaxReducer(initialState, ajaxActions, handlers) {
   const { startAction, failureAction, successAction } = ajaxActions;
   const ajaxHandlers = {
-    [startAction]: state => ({ ...state, isLoading: true }),
-    [failureAction]: state => ({ ...state, isLoading: false }),
-    [successAction]: state => ({ ...state, isLoading: false })
+    [startAction]: onAjaxStart,
+    [failureAction]: onAjaxEnd,
+    [successAction]: onAjaxEnd
   };
 
   const originalReducer = reducer(initialState, handlers);
@@ -22,4 +27,17 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
 
     return originalReducer(ajaxEnhancedState, action);
   };
+}
+
+function onAjaxStart(state, action) {
+  return onUpdate({ ...state, isLoading: true }, action);
+}
+
+function onAjaxEnd(state, action) {
+  return onUpdate({ ...state, isLoading: false }, action);
+}
+
+function onUpdate(state, action) {
+  const { time: lastUpdate } = action;
+  return { ...state, lastUpdate };
 }

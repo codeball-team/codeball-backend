@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet, parseNumber } from 'utils';
+import { ajaxReducer, ajaxReducerInitialState, safeGet, parseNumber } from 'utils';
 import { GameModel } from 'models';
 import {
   GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
@@ -10,9 +10,8 @@ import {
 } from 'constants/actionTypes';
 
 const initialState = {
-  isLoading: false,
+  ...ajaxReducerInitialState,
   isEditing: false,
-  lastUpdate: undefined,
   game: GameModel.example(),
   editedGame: {}
 };
@@ -80,15 +79,9 @@ export default ajaxReducer(
 );
 
 function gameLoaded(state, action) {
-  const { time: lastUpdate } = action;
   const responseGame = safeGet(action, ['response', 'body'], {});
   const game = GameModel.fromServerFormat(responseGame);
-
-  return {
-    ...initialState,
-    lastUpdate,
-    game
-  };
+  return { ...initialState, game };
 }
 
 function continueEditing(state) {

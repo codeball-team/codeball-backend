@@ -14,12 +14,12 @@ const store = configureStore(undefined, browserHistory);
 const rootElement = document.getElementById('app');
 const history = syncHistoryWithStore(browserHistory, store);
 
-let ComponentEl;
+let content;
 
 if (process.env.NODE_ENV !== 'production') {
   const DevTools = require('./containers/DevTools').default;
 
-  ComponentEl = (
+  content = (
     <div>
       <BodyBackground images={BACKGROUND_IMAGES} />
       <Router key="router" history={history} routes={routes} />
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV !== 'production') {
     </div>
   );
 } else {
-  ComponentEl = (
+  content = (
     <div>
       <BodyBackground images={BACKGROUND_IMAGES} />
       <Router history={history} routes={routes} />
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 ReactDOM.render(
   <Provider store={store}>
-    {ComponentEl}
+    {content}
   </Provider>,
   rootElement
 );
