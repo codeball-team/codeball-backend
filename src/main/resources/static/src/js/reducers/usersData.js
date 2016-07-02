@@ -3,7 +3,7 @@ import { reducer, safeGet } from 'utils';
 import { mapUser, userExample } from 'models/user';
 import {
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = {
   isLoading: false,

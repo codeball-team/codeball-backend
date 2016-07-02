@@ -10,6 +10,10 @@ export default class Spinner extends Component {
     show: PropTypes.bool.isRequired
   };
 
+  static defaultProps = {
+    placement: 'relative'
+  };
+
   render() {
     const {
       className,

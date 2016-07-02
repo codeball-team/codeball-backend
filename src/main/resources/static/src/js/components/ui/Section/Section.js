@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
+import { renderConditionally } from 'utils';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconEdit from 'react-icons/lib/io/ios-compose-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import Button from '../Button/Button';
 import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
-import { renderConditionally } from 'utils';
 import './Section.scss';
 
 export default function SectionDecorator(ChildComponent) {

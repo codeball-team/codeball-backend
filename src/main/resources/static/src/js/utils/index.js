@@ -9,3 +9,4 @@ export reducer from './reducer';
 export refreshDataIfNecessary from './refreshDataIfNecessary';
 export renderConditionally from './renderConditionally';
 export safeGet from './safeGet';
+export sortByMany from './sortByMany';

@@ -2,12 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import moment from 'moment';
+import { renderConditionally } from 'utils';
+import { DATE_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
-import {
-  DATE_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS
-} from 'constants/Configuration';
-import { renderConditionally } from 'utils';
 import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
 import './NewGame.scss';
 

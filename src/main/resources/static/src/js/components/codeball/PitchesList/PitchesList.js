@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import classNames from 'classnames';
 import { List } from 'components/ui';
 import PitchesListItem from '../PitchesListItem/PitchesListItem';
@@ -7,7 +6,7 @@ import PitchesListItem from '../PitchesListItem/PitchesListItem';
 export default class PitchesList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    pitches: PropTypes.object.isRequired
+    pitches: PropTypes.array.isRequired
   };
 
   render() {
@@ -22,7 +21,7 @@ export default class PitchesList extends Component {
           'pitches-list',
           className
         )}>
-        {_(pitches).map(pitch => {
+        {pitches.map(pitch => {
           const { id } = pitch;
 
           return (

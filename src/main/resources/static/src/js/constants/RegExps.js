@@ -1,4 +1,4 @@
-export function getDomain(string) {
+export function getDomain(url) {
   const domainRegExp = /(https?:\/\/[^\/]*)/;
-  return string.match(domainRegExp)[0];
+  return url.match(domainRegExp)[0];
 }

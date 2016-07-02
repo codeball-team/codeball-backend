@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
+import { renderConditionally } from 'utils';
+import { PITCH_TYPE_STRING, getDomain, mapsUrl } from 'constants';
 import IconLocation from 'react-icons/lib/io/ios-location';
 import IconWorld from 'react-icons/lib/io/ios-world-outline';
 import IconPeople from 'react-icons/lib/io/ios-people';
 import IconLayers from 'react-icons/lib/io/social-buffer';
-import { PITCH_TYPE_STRING, mapsUrl } from 'constants/Configuration';
-import { getDomain } from 'constants/RegExps';
-import { renderConditionally } from 'utils';
 import './PitchInfo.scss';
 
 export default class PitchInfo extends Component {

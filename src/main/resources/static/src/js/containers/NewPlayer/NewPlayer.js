@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { refreshDataIfNecessary } from 'utils';
+import * as codeballActions from 'actions';
 import { LoadableContent } from 'components/ui';
 //import { NewPlayerSection } from 'components/sections';
 
@@ -17,34 +16,42 @@ class NewPlayer extends Component {
 
   componentWillMount = () => {
     const {
-      actions,
+      actions: {
+        currentUserLoad,
+        pitchesLoad,
+        usersLoad
+      },
       currentUserData,
       pitchesData,
       usersData
     } = this.props;
 
-    refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
-    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
-    refreshDataIfNecessary(usersData, actions.usersLoad);
+    refreshDataIfNecessary(currentUserData, currentUserLoad);
+    refreshDataIfNecessary(pitchesData, pitchesLoad);
+    refreshDataIfNecessary(usersData, usersLoad);
   };
 
   render () {
     const {
-      actions,
-      currentUserData,
-      pitchesData,
-      usersData
+      currentUserData: {
+        currentUser,
+        isLoading: isCurrentUserLoading
+      },
+      pitchesData: {
+        pitches,
+        isLoading: arePitchesLoading
+      },
+      usersData: {
+        users,
+        isLoading: areUsersLoading
+      }
     } = this.props;
 
-    const { currentUser } = currentUserData;
-    const { pitches } = pitchesData;
-    const { users } = usersData;
-
-    const isContentLoading = _.any([
-      currentUserData.isLoading,
-      pitchesData.isLoading,
-      usersData.isLoading
-    ]);
+    const isContentLoading = [
+      arePitchesLoading,
+      areUsersLoading,
+      isCurrentUserLoading
+    ].some(Boolean);
 
     return (
       <LoadableContent

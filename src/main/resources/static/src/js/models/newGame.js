@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import moment from 'moment';
-import { unixToJavaTimestamp } from 'constants/Configuration';
+import { unixToJavaTimestamp } from 'constants';
 
 export default function NewGame(newGame) {
   return _({ ...newGame }).defaults({
@@ -13,7 +13,7 @@ export default function NewGame(newGame) {
 }
 
 export function isNewGameValid({ date, duration, hour, minute, pitchId }) {
-  return _.every([date, duration, hour, minute, pitchId], Number.isInteger);
+  return [date, duration, hour, minute, pitchId].every(Number.isInteger);
 }
 
 export function newGameToServerFormat(newGame) {

@@ -1,7 +1,7 @@
 import { reducer } from 'utils';
 import {
   AJAX_START, AJAX_FAILURE, AJAX_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = 0;
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import _ from 'underscore';
+import { sortByMany } from 'utils';
 import PlayersList from '../PlayersList/PlayersList';
 import './TeamLineup.scss';
 
@@ -22,12 +22,8 @@ export default class TeamLineup extends Component {
       team
     } = this.props;
 
-    const teamUsers = _(
-      _(team).map(userId => users[userId])
-    ).compact();
-    const sortedTeamUsers = _(
-      _(teamUsers).sortBy('firstName')
-    ).sortBy('lastName');
+    const teamUsers = team.map(userId => users[userId]).filter(Boolean);
+    const sortedTeamUsers = sortByMany(teamUsers, 'lastName', 'firstName');
 
     return (
       <div

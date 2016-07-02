@@ -7,7 +7,7 @@ import {
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = {
   isLoading: false,

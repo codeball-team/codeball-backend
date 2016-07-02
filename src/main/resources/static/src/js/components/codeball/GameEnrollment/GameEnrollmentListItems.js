@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import _ from 'underscore';
 import { List } from 'components/ui';
 import GameEnrollmentListItem from './GameEnrollmentListItem';
 
@@ -24,7 +23,7 @@ export default class GameEnrollmentListItems extends Component {
           'game-enrollment-list',
           className
         )}>
-        {_(enrolledUsers).map(user => {
+        {enrolledUsers.map(user => {
           const { id } = user;
 
           return (

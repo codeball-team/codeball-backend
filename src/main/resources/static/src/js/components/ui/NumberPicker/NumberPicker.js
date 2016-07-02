@@ -22,7 +22,7 @@ export default class NumberPicker extends Component {
   };
 
   onAdd = () => {
-    this.onChange(1)
+    this.onChange(1);
   };
 
   onSubtract = () => {

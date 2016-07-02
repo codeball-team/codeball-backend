@@ -13,7 +13,7 @@ export default class BodyBackground extends Component {
 
   changeBackground = (images, imageId = randomInteger(images.length)) => {
     const body = document.getElementsByTagName('body')[0];
-    const imageUrl = images[imageId];
+    const { [imageId]: imageUrl } = images;
     body.style.backgroundImage = `url(${imageUrl})`;
   };
 

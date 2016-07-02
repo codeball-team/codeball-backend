@@ -5,11 +5,11 @@ import {
   NEW_GAME_CHANGE_DATE, NEW_GAME_CHANGE_DURATION, NEW_GAME_CHANGE_HOUR,
   NEW_GAME_CHANGE_MINUTE, NEW_GAME_CHANGE_PITCH_ID, NEW_GAME_RESET,
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
-} from 'constants/ActionTypes';
-import { gameAdminUrl } from 'constants/Api';
+} from 'constants/actionTypes';
+import { gameAdminUrl } from 'constants';
 import { newGameToServerFormat } from 'models/newGame';
 
-export function addGame(newGame) {
+export function newGameSubmit(newGame) {
   const data = newGameToServerFormat(newGame);
   return ajax((dispatch) => ({
     request: request('POST', gameAdminUrl())

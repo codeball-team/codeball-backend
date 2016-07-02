@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { safeGet } from 'utils';
+import * as codeballActions from 'actions';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 
@@ -25,26 +24,24 @@ class Pitch extends Component {
   };
 
   updateData = () => {
-    const { actions } = this.props;
-    actions.pitchesLoad();
+    const { actions: { pitchesLoad } } = this.props;
+    pitchesLoad();
   };
 
   render () {
     const {
-      pitchesData,
-      params
+      params,
+      pitchesData: {
+        pitches,
+        isLoading: arePitchesLoading
+      }
     } = this.props;
-    const { pitches } = pitchesData;
     const pitch = pitches[params.pitchId];
     const { name } = pitch;
 
-    const isContentLoading = _.any([
-      pitchesData.isLoading
-    ]);
-
     return (
       <LoadableContent
-        isLoading={isContentLoading}
+        isLoading={arePitchesLoading}
         render={() => (
           <section className="pitch">
             <PitchInfoSection

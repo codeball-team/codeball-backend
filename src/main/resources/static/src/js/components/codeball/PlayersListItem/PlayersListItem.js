@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { USER_MISSING_PICTURE_URL } from 'constants';
 import { Link } from 'react-router';
-import { USER_MISSING_PICTURE_URL } from 'constants/Configuration';
 import { ListItem } from 'components/ui';
 import './PlayersListItem.scss';
 
@@ -15,15 +15,13 @@ export default class PlayersListItem extends Component {
     const {
       className,
       children,
-      user
+      user: {
+        id,
+        firstName,
+        lastName,
+        pictureUrl
+      }
     } = this.props;
-
-    const {
-      id,
-      firstName,
-      lastName,
-      pictureUrl
-    } = user;
 
     return (
       <Link className={className} key={id} to={`/players/${id}`}>

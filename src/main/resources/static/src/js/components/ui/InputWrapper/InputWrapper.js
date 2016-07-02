@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { renderConditionally } from 'utils';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
-import { renderConditionally } from 'utils';
 import './InputWrapper.scss';
 
 export default class InputWrapper extends Component {

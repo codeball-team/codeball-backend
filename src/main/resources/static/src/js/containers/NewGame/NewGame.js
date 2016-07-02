@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { refreshDataIfNecessary } from 'utils';
+import * as codeballActions from 'actions';
 import { isNewGameValid } from 'models/newGame';
 import { Link } from 'react-router';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
@@ -20,19 +20,32 @@ class NewGame extends Component {
 
   componentWillMount = () => {
     const {
-      actions,
+      actions: {
+        newGameReset,
+        pitchesLoad
+      },
       pitchesData
     } = this.props;
 
-    actions.newGameReset();
-    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
+    newGameReset();
+    refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
   render () {
     const {
-      actions,
+      actions: {
+        newGameChangeDate,
+        newGameChangeDuration,
+        newGameChangeHour,
+        newGameChangeMinute,
+        newGameChangePitchId,
+        newGameSubmit
+      },
       newGame,
-      pitchesData
+      pitchesData: {
+        pitches,
+        isLoading: arePitchesLoading
+      }
     } = this.props;
     const {
       date,
@@ -41,15 +54,10 @@ class NewGame extends Component {
       minute,
       pitchId
     } = newGame;
-    const { pitches } = pitchesData;
-
-    const isContentLoading = _.any([
-      pitchesData.isLoading
-    ]);
 
     return (
       <LoadableContent
-        isLoading={isContentLoading}
+        isLoading={arePitchesLoading}
         render={() => (
           <section className="new-game">
             <NewGameSection
@@ -70,16 +78,16 @@ class NewGame extends Component {
                 <Button
                   key="save"
                   isDisabled={!isNewGameValid(newGame)}
-                  onClick={() => actions.addGame(newGame)}>
+                  onClick={() => newGameSubmit(newGame)}>
                   <IconSave className="icon" />
                   <span className="label">Save</span>
                 </Button>
               ]}
-              onDateChange={(date) => actions.newGameChangeDate(date)}
-              onDurationChange={(duration) => actions.newGameChangeDuration(duration)}
-              onHourChange={(hour) => actions.newGameChangeHour(hour)}
-              onMinuteChange={(minute) => actions.newGameChangeMinute(minute)}
-              onPitchIdChange={(pitchId) => actions.newGameChangePitchId(pitchId)} />
+              onDateChange={(date) => newGameChangeDate(date)}
+              onDurationChange={(duration) => newGameChangeDuration(duration)}
+              onHourChange={(hour) => newGameChangeHour(hour)}
+              onMinuteChange={(minute) => newGameChangeMinute(minute)}
+              onPitchIdChange={(pitchId) => newGameChangePitchId(pitchId)} />
           </section>
         )} />
     );

@@ -4,7 +4,7 @@ import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   DATE_FORMAT, TIME_FORMAT,
   javaToUnixTimestamp
-} from 'constants/Configuration';
+} from 'constants';
 
 export default function Game(game) {
   return _({ ...game }).defaults({

@@ -3,7 +3,7 @@ import { reducer, safeGet } from 'utils';
 import { mapPitch, pitchExample } from 'models/pitch';
 import {
   PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = {
   isLoading: false,

@@ -14,14 +14,12 @@ export default class PitchesListItem extends Component {
     const {
       className,
       children,
-      pitch
+      pitch: {
+        id,
+        address,
+        name
+      }
     } = this.props;
-
-    const {
-      id,
-      address,
-      name
-    } = pitch;
 
     return (
       <Link className={className} key={id} to={`/pitches/${id}`}>

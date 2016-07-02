@@ -28,21 +28,17 @@ export default class GameScore extends Component {
     const {
       className,
       isEditing,
-      game,
-      pitch
+      game: {
+        date,
+        time,
+        teamAScore,
+        teamBScore
+      },
+      pitch: {
+        id: pitchId,
+        name: pitchName
+      }
     } = this.props;
-
-    const {
-      date,
-      time,
-      teamAScore,
-      teamBScore
-    } = game;
-
-    const {
-      id: pitchId,
-      name: pitchName
-    } = pitch;
 
     return (
       <div

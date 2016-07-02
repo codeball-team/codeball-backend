@@ -3,7 +3,7 @@ import { reducer, safeGet } from 'utils';
 import { mapGame, gameExample } from 'models/game';
 import {
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = {
   isLoading: false,

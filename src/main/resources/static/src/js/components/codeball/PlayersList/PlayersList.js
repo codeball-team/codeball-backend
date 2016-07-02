@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import _ from 'underscore';
 import { List } from 'components/ui';
 import PlayersListItem from '../PlayersListItem/PlayersListItem';
 
@@ -23,7 +22,7 @@ export default class PlayersList extends Component {
           'players-list',
           className
         )}>
-        {_(users).map(user => {
+        {users.map(user => {
           const { id } = user;
 
           return (

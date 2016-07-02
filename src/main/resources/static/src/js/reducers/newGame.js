@@ -2,7 +2,7 @@ import { reducer } from 'utils';
 import {
   NEW_GAME_CHANGE_DATE, NEW_GAME_CHANGE_DURATION, NEW_GAME_CHANGE_HOUR,
   NEW_GAME_CHANGE_MINUTE, NEW_GAME_CHANGE_PITCH_ID, NEW_GAME_RESET
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 
 const initialState = {
   date: undefined,

@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
+import * as codeballActions from 'actions';
+import { ENROLLMENT_STATUS_YES } from 'constants';
 import { Pitch } from 'models';
-import { ENROLLMENT_STATUS_YES } from 'constants/Configuration';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import IconShuffle from 'react-icons/lib/io/shuffle';
 import { Button, LoadableContent } from 'components/ui';
@@ -45,57 +45,75 @@ export default function GenerateUpcomingGame(getGameId) {
 
     updateData = (props) => {
       const {
-        actions,
-        params,
+        actions: {
+          currentUserLoad,
+          gameLoad,
+          pitchesLoad,
+          usersLoad
+        },
+        params: { gameId },
         pitchesData,
         usersData
       } = props;
 
-      actions.gameLoad(params.gameId);
-      refreshDataIfNecessary(usersData, actions.usersLoad);
-      refreshDataIfNecessary(usersData, actions.currentUserLoad);
-      refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
+      gameLoad(gameId);
+      refreshDataIfNecessary(usersData, usersLoad);
+      refreshDataIfNecessary(usersData, currentUserLoad);
+      refreshDataIfNecessary(pitchesData, pitchesLoad);
     };
 
     render () {
       const {
-        gameData,
-        pitchesData,
-        usersData,
-        currentUserData,
-        actions
+        actions: {
+          gameChangeEnrollmentStatus,
+          gameCloseEnrollment,
+          gameDrawTeams,
+          gameEnd
+        },
+        currentUserData: {
+          currentUser,
+          isLoading: isCurrentUserLoading
+        },
+        gameData: {
+          game: {
+            id: gameId,
+            date,
+            time,
+            duration,
+            pitchId,
+            isEnrollmentOver,
+            isGameOver,
+            enrolledUsers,
+            teamA,
+            teamB
+          },
+          isLoading: isGameLoading
+        },
+        pitchesData: {
+          pitches,
+          isLoading: arePitchesLoading
+        },
+        usersData: {
+          users,
+          isLoading: areUsersLoading
+        }
       } = this.props;
 
-      const { game } = gameData;
-      const { pitches } = pitchesData;
-      const { users } = usersData;
-      const { currentUser } = currentUserData;
       const { id: userId } = currentUser;
-      const {
-        id: gameId,
-        date,
-        time,
-        duration,
-        pitchId,
-        isEnrollmentOver,
-        isGameOver,
-        enrolledUsers,
-        teamA,
-        teamB
-      } = game;
       const pitch = Pitch(pitches[pitchId]);
 
       const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
-        return _(userIds).contains(userId) ? status : selectedEnrollmentStatus;
+        return userIds.includes(userId) ? status : selectedEnrollmentStatus;
       }, undefined);
 
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
 
-      const isContentLoading = _([
-        gameData.isLoading,
-        usersData.isLoading,
-        pitchesData.isLoading
-      ]).any();
+      const isContentLoading = [
+        arePitchesLoading,
+        areUsersLoading,
+        isCurrentUserLoading,
+        isGameLoading
+      ].some(Boolean);
 
       return (
         <LoadableContent
@@ -115,7 +133,7 @@ export default function GenerateUpcomingGame(getGameId) {
                       render: () => (
                         <Button
                           key="close-enrollment"
-                          onClick={() => actions.gameCloseEnrollment(gameId)}>
+                          onClick={() => gameCloseEnrollment(gameId)}>
                           <IconSave className="icon" />
                           <span className="label">Close enrollment</span>
                         </Button>
@@ -126,7 +144,7 @@ export default function GenerateUpcomingGame(getGameId) {
                       render: () => (
                         <Button
                           key="draw-teams"
-                          onClick={() => actions.gameDrawTeams(gameId)}>
+                          onClick={() => gameDrawTeams(gameId)}>
                           <IconShuffle className="icon" />
                           <span className="label">Draw teams</span>
                         </Button>
@@ -137,7 +155,7 @@ export default function GenerateUpcomingGame(getGameId) {
                       render: () => (
                         <Button
                           key="end-game"
-                          onClick={() => actions.gameEnd(gameId)}>
+                          onClick={() => gameEnd(gameId)}>
                           <IconSave className="icon" />
                           <span className="label">End game</span>
                         </Button>
@@ -152,7 +170,7 @@ export default function GenerateUpcomingGame(getGameId) {
                   <GameEnrollmentFormSection
                     title="Are you going?"
                     value={selectedEnrollmentStatus}
-                    onChange={enrollmentStatus => actions.gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+                    onChange={enrollmentStatus => gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
                 )
               })}
 

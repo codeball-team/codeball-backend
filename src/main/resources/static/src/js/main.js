@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { BodyBackground } from 'components/ui';
-import BACKGROUND_IMAGES from 'constants/BackgroundImages';
+import { BACKGROUND_IMAGES } from 'constants';
 import routes from './routes';
 
 const store = configureStore(undefined, browserHistory);

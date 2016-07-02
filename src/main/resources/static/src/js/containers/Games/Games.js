@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { refreshDataIfNecessary, sortByMany } from 'utils';
 import * as codeballActions from 'actions';
-import { refreshDataIfNecessary } from 'utils';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -20,49 +20,54 @@ class Games extends Component {
 
   componentWillMount = () => {
     const {
-      actions,
+      actions: {
+        currentUserLoad,
+        gamesLoad,
+        pitchesLoad,
+        usersLoad
+      },
       currentUserData,
       pitchesData,
       usersData
     } = this.props;
 
-    actions.gamesLoad();
-    refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
-    refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
-    refreshDataIfNecessary(usersData, actions.usersLoad);
+    gamesLoad();
+    refreshDataIfNecessary(currentUserData, currentUserLoad);
+    refreshDataIfNecessary(pitchesData, pitchesLoad);
+    refreshDataIfNecessary(usersData, usersLoad);
   };
 
   render () {
     const {
-      currentUserData,
-      gamesData,
-      pitchesData,
-      usersData
+      currentUserData: {
+        currentUser,
+        isLoading: isCurrentUserLoading
+      },
+      gamesData: {
+        games,
+        isLoading: areGamesLoading
+      },
+      pitchesData: {
+        pitches,
+        isLoading: arePitchesLoading
+      },
+      usersData: {
+        users,
+        isLoading: areUsersLoading
+      }
     } = this.props;
 
-    const { currentUser } = currentUserData;
-    const { games } = gamesData;
-    const { pitches } = pitchesData;
-    const { users } = usersData;
+    const gamesListProps = { currentUser, pitches, users };
+    const sortedGames = sortByMany(_(games).values(), 'date').reverse();
+    const upcomingGames = sortedGames.filter(game => !game.isGameOver);
+    const previousGames = sortedGames.filter(game => game.isGameOver);
 
-    const gamesListProps = {
-      currentUser,
-      pitches,
-      users
-    };
-
-    const sortedGames = _(
-      _(games).values()
-    ).sortBy('date').reverse();
-    const upcomingGames = _(sortedGames).filter(game => !game.isGameOver);
-    const previousGames = _(sortedGames).filter(game => game.isGameOver);
-
-    const isContentLoading = _.any([
-      currentUserData.isLoading,
-      gamesData.isLoading,
-      pitchesData.isLoading,
-      usersData.isLoading
-    ]);
+    const isContentLoading = [
+      areGamesLoading,
+      arePitchesLoading,
+      areUsersLoading,
+      isCurrentUserLoading
+    ].some(Boolean);
 
     return (
       <LoadableContent

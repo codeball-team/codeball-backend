@@ -16,25 +16,29 @@ class Players extends Component {
   };
 
   componentWillMount = () => {
-    const { actions } = this.props;
-    actions.currentUserLoad();
-    actions.usersLoad();
+    const { actions: { currentUserLoad, usersLoad } } = this.props;
+    currentUserLoad();
+    usersLoad();
   };
 
   render () {
     const {
-      currentUserData,
-      usersData
+      currentUserData: {
+        currentUser,
+        isLoading: isCurrentUserLoading
+      },
+      usersData: {
+        users,
+        isLoading: areUsersLoading
+      }
     } = this.props;
 
-    const { currentUser } = currentUserData;
-    const { users } = usersData;
-    const numberOfUsers = _(users).keys().length;
+    const numberOfUsers = Object.keys(users).length;
 
-    const isContentLoading = _.any([
-      currentUserData.isLoading,
-      usersData.isLoading
-    ]);
+    const isContentLoading = [
+      isCurrentUserLoading,
+      areUsersLoading
+    ].some(Boolean);
 
     return (
       <LoadableContent

@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import classNames from 'classnames';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
-} from 'constants/Configuration';
+} from 'constants';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 
-const gameEnrollmentFormOptions = [
+const GAME_ENROLLMENT_FORM_OPTIONS = [
   {
     className: 'yes',
     value: ENROLLMENT_STATUS_YES,
@@ -49,7 +48,7 @@ export default class GameEnrollmentForm extends Component {
           'game-enrollment-form',
           className
         )}>
-        {_(gameEnrollmentFormOptions).map(option => (
+        {GAME_ENROLLMENT_FORM_OPTIONS.map(option => (
           <GameEnrollmentFormOption
             key={option.value}
             inactive={value !== undefined && option.value !== value}

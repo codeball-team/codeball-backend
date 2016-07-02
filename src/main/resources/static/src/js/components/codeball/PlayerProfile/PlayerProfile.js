@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ROLE_STRING, USER_MISSING_PICTURE_URL } from 'constants';
 import IconEmail from 'react-icons/lib/io/ios-email-outline';
 import IconAccessLevel from 'react-icons/lib/io/key';
-import { ROLE_STRING, USER_MISSING_PICTURE_URL } from 'constants/Configuration';
 import './PlayerProfile.scss';
 
 export default class PlayerProfile extends Component {
@@ -14,14 +14,12 @@ export default class PlayerProfile extends Component {
   render() {
     const {
       className,
-      user
+      user: {
+        email,
+        pictureUrl,
+        role
+      }
     } = this.props;
-
-    const {
-      email,
-      pictureUrl,
-      role
-    } = user;
 
     return (
       <div

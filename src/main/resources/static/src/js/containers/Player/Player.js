@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { safeGet } from 'utils';
+import * as codeballActions from 'actions';
 import { LoadableContent } from 'components/ui';
 import { PlayerProfileSection } from 'components/sections';
 
@@ -25,29 +24,27 @@ class Player extends Component {
   };
 
   updateData = () => {
-    const { actions } = this.props;
-    actions.usersLoad();
+    const { actions: { usersLoad } } = this.props;
+    usersLoad();
   };
 
   render () {
     const {
-      usersData,
-      params
+      params: {
+        userId
+      },
+      usersData: {
+        users,
+        isLoading: areUsersLoading
+      }
     } = this.props;
-    const { users } = usersData;
-    const user = users[params.userId];
-    const {
-      firstName,
-      lastName
-    } = user;
 
-    const isContentLoading = _.any([
-      usersData.isLoading
-    ]);
+    const { [userId]: user } = users;
+    const { firstName, lastName } = user;
 
     return (
       <LoadableContent
-        isLoading={isContentLoading}
+        isLoading={areUsersLoading}
         render={() => (
           <section className="player">
             <PlayerProfileSection

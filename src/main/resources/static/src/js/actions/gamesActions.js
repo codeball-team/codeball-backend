@@ -10,14 +10,14 @@ import {
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SAVE, GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
-} from 'constants/ActionTypes';
+} from 'constants/actionTypes';
 import {
   gameAdminUrl,
-  gameUrl,
   gameDrawTeamsUrl,
   gameEnrollmentUrl,
+  gameUrl,
   gamesUrl
-} from 'constants/Api';
+} from 'constants';
 
 export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
   return ajax(() => ({

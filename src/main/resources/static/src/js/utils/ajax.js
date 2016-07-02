@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import { now } from 'utils';
-import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE} from 'constants/ActionTypes';
+import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE } from 'constants/actionTypes';
 
 export default function ajax(getOptions) {
   return dispatch => {

@@ -1,4 +1,4 @@
-const BACKGROUND_IMAGES = [
+export const BACKGROUND_IMAGES = [
   '/images/bg/bg-0.jpg',
   '/images/bg/bg-1.jpg',
   '/images/bg/bg-2.jpg',
@@ -15,5 +15,3 @@ const BACKGROUND_IMAGES = [
   '/images/bg/bg-13.jpg',
   '/images/bg/bg-14.jpg'
 ];
-
-export default BACKGROUND_IMAGES;

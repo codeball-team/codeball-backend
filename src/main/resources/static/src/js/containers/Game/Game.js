@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
 import { refreshDataIfNecessary, safeGet } from 'utils';
+import * as codeballActions from 'actions';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 
@@ -40,46 +39,67 @@ export default function GenerateGame(getGameId) {
 
     updateData = (props) => {
       const {
-        actions,
-        params,
+        actions: {
+          currentUserLoad,
+          gameLoad,
+          pitchesLoad,
+          usersLoad
+        },
+        params: { gameId },
         currentUserData,
         pitchesData,
         usersData
       } = props;
 
-      actions.gameLoad(params.gameId);
-      refreshDataIfNecessary(currentUserData, actions.currentUserLoad);
-      refreshDataIfNecessary(pitchesData, actions.pitchesLoad);
-      refreshDataIfNecessary(usersData, actions.usersLoad);
+      gameLoad(gameId);
+      refreshDataIfNecessary(currentUserData, currentUserLoad);
+      refreshDataIfNecessary(pitchesData, pitchesLoad);
+      refreshDataIfNecessary(usersData, usersLoad);
     };
 
     render () {
       const {
-        actions,
-        currentUserData,
-        gameData,
-        pitchesData,
-        usersData
+        actions: {
+          gameEdit,
+          gameEditCancel,
+          gameEditScoreA,
+          gameEditScoreB,
+          gameSave
+        },
+        currentUserData: {
+          currentUser,
+          isLoading: isCurrentUserLoading
+        },
+        gameData: {
+          editedGame,
+          game,
+          isEditing,
+          isLoading: isGameLoading
+        },
+        pitchesData: {
+          pitches,
+          isLoading: arePitchesLoading
+        },
+        usersData: {
+          users,
+          isLoading: areUsersLoading
+        }
       } = this.props;
 
-      const { currentUser } = currentUserData;
-      const { game, isEditing, editedGame } = gameData;
-      const { pitches } = pitchesData;
-      const { users } = usersData;
-      const { pitchId } = game;
-      const pitch = pitches[pitchId];
       const {
         id: gameId,
+        pitchId,
         teamA,
         teamB
       } = game;
+      const pitch = pitches[pitchId];
 
-      const isContentLoading = _.any([
-        gameData.isLoading,
-        pitchesData.isLoading,
-        usersData.isLoading,
-        currentUserData.isLoading
-      ]);
+      const isContentLoading = [
+        arePitchesLoading,
+        areUsersLoading,
+        isCurrentUserLoading,
+        isGameLoading
+      ].some(Boolean);
 
       return (
         <LoadableContent
@@ -92,11 +112,11 @@ export default function GenerateGame(getGameId) {
                 isEditing={isEditing}
                 pitch={pitch}
                 game={isEditing ? Object.assign({}, game, editedGame) : game}
-                onEdit={actions.gameEdit}
-                onCancel={actions.gameEditCancel}
-                onSave={() => actions.gameSave(gameId, editedGame)}
-                onEditGameScoreA={actions.gameEditScoreA}
-                onEditGameScoreB={actions.gameEditScoreB} />
+                onEdit={gameEdit}
+                onCancel={gameEditCancel}
+                onSave={() => gameSave(gameId, editedGame)}
+                onEditGameScoreA={gameEditScoreA}
+                onEditGameScoreB={gameEditScoreB} />
 
               <GameLineupSection
                 title="Lineups"

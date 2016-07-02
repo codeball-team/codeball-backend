@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 import { List, ListItem } from 'components/ui';
@@ -29,7 +28,7 @@ export default class GamesList extends Component {
           'games-list',
           className
         )}>
-        {_(games).map((game) => {
+        {games.map(game => {
           const {
             id,
             date,
@@ -38,7 +37,7 @@ export default class GamesList extends Component {
             teamAScore,
             teamBScore
           } = game;
-          const pitch = pitches[pitchId];
+          const { name: pitchName } = pitches[pitchId];
 
           return (
             <Link key={id} to={formatUrl(id)}>
@@ -48,7 +47,7 @@ export default class GamesList extends Component {
                 </div>
 
                 <div className="pitch ellipsis">
-                  {pitch.name}
+                  {pitchName}
                 </div>
 
                 <div className="score">

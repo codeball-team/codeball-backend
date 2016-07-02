@@ -15,27 +15,27 @@ class Pitches extends Component {
   };
 
   componentWillMount = () => {
-    const { actions } = this.props;
-    actions.pitchesLoad();
+    const { actions: { pitchesLoad } } = this.props;
+    pitchesLoad();
   };
 
   render () {
-    const { pitchesData } = this.props;
-    const { pitches } = pitchesData;
-    const numberOfPitches = _(pitches).keys().length;
-
-    const isContentLoading = _.any([
-      pitchesData.isLoading
-    ]);
+    const {
+      pitchesData: {
+        pitches,
+        isLoading: arePitchesLoading
+      }
+    } = this.props;
+    const numberOfPitches = Object.keys(pitches).length;
 
     return (
       <LoadableContent
-        isLoading={isContentLoading}
+        isLoading={arePitchesLoading}
         render={() => (
           <section className="pitches">
             <PitchesListSection
               title={`Pitches (${numberOfPitches})`}
-              pitches={pitches}
+              pitches={_(pitches).values()}
               buttons={[
                 <Link key="new" to="pitches/new">
                   <Button>
