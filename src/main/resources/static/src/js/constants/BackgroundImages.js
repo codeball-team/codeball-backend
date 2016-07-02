@@ -13,5 +13,6 @@ export const BACKGROUND_IMAGES = [
   '/images/bg/bg-11.jpg',
   '/images/bg/bg-12.jpg',
   '/images/bg/bg-13.jpg',
-  '/images/bg/bg-14.jpg'
+  '/images/bg/bg-14.jpg',
+  '/images/bg/bg-15.jpg'
 ];
