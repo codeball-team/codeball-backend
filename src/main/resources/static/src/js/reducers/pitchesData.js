@@ -1,5 +1,4 @@
-import _ from 'underscore';
-import { reducer, safeGet } from 'utils';
+import { objectify, reducer, safeGet } from 'utils';
 import { mapPitch, pitchExample } from 'models/pitch';
 import {
   PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
@@ -31,11 +30,8 @@ export default reducer(initialState, {
   [PITCHES_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
     const responsePitches = safeGet(action, 'response.body', []);
-    const mappedPitches = _(responsePitches).map(mapPitch);
-    const pitches = _.object(
-      _(mappedPitches).pluck('id'),
-      mappedPitches
-    );
+    const mappedPitches = responsePitches.map(mapPitch);
+    const pitches = objectify(mappedPitches);
 
     return {
       ...initialState,

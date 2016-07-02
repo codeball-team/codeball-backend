@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import { reducer, safeGet } from 'utils';
+import { objectify, reducer, safeGet } from 'utils';
 import { mapUser, userExample } from 'models/user';
 import {
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
@@ -32,10 +32,7 @@ export default reducer(initialState, {
     const { time: lastUpdate } = action;
     const responseUsers = safeGet(action, 'response.body', []);
     const mappedUsers = _(responseUsers).map(mapUser);
-    const users = _.object(
-      _(mappedUsers).pluck('id'),
-      mappedUsers
-    );
+    const users = objectify(mappedUsers);
 
     return {
       ...initialState,
