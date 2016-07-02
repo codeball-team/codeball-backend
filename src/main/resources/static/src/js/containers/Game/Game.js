@@ -32,7 +32,8 @@ export default function GenerateGame(getGameId) {
     };
 
     componentWillReceiveProps = (newProps) => {
-      if (safeGet(newProps, 'params.gameId') !== safeGet(this.props, 'params.gameId')) {
+      const gameIdPath = ['params', 'gameId'];
+      if (safeGet(newProps, gameIdPath) !== safeGet(this.props, gameIdPath)) {
         this.updateData(newProps);
       }
     };

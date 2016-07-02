@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 export default function safeGet(object, path, defaultValue = undefined) {
-  const subAttributes = path.split('.').reverse();
+  const subAttributes = [...path].reverse();
   let currentValue = object;
 
   while (subAttributes.length > 0) {

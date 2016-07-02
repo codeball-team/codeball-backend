@@ -19,7 +19,7 @@ export function newGameSubmit(newGame) {
     successAction: NEW_GAME_SUBMIT_SUCCESS,
     failureAction: NEW_GAME_SUBMIT_FAILURE,
     successCallback: (response) => {
-      const gameId = safeGet(response, 'body.gameId');
+      const gameId = safeGet(response, ['body', 'gameId']);
       dispatch(push(`/games/upcoming/${gameId}`));
     }
   }));

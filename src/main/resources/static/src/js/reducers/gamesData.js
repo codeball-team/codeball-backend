@@ -30,7 +30,7 @@ export default reducer(initialState, {
 
   [GAMES_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
-    const responseGames = safeGet(action, 'response.body', []);
+    const responseGames = safeGet(action, ['response', 'body'], []);
     const mappedGames = responseGames.map(mapGame);
     const games = objectify(mappedGames);
 

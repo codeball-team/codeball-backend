@@ -30,7 +30,7 @@ export default reducer(initialState, {
 
   [USERS_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
-    const responseUsers = safeGet(action, 'response.body', []);
+    const responseUsers = safeGet(action, ['response', 'body'], []);
     const mappedUsers = _(responseUsers).map(mapUser);
     const users = objectify(mappedUsers);
 

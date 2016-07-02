@@ -111,7 +111,7 @@ export default reducer(initialState, {
 
 function gameLoaded(state, action) {
   const { time: lastUpdate } = action;
-  const responseGame = safeGet(action, 'response.body', {});
+  const responseGame = safeGet(action, ['response', 'body'], {});
   const game = mapGame(responseGame);
 
   return {

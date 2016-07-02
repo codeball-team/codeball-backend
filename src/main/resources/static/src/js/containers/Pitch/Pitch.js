@@ -18,7 +18,8 @@ class Pitch extends Component {
   };
 
   componentWillReceiveProps = (newProps) => {
-    if (safeGet(newProps, 'params.pitchId') !== safeGet(this.props, 'params.pitchId')) {
+    const pitchIdPath = ['params', 'pitchId'];
+    if (safeGet(newProps, pitchIdPath) !== safeGet(this.props, pitchIdPath)) {
       this.updateData();
     }
   };

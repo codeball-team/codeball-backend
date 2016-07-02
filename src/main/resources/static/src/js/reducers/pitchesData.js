@@ -29,7 +29,7 @@ export default reducer(initialState, {
 
   [PITCHES_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
-    const responsePitches = safeGet(action, 'response.body', []);
+    const responsePitches = safeGet(action, ['response', 'body'], []);
     const mappedPitches = responsePitches.map(mapPitch);
     const pitches = objectify(mappedPitches);
 

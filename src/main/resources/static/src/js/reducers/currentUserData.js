@@ -27,7 +27,7 @@ export default reducer(initialState, {
 
   [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
     const { time: lastUpdate } = action;
-    const responseUser = safeGet(action, 'response.body', {});
+    const responseUser = safeGet(action, ['response', 'body'], {});
     const currentUser = mapUser(responseUser);
 
     return {
