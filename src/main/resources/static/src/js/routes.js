@@ -18,6 +18,7 @@ export default ([
   <Redirect key="initial-redirect" from="/" to="/upcoming-game" />,
 
   <Route key="app" path="/" component={App}>
+    <Route path="404" component={NotFound} />
     <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
     <Route path="last-game" component={Game(() => 'last')} />
     <Route path="games">
