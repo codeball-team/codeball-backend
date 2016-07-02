@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
 import { UserModel } from 'models';
 import { USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS } from 'constants/actionTypes';
@@ -20,7 +19,7 @@ export default ajaxReducer(
   {
     [USERS_LOAD_SUCCESS]: (state, action) => {
       const responseUsers = safeGet(action, ['response', 'body'], []);
-      const mappedUsers = _(responseUsers).map(UserModel.fromServerFormat);
+      const mappedUsers = responseUsers.map(UserModel.fromServerFormat);
       const users = objectify(mappedUsers);
       return { ...initialState, users };
     }

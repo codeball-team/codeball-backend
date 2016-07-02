@@ -1,8 +1,6 @@
 import request from 'superagent';
 import { ajax } from 'utils';
-import {
-  USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
-} from 'constants/actionTypes';
+import { USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS } from 'constants/actionTypes';
 import { usersUrl } from 'constants';
 
 export function usersLoad() {
