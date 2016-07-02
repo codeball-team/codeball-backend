@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { refreshDataIfNecessary } from 'utils';
 import * as codeballActions from 'actions';
-import { isNewGameValid } from 'models/newGame';
+import { NewGameModel } from 'models';
 import { Link } from 'react-router';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
@@ -77,7 +77,7 @@ class NewGame extends Component {
                 </Link>,
                 <Button
                   key="save"
-                  isDisabled={!isNewGameValid(newGame)}
+                  isDisabled={!NewGameModel.isValid(newGame)}
                   onClick={() => newGameSubmit(newGame)}>
                   <IconSave className="icon" />
                   <span className="label">Save</span>

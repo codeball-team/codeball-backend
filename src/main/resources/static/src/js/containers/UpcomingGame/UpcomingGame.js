@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
 import * as codeballActions from 'actions';
 import { ENROLLMENT_STATUS_YES } from 'constants';
-import { Pitch } from 'models';
+import { PitchModel } from 'models';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import IconShuffle from 'react-icons/lib/io/shuffle';
 import { Button, LoadableContent } from 'components/ui';
@@ -101,7 +101,7 @@ export default function GenerateUpcomingGame(getGameId) {
       } = this.props;
 
       const { id: userId } = currentUser;
-      const pitch = Pitch(pitches[pitchId]);
+      const pitch = new PitchModel(pitches[pitchId]);
 
       const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
         return userIds.includes(userId) ? status : selectedEnrollmentStatus;

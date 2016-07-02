@@ -1,4 +1,5 @@
 export ajax from './ajax';
+export ajaxReducer from './ajaxReducer';
 export isDataInvalidated from './isDataInvalidated';
 export model from './model';
 export now from './now';

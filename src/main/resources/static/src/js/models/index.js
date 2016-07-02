@@ -1,3 +1,4 @@
-export Game from './game';
-export Pitch from './pitch';
-export User from './user';
+export GameModel from './game';
+export NewGameModel from './newGame';
+export PitchModel from './pitch';
+export UserModel from './user';

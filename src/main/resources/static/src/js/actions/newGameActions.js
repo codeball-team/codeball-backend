@@ -7,10 +7,10 @@ import {
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
 import { gameAdminUrl } from 'constants';
-import { newGameToServerFormat } from 'models/newGame';
+import { NewGameModel } from 'models';
 
 export function newGameSubmit(newGame) {
-  const data = newGameToServerFormat(newGame);
+  const data = NewGameModel.toServerFormat(newGame);
   return ajax((dispatch) => ({
     request: request('POST', gameAdminUrl())
       .set('Content-Type', 'application/json')

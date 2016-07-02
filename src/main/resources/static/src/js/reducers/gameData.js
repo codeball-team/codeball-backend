@@ -1,7 +1,7 @@
-import { reducer, safeGet, parseNumber } from 'utils';
-import { mapGame, gameExample } from 'models/game';
+import { ajaxReducer, safeGet, parseNumber } from 'utils';
+import { GameModel } from 'models';
 import {
-  GAME_CHANGE_ENROLLMENT_STATUS, GAME_CHANGE_ENROLLMENT_STATUS_FAILURE, GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
+  GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
   GAME_CLOSE_ENROLLMENT_SUCCESS, GAME_DRAW_TEAMS_SUCCESS, GAME_EDIT,
   GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B, GAME_END_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
@@ -13,110 +13,84 @@ const initialState = {
   isLoading: false,
   isEditing: false,
   lastUpdate: undefined,
-  game: gameExample(),
+  game: GameModel.example(),
   editedGame: {}
 };
 
-export default reducer(initialState, {
-  [GAME_CHANGE_ENROLLMENT_STATUS]: (state) => state,
-
-  [GAME_CHANGE_ENROLLMENT_STATUS_FAILURE]: (state) => state,
-
-  [GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
-
-  [GAME_CLOSE_ENROLLMENT_SUCCESS]: gameLoaded,
-
-  [GAME_DRAW_TEAMS_SUCCESS]: gameLoaded,
-
-  [GAME_EDIT]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
+export default ajaxReducer(
+  initialState,
+  {
+    startAction: GAME_LOAD,
+    failureAction: GAME_LOAD_FAILURE,
+    successAction: GAME_LOAD_SUCCESS
   },
+  {
+    [GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS]: gameLoaded,
 
-  [GAME_EDIT_CANCEL]: (state) => {
-    return {
-      ...state,
-      editedGame: {},
-      isEditing: false
-    };
-  },
+    [GAME_CLOSE_ENROLLMENT_SUCCESS]: gameLoaded,
 
-  [GAME_EDIT_SCORE_A]: (state, action) => {
-    const { teamAScore } = action;
-    return {
-      ...state,
-      editedGame: {
-        ...state.editedGame,
-        teamAScore: parseNumber(teamAScore)
-      }
-    };
-  },
+    [GAME_DRAW_TEAMS_SUCCESS]: gameLoaded,
 
-  [GAME_EDIT_SCORE_B]: (state, action) => {
-    const { teamBScore } = action;
-    return {
-      ...state,
-      editedGame: {
-        ...state.editedGame,
-        teamBScore: parseNumber(teamBScore)
-      }
-    };
-  },
+    [GAME_EDIT]: continueEditing,
 
-  [GAME_END_SUCCESS]: gameLoaded,
+    [GAME_EDIT_CANCEL]: (state) => {
+      return {
+        ...state,
+        editedGame: {},
+        isEditing: false
+      };
+    },
 
-  [GAME_LOAD]: (state) => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+    [GAME_EDIT_SCORE_A]: (state, action) => {
+      const { teamAScore } = action;
+      return {
+        ...state,
+        editedGame: {
+          ...state.editedGame,
+          teamAScore: parseNumber(teamAScore)
+        }
+      };
+    },
 
-  [GAME_LOAD_FAILURE]: (state) => {
-    return {
-      ...state,
-      isLoading: false
-    };
-  },
+    [GAME_EDIT_SCORE_B]: (state, action) => {
+      const { teamBScore } = action;
+      return {
+        ...state,
+        editedGame: {
+          ...state.editedGame,
+          teamBScore: parseNumber(teamBScore)
+        }
+      };
+    },
 
-  [GAME_LOAD_SUCCESS]: gameLoaded,
+    [GAME_END_SUCCESS]: gameLoaded,
 
-  [GAME_SAVE_FAILURE]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
+    [GAME_LOAD_SUCCESS]: gameLoaded,
 
-  [GAME_SAVE_SUCCESS]: gameLoaded,
+    [GAME_SAVE_FAILURE]: continueEditing,
 
-  [NEW_GAME_SUBMIT]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
+    [GAME_SAVE_SUCCESS]: gameLoaded,
 
-  [NEW_GAME_SUBMIT_FAILURE]: (state) => {
-    return {
-      ...state,
-      isEditing: true
-    };
-  },
+    [NEW_GAME_SUBMIT]: continueEditing,
 
-  [NEW_GAME_SUBMIT_SUCCESS]: gameLoaded
-});
+    [NEW_GAME_SUBMIT_FAILURE]: continueEditing,
+
+    [NEW_GAME_SUBMIT_SUCCESS]: gameLoaded
+  }
+);
 
 function gameLoaded(state, action) {
   const { time: lastUpdate } = action;
   const responseGame = safeGet(action, ['response', 'body'], {});
-  const game = mapGame(responseGame);
+  const game = GameModel.fromServerFormat(responseGame);
 
   return {
     ...initialState,
     lastUpdate,
     game
   };
+}
+
+function continueEditing(state) {
+  return { ...state, isEditing: true };
 }
