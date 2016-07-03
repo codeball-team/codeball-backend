@@ -5,18 +5,18 @@ import './PitchesListItem.scss';
 
 export default class PitchesListItem extends Component {
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.element,
+    className: PropTypes.string,
     pitch: PropTypes.object.isRequired
   };
 
   render() {
     const {
-      className,
       children,
+      className,
       pitch: {
-        id,
         address,
+        id,
         name
       }
     } = this.props;

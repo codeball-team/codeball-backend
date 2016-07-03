@@ -7,18 +7,18 @@ export default class GameLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
     teamA: PropTypes.array.isRequired,
-    teamB: PropTypes.array.isRequired
+    teamB: PropTypes.array.isRequired,
+    users: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
       currentUser,
-      users,
       teamA,
-      teamB
+      teamB,
+      users
     } = this.props;
 
     return (

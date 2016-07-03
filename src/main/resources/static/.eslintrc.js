@@ -1,7 +1,7 @@
 module.exports = {
   "parser": "babel-eslint",
 
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["eslint:recommended"],
 
   "parserOptions": {
     "ecmaVersion": 6,
@@ -204,7 +204,7 @@ module.exports = {
     "lines-around-comment": "off",
     "max-depth": ["error", 2],
     "max-len": ["error", 120],
-    "max-lines": ["error", 200],
+    "max-lines": ["warn", 200],
     "max-nested-callbacks": ["error", 2],
     "max-params": ["error", 3],
     "max-statements": ["error", 8],
@@ -317,7 +317,79 @@ module.exports = {
     }],
 
     // React
+    "react/display-name": "off",
+    "react/forbid-prop-types": ["error", {
+        "forbid": ["any"]
+    }],
+    "react/no-comment-textnodes": "error",
+    "react/no-danger": "error",
+    "react/no-deprecated": "error",
+    "react/no-did-mount-set-state": "error",
+    "react/no-did-update-set-state": "error",
+    "react/no-direct-mutation-state": "error",
+    "react/no-is-mounted": "error",
+    "react/no-multi-comp": "error",
+    "react/no-render-return-value": "error",
+    "react/no-set-state": "error",
+    "react/no-string-refs": "error",
+    "react/no-unknown-property": "error",
+    "react/prefer-es6-class": "error",
+    // "react/prefer-stateless-function": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/require-extension": "error",
+    // "react/require-optimization": "error",
+    "react/require-render-return": "error",
+    "react/self-closing-comp": "error",
+    "react/sort-comp": ["error", {
+      order: [
+        'static-methods',
+        'lifecycle',
+        '/^on.+$/',
+        'everything-else',
+        'render',
+        '/^render.+/'
+      ]
+    }],
+    "react/sort-prop-types": ["error", {
+        "ignoreCase": true,
+        "callbacksLast": true
+    }],
+    "react/wrap-multilines": "error",
+
+    // JSX-specific rules
     "react/jsx-boolean-value": ["error", "always"],
+    "react/jsx-closing-bracket-location": ["error", {
+        "nonEmpty": "after-props",
+        "selfClosing": "after-props"
+    }],
+    "react/jsx-curly-spacing": ["error", "never"],
+    "react/jsx-equals-spacing": ["error", "never"],
+    "react/jsx-filename-extension": ["error", {
+        "extensions": [".js"]
+    }],
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
+    "react/jsx-handler-names": ["error", {
+      "eventHandlerPrefix": "on",
+      "eventHandlerPropPrefix": "on"
+    }],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": ["error", 2],
+    "react/jsx-key": "error",
+    "react/jsx-max-props-per-line": ["error", {
+        "maximum": 3,
+    }],
+    "react/jsx-no-bind": "warn",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-literals": "off",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-pascal-case": "error",
+    "react/jsx-sort-props": "off",
+    "react/jsx-space-before-closing": ["error", "always"],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+    /*"react/jsx-boolean-value": ["error", "always"],
     "react/sort-comp": ["error", {
       order: [
         'static-methods',
@@ -344,6 +416,6 @@ module.exports = {
     "react/no-set-state": "off",
     "react/prefer-es6-class": "warn",
     "react/require-extension": "warn",
-    "react/self-closing-comp": "warn"
+    "react/self-closing-comp": "warn"*/
   }
 }

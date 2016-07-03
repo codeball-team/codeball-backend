@@ -4,14 +4,14 @@ import './ButtonsPanel.scss';
 
 export default class ButtonsPanel extends Component {
   static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    className: PropTypes.string
   };
 
   render() {
     const {
-      className,
-      children
+      children,
+      className
     } = this.props;
 
     return (

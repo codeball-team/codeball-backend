@@ -5,8 +5,8 @@ import './Button.scss';
 
 export default class Button extends Component {
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func
   };
@@ -16,17 +16,21 @@ export default class Button extends Component {
     onClick: _.noop
   };
 
+  onClick = () => {
+    const { onClick } = this.props;
+    onClick();
+  }
+
   render() {
     const {
-      className,
       children,
-      isDisabled,
-      onClick
+      className,
+      isDisabled
     } = this.props;
 
     return (
       <div
-        onClick={() => onClick()}
+        onClick={this.onClick}
         className={classNames(
           'button',
           'ellipsis',

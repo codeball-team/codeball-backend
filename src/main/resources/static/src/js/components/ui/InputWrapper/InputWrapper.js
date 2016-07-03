@@ -7,8 +7,8 @@ import './InputWrapper.scss';
 
 export default class InputWrapper extends Component {
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     isValid: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.string
@@ -16,8 +16,8 @@ export default class InputWrapper extends Component {
 
   render() {
     const {
-      className,
       children,
+      className,
       isValid,
       label,
       value

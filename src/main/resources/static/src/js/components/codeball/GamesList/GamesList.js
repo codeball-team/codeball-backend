@@ -8,7 +8,6 @@ export default class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
     formatUrl: PropTypes.func.isRequired,
-    currentUser: PropTypes.object.isRequired,
     games: PropTypes.array.isRequired,
     pitches: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired
@@ -32,10 +31,10 @@ export default class GamesList extends Component {
           const {
             id,
             date,
-            time,
             pitchId,
             teamAScore,
-            teamBScore
+            teamBScore,
+            time
           } = game;
           const { name: pitchName } = pitches[pitchId];
 

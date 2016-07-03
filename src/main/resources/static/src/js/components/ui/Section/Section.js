@@ -15,17 +15,17 @@ export default function SectionDecorator(ChildComponent) {
       isEditable: PropTypes.bool,
       isEditing: PropTypes.bool,
       title: PropTypes.node.isRequired,
+      onCancel: PropTypes.func,
       onEdit: PropTypes.func,
-      onSave: PropTypes.func,
-      onCancel: PropTypes.func
+      onSave: PropTypes.func
     };
 
     static defaultProps = {
       isEditable: false,
       isEditing: false,
+      onCancel: _.noop,
       onEdit: _.noop,
-      onSave: _.noop,
-      onCancel: _.noop
+      onSave: _.noop
     };
 
     render() {
@@ -66,21 +66,17 @@ export default function SectionDecorator(ChildComponent) {
                   }),
                   renderConditionally({
                     when: isEditing,
-                    render: () => (
+                    render: () => [
                       <Button key="cancel" onClick={onCancel}>
                         <IconCancel className="icon" />
                         <span className="label">Cancel</span>
-                      </Button>
-                    )
-                  }),
-                  renderConditionally({
-                    when: isEditing,
-                    render: () => (
+                      </Button>,
+
                       <Button key="save" onClick={onSave}>
                         <IconSave className="icon" />
                         <span className="label">Save</span>
                       </Button>
-                    )
+                    ]
                   })
                 ].filter(Boolean)
               })}

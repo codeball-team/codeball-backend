@@ -9,18 +9,18 @@ export default class GameInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
     date: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
-    pitch: PropTypes.object.isRequired
+    pitch: PropTypes.object.isRequired,
+    time: PropTypes.string.isRequired
   };
 
   render() {
     const {
       className,
       date,
-      time,
       duration,
-      pitch
+      pitch,
+      time
     } = this.props;
 
     return (

@@ -9,6 +9,8 @@ import Calendar from 'react-datepicker/lib/calendar';
 import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
 import './NewGame.scss';
 
+const onClickOutside = _.noop;
+
 export default class NewGame extends Component {
   static propTypes = {
     className: PropTypes.string,
@@ -18,11 +20,11 @@ export default class NewGame extends Component {
     minute: PropTypes.number,
     pitches: PropTypes.array.isRequired,
     pitchId: PropTypes.number,
+    onDateChange: PropTypes.func.isRequired,
     onDurationChange: PropTypes.func.isRequired,
     onHourChange: PropTypes.func.isRequired,
     onMinuteChange: PropTypes.func.isRequired,
-    onPitchIdChange: PropTypes.func.isRequired,
-    onDateChange: PropTypes.func.isRequired
+    onPitchIdChange: PropTypes.func.isRequired
   };
 
   onPitchIdChange = ({ value }) => {
@@ -44,9 +46,9 @@ export default class NewGame extends Component {
       minute,
       pitches,
       pitchId,
-      onMinuteChange,
+      onDurationChange,
       onHourChange,
-      onDurationChange
+      onMinuteChange
     } = this.props;
 
     const pitchesOptions = pitches.map(({ id, name }) => ({
@@ -125,7 +127,7 @@ export default class NewGame extends Component {
                 locale="en-GB"
                 minDate={moment()}
                 selected={date && selectedStartDate}
-                onClickOutside={_.noop}
+                onClickOutside={onClickOutside}
                 onSelect={this.onDateChange} />
             </InputWrapper>
           ]

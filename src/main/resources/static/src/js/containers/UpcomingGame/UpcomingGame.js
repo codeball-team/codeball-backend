@@ -15,11 +15,11 @@ export default function GenerateUpcomingGame(getGameId) {
   class UpcomingGame extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
-      params: PropTypes.object.isRequired,
+      currentUserData: PropTypes.object.isRequired,
       gameData: PropTypes.object.isRequired,
+      params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
-      usersData: PropTypes.object.isRequired,
-      currentUserData: PropTypes.object.isRequired
+      usersData: PropTypes.object.isRequired
     };
 
     componentWillMount = () => {
@@ -39,6 +39,39 @@ export default function GenerateUpcomingGame(getGameId) {
       }
     };
 
+    onCloseEnrollment = () => {
+      const {
+        actions: { gameCloseEnrollment },
+        gameData: { game: { id: gameId } }
+      } = this.props;
+      gameCloseEnrollment(gameId);
+    };
+
+    onDrawTeams = () => {
+      const {
+        actions: { gameDrawTeams },
+        gameData: { game: { id: gameId } }
+      } = this.props;
+      gameDrawTeams(gameId);
+    };
+
+    onEndGame = () => {
+      const {
+        actions: { gameEnd },
+        gameData: { game: { id: gameId } }
+      } = this.props;
+      gameEnd(gameId);
+    };
+
+    onEnrollmentStatusChange = enrollmentStatus => {
+      const {
+        actions: { gameChangeEnrollmentStatus },
+        currentUserData: { currentUser: { id: userId } },
+        gameData: { game: { id: gameId } }
+      } = this.props;
+      gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus);
+    };
+
     updateData = props => {
       const {
         actions: {
@@ -47,6 +80,7 @@ export default function GenerateUpcomingGame(getGameId) {
           pitchesLoad,
           usersLoad
         },
+        currentUserData,
         params: { gameId },
         pitchesData,
         usersData
@@ -54,34 +88,27 @@ export default function GenerateUpcomingGame(getGameId) {
 
       gameLoad(gameId);
       refreshDataIfNecessary(usersData, usersLoad);
-      refreshDataIfNecessary(usersData, currentUserLoad);
+      refreshDataIfNecessary(currentUserData, currentUserLoad);
       refreshDataIfNecessary(pitchesData, pitchesLoad);
     };
 
     render() {
       const {
-        actions: {
-          gameChangeEnrollmentStatus,
-          gameCloseEnrollment,
-          gameDrawTeams,
-          gameEnd
-        },
         currentUserData: {
           currentUser,
           isLoading: isCurrentUserLoading
         },
         gameData: {
           game: {
-            id: gameId,
             date,
-            time,
             duration,
-            pitchId,
+            enrolledUsers,
             isEnrollmentOver,
             isGameOver,
-            enrolledUsers,
+            pitchId,
             teamA,
-            teamB
+            teamB,
+            time
           },
           isLoading: isGameLoading
         },
@@ -128,7 +155,7 @@ export default function GenerateUpcomingGame(getGameId) {
                       render: () => (
                         <Button
                           key="close-enrollment"
-                          onClick={() => gameCloseEnrollment(gameId)}>
+                          onClick={this.onCloseEnrollment}>
                           <IconSave className="icon" />
                           <span className="label">Close enrollment</span>
                         </Button>
@@ -139,14 +166,14 @@ export default function GenerateUpcomingGame(getGameId) {
                       render: () => [
                         <Button
                           key="draw-teams"
-                          onClick={() => gameDrawTeams(gameId)}>
+                          onClick={this.onDrawTeams}>
                           <IconShuffle className="icon" />
                           <span className="label">Draw teams</span>
                         </Button>,
 
                         <Button
                           key="end-game"
-                          onClick={() => gameEnd(gameId)}>
+                          onClick={this.onEndGame}>
                           <IconSave className="icon" />
                           <span className="label">End game</span>
                         </Button>
@@ -161,7 +188,7 @@ export default function GenerateUpcomingGame(getGameId) {
                   <GameEnrollmentFormSection
                     title="Are you going?"
                     value={selectedEnrollmentStatus}
-                    onChange={enrollmentStatus => gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus)} />
+                    onChange={this.onEnrollmentStatusChange} />
                 )
               })}
 

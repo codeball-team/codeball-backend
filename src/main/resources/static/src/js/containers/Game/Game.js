@@ -7,9 +7,9 @@ export default function GenerateGame(getGameId) {
   class Game extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
-      params: PropTypes.object.isRequired,
       currentUserData: PropTypes.object.isRequired,
       gameData: PropTypes.object.isRequired,
+      params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
       usersData: PropTypes.object.isRequired
     };
@@ -31,6 +31,21 @@ export default function GenerateGame(getGameId) {
       }
     };
 
+    onSave() {
+      const {
+        actions: {
+          gameSave
+        },
+        gameData: {
+          editedGame,
+          game: {
+            id: gameId
+          }
+        }
+      } = this.props;
+      gameSave(gameId, editedGame);
+    }
+
     updateData = props => {
       const {
         actions: {
@@ -39,8 +54,8 @@ export default function GenerateGame(getGameId) {
           pitchesLoad,
           usersLoad
         },
-        params: { gameId },
         currentUserData,
+        params: { gameId },
         pitchesData,
         usersData
       } = props;
@@ -57,8 +72,7 @@ export default function GenerateGame(getGameId) {
           gameEdit,
           gameEditCancel,
           gameEditScoreA,
-          gameEditScoreB,
-          gameSave
+          gameEditScoreB
         },
         currentUserData: {
           currentUser,
@@ -80,12 +94,7 @@ export default function GenerateGame(getGameId) {
         }
       } = this.props;
 
-      const {
-        id: gameId,
-        pitchId,
-        teamA,
-        teamB
-      } = game;
+      const { pitchId, teamA, teamB } = game;
       const pitch = pitches[pitchId];
 
       const isContentLoading = [
@@ -108,7 +117,7 @@ export default function GenerateGame(getGameId) {
                 game={isEditing ? Object.assign({}, game, editedGame) : game}
                 onEdit={gameEdit}
                 onCancel={gameEditCancel}
-                onSave={() => gameSave(gameId, editedGame)}
+                onSave={this.onSave}
                 onEditGameScoreA={gameEditScoreA}
                 onEditGameScoreB={gameEditScoreB} />
 

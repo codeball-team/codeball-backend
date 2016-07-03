@@ -6,18 +6,18 @@ import './PlayersListItem.scss';
 
 export default class PlayersListItem extends Component {
   static propTypes = {
-    className: PropTypes.string,
     children: PropTypes.element,
+    className: PropTypes.string,
     user: PropTypes.object.isRequired
   };
 
   render() {
     const {
-      className,
       children,
+      className,
       user: {
-        id,
         firstName,
+        id,
         lastName,
         pictureUrl
       }

@@ -28,13 +28,13 @@ class Pitch extends Component {
 
   render() {
     const {
-      params,
+      params: { pitchId },
       pitchesData: {
         pitches,
         isLoading: arePitchesLoading
       }
     } = this.props;
-    const pitch = pitches[params.pitchId];
+    const pitch = pitches[pitchId];
     const { name } = pitch;
 
     return (

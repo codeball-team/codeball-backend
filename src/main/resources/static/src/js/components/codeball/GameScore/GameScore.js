@@ -7,8 +7,8 @@ import './GameScore.scss';
 export default class GameScore extends Component {
   static propTypes = {
     className: PropTypes.string,
-    isEditing: PropTypes.bool,
     game: PropTypes.object.isRequired,
+    isEditing: PropTypes.bool,
     pitch: PropTypes.object.isRequired,
     onEditGameScoreA: PropTypes.func,
     onEditGameScoreB: PropTypes.func
@@ -27,13 +27,13 @@ export default class GameScore extends Component {
   render() {
     const {
       className,
-      isEditing,
       game: {
         date,
         time,
         teamAScore,
         teamBScore
       },
+      isEditing,
       pitch: {
         id: pitchId,
         name: pitchName

@@ -5,15 +5,15 @@ import classNames from 'classnames';
 export default class GameEnrollmentListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
-    user: PropTypes.object.isRequired,
-    enrollmentStatus: PropTypes.string.isRequired
+    enrollmentStatus: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
-      user,
-      enrollmentStatus
+      enrollmentStatus,
+      user
     } = this.props;
 
     return (

@@ -48,13 +48,17 @@ export default class GameEnrollmentForm extends Component {
           'game-enrollment-form',
           className
         )}>
-        {GAME_ENROLLMENT_FORM_OPTIONS.map(option => (
-          <GameEnrollmentFormOption
-            key={option.value}
-            inactive={value !== undefined && option.value !== value}
-            onClick={() => onChange(option.value)}
-            {...option} />
-        ))}
+        {GAME_ENROLLMENT_FORM_OPTIONS.map(option => {
+          const { value: optionValue } = option;
+          return (
+            <GameEnrollmentFormOption
+              key={optionValue}
+              inactive={value !== undefined && optionValue !== value}
+              value={optionValue}
+              onClick={onChange}
+              {...option} />
+          );
+        })}
       </div>
     );
   }

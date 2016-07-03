@@ -7,20 +7,25 @@ export default class GameEnrollmentFormOption extends Component {
     className: PropTypes.string,
     inactive: PropTypes.bool,
     text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
+  };
+
+  onClick = () => {
+    const { value, onClick } = this.props;
+    onClick(value);
   };
 
   render() {
     const {
       className,
       inactive,
-      text,
-      onClick
+      text
     } = this.props;
 
     return (
       <Button
-        onClick={() => onClick()}
+        onClick={this.onClick}
         className={classNames(
           'option',
           className,

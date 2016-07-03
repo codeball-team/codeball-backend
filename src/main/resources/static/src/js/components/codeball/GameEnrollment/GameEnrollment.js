@@ -19,15 +19,15 @@ const ENROLLMENT_STATUSES = Object.keys(ENROLLMENT_STATUS_STRING);
 export default class GameEnrollment extends Component {
   static propTypes = {
     className: PropTypes.string,
-    users: PropTypes.object.isRequired,
-    enrolledUsers: PropTypes.object.isRequired
+    enrolledUsers: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
-      users,
-      enrolledUsers
+      enrolledUsers,
+      users
     } = this.props;
 
     return (

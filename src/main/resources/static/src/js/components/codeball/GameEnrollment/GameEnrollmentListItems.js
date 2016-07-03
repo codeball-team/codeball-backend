@@ -6,15 +6,15 @@ import GameEnrollmentListItem from './GameEnrollmentListItem';
 export default class GameEnrollmentListItems extends Component {
   static propTypes = {
     className: PropTypes.string,
-    enrollmentStatus: PropTypes.string.isRequired,
-    enrolledUsers: PropTypes.array.isRequired
+    enrolledUsers: PropTypes.array.isRequired,
+    enrollmentStatus: PropTypes.string.isRequired
   };
 
   render() {
     const {
       className,
-      enrollmentStatus,
-      enrolledUsers
+      enrolledUsers,
+      enrollmentStatus
     } = this.props;
 
     return (

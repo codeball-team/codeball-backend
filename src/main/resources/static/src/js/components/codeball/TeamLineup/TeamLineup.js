@@ -8,18 +8,18 @@ export default class TeamLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
+    team: PropTypes.array.isRequired,
     teamName: PropTypes.string.isRequired,
-    users: PropTypes.object.isRequired,
-    team: PropTypes.array.isRequired
+    users: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
       currentUser,
+      team,
       teamName,
-      users,
-      team
+      users
     } = this.props;
 
     const teamUsers = team.map(userId => users[userId]).filter(Boolean);

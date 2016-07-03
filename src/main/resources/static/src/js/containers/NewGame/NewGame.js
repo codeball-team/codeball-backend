@@ -28,16 +28,38 @@ class NewGame extends Component {
     refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
+  onDateChange = date => {
+    const { actions: { newGameChangeDate } } = this.props;
+    newGameChangeDate(date);
+  };
+
+  onDurationChange = duration => {
+    const { actions: { newGameChangeDuration } } = this.props;
+    newGameChangeDuration(duration);
+  };
+
+  onHourChange = hour => {
+    const { actions: { newGameChangeHour } } = this.props;
+    newGameChangeHour(hour);
+  };
+
+  onMinuteChange = minute => {
+    const { actions: { newGameChangeMinute } } = this.props;
+    newGameChangeMinute(minute);
+  };
+
+  onPitchIdChange = pitchId => {
+    const { actions: { newGameChangePitchId } } = this.props;
+    newGameChangePitchId(pitchId);
+  };
+
+  onSubmit = () => {
+    const { actions: { newGameSubmit }, newGame } = this.props;
+    newGameSubmit(newGame);
+  };
+
   render() {
     const {
-      actions: {
-        newGameChangeDate,
-        newGameChangeDuration,
-        newGameChangeHour,
-        newGameChangeMinute,
-        newGameChangePitchId,
-        newGameSubmit
-      },
       newGame,
       pitchesData: {
         pitches,
@@ -75,16 +97,16 @@ class NewGame extends Component {
                 <Button
                   key="save"
                   isDisabled={!NewGameModel.isValid(newGame)}
-                  onClick={() => newGameSubmit(newGame)}>
+                  onClick={this.onSubmit}>
                   <IconSave className="icon" />
                   <span className="label">Save</span>
                 </Button>
               ]}
-              onDateChange={newDate => newGameChangeDate(newDate)}
-              onDurationChange={newDuration => newGameChangeDuration(newDuration)}
-              onHourChange={newHour => newGameChangeHour(newHour)}
-              onMinuteChange={newMinute => newGameChangeMinute(newMinute)}
-              onPitchIdChange={newPitchId => newGameChangePitchId(newPitchId)} />
+              onDateChange={this.onDateChange}
+              onDurationChange={this.onDurationChange}
+              onHourChange={this.onHourChange}
+              onMinuteChange={this.onMinuteChange}
+              onPitchIdChange={this.onPitchIdChange} />
           </section>
         )} />
     );
