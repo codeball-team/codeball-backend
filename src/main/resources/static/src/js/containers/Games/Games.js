@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { refreshDataIfNecessary, sortByMany } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, refreshDataIfNecessary, sortByMany } from 'utils';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -100,22 +97,9 @@ class Games extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUserData: state.currentUserData,
-    gamesData: state.gamesData,
-    pitchesData: state.pitchesData,
-    usersData: state.usersData
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(codeballActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Games);
+export default bindActionsAndConnect(Games, state => ({
+  currentUserData: state.currentUserData,
+  gamesData: state.gamesData,
+  pitchesData: state.pitchesData,
+  usersData: state.usersData
+}));

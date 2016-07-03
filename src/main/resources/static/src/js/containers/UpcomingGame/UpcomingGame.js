@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 import { PitchModel } from 'models';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
@@ -102,12 +99,10 @@ export default function GenerateUpcomingGame(getGameId) {
 
       const { id: userId } = currentUser;
       const pitch = new PitchModel(pitches[pitchId]);
-
+      const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
       const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
         return userIds.includes(userId) ? status : selectedEnrollmentStatus;
       }, undefined);
-
-      const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
 
       const isContentLoading = [
         arePitchesLoading,
@@ -197,23 +192,10 @@ export default function GenerateUpcomingGame(getGameId) {
     }
   }
 
-  function mapStateToProps(state) {
-    return {
-      gameData: state.gameData,
-      pitchesData: state.pitchesData,
-      usersData: state.usersData,
-      currentUserData: state.currentUserData
-    };
-  }
-
-  function mapDispatchToProps(dispatch) {
-    return {
-      actions: bindActionCreators(codeballActions, dispatch)
-    };
-  }
-
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(UpcomingGame);
+  return bindActionsAndConnect(UpcomingGame, state => ({
+    gameData: state.gameData,
+    pitchesData: state.pitchesData,
+    usersData: state.usersData,
+    currentUserData: state.currentUserData
+  }));
 }

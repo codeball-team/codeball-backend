@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect } from 'utils';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -63,20 +61,7 @@ class Players extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUserData: state.currentUserData,
-    usersData: state.usersData
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(codeballActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Players);
+export default bindActionsAndConnect(Players, state => ({
+  currentUserData: state.currentUserData,
+  usersData: state.usersData
+}));

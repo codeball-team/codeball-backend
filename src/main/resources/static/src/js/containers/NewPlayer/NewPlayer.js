@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { refreshDataIfNecessary } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { LoadableContent } from 'components/ui';
 //import { NewPlayerSection } from 'components/sections';
 
@@ -65,21 +62,8 @@ class NewPlayer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUserData: state.currentUserData,
-    pitchesData: state.pitchesData,
-    usersData: state.usersData
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(codeballActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewPlayer);
+export default bindActionsAndConnect(NewPlayer, state => ({
+  currentUserData: state.currentUserData,
+  pitchesData: state.pitchesData,
+  usersData: state.usersData
+}));

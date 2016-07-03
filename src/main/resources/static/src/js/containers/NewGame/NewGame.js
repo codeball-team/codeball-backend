@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { refreshDataIfNecessary } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { NewGameModel } from 'models';
 import { Link } from 'react-router';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
@@ -94,20 +91,7 @@ class NewGame extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    newGame: state.newGame,
-    pitchesData: state.pitchesData
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(codeballActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewGame);
+export default bindActionsAndConnect(NewGame, state => ({
+  newGame: state.newGame,
+  pitchesData: state.pitchesData
+}));

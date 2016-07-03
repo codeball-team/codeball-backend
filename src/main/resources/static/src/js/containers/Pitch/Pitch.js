@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { safeGet } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 
@@ -54,19 +51,6 @@ class Pitch extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    pitchesData: state.pitchesData
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(codeballActions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pitch);
+export default bindActionsAndConnect(Pitch, state => ({
+  pitchesData: state.pitchesData
+}))

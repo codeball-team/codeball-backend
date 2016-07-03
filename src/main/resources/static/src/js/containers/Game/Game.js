@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { refreshDataIfNecessary, safeGet } from 'utils';
-import * as codeballActions from 'actions';
+import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 
@@ -131,23 +128,10 @@ export default function GenerateGame(getGameId) {
     }
   }
 
-  function mapStateToProps(state) {
-    return {
-      currentUserData: state.currentUserData,
-      gameData: state.gameData,
-      pitchesData: state.pitchesData,
-      usersData: state.usersData
-    };
-  }
-
-  function mapDispatchToProps(dispatch) {
-    return {
-      actions: bindActionCreators(codeballActions, dispatch)
-    };
-  }
-
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Game);
+  return bindActionsAndConnect(Game, state => ({
+    currentUserData: state.currentUserData,
+    gameData: state.gameData,
+    pitchesData: state.pitchesData,
+    usersData: state.usersData
+  }));
 }

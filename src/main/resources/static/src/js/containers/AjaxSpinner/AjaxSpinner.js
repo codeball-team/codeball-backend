@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { bindActionsAndConnect } from 'utils';
 import { Spinner } from 'components/ui';
 
 class AjaxSpinner extends Component {
@@ -18,12 +18,6 @@ class AjaxSpinner extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    ajaxRequests: state.ajaxRequests
-  };
-}
-
-export default connect(
-  mapStateToProps
-)(AjaxSpinner);
+export default bindActionsAndConnect(AjaxSpinner, state => ({
+  ajaxRequests: state.ajaxRequests
+}));
