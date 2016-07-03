@@ -14,11 +14,12 @@ function createEnhancer(history) {
     return createDevelopmentEnhancer(createDevelopmentMiddleware(history));
   }
 
-  return createProductionEnhancer(createProductionMiddleware());
+  return createProductionEnhancer(createProductionMiddleware(history));
 }
 
-function createProductionMiddleware() {
+function createProductionMiddleware(history) {
   return applyMiddleware(
+    routerMiddleware(history),
     require('redux-thunk').default
   );
 }
