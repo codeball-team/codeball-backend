@@ -38,6 +38,9 @@ export const ROLE_STRING = {
   [ROLE_USER]: 'User'
 };
 
+export const MIN_PITCH_CAPACITY = 2;
+export const MAX_PITCH_CAPACITY = 22;
+
 export const DURATION_OPTIONS = [60, 90, 120, 150, 180].map(minutes => ({
   label: `${minutes} min`,
   value: minutes

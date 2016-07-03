@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { renderConditionally } from 'utils';
+import { MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY } from 'constants';
 import { EditableText, InputWrapper, RangePicker } from 'components/ui';
 
 export default class NewPitch extends Component {
@@ -30,11 +31,11 @@ export default class NewPitch extends Component {
       onNameChange
     } = this.props;
 
-    const isAddressProvided = !_.isUndefined(address);
+    const isAddressProvided = Boolean(address);
     const isMaxNumberOfPlayersProvided = !_.isUndefined(maxNumberOfPlayers);
     const isMinNumberOfPlayersProvided = !_.isUndefined(minNumberOfPlayers);
     const isCapacityProvided = isMinNumberOfPlayersProvided && isMaxNumberOfPlayersProvided;
-    const isNameProvided = !_.isUndefined(name);
+    const isNameProvided = Boolean(name);
     const capacity = minNumberOfPlayers === maxNumberOfPlayers
       ? `${minNumberOfPlayers}`
       : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`;
@@ -79,9 +80,9 @@ export default class NewPitch extends Component {
               isValid={isCapacityProvided}>
               <RangePicker
                 min={minNumberOfPlayers}
-                minOptions={_.range(1, maxNumberOfPlayers + 1)}
+                minOptions={_.range(MIN_PITCH_CAPACITY, maxNumberOfPlayers + 1, 2)}
                 max={maxNumberOfPlayers}
-                maxOptions={_.range(minNumberOfPlayers, 22 + 1)}
+                maxOptions={_.range(minNumberOfPlayers, MAX_PITCH_CAPACITY + 1, 2)}
                 orientation="vertical"
                 separator="-"
                 onMinChange={onMinNumberOfPlayersChange}
