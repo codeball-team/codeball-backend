@@ -17,9 +17,7 @@
     "start": "webpack-dev-server --config ./config/webpack.config.dev.js --hot --inline --progress",
     "prebuild": "npm run clean:build && npm run build:html",
     "build": "SET NODE_ENV=production& NODE_ENV=production& webpack -p --config ./config/webpack.config.prod.js --progress",
-    "lint": "npm run eslint && npm run jscs",
-    "eslint": "eslint config src/js --ext .js",
-    "jscs": "jscs src/js/",
+    "lint": "eslint config src/js --ext .js --fix",
     "test": "set NODE_PATH=%CD%/src/js&& mocha --compilers js:babel-core/register,css:./test/unit/cssNullCompiler.js --require ./test/unit/testHelper.js --recursive ./test/unit",
     "test:watch": "npm run test -- --watch"
   },
@@ -42,7 +40,6 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
     "jquery": "2.2.2",
-    "jscs": "2.10.1",
     "jsdom": "8.2.0",
     "json-loader": "0.5.4",
     "mocha": "2.4.5",
