@@ -35,7 +35,7 @@ class Pitch extends Component {
       }
     } = this.props;
     const pitch = pitches[pitchId];
-    const { name } = pitch;
+    const name = safeGet(pitch, ['name']);
 
     return (
       <LoadableContent

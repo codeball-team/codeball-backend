@@ -27,6 +27,10 @@ export default class PitchInfo extends Component {
       }
     } = this.props;
 
+    const capacity = minNumberOfPlayers === maxNumberOfPlayers
+      ? `${minNumberOfPlayers}`
+      : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`;
+
     return (
       <div
         className={classNames(
@@ -64,11 +68,7 @@ export default class PitchInfo extends Component {
 
         <div title="Pitch capacity">
           <IconPeople className="icon" />
-          {
-            minNumberOfPlayers === maxNumberOfPlayers
-              ? `${minNumberOfPlayers}`
-              : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`
-          }
+          {capacity}
         </div>
       </div>
     );

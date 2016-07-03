@@ -5,6 +5,7 @@ import currentUserData from './currentUserData';
 import gameData from './gameData';
 import gamesData from './gamesData';
 import newGame from './newGame';
+import newPitch from './newPitch';
 import pitchesData from './pitchesData';
 import usersData from './usersData';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   gameData,
   gamesData,
   newGame,
+  newPitch,
   pitchesData,
   usersData,
   routing: routerReducer

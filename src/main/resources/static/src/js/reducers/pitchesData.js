@@ -1,6 +1,9 @@
 import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
 import { PitchModel } from 'models';
-import { PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS } from 'constants/actionTypes';
+import {
+  NEW_PITCH_SUBMIT_SUCCESS,
+  PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
+} from 'constants/actionTypes';
 
 const initialState = {
   ...ajaxReducerInitialState,
@@ -17,6 +20,19 @@ export default ajaxReducer(
     successAction: PITCHES_LOAD_SUCCESS
   },
   {
+    [NEW_PITCH_SUBMIT_SUCCESS]: (state, action) => {
+      const responsePitch = safeGet(action, ['response', 'body'], {});
+      const mappedPitch = PitchModel.fromServerFormat(responsePitch);
+      const { id } = mappedPitch;
+      return {
+        ...state,
+        pitches: {
+          ...state.pitches,
+          [id]: mappedPitch
+        }
+      };
+    },
+
     [PITCHES_LOAD_SUCCESS]: (state, action) => {
       const responsePitches = safeGet(action, ['response', 'body'], []);
       const mappedPitches = responsePitches.map(PitchModel.fromServerFormat);

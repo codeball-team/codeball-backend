@@ -1,69 +1,89 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
-import { LoadableContent } from 'components/ui';
-// import { NewPitchSection } from 'components/sections';
+import { bindActionsAndConnect } from 'utils';
+import { NewPitchModel } from 'models';
+import { Link } from 'react-router';
+import IconCancel from 'react-icons/lib/io/ios-close-outline';
+import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { NewPitchSection } from 'components/sections';
+import { Button } from 'components/ui';
 
 class NewPitch extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    currentUserData: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired
+    newPitch: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const {
-      actions: {
-        currentUserLoad,
-        pitchesLoad,
-        usersLoad
-      },
-      currentUserData,
-      pitchesData,
-      usersData
-    } = this.props;
+    const { actions: { newPitchReset } } = this.props;
+    newPitchReset();
+  };
 
-    refreshDataIfNecessary(currentUserData, currentUserLoad);
-    refreshDataIfNecessary(pitchesData, pitchesLoad);
-    refreshDataIfNecessary(usersData, usersLoad);
+  onAddressChange = address => {
+    const { actions: { newPitchChangeAddress } } = this.props;
+    newPitchChangeAddress(address);
+  };
+
+  onMinNumberOfPlayersChange = minNumberOfPlayers => {
+    const { actions: { newPitchChangeMinNumberOfPlayers } } = this.props;
+    newPitchChangeMinNumberOfPlayers(minNumberOfPlayers);
+  };
+
+  onMaxNumberOfPlayersChange = maxNumberOfPlayers => {
+    const { actions: { newPitchChangeMaxNumberOfPlayers } } = this.props;
+    newPitchChangeMaxNumberOfPlayers(maxNumberOfPlayers);
+  };
+
+  onNameChange = name => {
+    const { actions: { newPitchChangeName } } = this.props;
+    newPitchChangeName(name);
+  };
+
+  onSubmit = () => {
+    const { actions: { newPitchSubmit }, newPitch } = this.props;
+    newPitchSubmit(newPitch);
   };
 
   render() {
+    const { newPitch } = this.props;
     const {
-      currentUserData: {
-        currentUser,
-        isLoading: isCurrentUserLoading
-      },
-      pitchesData: {
-        pitches,
-        isLoading: arePitchesLoading
-      },
-      usersData: {
-        users,
-        isLoading: areUsersLoading
-      }
-    } = this.props;
-
-    const isContentLoading = [
-      arePitchesLoading,
-      areUsersLoading,
-      isCurrentUserLoading
-    ].some(Boolean);
+      address,
+      minNumberOfPlayers,
+      maxNumberOfPlayers,
+      name
+    } = newPitch;
 
     return (
-      <LoadableContent
-        isLoading={isContentLoading}
-        render={() => (
-          <section className="new-pitch">
-            new pitch
-          </section>
-        )} />
+      <section className="new-pitch">
+        <NewPitchSection
+          title="New pitch"
+          address={address}
+          minNumberOfPlayers={minNumberOfPlayers}
+          maxNumberOfPlayers={maxNumberOfPlayers}
+          name={name}
+          buttons={[
+            <Link key="cancel" to="/pitches">
+              <Button>
+                <IconCancel className="icon" />
+                <span className="label">Cancel</span>
+              </Button>
+            </Link>,
+            <Button
+              key="save"
+              isDisabled={!NewPitchModel.isValid(newPitch)}
+              onClick={this.onSubmit}>
+              <IconSave className="icon" />
+              <span className="label">Save</span>
+            </Button>
+          ]}
+          onAddressChange={this.onAddressChange}
+          onMinNumberOfPlayersChange={this.onMinNumberOfPlayersChange}
+          onMaxNumberOfPlayersChange={this.onMaxNumberOfPlayersChange}
+          onNameChange={this.onNameChange} />
+      </section>
     );
   }
 }
 
 export default bindActionsAndConnect(NewPitch, state => ({
-  currentUserData: state.currentUserData,
-  pitchesData: state.pitchesData,
-  usersData: state.usersData
+  newPitch: state.newPitch
 }));

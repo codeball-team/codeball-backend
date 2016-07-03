@@ -8,7 +8,7 @@ export ListItem from './ListItem/ListItem';
 export LoadableContent from './LoadableContent/LoadableContent';
 export Navigation from './Navigation/Navigation';
 export Page from './Page/Page';
+export RangePicker from './RangePicker/RangePicker';
 export Section from './Section/Section';
 export Spinner from './Spinner/Spinner';
-export TimePicker from './TimePicker/TimePicker';
 export ValuePicker from './ValuePicker/ValuePicker';

@@ -6,10 +6,10 @@ import { findLabelByValue, padLeft, renderConditionally } from 'utils';
 import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
-import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
-import './NewGame.scss';
+import { InputWrapper, RangePicker, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
+const formatter = value => padLeft(value, 2);
 
 export default class NewGame extends Component {
   static propTypes = {
@@ -105,14 +105,17 @@ export default class NewGame extends Component {
               label="Start time"
               value={`${padLeft(hour, 2)}:${padLeft(minute, 2)}`}
               isValid={isStartTimeSelected}>
-              <div className="date-input">
-                <TimePicker
-                  hour={hour}
-                  hourOptions={HOUR_OPTIONS}
-                  minute={minute}
-                  minuteOptions={MINUTE_OPTIONS}
-                  onHourChange={onHourChange}
-                  onMinuteChange={onMinuteChange} />
+              <div className="time-input">
+                <RangePicker
+                  formatter={formatter}
+                  min={hour}
+                  minOptions={HOUR_OPTIONS}
+                  max={minute}
+                  maxOptions={MINUTE_OPTIONS}
+                  orientation="vertical"
+                  separator=":"
+                  onMinChange={onHourChange}
+                  onMaxChange={onMinuteChange} />
               </div>
             </InputWrapper>,
 

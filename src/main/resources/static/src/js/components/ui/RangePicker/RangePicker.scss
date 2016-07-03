@@ -1,20 +1,20 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
 
-.time-picker {
+.range-picker {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   align-items: center;
 
-  .hour-picker {
-    flex: 1 1 auto;
+  .min-picker {
+    flex: 0 1 auto;
     margin-right: $spacing-s;
   }
 
-  .minute-picker {
+  .max-picker {
+    flex: 0 1 auto;
     margin-left: $spacing-s;
-    flex: 1 0 auto;
   }
 
   .separator {
@@ -22,11 +22,11 @@
   }
 
   @include phone {
-    .hour-picker {
+    .min-picker {
       flex: 0 1 auto;
     }
 
-    .minute-picker {
+    .max-picker {
       flex: 1 1 auto;
     }
   }

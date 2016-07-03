@@ -50,9 +50,7 @@ export default class NumberPicker extends Component {
       <div
         className={classNames(
           'number-picker',
-          {
-            vertical: orientation === 'vertical'
-          },
+          orientation,
           className
         )}>
         <Button className="subtract" onClick={this.onSubtract}>

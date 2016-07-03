@@ -7,6 +7,7 @@ import {
   GameScore,
   GamesList,
   NewGame,
+  NewPitch,
   PitchesList,
   PitchInfo,
   PlayerProfile,
@@ -20,6 +21,7 @@ export const GameLineupSection = Section(GameLineup);
 export const GameScoreSection = Section(GameScore);
 export const GamesListSection = Section(GamesList);
 export const NewGameSection = Section(NewGame);
+export const NewPitchSection = Section(NewPitch);
 export const PitchesListSection = Section(PitchesList);
 export const PitchInfoSection = Section(PitchInfo);
 export const PlayerProfileSection = Section(PlayerProfile);

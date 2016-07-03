@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-export const DATA_INVALIDATION_TIME = 5 * 60 * 1000 * 1000;
+export const DATA_INVALIDATION_TIME = 0 * 5 * 60 * 1000 * 1000;
 export const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
 
 export const DATE_FORMAT = 'YYYY/MM/DD (ddd)';

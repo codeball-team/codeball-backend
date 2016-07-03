@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { sortByMany } from 'utils';
 import { List } from 'components/ui';
 import PitchesListItem from '../PitchesListItem/PitchesListItem';
 
@@ -15,13 +16,15 @@ export default class PitchesList extends Component {
       pitches
     } = this.props;
 
+    const sortedPitches = sortByMany(pitches, 'name');
+
     return (
       <List
         className={classNames(
           'pitches-list',
           className
         )}>
-        {pitches.map(pitch => {
+        {sortedPitches.map(pitch => {
           const { id } = pitch;
 
           return (

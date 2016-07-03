@@ -33,6 +33,13 @@ export function gamesUrl() {
   return `${BASE_API_URL}/${GAMES}`;
 }
 
+export function pitchAdminUrl(pitchId) {
+  if (pitchId) {
+    return `${BASE_API_URL}/${ADMIN}/pitch/${pitchId}`;
+  }
+  return `${BASE_API_URL}/${ADMIN}/pitch`;
+}
+
 export function pitchUrl(pitchId) {
   return `${pitchesUrl()}/${pitchId}`;
 }

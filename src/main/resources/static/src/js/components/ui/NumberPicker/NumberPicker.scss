@@ -18,6 +18,7 @@
   .value {
     display: inline-block;
     width: 41px;
+    text-align: center;
 
     @include phone {
       width: 39px;
