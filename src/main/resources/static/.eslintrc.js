@@ -389,33 +389,5 @@ module.exports = {
     "react/jsx-space-before-closing": ["error", "always"],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
-    /*"react/jsx-boolean-value": ["error", "always"],
-    "react/sort-comp": ["error", {
-      order: [
-        'static-methods',
-        'lifecycle',
-        '/^on.+$/',
-        'everything-else',
-        'render',
-        '/^render.+/'
-      ]
-    }],
-    "react/wrap-multilines": "error",
-    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
-    "react/jsx-closing-bracket-location": "off",
-    "react/jsx-curly-spacing": "warn",
-    "react/jsx-indent-props": "off",
-    "react/jsx-key": "warn",
-    "react/jsx-max-props-per-line": "off",
-    "react/jsx-no-bind": "off",
-    "react/jsx-no-literals": "off",
-    "react/jsx-pascal-case": "warn",
-    "react/jsx-sort-prop-types": "off",
-    "react/jsx-sort-props": "off",
-    "react/no-multi-comp": "warn",
-    "react/no-set-state": "off",
-    "react/prefer-es6-class": "warn",
-    "react/require-extension": "warn",
-    "react/self-closing-comp": "warn"*/
   }
-}
+};
