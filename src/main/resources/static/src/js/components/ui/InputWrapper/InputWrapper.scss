@@ -3,6 +3,16 @@
 
 .input-wrapper {
   padding-bottom: $spacing-l;
+  padding-top: $spacing-l;
+  border-bottom: $border-dotted;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   .label {
     display: flex;
@@ -10,6 +20,8 @@
     padding-bottom: $spacing-s;
 
     .title {
+      @include ellipsis;
+
       flex: 1 1 auto;
       margin-right: $spacing-l;
     }

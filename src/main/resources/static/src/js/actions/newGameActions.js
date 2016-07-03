@@ -14,7 +14,7 @@ export function newGameSubmit(newGame) {
   return ajax((dispatch) => ({
     request: request('POST', gameAdminUrl())
       .set('Content-Type', 'application/json')
-      .send(data),
+      .send(JSON.stringify(data)),
     startAction: NEW_GAME_SUBMIT,
     successAction: NEW_GAME_SUBMIT_SUCCESS,
     failureAction: NEW_GAME_SUBMIT_FAILURE,

@@ -54,6 +54,10 @@ h2 {
   @include ellipsis;
 }
 
+.text-highlight {
+  color: $yellow;
+}
+
 .fg-success {
   color: $bg-color-success;
 }

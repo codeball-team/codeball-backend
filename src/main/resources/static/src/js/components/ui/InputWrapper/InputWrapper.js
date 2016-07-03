@@ -10,7 +10,8 @@ export default class InputWrapper extends Component {
     className: PropTypes.string,
     children: PropTypes.node,
     isValid: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string
   };
 
   render() {
@@ -18,7 +19,8 @@ export default class InputWrapper extends Component {
       className,
       children,
       isValid,
-      label
+      label,
+      value
     } = this.props;
 
     return (
@@ -29,7 +31,15 @@ export default class InputWrapper extends Component {
         )}>
         <div className="label">
           <div className="title">
-            {label}
+            {label} {renderConditionally({
+              when: isValid,
+              render: () => (
+                <span>
+                  <span>:</span>
+                  <span className="text-highlight">{` ${value}`}</span>
+                </span>
+              )
+            })}
           </div>
 
           <div

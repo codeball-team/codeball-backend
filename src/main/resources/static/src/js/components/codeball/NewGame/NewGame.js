@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import moment from 'moment';
-import { renderConditionally } from 'utils';
-import { DATE_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
+import { findLabelByValue, padLeft, renderConditionally } from 'utils';
+import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
 import { InputWrapper, TimePicker, ValuePicker } from 'components/ui';
@@ -54,6 +54,8 @@ export default class NewGame extends Component {
       value: id
     }));
 
+    const selectedStartDate = moment(date);
+
     const isPitchSelected = !_.isUndefined(pitchId);
     const isDurationSelected = !_.isUndefined(duration);
     const isStartTimeSelected = !_.isUndefined(hour) && !_.isUndefined(minute);
@@ -67,6 +69,7 @@ export default class NewGame extends Component {
         )}>
         <InputWrapper
           label="Pitch"
+          value={findLabelByValue(pitchesOptions, pitchId)}
           isValid={isPitchSelected}>
           <Select
             placeholder="Select pitch..."
@@ -82,6 +85,7 @@ export default class NewGame extends Component {
           render: () => (
             <InputWrapper
               label="Duration"
+              value={findLabelByValue(DURATION_OPTIONS, duration)}
               isValid={isDurationSelected}>
               <ValuePicker
                 options={DURATION_OPTIONS}
@@ -97,6 +101,7 @@ export default class NewGame extends Component {
             <InputWrapper
               key="time"
               label="Start time"
+              value={`${padLeft(hour, 2)}:${padLeft(minute, 2)}`}
               isValid={isStartTimeSelected}>
               <div className="date-input">
                 <TimePicker
@@ -112,13 +117,14 @@ export default class NewGame extends Component {
             <InputWrapper
               key="date"
               label="Start date"
+              value={selectedStartDate.format(DATE_FORMAT)}
               isValid={isStartDateSelected}>
               <Calendar
                 className="editable-text-input"
-                dateFormat={DATE_FORMAT}
+                dateFormat={MONTH_YEAR_FORMAT}
                 locale="en-GB"
                 minDate={moment()}
-                selected={date && moment(date)}
+                selected={date && selectedStartDate}
                 onClickOutside={_.noop}
                 onSelect={this.onDateChange} />
             </InputWrapper>
