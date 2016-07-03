@@ -20,7 +20,10 @@ export default class NewGameModel {
 
   static toServerFormat(newGameModel) {
     const { date, duration, hour, minute, pitchId } = newGameModel;
-    const startTimestamp = moment(date).add('hours', hour).add('minutes', minute).valueOf();
+    const startTimestamp = moment(date)
+      .add('hours', hour)
+      .add('minutes', minute)
+      .valueOf();
 
     return {
       startTimestamp: unixToJavaTimestamp(startTimestamp),

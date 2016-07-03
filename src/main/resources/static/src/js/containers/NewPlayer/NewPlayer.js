@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { LoadableContent } from 'components/ui';
-//import { NewPlayerSection } from 'components/sections';
+// import { NewPlayerSection } from 'components/sections';
 
 class NewPlayer extends Component {
   static propTypes = {

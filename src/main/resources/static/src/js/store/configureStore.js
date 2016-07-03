@@ -42,11 +42,11 @@ function createDevelopmentEnhancer(middleware) {
     return (matches && matches.length) ? matches[1] : null;
   };
 
+  const devToolsExtension = window.devToolsExtension;
+
   return compose(
     middleware,
-    window.devToolsExtension ?
-      window.devToolsExtension() :
-      require('../containers/DevTools').default.instrument(),
+    devToolsExtension ? devToolsExtension() : require('../containers/DevTools').default.instrument(),
 
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
     persistState(getDebugSessionKey())

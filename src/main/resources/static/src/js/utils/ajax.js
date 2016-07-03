@@ -17,7 +17,6 @@ export default function ajax(getOptions) {
       failureCallback: _.noop,
       ...getOptions(dispatch)
     };
-
     const time = now();
 
     request.end((error, response) => {

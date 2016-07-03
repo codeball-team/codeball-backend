@@ -6,11 +6,11 @@ export default function safeGet(object, path, defaultValue = undefined) {
 
   while (subAttributes.length > 0) {
     const attribute = subAttributes.pop();
-    if (_(currentValue).has(attribute)) {
-      currentValue = currentValue[attribute];
-    } else {
+    if (!_(currentValue).has(attribute)) {
       return defaultValue;
     }
+
+    currentValue = currentValue[attribute];
   }
 
   return currentValue;

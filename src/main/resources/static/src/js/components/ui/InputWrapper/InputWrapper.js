@@ -46,8 +46,8 @@ export default class InputWrapper extends Component {
             className={classNames(
               'validation',
               {
-                'valid': isValid,
-                'invalid': !isValid
+                valid: isValid,
+                invalid: !isValid
               }
             )}>
             {renderConditionally({

@@ -6,7 +6,7 @@ const initialState = 0;
 export default reducer(initialState, {
   [AJAX_START]: state => state + 1,
 
-  [AJAX_FAILURE]: state => state -1,
+  [AJAX_FAILURE]: state => state - 1,
 
-  [AJAX_SUCCESS]: state => state -1
+  [AJAX_SUCCESS]: state => state - 1
 });

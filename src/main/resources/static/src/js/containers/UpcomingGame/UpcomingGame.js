@@ -7,10 +7,8 @@ import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import IconShuffle from 'react-icons/lib/io/shuffle';
 import { Button, LoadableContent } from 'components/ui';
 import {
-  GameEnrollmentSection,
-  GameEnrollmentFormSection,
-  GameInfoSection,
-  GameLineupSection
+  GameEnrollmentSection, GameEnrollmentFormSection,
+  GameInfoSection, GameLineupSection
 } from 'components/sections';
 
 export default function GenerateUpcomingGame(getGameId) {
@@ -138,25 +136,21 @@ export default function GenerateUpcomingGame(getGameId) {
                     }),
                     renderConditionally({
                       when: isEnrollmentOver && !isGameOver,
-                      render: () => (
+                      render: () => [
                         <Button
                           key="draw-teams"
                           onClick={() => gameDrawTeams(gameId)}>
                           <IconShuffle className="icon" />
                           <span className="label">Draw teams</span>
-                        </Button>
-                      )
-                    }),
-                    renderConditionally({
-                      when: isEnrollmentOver && !isGameOver,
-                      render: () => (
+                        </Button>,
+
                         <Button
                           key="end-game"
                           onClick={() => gameEnd(gameId)}>
                           <IconSave className="icon" />
                           <span className="label">End game</span>
                         </Button>
-                      )
+                      ]
                     })
                   ].filter(Boolean)
                 } />

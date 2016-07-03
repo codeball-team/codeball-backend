@@ -53,4 +53,4 @@ class Pitch extends Component {
 
 export default bindActionsAndConnect(Pitch, state => ({
   pitchesData: state.pitchesData
-}))
+}));

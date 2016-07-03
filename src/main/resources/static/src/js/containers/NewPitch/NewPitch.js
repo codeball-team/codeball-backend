@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { LoadableContent } from 'components/ui';
-//import { NewPitchSection } from 'components/sections';
+// import { NewPitchSection } from 'components/sections';
 
 class NewPitch extends Component {
   static propTypes = {
