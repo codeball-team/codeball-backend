@@ -9,6 +9,10 @@
   cursor: pointer;
   font-size: $font-size-l;
 
+  :focus {
+    outline: 0;
+  }
+
   &.is-disabled {
     pointer-events: none;
     color: $fg-color-inactive;

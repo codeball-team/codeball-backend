@@ -141,7 +141,6 @@ module.exports = {
 
     // Variables
     "init-declarations": ["error", "always"],
-
     "no-catch-shadow": "error",
     "no-delete-var": "error",
     "no-label-var": "error",
@@ -155,6 +154,16 @@ module.exports = {
     "no-use-before-define": "off",
 
     // Node.js and CommonJS
+    "callback-return": "error",
+    "global-require": "off",
+    "handle-callback-err": "off",
+    "no-mixed-requires": "off",
+    "no-new-require": "off",
+    "no-path-concat": "off",
+    "no-process-env": "off",
+    "no-process-exit": "error",
+    "no-restricted-modules": "off",
+    "no-sync": "error",
 
     // Stylistic Issues
 
