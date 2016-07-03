@@ -33,6 +33,7 @@ module.exports = {
   ],
 
   "rules": {
+    // Possible Errors
     "comma-dangle": "error",
     "no-cond-assign": "error",
     "no-console": "warn",
@@ -66,7 +67,7 @@ module.exports = {
     "valid-jsdoc": "off",
     "valid-typeof": "error",
 
-
+    // Best Practices
     "accessor-pairs": "error",
     "array-callback-return": "error",
     "block-scoped-var": "error",
@@ -134,6 +135,37 @@ module.exports = {
     "vars-on-top": "error",
     "wrap-iife": "error",
     "yoda": ["error", "never"],
+
+    // Strict Mode
+    "strict": ["error", "never"],
+
+    // Variables
+    "init-declarations": ["error", "always"],
+
+    "no-catch-shadow": "error",
+    "no-delete-var": "error",
+    "no-label-var": "error",
+    "no-restricted-globals": "error",
+    "no-shadow": "error",
+    "no-shadow-restricted-names": "error",
+    "no-undef": "error",
+    "no-undef-init": "error",
+    "no-undefined": "off",
+    "no-unused-vars": "error",
+    "no-use-before-define": "off",
+
+    // Node.js and CommonJS
+
+    // Stylistic Issues
+
+    // ECMAScript 6
+
+
+
+
+
+
+
 
     "react/jsx-boolean-value": ["error", "always"],
     "react/sort-comp": ["error", {

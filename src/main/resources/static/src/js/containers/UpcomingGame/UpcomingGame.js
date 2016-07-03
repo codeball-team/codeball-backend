@@ -100,8 +100,8 @@ export default function GenerateUpcomingGame(getGameId) {
       const { id: userId } = currentUser;
       const pitch = new PitchModel(pitches[pitchId]);
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
-      const selectedEnrollmentStatus = _(enrolledUsers).reduce((selectedEnrollmentStatus, userIds, status) => {
-        return userIds.includes(userId) ? status : selectedEnrollmentStatus;
+      const selectedEnrollmentStatus = _(enrolledUsers).reduce((enrollmentStatus, userIds, status) => {
+        return userIds.includes(userId) ? status : enrollmentStatus;
       }, undefined);
 
       const isContentLoading = [

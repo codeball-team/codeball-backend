@@ -80,11 +80,11 @@ class NewGame extends Component {
                   <span className="label">Save</span>
                 </Button>
               ]}
-              onDateChange={(date) => newGameChangeDate(date)}
-              onDurationChange={(duration) => newGameChangeDuration(duration)}
-              onHourChange={(hour) => newGameChangeHour(hour)}
-              onMinuteChange={(minute) => newGameChangeMinute(minute)}
-              onPitchIdChange={(pitchId) => newGameChangePitchId(pitchId)} />
+              onDateChange={(newDate) => newGameChangeDate(newDate)}
+              onDurationChange={(newDuration) => newGameChangeDuration(newDuration)}
+              onHourChange={(newHour) => newGameChangeHour(newHour)}
+              onMinuteChange={(newMinute) => newGameChangeMinute(newMinute)}
+              onPitchIdChange={(newPitchId) => newGameChangePitchId(newPitchId)} />
           </section>
         )} />
     );

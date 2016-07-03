@@ -4,28 +4,38 @@ import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
 
 export default function configureStore(initialState, history) {
-  let enhancer;
-
-  if (process.env.NODE_ENV !== 'production') {
-    let middleware = applyMiddleware(
-      routerMiddleware(history),
-      require('redux-thunk').default,
-      require('redux-immutable-state-invariant')()
-    );
-    enhancer = createProductionEnhancer(middleware);
-  } else {
-    let middleware = applyMiddleware(
-      require('redux-thunk').default
-    );
-    enhancer = createDevelopmentEnhancer(middleware);
-  }
-
-  const store = createStore(rootReducer, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, createEnhancer(history));
   enableWebpackHMRForReducers(store);
   return store;
 }
 
+function createEnhancer(history) {
+  if (process.env.NODE_ENV !== 'production') {
+    return createDevelopmentEnhancer(createDevelopmentMiddleware(history));
+  }
+
+  return createProductionEnhancer(createProductionMiddleware());
+}
+
+function createProductionMiddleware() {
+  return applyMiddleware(
+    require('redux-thunk').default
+  );
+}
+
 function createProductionEnhancer(middleware) {
+  return compose(middleware);
+}
+
+function createDevelopmentMiddleware(history) {
+  return applyMiddleware(
+    routerMiddleware(history),
+    require('redux-thunk').default,
+    require('redux-immutable-state-invariant')()
+  );
+}
+
+function createDevelopmentEnhancer(middleware) {
   let getDebugSessionKey = function () {
     // By default we try to read the key from ?debug_session=<key> in the address bar
     const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
@@ -41,10 +51,6 @@ function createProductionEnhancer(middleware) {
     // Optional. Lets you write ?debug_session=<key> in address bar to persist debug sessions
     persistState(getDebugSessionKey())
   );
-}
-
-function createDevelopmentEnhancer(middleware) {
-  return compose(middleware);
 }
 
 function enableWebpackHMRForReducers(store) {

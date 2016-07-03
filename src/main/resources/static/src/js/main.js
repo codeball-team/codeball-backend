@@ -14,30 +14,30 @@ const store = configureStore(undefined, browserHistory);
 const rootElement = document.getElementById('app');
 const history = syncHistoryWithStore(browserHistory, store);
 
-let content;
+ReactDOM.render(
+  <Provider store={store}>
+    {renderContent()}
+  </Provider>,
+  rootElement
+);
 
-if (process.env.NODE_ENV !== 'production') {
-  const DevTools = require('./containers/DevTools').default;
+function renderContent() {
+  if (process.env.NODE_ENV !== 'production') {
+    const DevTools = require('./containers/DevTools').default;
 
-  content = (
-    <div>
-      <BodyBackground images={BACKGROUND_IMAGES} />
-      <Router key="router" history={history} routes={routes} />
-      <DevTools key="devtools" />
-    </div>
-  );
-} else {
-  content = (
+    return (
+      <div>
+        <BodyBackground images={BACKGROUND_IMAGES} />
+        <Router key="router" history={history} routes={routes} />
+        <DevTools key="devtools" />
+      </div>
+    );
+  }
+
+  return (
     <div>
       <BodyBackground images={BACKGROUND_IMAGES} />
       <Router history={history} routes={routes} />
     </div>
   );
 }
-
-ReactDOM.render(
-  <Provider store={store}>
-    {content}
-  </Provider>,
-  rootElement
-);
