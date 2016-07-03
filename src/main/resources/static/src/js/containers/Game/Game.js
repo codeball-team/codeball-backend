@@ -31,7 +31,7 @@ export default function GenerateGame(getGameId) {
       }
     };
 
-    onSave() {
+    onSave = () => {
       const {
         actions: {
           gameSave
