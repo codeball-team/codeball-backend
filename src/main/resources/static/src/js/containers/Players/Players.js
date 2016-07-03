@@ -21,7 +21,7 @@ class Players extends Component {
     usersLoad();
   };
 
-  render () {
+  render() {
     const {
       currentUserData: {
         currentUser,

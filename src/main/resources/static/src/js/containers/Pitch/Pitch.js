@@ -29,7 +29,7 @@ class Pitch extends Component {
     pitchesLoad();
   };
 
-  render () {
+  render() {
     const {
       params,
       pitchesData: {

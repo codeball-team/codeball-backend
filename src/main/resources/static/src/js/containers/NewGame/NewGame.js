@@ -31,7 +31,7 @@ class NewGame extends Component {
     refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
-  render () {
+  render() {
     const {
       actions: {
         newGameChangeDate,

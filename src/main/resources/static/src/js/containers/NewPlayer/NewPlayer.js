@@ -31,7 +31,7 @@ class NewPlayer extends Component {
     refreshDataIfNecessary(usersData, usersLoad);
   };
 
-  render () {
+  render() {
     const {
       currentUserData: {
         currentUser,

@@ -37,7 +37,7 @@ class Games extends Component {
     refreshDataIfNecessary(usersData, usersLoad);
   };
 
-  render () {
+  render() {
     const {
       currentUserData: {
         currentUser,

@@ -63,7 +63,7 @@ export default function GenerateUpcomingGame(getGameId) {
       refreshDataIfNecessary(pitchesData, pitchesLoad);
     };
 
-    render () {
+    render() {
       const {
         actions: {
           gameChangeEnrollmentStatus,

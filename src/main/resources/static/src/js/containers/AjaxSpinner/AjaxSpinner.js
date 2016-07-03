@@ -7,7 +7,7 @@ class AjaxSpinner extends Component {
     ajaxRequests: PropTypes.number.isRequired
   };
 
-  render () {
+  render() {
     const { ajaxRequests } = this.props;
 
     return (

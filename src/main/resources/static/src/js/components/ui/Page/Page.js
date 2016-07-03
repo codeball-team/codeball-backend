@@ -18,7 +18,7 @@ export default class Page extends Component {
     router.goBack();
   };
 
-  render () {
+  render() {
     const {
       children,
       GlobalSpinnerComponent

@@ -58,7 +58,7 @@ export default function GenerateGame(getGameId) {
       refreshDataIfNecessary(usersData, usersLoad);
     };
 
-    render () {
+    render() {
       const {
         actions: {
           gameEdit,

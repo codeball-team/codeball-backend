@@ -29,7 +29,7 @@ class Player extends Component {
     usersLoad();
   };
 
-  render () {
+  render() {
     const {
       params: {
         userId
