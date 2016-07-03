@@ -12,7 +12,7 @@ export default class ValuePicker extends Component {
     onChange: PropTypes.func.isRequired
   };
 
-  onChange = (value) => {
+  onChange = value => {
     const { onChange } = this.props;
     onChange(value);
   }

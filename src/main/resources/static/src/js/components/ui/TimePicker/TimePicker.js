@@ -4,7 +4,7 @@ import NumberPicker from '../NumberPicker/NumberPicker';
 import { padLeft } from 'utils';
 import './TimePicker.scss';
 
-const formatter = (value) => padLeft(value, 2);
+const formatter = value => padLeft(value, 2);
 
 export default class TimePicker extends Component {
   static propTypes = {

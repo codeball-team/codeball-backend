@@ -8,16 +8,6 @@ const PATHS = {
   build: path.resolve(__dirname, '../build')
 };
 
-const plugins = [
-  new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
-  new webpack.NoErrorsPlugin(),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('development'),
-    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-  }),
-  new webpack.optimize.OccurenceOrderPlugin()
-];
-
 const sassLoaders = [
   'style-loader',
   'css-loader?sourceMap',
@@ -69,12 +59,20 @@ module.exports = {
       }
     ]
   },
-  plugins: plugins,
-  postcss: function () {
-    return [autoprefixer({
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+    }),
+    new webpack.optimize.OccurenceOrderPlugin()
+  ],
+  postcss: () => [
+    autoprefixer({
       browsers: ['last 2 versions']
-    })];
-  },
+    })
+  ],
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
     port: 3000

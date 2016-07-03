@@ -14,12 +14,12 @@ export default class GameScore extends Component {
     onEditGameScoreB: PropTypes.func
   };
 
-  onGameScoreAChanged = (teamAScore) => {
+  onGameScoreAChanged = teamAScore => {
     const { onEditGameScoreA } = this.props;
     onEditGameScoreA(teamAScore);
   };
 
-  onGameScoreBChanged = (teamBScore) => {
+  onGameScoreBChanged = teamBScore => {
     const { onEditGameScoreB } = this.props;
     onEditGameScoreB(teamBScore);
   };

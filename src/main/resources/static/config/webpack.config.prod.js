@@ -12,29 +12,6 @@ const PATHS = {
   build: path.resolve(__dirname, '../build')
 };
 
-const plugins = [
-  new CopyWebpackPlugin([
-    {
-      from: PATHS.images,
-      to: 'images'
-    }
-  ]),
-  new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
-  new webpack.NoErrorsPlugin(),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
-    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-  }),
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    }
-  }),
-  new ExtractTextPlugin('css/app.css', { allChunks: true })
-];
-
 const sassLoaders = [
   'css-loader?sourceMap',
   'postcss-loader',
@@ -88,11 +65,32 @@ module.exports = {
       }
     ]
   },
-  plugins: plugins,
-  postcss: function () {
-    return [autoprefixer({
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: PATHS.images,
+        to: 'images'
+      }
+    ]),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
+    new ExtractTextPlugin('css/app.css', { allChunks: true })
+  ],
+  postcss: () => [
+    autoprefixer({
       browsers: ['last 2 versions']
-    })];
-  },
+    })
+  ],
   devtool: 'source-map'
 };

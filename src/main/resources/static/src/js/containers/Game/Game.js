@@ -14,10 +14,6 @@ export default function GenerateGame(getGameId) {
       usersData: PropTypes.object.isRequired
     };
 
-    constructor(props, context) {
-      super(props, context);
-    }
-
     componentWillMount = () => {
       this.updateData({
         ...this.props,
@@ -28,14 +24,14 @@ export default function GenerateGame(getGameId) {
       });
     };
 
-    componentWillReceiveProps = (newProps) => {
+    componentWillReceiveProps = newProps => {
       const gameIdPath = ['params', 'gameId'];
       if (safeGet(newProps, gameIdPath) !== safeGet(this.props, gameIdPath)) {
         this.updateData(newProps);
       }
     };
 
-    updateData = (props) => {
+    updateData = props => {
       const {
         actions: {
           currentUserLoad,

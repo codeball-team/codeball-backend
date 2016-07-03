@@ -36,7 +36,7 @@ function createDevelopmentMiddleware(history) {
 }
 
 function createDevelopmentEnhancer(middleware) {
-  let getDebugSessionKey = function () {
+  const getDebugSessionKey = () => {
     // By default we try to read the key from ?debug_session=<key> in the address bar
     const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
     return (matches && matches.length) ? matches[1] : null;

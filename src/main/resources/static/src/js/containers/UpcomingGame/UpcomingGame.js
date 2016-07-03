@@ -34,14 +34,14 @@ export default function GenerateUpcomingGame(getGameId) {
       });
     };
 
-    componentWillReceiveProps = (newProps) => {
+    componentWillReceiveProps = newProps => {
       const gameIdPath = ['params', 'gameId'];
       if (safeGet(newProps, gameIdPath) !== safeGet(this.props, gameIdPath)) {
         this.updateData(newProps);
       }
     };
 
-    updateData = (props) => {
+    updateData = props => {
       const {
         actions: {
           currentUserLoad,
@@ -100,9 +100,9 @@ export default function GenerateUpcomingGame(getGameId) {
       const { id: userId } = currentUser;
       const pitch = new PitchModel(pitches[pitchId]);
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
-      const selectedEnrollmentStatus = _(enrolledUsers).reduce((enrollmentStatus, userIds, status) => {
-        return userIds.includes(userId) ? status : enrollmentStatus;
-      }, undefined);
+      const selectedEnrollmentStatus = _(enrolledUsers).reduce(
+        (enrollmentStatus, userIds, status) => (userIds.includes(userId) ? status : enrollmentStatus)
+      );
 
       const isContentLoading = [
         arePitchesLoading,

@@ -32,13 +32,11 @@ export default ajaxReducer(
 
     [GAME_EDIT]: continueEditing,
 
-    [GAME_EDIT_CANCEL]: (state) => {
-      return {
-        ...state,
-        editedGame: {},
-        isEditing: false
-      };
-    },
+    [GAME_EDIT_CANCEL]: state => ({
+      ...state,
+      editedGame: {},
+      isEditing: false
+    }),
 
     [GAME_EDIT_SCORE_A]: (state, action) => {
       const { teamAScore } = action;

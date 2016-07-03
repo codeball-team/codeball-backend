@@ -33,7 +33,5 @@ export default reducer(initialState, {
     return { ...state, pitchId };
   },
 
-  [NEW_GAME_RESET]: () => {
-    return initialState;
-  }
+  [NEW_GAME_RESET]: () => initialState
 });

@@ -88,7 +88,7 @@ export function gameEditScoreB(teamBScore) {
 }
 
 export function gameEnd(gameId) {
-  return ajax((dispatch) => ({
+  return ajax(dispatch => ({
     request: request('PUT', gameAdminUrl(gameId))
       .set('Content-Type', 'application/json')
       .send({ isGameOver: true }),

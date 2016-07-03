@@ -14,7 +14,7 @@ class Player extends Component {
     this.updateData();
   };
 
-  componentWillReceiveProps = (newProps) => {
+  componentWillReceiveProps = newProps => {
     const userIdPath = ['params', 'userId'];
     if (safeGet(newProps, userIdPath) !== safeGet(this.props, userIdPath)) {
       this.updateData();

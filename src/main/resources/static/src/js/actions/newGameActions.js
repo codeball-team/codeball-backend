@@ -11,14 +11,14 @@ import { NewGameModel } from 'models';
 
 export function newGameSubmit(newGame) {
   const data = NewGameModel.toServerFormat(newGame);
-  return ajax((dispatch) => ({
+  return ajax(dispatch => ({
     request: request('POST', gameAdminUrl())
       .set('Content-Type', 'application/json')
       .send(JSON.stringify(data)),
     startAction: NEW_GAME_SUBMIT,
     successAction: NEW_GAME_SUBMIT_SUCCESS,
     failureAction: NEW_GAME_SUBMIT_FAILURE,
-    successCallback: (response) => {
+    successCallback: response => {
       const gameId = safeGet(response, ['body', 'gameId']);
       dispatch(push(`/games/upcoming/${gameId}`));
     }

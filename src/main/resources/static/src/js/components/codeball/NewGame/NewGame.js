@@ -30,7 +30,7 @@ export default class NewGame extends Component {
     onPitchIdChange(value);
   };
 
-  onDateChange = (date) => {
+  onDateChange = date => {
     const { onDateChange } = this.props;
     onDateChange(date.valueOf());
   };
