@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-export default class NewPlayerModel {
+export default class NewUserModel {
   constructor(attributes) {
     _.extend(this, _({ ...attributes }).defaults({
       email: undefined,
@@ -10,13 +10,13 @@ export default class NewPlayerModel {
     }));
   }
 
-  static isValid(newPlayerModel) {
-    const { email, firstName, lastName, role } = newPlayerModel;
+  static isValid(newUserModel) {
+    const { email, firstName, lastName, role } = newUserModel;
     return [email, firstName, lastName, role].every(Boolean);
   }
 
-  static toServerFormat(newPlayerModel) {
-    const { email, firstName, lastName, role } = newPlayerModel;
+  static toServerFormat(newUserModel) {
+    const { email, firstName, lastName, role } = newUserModel;
 
     return {
       email,
