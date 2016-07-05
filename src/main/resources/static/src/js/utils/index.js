@@ -3,6 +3,7 @@ export ajaxReducer, { ajaxReducerInitialState } from './ajaxReducer';
 export bindActionsAndConnect from './bindActionsAndConnect';
 export findLabelByValue from './findLabelByValue';
 export isDataInvalidated from './isDataInvalidated';
+export isInRange from './isInRange';
 export model from './model';
 export now from './now';
 export objectify from './objectify';

@@ -2,6 +2,7 @@ export BodyBackground from './BodyBackground/BodyBackground';
 export Button from './Button/Button';
 export ButtonsPanel from './ButtonsPanel/ButtonsPanel';
 export EditableText from './EditableText/EditableText';
+export Form from './Form/Form';
 export InputWrapper from './InputWrapper/InputWrapper';
 export List from './List/List';
 export ListItem from './ListItem/ListItem';

@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import moment from 'moment';
-import { findLabelByValue, padLeft, renderConditionally } from 'utils';
+import { findLabelByValue, padLeft } from 'utils';
 import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
+import { NewGameModel } from 'models';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
-import { InputWrapper, RangePicker, ValuePicker } from 'components/ui';
+import { Form, RangePicker, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
 const formatter = value => padLeft(value, 2);
@@ -55,13 +56,7 @@ export default class NewGame extends Component {
       label: name,
       value: id
     }));
-
     const selectedStartDate = moment(date);
-
-    const isPitchSelected = !_.isUndefined(pitchId);
-    const isDurationSelected = !_.isUndefined(duration);
-    const isStartTimeSelected = !_.isUndefined(hour) && !_.isUndefined(minute);
-    const isStartDateSelected = !_.isUndefined(date);
 
     return (
       <div
@@ -69,43 +64,38 @@ export default class NewGame extends Component {
           'new-game',
           className
         )}>
-        <InputWrapper
-          label="Pitch"
-          value={findLabelByValue(pitchesOptions, pitchId)}
-          isValid={isPitchSelected}>
-          <Select
-            placeholder="Select pitch..."
-            options={pitchesOptions}
-            value={pitchId}
-            searchable={false}
-            clearable={false}
-            onChange={this.onPitchIdChange} />
-        </InputWrapper>
-
-        {renderConditionally({
-          when: isPitchSelected,
-          render: () => (
-            <InputWrapper
-              label="Duration"
-              value={findLabelByValue(DURATION_OPTIONS, duration)}
-              isValid={isDurationSelected}>
-              <ValuePicker
-                options={DURATION_OPTIONS}
-                value={duration}
-                onChange={onDurationChange} />
-            </InputWrapper>
-          )
-        })}
-
-        {renderConditionally({
-          when: isDurationSelected,
-          render: () => [
-            <InputWrapper
-              key="time"
-              label="Start time"
-              value={`${padLeft(hour, 2)}:${padLeft(minute, 2)}`}
-              isValid={isStartTimeSelected}>
-              <div className="time-input">
+        <Form
+          inputs={[
+            {
+              label: 'Pitch',
+              value: findLabelByValue(pitchesOptions, pitchId),
+              isValid: NewGameModel.isPitchIdValid(pitchId),
+              render: () => (
+                <Select
+                  placeholder="Select pitch..."
+                  options={pitchesOptions}
+                  value={pitchId}
+                  searchable={false}
+                  clearable={false}
+                  onChange={this.onPitchIdChange} />
+              )
+            },
+            {
+              label: 'Duration',
+              value: findLabelByValue(DURATION_OPTIONS, duration),
+              isValid: NewGameModel.isDurationValid(duration),
+              render: () => (
+                <ValuePicker
+                  options={DURATION_OPTIONS}
+                  value={duration}
+                  onChange={onDurationChange} />
+              )
+            },
+            {
+              label: 'Start time',
+              value: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
+              isValid: NewGameModel.isStartTimeValid(hour, minute),
+              render: () => (
                 <RangePicker
                   formatter={formatter}
                   min={hour}
@@ -116,25 +106,24 @@ export default class NewGame extends Component {
                   separator=":"
                   onMinChange={onHourChange}
                   onMaxChange={onMinuteChange} />
-              </div>
-            </InputWrapper>,
-
-            <InputWrapper
-              key="date"
-              label="Start date"
-              value={selectedStartDate.format(DATE_FORMAT)}
-              isValid={isStartDateSelected}>
-              <Calendar
-                className="editable-text-input"
-                dateFormat={MONTH_YEAR_FORMAT}
-                locale="en-GB"
-                minDate={moment()}
-                selected={date && selectedStartDate}
-                onClickOutside={onClickOutside}
-                onSelect={this.onDateChange} />
-            </InputWrapper>
-          ]
-        })}
+              )
+            },
+            {
+              label: 'Start date',
+              value: selectedStartDate.format(DATE_FORMAT),
+              isValid: NewGameModel.isDateValid(date),
+              render: () => (
+                <Calendar
+                  className="editable-text-input"
+                  dateFormat={MONTH_YEAR_FORMAT}
+                  locale="en-GB"
+                  minDate={moment()}
+                  selected={date && selectedStartDate}
+                  onClickOutside={onClickOutside}
+                  onSelect={this.onDateChange} />
+              )
+            }
+          ]} />
       </div>
     );
   }
