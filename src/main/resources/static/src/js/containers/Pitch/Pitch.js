@@ -34,18 +34,17 @@ class Pitch extends Component {
         isLoading: arePitchesLoading
       }
     } = this.props;
-    const pitch = pitches[pitchId];
+
+    const { [pitchId]: pitch } = pitches;
     const name = safeGet(pitch, ['name']);
 
     return (
       <LoadableContent
         isLoading={arePitchesLoading}
         render={() => (
-          <section className="pitch">
-            <PitchInfoSection
-              title={name}
-              pitch={pitch} />
-          </section>
+          <PitchInfoSection
+            title={name}
+            pitch={pitch} />
         )} />
     );
   }

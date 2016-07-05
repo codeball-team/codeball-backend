@@ -50,7 +50,7 @@ export default class GameScore extends Component {
           <EditableText
             className="team-score score-a"
             isEditing={isEditing}
-            text={String(teamAScore === undefined ? '' : teamAScore)}
+            text={teamAScore}
             maxLength="2"
             onChange={this.onGameScoreAChanged} />
 
@@ -59,7 +59,7 @@ export default class GameScore extends Component {
           <EditableText
             className="team-score score-b"
             isEditing={isEditing}
-            text={String(teamBScore === undefined ? '' : teamBScore)}
+            text={teamBScore}
             maxLength="2"
             onChange={this.onGameScoreBChanged} />
         </div>

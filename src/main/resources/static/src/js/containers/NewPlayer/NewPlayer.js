@@ -1,69 +1,89 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
-import { LoadableContent } from 'components/ui';
-// import { NewPlayerSection } from 'components/sections';
+import { bindActionsAndConnect } from 'utils';
+import { NewPlayerModel } from 'models';
+import { Link } from 'react-router';
+import IconCancel from 'react-icons/lib/io/ios-close-outline';
+import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { NewPlayerSection } from 'components/sections';
+import { Button } from 'components/ui';
 
 class NewPlayer extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    currentUserData: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    usersData: PropTypes.object.isRequired
+    newPlayer: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const {
-      actions: {
-        currentUserLoad,
-        pitchesLoad,
-        usersLoad
-      },
-      currentUserData,
-      pitchesData,
-      usersData
-    } = this.props;
+    const { actions: { newPlayerReset } } = this.props;
+    newPlayerReset();
+  };
 
-    refreshDataIfNecessary(currentUserData, currentUserLoad);
-    refreshDataIfNecessary(pitchesData, pitchesLoad);
-    refreshDataIfNecessary(usersData, usersLoad);
+  onEmailChange = email => {
+    const { actions: { newPlayerChangeEmail } } = this.props;
+    newPlayerChangeEmail(email);
+  };
+
+  onFirstNameChange = firstName => {
+    const { actions: { newPlayerChangeFirstName } } = this.props;
+    newPlayerChangeFirstName(firstName);
+  };
+
+  onLastNameChange = lastName => {
+    const { actions: { newPlayerChangeLastName } } = this.props;
+    newPlayerChangeLastName(lastName);
+  };
+
+  onRoleChange = role => {
+    const { actions: { newPlayerChangeRole } } = this.props;
+    newPlayerChangeRole(role);
+  };
+
+  onSubmit = () => {
+    const { actions: { newPlayerSubmit }, newPlayer } = this.props;
+    newPlayerSubmit(newPlayer);
   };
 
   render() {
+    const { newPlayer } = this.props;
     const {
-      currentUserData: {
-        currentUser,
-        isLoading: isCurrentUserLoading
-      },
-      pitchesData: {
-        pitches,
-        isLoading: arePitchesLoading
-      },
-      usersData: {
-        users,
-        isLoading: areUsersLoading
-      }
-    } = this.props;
-
-    const isContentLoading = [
-      arePitchesLoading,
-      areUsersLoading,
-      isCurrentUserLoading
-    ].some(Boolean);
+      email,
+      firstName,
+      lastName,
+      role
+    } = newPlayer;
 
     return (
-      <LoadableContent
-        isLoading={isContentLoading}
-        render={() => (
-          <section className="new-player">
-            new player
-          </section>
-        )} />
+      <section className="new-player">
+        <NewPlayerSection
+          title="New player"
+          email={email}
+          firstName={firstName}
+          lastName={lastName}
+          role={role}
+          buttons={[
+            <Link key="cancel" to="/players">
+              <Button>
+                <IconCancel className="icon" />
+                <span className="label">Cancel</span>
+              </Button>
+            </Link>,
+            <Button
+              key="save"
+              isDisabled={!NewPlayerModel.isValid(newPlayer)}
+              onClick={this.onSubmit}>
+              <IconSave className="icon" />
+              <span className="label">Save</span>
+            </Button>
+          ]}
+          onEmailChange={this.onEmailChange}
+          onFirstNameChange={this.onFirstNameChange}
+          onLastNameChange={this.onLastNameChange}
+          onRoleChange={this.onRoleChange} />
+      </section>
     );
   }
 }
 
 export default bindActionsAndConnect(NewPlayer, state => ({
-  currentUserData: state.currentUserData,
-  pitchesData: state.pitchesData,
-  usersData: state.usersData
+  newPlayer: state.newPlayer
 }));

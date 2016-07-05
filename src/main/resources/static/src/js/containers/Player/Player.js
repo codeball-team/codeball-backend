@@ -38,7 +38,8 @@ class Player extends Component {
     } = this.props;
 
     const { [userId]: user } = users;
-    const { firstName, lastName } = user;
+    const firstName = safeGet(user, ['firstName']);
+    const lastName = safeGet(user, ['lastName']);
 
     return (
       <LoadableContent

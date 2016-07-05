@@ -8,7 +8,7 @@ export default class EditableText extends Component {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     isEditing: PropTypes.bool,
-    text: PropTypes.string,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func
   };
 
@@ -38,7 +38,7 @@ export default class EditableText extends Component {
       return (
         <input
           {...childProps}
-          value={text}
+          value={String(text === undefined ? '' : text)}
           onChange={this.onChange}
           disabled={isDisabled}
           className={classNames(

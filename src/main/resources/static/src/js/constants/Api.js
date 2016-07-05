@@ -48,6 +48,13 @@ export function pitchesUrl() {
   return `${BASE_API_URL}/${PITCHES}`;
 }
 
+export function userAdminUrl(userId) {
+  if (userId) {
+    return `${BASE_API_URL}/${ADMIN}/user/${userId}`;
+  }
+  return `${BASE_API_URL}/${ADMIN}/user`;
+}
+
 export function usersUrl() {
   return `${BASE_API_URL}/${USERS}`;
 }

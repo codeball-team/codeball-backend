@@ -1,6 +1,9 @@
 import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
 import { UserModel } from 'models';
-import { USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS } from 'constants/actionTypes';
+import {
+  NEW_PLAYER_SUBMIT_SUCCESS,
+  USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
+} from 'constants/actionTypes';
 
 const initialState = {
   ...ajaxReducerInitialState,
@@ -17,6 +20,20 @@ export default ajaxReducer(
     successAction: USERS_LOAD_SUCCESS
   },
   {
+    [NEW_PLAYER_SUBMIT_SUCCESS]: (state, action) => {
+      const responseUser = safeGet(action, ['response', 'body'], {});
+      const mappedUser = UserModel.fromServerFormat(responseUser);
+      const { id } = mappedUser;
+
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          [id]: mappedUser
+        }
+      };
+    },
+
     [USERS_LOAD_SUCCESS]: (state, action) => {
       const responseUsers = safeGet(action, ['response', 'body'], []);
       const mappedUsers = responseUsers.map(UserModel.fromServerFormat);

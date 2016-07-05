@@ -52,7 +52,7 @@ export default class NewPitch extends Component {
           isValid={isNameProvided}>
           <EditableText
             isEditing={true}
-            text={String(name === undefined ? '' : name)}
+            text={name}
             onChange={onNameChange} />
         </InputWrapper>
 
@@ -65,7 +65,7 @@ export default class NewPitch extends Component {
               isValid={isAddressProvided}>
               <EditableText
                 isEditing={true}
-                text={String(address === undefined ? '' : address)}
+                text={address}
                 onChange={onAddressChange} />
             </InputWrapper>
           )
