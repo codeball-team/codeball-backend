@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { renderConditionally } from 'utils';
 import { ROLE_STRING, ROLE_OPTIONS } from 'constants';
-import { EditableText, InputWrapper, ValuePicker } from 'components/ui';
+import { NewUserModel } from 'models';
+import { EditableText, Form, ValuePicker } from 'components/ui';
 import './NewPlayer.scss';
 
 export default class NewPlayer extends Component {
@@ -31,72 +31,60 @@ export default class NewPlayer extends Component {
       onRoleChange
     } = this.props;
 
-    const isEmailProvided = Boolean(email);
-    const isFirstNameProvided = Boolean(firstName);
-    const isLastNameProvided = Boolean(lastName);
-    const isRoleProvided = Boolean(role);
-
     return (
       <div
         className={classNames(
           'new-player',
           className
         )}>
-        <InputWrapper
-          label="First name"
-          value={firstName}
-          isValid={isFirstNameProvided}>
-          <EditableText
-            isEditing={true}
-            text={firstName}
-            onChange={onFirstNameChange} />
-        </InputWrapper>
-
-        {renderConditionally({
-          when: isFirstNameProvided,
-          render: () => (
-            <InputWrapper
-              label="Last name"
-              value={lastName}
-              isValid={isLastNameProvided}>
-              <EditableText
-                isEditing={true}
-                text={lastName}
-                onChange={onLastNameChange} />
-            </InputWrapper>
-          )
-        })}
-
-        {renderConditionally({
-          when: isLastNameProvided,
-          render: () => (
-            <InputWrapper
-              label="Email"
-              value={email}
-              isValid={isEmailProvided}>
-              <EditableText
-                isEditing={true}
-                text={email}
-                onChange={onEmailChange} />
-            </InputWrapper>
-          )
-        })}
-
-        {renderConditionally({
-          when: isEmailProvided,
-          render: () => (
-            <InputWrapper
-              label="Role"
-              value={ROLE_STRING[role]}
-              isValid={isRoleProvided}>
-              <ValuePicker
-                className="role-picker"
-                options={ROLE_OPTIONS}
-                value={role}
-                onChange={onRoleChange} />
-            </InputWrapper>
-          )
-        })}
+        <Form
+          inputs={[
+            {
+              label: 'First name',
+              value: firstName,
+              isValid: NewUserModel.isFirstNameValid(firstName),
+              render: () => (
+                <EditableText
+                  isEditing={true}
+                  text={firstName}
+                  onChange={onFirstNameChange} />
+              )
+            },
+            {
+              label: 'Last name',
+              value: lastName,
+              isValid: NewUserModel.isLastNameValid(lastName),
+              render: () => (
+                <EditableText
+                  isEditing={true}
+                  text={lastName}
+                  onChange={onLastNameChange} />
+              )
+            },
+            {
+              label: 'Email',
+              value: email,
+              isValid: NewUserModel.isEmailValid(email),
+              render: () => (
+                <EditableText
+                  isEditing={true}
+                  text={email}
+                  onChange={onEmailChange} />
+              )
+            },
+            {
+              label: 'Role',
+              value: ROLE_STRING[role],
+              isValid: NewUserModel.isRoleValid(role),
+              render: () => (
+                <ValuePicker
+                  className="role-picker"
+                  options={ROLE_OPTIONS}
+                  value={role}
+                  onChange={onRoleChange} />
+              )
+            }
+          ]} />
       </div>
     );
   }

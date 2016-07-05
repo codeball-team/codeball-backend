@@ -10,10 +10,38 @@ export default class NewPitchModel {
     }));
   }
 
+  static isAddressValid(address) {
+    return typeof address === 'string' && address.length > 0;
+  }
+
+  static isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers) {
+    return [
+      NewPitchModel.isMinNumberOfPlayersValid(minNumberOfPlayers),
+      NewPitchModel.isMaxNumberOfPlayersValid(maxNumberOfPlayers),
+      minNumberOfPlayers <= maxNumberOfPlayers
+    ].every(Boolean);
+  }
+
+  static isMinNumberOfPlayersValid(minNumberOfPlayers) {
+    return Number.isInteger(minNumberOfPlayers) && minNumberOfPlayers >= 2;
+  }
+
+  static isMaxNumberOfPlayersValid(maxNumberOfPlayers) {
+    return Number.isInteger(maxNumberOfPlayers) && maxNumberOfPlayers <= 22;
+  }
+
+  static isNameValid(name) {
+    return typeof name === 'string' && name.length > 0;
+  }
+
   static isValid(newPitchModel) {
     const { address, minNumberOfPlayers, maxNumberOfPlayers, name } = newPitchModel;
-    const isCapacityValid = [minNumberOfPlayers, maxNumberOfPlayers].every(Number.isInteger);
-    return isCapacityValid && [address, name].every(Boolean);
+
+    return [
+      NewPitchModel.isAddressValid(address),
+      NewPitchModel.isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers),
+      NewPitchModel.isNameValid(name)
+    ].every(Boolean);
   }
 
   static toServerFormat(newPitchModel) {

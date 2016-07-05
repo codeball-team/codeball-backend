@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import { renderConditionally } from 'utils';
 import { MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY } from 'constants';
-import { EditableText, InputWrapper, RangePicker } from 'components/ui';
+import { NewPitchModel } from 'models';
+import { EditableText, Form, RangePicker } from 'components/ui';
 
 export default class NewPitch extends Component {
   static propTypes = {
@@ -31,11 +31,6 @@ export default class NewPitch extends Component {
       onNameChange
     } = this.props;
 
-    const isAddressProvided = Boolean(address);
-    const isMaxNumberOfPlayersProvided = !_.isUndefined(maxNumberOfPlayers);
-    const isMinNumberOfPlayersProvided = !_.isUndefined(minNumberOfPlayers);
-    const isCapacityProvided = isMinNumberOfPlayersProvided && isMaxNumberOfPlayersProvided;
-    const isNameProvided = Boolean(name);
     const capacity = minNumberOfPlayers === maxNumberOfPlayers
       ? `${minNumberOfPlayers}`
       : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`;
@@ -46,50 +41,47 @@ export default class NewPitch extends Component {
           'new-pitch',
           className
         )}>
-        <InputWrapper
-          label="Name"
-          value={name}
-          isValid={isNameProvided}>
-          <EditableText
-            isEditing={true}
-            text={name}
-            onChange={onNameChange} />
-        </InputWrapper>
-
-        {renderConditionally({
-          when: isNameProvided,
-          render: () => (
-            <InputWrapper
-              label="Address"
-              value={address}
-              isValid={isAddressProvided}>
-              <EditableText
-                isEditing={true}
-                text={address}
-                onChange={onAddressChange} />
-            </InputWrapper>
-          )
-        })}
-
-        {renderConditionally({
-          when: isAddressProvided,
-          render: () => (
-            <InputWrapper
-              label="Capacity"
-              value={capacity}
-              isValid={isCapacityProvided}>
-              <RangePicker
-                min={minNumberOfPlayers}
-                minOptions={_.range(MIN_PITCH_CAPACITY, maxNumberOfPlayers + 1, 2)}
-                max={maxNumberOfPlayers}
-                maxOptions={_.range(minNumberOfPlayers, MAX_PITCH_CAPACITY + 1, 2)}
-                orientation="vertical"
-                separator="-"
-                onMinChange={onMinNumberOfPlayersChange}
-                onMaxChange={onMaxNumberOfPlayersChange} />
-            </InputWrapper>
-          )
-        })}
+        <Form
+          inputs={[
+            {
+              label: 'Name',
+              value: name,
+              isValid: NewPitchModel.isNameValid(name),
+              render: () => (
+                <EditableText
+                  isEditing={true}
+                  text={name}
+                  onChange={onNameChange} />
+              )
+            },
+            {
+              label: 'Address',
+              value: address,
+              isValid: NewPitchModel.isAddressValid(address),
+              render: () => (
+                <EditableText
+                  isEditing={true}
+                  text={address}
+                  onChange={onAddressChange} />
+              )
+            },
+            {
+              label: 'Capacity',
+              value: capacity,
+              isValid: NewPitchModel.isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers),
+              render: () => (
+                <RangePicker
+                  min={minNumberOfPlayers}
+                  minOptions={_.range(MIN_PITCH_CAPACITY, maxNumberOfPlayers + 1, 2)}
+                  max={maxNumberOfPlayers}
+                  maxOptions={_.range(minNumberOfPlayers, MAX_PITCH_CAPACITY + 1, 2)}
+                  orientation="vertical"
+                  separator="-"
+                  onMinChange={onMinNumberOfPlayersChange}
+                  onMaxChange={onMaxNumberOfPlayersChange} />
+              )
+            }
+          ]} />
       </div>
     );
   }
