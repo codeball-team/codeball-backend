@@ -31,14 +31,6 @@ export const PITCH_TYPE_STRING = {
   [PITCH_TYPE_INDOOR]: 'Indoor'
 };
 
-export const ROLE_ADMIN = 'ROLE_ADMIN';
-export const ROLE_USER = 'ROLE_USER';
-export const ROLE_STRING = {
-  [ROLE_ADMIN]: 'Admin',
-  [ROLE_USER]: 'User'
-};
-export const ROLES = _(ROLE_STRING).keys();
-
 export const MIN_PITCH_CAPACITY = 2;
 export const MAX_PITCH_CAPACITY = 22;
 export const DURATION_OPTIONS = [60, 90, 120, 150, 180].map(minutes => ({
@@ -47,10 +39,6 @@ export const DURATION_OPTIONS = [60, 90, 120, 150, 180].map(minutes => ({
 }));
 export const MINUTE_OPTIONS = [0, 15, 30, 45];
 export const HOUR_OPTIONS = _.range(0, 24);
-export const ROLE_OPTIONS = ROLES.map(role => ({
-  label: `${ROLE_STRING[role]}`,
-  value: role
-}));
 
 export function mapsUrl(address) {
   return `https://www.google.com/maps/?q=${address}`;

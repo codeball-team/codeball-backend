@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
-import { ENROLLMENT_STATUS_YES } from 'constants';
+import {
+  PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS, PERMISSION_END_GAME,
+  ENROLLMENT_STATUS_YES
+} from 'constants';
 import { PitchModel } from 'models';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import IconShuffle from 'react-icons/lib/io/shuffle';
@@ -17,6 +20,7 @@ export default function GenerateUpcomingGame(getGameId) {
       actions: PropTypes.object.isRequired,
       currentUserData: PropTypes.object.isRequired,
       gameData: PropTypes.object.isRequired,
+      hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
       usersData: PropTypes.object.isRequired
@@ -94,6 +98,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
     render() {
       const {
+        hasPermission,
         currentUserData: {
           currentUser,
           isLoading: isCurrentUserLoading
@@ -151,7 +156,10 @@ export default function GenerateUpcomingGame(getGameId) {
                 buttons={
                   [
                     renderConditionally({
-                      when: !isEnrollmentOver,
+                      when: [
+                        hasPermission(PERMISSION_CLOSE_ENROLMENT),
+                        !isEnrollmentOver
+                      ].every(Boolean),
                       render: () => (
                         <Button
                           key="close-enrollment"
@@ -164,20 +172,30 @@ export default function GenerateUpcomingGame(getGameId) {
                     renderConditionally({
                       when: isEnrollmentOver && !isGameOver,
                       render: () => [
-                        <Button
-                          key="draw-teams"
-                          onClick={this.onDrawTeams}>
-                          <IconShuffle className="icon" />
-                          <span className="label">Draw teams</span>
-                        </Button>,
+                        renderConditionally({
+                          when: hasPermission(PERMISSION_DRAW_TEAMS),
+                          render: () => (
+                            <Button
+                              key="draw-teams"
+                              onClick={this.onDrawTeams}>
+                              <IconShuffle className="icon" />
+                              <span className="label">Draw teams</span>
+                            </Button>
+                          )
+                        }),
 
-                        <Button
-                          key="end-game"
-                          onClick={this.onEndGame}>
-                          <IconSave className="icon" />
-                          <span className="label">End game</span>
-                        </Button>
-                      ]
+                        renderConditionally({
+                          when: hasPermission(PERMISSION_END_GAME),
+                          render: () => (
+                            <Button
+                              key="end-game"
+                              onClick={this.onEndGame}>
+                              <IconSave className="icon" />
+                              <span className="label">End game</span>
+                            </Button>
+                          )
+                        })
+                      ].filter(Boolean)
                     })
                   ].filter(Boolean)
                 } />
