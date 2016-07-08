@@ -2,17 +2,18 @@ import React from 'react';
 import { Route, IndexRoute, Redirect } from 'react-router';
 
 import App from 'components/App';
-import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
 import NewGame from 'containers/NewGame/NewGame';
 import NewPitch from 'containers/NewPitch/NewPitch';
 import NewPlayer from 'containers/NewPlayer/NewPlayer';
+import NotFound from 'containers/NotFound/NotFound';
 import Pitch from 'containers/Pitch/Pitch';
 import Pitches from 'containers/Pitches/Pitches';
 import Player from 'containers/Player/Player';
 import Players from 'containers/Players/Players';
-import NotFound from 'containers/NotFound/NotFound';
+import Unauthorized from 'containers/Unauthorized/Unauthorized';
+import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 
 export default ([
   <Redirect key="initial-redirect" from="/" to="/upcoming-game" />,
@@ -39,6 +40,7 @@ export default ([
     </Route>
     <Route path="players" component={NotFound} />
 
+    <Route path="unauthorized" component={Unauthorized} />
     <Redirect from="*" to="/404" />
   </Route>
 ]);

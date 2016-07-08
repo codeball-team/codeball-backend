@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect, refreshDataIfNecessary, sortByMany } from 'utils';
+import {
+  bindActionsAndConnect, refreshDataIfNecessary,
+  renderConditionally, sortByMany
+} from 'utils';
+import { PERMISSION_ADD_GAME } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -13,6 +17,7 @@ class Games extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     gamesData: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     pitchesData: PropTypes.object.isRequired,
     usersData: PropTypes.object.isRequired
   };
@@ -35,6 +40,7 @@ class Games extends Component {
 
   render() {
     const {
+      hasPermission,
       gamesData: {
         games,
         isLoading: areGamesLoading
@@ -71,13 +77,18 @@ class Games extends Component {
               formatUrl={formatUpcomingGameUrl}
               games={upcomingGames}
               buttons={[
-                <Link key="new" to="/games/new">
-                  <Button>
-                    <IconAdd className="icon" />
-                    <span className="label">Add</span>
-                  </Button>
-                </Link>
-              ]}
+                renderConditionally({
+                  when: hasPermission(PERMISSION_ADD_GAME),
+                  render: () => (
+                    <Link key="new" to="/games/new">
+                      <Button>
+                        <IconAdd className="icon" />
+                        <span className="label">Add</span>
+                      </Button>
+                    </Link>
+                  )
+                })
+              ].filter(Boolean)}
               {...gamesListProps} />
 
             <GamesListSection

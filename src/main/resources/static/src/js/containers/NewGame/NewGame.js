@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
+import { PERMISSION_ADD_GAME } from 'constants';
 import { NewGameModel } from 'models';
 import { Link } from 'react-router';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
@@ -11,6 +12,7 @@ import { NewGameSection } from 'components/sections';
 class NewGame extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     newGame: PropTypes.object.isRequired,
     pitchesData: PropTypes.object.isRequired
   };
@@ -29,7 +31,10 @@ class NewGame extends Component {
   };
 
   onDateChange = date => {
-    const { actions: { newGameChangeDate } } = this.props;
+    const { actions: { newGameChangeDate, redirect }, hasPermission } = this.props;
+    if (!hasPermission(PERMISSION_ADD_GAME)) {
+      redirect('/unauthorized');
+    }
     newGameChangeDate(date);
   };
 

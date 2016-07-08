@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect } from 'utils';
+import { bindActionsAndConnect, renderConditionally } from 'utils';
+import { PERMISSION_ADD_PITCH } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -9,6 +10,7 @@ import { PitchesListSection } from 'components/sections';
 class Pitches extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     pitchesData: PropTypes.object.isRequired
   };
 
@@ -19,6 +21,7 @@ class Pitches extends Component {
 
   render() {
     const {
+      hasPermission,
       pitchesData: {
         pitches,
         isLoading: arePitchesLoading
@@ -35,12 +38,17 @@ class Pitches extends Component {
               title={`Pitches (${numberOfPitches})`}
               pitches={_(pitches).values()}
               buttons={[
-                <Link key="new" to="pitches/new">
-                  <Button>
-                    <IconAdd className="icon" />
-                    <span className="label">Add</span>
-                  </Button>
-                </Link>
+                renderConditionally({
+                  when: hasPermission(PERMISSION_ADD_PITCH),
+                  render: () => (
+                    <Link key="new" to="pitches/new">
+                      <Button>
+                        <IconAdd className="icon" />
+                        <span className="label">Add</span>
+                      </Button>
+                    </Link>
+                  )
+                })
               ]} />
           </section>
         )} />

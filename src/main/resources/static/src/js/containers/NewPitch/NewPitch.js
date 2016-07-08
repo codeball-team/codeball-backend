@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
+import { PERMISSION_ADD_PITCH } from 'constants';
 import { NewPitchModel } from 'models';
 import { Link } from 'react-router';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
@@ -10,11 +11,15 @@ import { Button } from 'components/ui';
 class NewPitch extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     newPitch: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions: { newPitchReset } } = this.props;
+    const { actions: { newPitchReset, redirect }, hasPermission } = this.props;
+    if (!hasPermission(PERMISSION_ADD_PITCH)) {
+      redirect('/unauthorized');
+    }
     newPitchReset();
   };
 

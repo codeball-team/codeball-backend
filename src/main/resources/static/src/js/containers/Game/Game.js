@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
+import { PERMISSION_EDIT_GAME_SCORE } from 'constants';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 
@@ -9,6 +10,7 @@ export default function GenerateGame(getGameId) {
       actions: PropTypes.object.isRequired,
       currentUserData: PropTypes.object.isRequired,
       gameData: PropTypes.object.isRequired,
+      hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
       usersData: PropTypes.object.isRequired
@@ -68,6 +70,7 @@ export default function GenerateGame(getGameId) {
 
     render() {
       const {
+        hasPermission,
         actions: {
           gameEdit,
           gameEditCancel,
@@ -111,6 +114,7 @@ export default function GenerateGame(getGameId) {
             <section>
               <GameScoreSection
                 title="Result"
+                canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
                 isEditable={true}
                 isEditing={isEditing}
                 pitch={pitch}

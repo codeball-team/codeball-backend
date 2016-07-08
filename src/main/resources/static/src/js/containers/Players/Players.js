@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect } from 'utils';
+import { bindActionsAndConnect, renderConditionally } from 'utils';
+import { PERMISSION_ADD_USER } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
 import { Button, LoadableContent } from 'components/ui';
@@ -10,6 +11,7 @@ class Players extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     currentUserData: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     usersData: PropTypes.object.isRequired
   };
 
@@ -21,6 +23,7 @@ class Players extends Component {
 
   render() {
     const {
+      hasPermission,
       currentUserData: {
         currentUser,
         isLoading: isCurrentUserLoading
@@ -48,12 +51,17 @@ class Players extends Component {
               currentUser={currentUser}
               users={_(users).values()}
               buttons={[
-                <Link key="new" to="players/new">
-                  <Button>
-                    <IconAdd className="icon" />
-                    <span className="label">Add</span>
-                  </Button>
-                </Link>
+                renderConditionally({
+                  when: hasPermission(PERMISSION_ADD_USER),
+                  render: () => (
+                    <Link key="new" to="players/new">
+                      <Button>
+                        <IconAdd className="icon" />
+                        <span className="label">Add</span>
+                      </Button>
+                    </Link>
+                  )
+                })
               ]} />
           </section>
         )} />

@@ -12,6 +12,7 @@ export default function SectionDecorator(ChildComponent) {
   return class Section extends Component {
     static propTypes = {
       buttons: PropTypes.node,
+      canEdit: PropTypes.bool,
       isEditable: PropTypes.bool,
       isEditing: PropTypes.bool,
       title: PropTypes.node.isRequired,
@@ -21,6 +22,7 @@ export default function SectionDecorator(ChildComponent) {
     };
 
     static defaultProps = {
+      canEdit: false,
       isEditable: false,
       isEditing: false,
       onCancel: _.noop,
@@ -31,6 +33,7 @@ export default function SectionDecorator(ChildComponent) {
     render() {
       const {
         buttons,
+        canEdit,
         isEditable,
         isEditing,
         title,
@@ -53,7 +56,7 @@ export default function SectionDecorator(ChildComponent) {
 
             <ButtonsPanel>
               {renderConditionally({
-                when: isEditable,
+                when: canEdit && isEditable,
                 render: () => [
                   renderConditionally({
                     when: !isEditing,
