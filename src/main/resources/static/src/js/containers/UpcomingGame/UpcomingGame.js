@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
 import {
   PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS, PERMISSION_END_GAME,
-  ENROLLMENT_STATUS_YES
+  PERMISSION_ENROLL, ENROLLMENT_STATUS_YES
 } from 'constants';
 import { PitchModel } from 'models';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
@@ -201,7 +201,10 @@ export default function GenerateUpcomingGame(getGameId) {
                 } />
 
               {renderConditionally({
-                when: !isEnrollmentOver,
+                when: [
+                  hasPermission(PERMISSION_ENROLL),
+                  !isEnrollmentOver
+                ].every(Boolean),
                 render: () => (
                   <GameEnrollmentFormSection
                     title="Are you going?"

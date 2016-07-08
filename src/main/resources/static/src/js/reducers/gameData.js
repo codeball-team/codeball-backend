@@ -12,7 +12,7 @@ import {
 const initialState = {
   ...ajaxReducerInitialState,
   isEditing: false,
-  game: GameModel.example(),
+  game: new GameModel(),
   editedGame: {}
 };
 

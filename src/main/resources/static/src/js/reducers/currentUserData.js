@@ -4,7 +4,7 @@ import { CURRENT_USER_LOAD, CURRENT_USER_LOAD_FAILURE, CURRENT_USER_LOAD_SUCCESS
 
 const initialState = {
   ...ajaxReducerInitialState,
-  currentUser: UserModel.example()
+  currentUser: new UserModel()
 };
 
 export default ajaxReducer(

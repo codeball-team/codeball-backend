@@ -6,7 +6,7 @@ export default function safeGet(object, path, defaultValue = undefined) {
 
   while (subAttributes.length > 0) {
     const attribute = subAttributes.pop();
-    if (!_(currentValue).has(attribute)) {
+    if (!_(currentValue).has(attribute) || currentValue[attribute] === undefined) {
       return defaultValue;
     }
 

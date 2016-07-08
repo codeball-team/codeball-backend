@@ -4,12 +4,12 @@ export default class PitchModel {
   constructor(attributes) {
     _.extend(this, _({ ...attributes }).defaults({
       id: undefined,
-      name: undefined,
+      name: '',
       type: undefined,
       address: undefined,
       url: undefined,
-      minNumberOfPlayers: undefined,
-      maxNumberOfPlayers: undefined
+      minNumberOfPlayers: 0,
+      maxNumberOfPlayers: 0
     }));
   }
 

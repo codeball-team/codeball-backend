@@ -7,9 +7,7 @@ import {
 
 const initialState = {
   ...ajaxReducerInitialState,
-  users: {
-    [UserModel.example().id]: UserModel.example()
-  }
+  users: {}
 };
 
 export default ajaxReducer(

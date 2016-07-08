@@ -7,9 +7,7 @@ import {
 
 const initialState = {
   ...ajaxReducerInitialState,
-  pitches: {
-    [PitchModel.example().id]: PitchModel.example()
-  }
+  pitches: {}
 };
 
 export default ajaxReducer(

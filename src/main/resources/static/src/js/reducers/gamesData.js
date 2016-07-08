@@ -5,9 +5,7 @@ import { GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS } from 'constants/ac
 const initialState = {
   ...ajaxReducerInitialState,
   isEditing: false,
-  games: {
-    [GameModel.example().id]: GameModel.example()
-  }
+  games: {}
 };
 
 export default ajaxReducer(

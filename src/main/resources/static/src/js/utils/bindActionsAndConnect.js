@@ -6,12 +6,12 @@ import * as actions from 'actions';
 
 export default function bindActionsAndConnect(component, mapStateToProps) {
   return connect(
-    enhancePropsWithPermissions(mapStateToProps),
+    enhancePropsWithHasPermissions(mapStateToProps),
     mapDispatchToProps
   )(component);
 }
 
-function enhancePropsWithPermissions(mapStateToProps) {
+function enhancePropsWithHasPermissions(mapStateToProps) {
   return state => ({
     ...mapStateToProps(state),
 

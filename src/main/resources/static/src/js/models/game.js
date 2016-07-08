@@ -9,9 +9,9 @@ import {
 export default class GameModel {
   constructor(attributes) {
     _.extend(this, _({ ...attributes }).defaults({
-      date: undefined,
-      time: undefined,
-      duration: undefined,
+      date: '1970/01/01',
+      time: '00:00',
+      duration: 0,
       pitchId: undefined,
       isEnrollmentOver: undefined,
       isGameOver: undefined,
