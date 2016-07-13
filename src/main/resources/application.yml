@@ -34,4 +34,4 @@ development:
     firstName: Codeball
     lastName: Developer
     pictureUrl: https://gpkt.files.wordpress.com/2008/05/012.jpg
-    role: ROLE_USER
+    role: ROLE_ADMIN
