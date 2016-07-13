@@ -5,7 +5,8 @@ import { currentUserUrl } from 'constants';
 
 export function currentUserLoad() {
   return ajax(() => ({
-    request: request('GET', currentUserUrl()),
+    request: request('GET', currentUserUrl())
+      .set('Content-Type', 'application/json'),
     startAction: CURRENT_USER_LOAD,
     successAction: CURRENT_USER_LOAD_SUCCESS,
     failureAction: CURRENT_USER_LOAD_FAILURE
