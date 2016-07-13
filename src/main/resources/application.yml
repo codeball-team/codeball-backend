@@ -1,11 +1,11 @@
 codeball:
-  authorizationDomain: codete.co
+  authorizationDomain: codete.com
 
 spring:
   application:
     index: index.html
   resources:
-    static-locations: classpath:/resources/,classpath:/static/build/,classpath:/META-INF/resources/
+    static-locations: classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
 
 security:
   basic:

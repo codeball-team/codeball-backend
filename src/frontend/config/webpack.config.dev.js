@@ -75,7 +75,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
-    port: 3000
+    port: 3001
   },
   devtool: 'eval'
 };
