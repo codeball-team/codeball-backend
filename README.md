@@ -1,11 +1,11 @@
 # codeball
 ## Frontend environment
-Location: `src/main/resources/static/`
+Location: `src/frontend/`
 ### Installation
 `npm install`
 ### Building
-`npm run build` will prepare a clean build in `src/main/resources/static/build/`
+`npm run build` will prepare a clean build in `src/frontend/build/`
 ### Development server
 `npm start` will start a server at `localhost:3000`
-### ESLint + JSCS
+### ESLint
 `npm run lint`
