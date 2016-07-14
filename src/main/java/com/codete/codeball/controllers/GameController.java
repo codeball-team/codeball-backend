@@ -58,7 +58,7 @@ public class GameController {
         if (game.isEnrollmentOver()) {
             throw new EnrollmentOverException(gameId);
         }
-        game.getEnrollments().put(currentUser, status);
+        game.enrollUser(currentUser, status);
         return game;
     }
 

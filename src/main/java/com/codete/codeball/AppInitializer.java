@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneOffset;
-import java.util.HashMap;
 
 @Component
 public class AppInitializer implements CommandLineRunner {
@@ -66,17 +65,17 @@ public class AppInitializer implements CommandLineRunner {
                 .build();
         userRepository.save(user2);
 
-        HashMap<User, EnrollmentStatus> enrollment = new HashMap<>();
-        enrollment.put(user1, EnrollmentStatus.MAYBE);
-        enrollment.put(user2, EnrollmentStatus.YES);
         Game game1 = Game.builder()
                 .startTimestamp(LocalDateTime.of(2016, Month.JUNE, 23, 19, 0).toEpochSecond(ZoneOffset.UTC))
                 .durationInMinutes(120)
                 .pitch(pitch1)
                 .enrollmentOver(false)
+                .enrollments(Sets.newHashSet())
                 .gameOver(false)
-                .enrollments(enrollment)
                 .build();
+        gameRepository.save(game1);
+        game1.enrollUser(user1, EnrollmentStatus.MAYBE);
+        game1.enrollUser(user2, EnrollmentStatus.YES);
         gameRepository.save(game1);
 
         Game game2 = Game.builder()
@@ -84,6 +83,7 @@ public class AppInitializer implements CommandLineRunner {
                 .durationInMinutes(90)
                 .pitch(pitch2)
                 .enrollmentOver(true)
+                .enrollments(Sets.newHashSet())
                 .gameOver(true)
                 .teamA(Sets.newHashSet(user1))
                 .teamB(Sets.newHashSet(user2))

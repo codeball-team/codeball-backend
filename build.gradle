@@ -32,6 +32,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-tomcat'
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.boot:spring-boot-configuration-processor"
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.0'
 
     compile 'org.projectlombok:lombok:1.16.8'
 
