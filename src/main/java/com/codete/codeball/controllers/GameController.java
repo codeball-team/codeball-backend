@@ -69,7 +69,7 @@ public class GameController {
         return gameRepository.save(game);
     }
 
-    @RequestMapping(value = "/enrollment/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/finishEnrollment", method = RequestMethod.PUT)
     public Game finishEnrollment(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
         game.setEnrollmentOver(true);
