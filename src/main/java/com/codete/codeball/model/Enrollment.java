@@ -34,15 +34,31 @@ public class Enrollment {
     @JsonProperty("enrollmentStatus")
     private EnrollmentStatus enrollmentStatus;
 
+    @Setter
+    @Getter
+    @JsonProperty("enroller")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = User.class)
+    @JsonIdentityReference(alwaysAsId = true)
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    private User enroller;
+
     @Tolerate
     public Enrollment() {
 
+    }
+
+    public Enrollment(Game game, User user, EnrollmentStatus enrollmentStatus, User enroller) {
+        this.game = game;
+        this.user = user;
+        this.enrollmentStatus = enrollmentStatus;
+        this.enroller = enroller;
     }
 
     public Enrollment(Game game, User user, EnrollmentStatus enrollmentStatus) {
         this.game = game;
         this.user = user;
         this.enrollmentStatus = enrollmentStatus;
+        this.enroller = user;
     }
 
 }

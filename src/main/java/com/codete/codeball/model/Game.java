@@ -67,13 +67,18 @@ public class Game {
         this.teamB = teamAssignment.getTeamB();
     }
 
-    public void enrollUser(User user, EnrollmentStatus status) {
-        Optional<Enrollment> userEnrollment = enrollments.stream().filter(enrollment -> enrollment.getUser().equals(user)).findFirst();
+    public void enrollUser(User userToBeEnrolled, EnrollmentStatus status, User enroller) {
+        Optional<Enrollment> userEnrollment = enrollments.stream().filter(enrollment -> enrollment.getUser().equals(userToBeEnrolled)).findFirst();
         if (userEnrollment.isPresent()) {
             userEnrollment.get().setEnrollmentStatus(status);
+            userEnrollment.get().setEnroller(enroller);
         } else {
-            enrollments.add(new Enrollment(this, user, status));
+            enrollments.add(new Enrollment(this, userToBeEnrolled, status, enroller));
         }
+    }
+
+    public void enrollUser(User user, EnrollmentStatus status) {
+        enrollUser(user, status, user);
     }
 
     public void setScore(int teamAScore, int teamBScore) {
