@@ -8,6 +8,7 @@ import com.codete.codeball.model.TeamAssignment;
 import com.codete.codeball.model.User;
 import com.codete.codeball.model.requests.GameScoreRequest;
 import com.codete.codeball.repositories.GameRepository;
+import com.codete.codeball.repositories.UserRepository;
 import com.codete.codeball.services.teams.TeamAssigner;
 import com.codete.codeball.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class GameController {
 
     @Autowired
     private GameRepository gameRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private TeamAssigner teamAssigner;
@@ -51,15 +55,30 @@ public class GameController {
         return gameRepository.findAll(new Sort(Sort.Direction.DESC, "startTimestamp"));
     }
 
+    @Deprecated
     @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Game deprecatedSetEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
+        return setEnrollmentStatus(principal, gameId, status);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}/enrollment", method = RequestMethod.PUT)
     public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
         User currentUser = contextUtils.getUser(principal);
+        return setEnrollmentStatus(principal, gameId, currentUser.getId(), status);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}/enrollment/{userId}", method = RequestMethod.PUT)
+    public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
+        User currentUser = contextUtils.getUser(principal);
+        User userToEnroll = userRepository.findOne(userId);
         Game game = gameRepository.findOne(gameId);
         if (game.isEnrollmentOver()) {
             throw new EnrollmentOverException(gameId);
         }
-        game.enrollUser(currentUser, status);
+        game.enrollUser(userToEnroll, status, currentUser);
         return game;
     }
 
