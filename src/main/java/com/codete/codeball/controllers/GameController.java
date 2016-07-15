@@ -65,9 +65,6 @@ public class GameController {
     @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT)
     public Game drawTeams(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
-        if (game.isGameOver()) {
-            throw new GameOverException(gameId);
-        }
         drawTeams(game);
         return gameRepository.save(game);
     }
@@ -81,6 +78,9 @@ public class GameController {
     }
 
     private void drawTeams(Game game) {
+        if (game.isGameOver()) {
+            throw new GameOverException(game.getId());
+        }
         TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
         game.assignTeams(teamAssignment);
     }
