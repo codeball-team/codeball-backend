@@ -7,9 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -22,6 +20,8 @@ public class Pitch {
     private Long id;
     private String name;
     private String address;
+    @Enumerated(EnumType.STRING)
+    private PitchType pitchType;
     private int minNumberOfPlayers;
     private int maxNumberOfPlayers;
 

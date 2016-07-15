@@ -1,9 +1,6 @@
 package com.codete.codeball;
 
-import com.codete.codeball.model.EnrollmentStatus;
-import com.codete.codeball.model.Game;
-import com.codete.codeball.model.Pitch;
-import com.codete.codeball.model.User;
+import com.codete.codeball.model.*;
 import com.codete.codeball.repositories.GameRepository;
 import com.codete.codeball.repositories.PitchRepository;
 import com.codete.codeball.repositories.UserRepository;
@@ -37,6 +34,7 @@ public class AppInitializer implements CommandLineRunner {
                 .address("ul. Piastowska 69, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(6)
+                .pitchType(PitchType.FIRM_GROUND)
                 .build();
         pitchRepository.save(pitch1);
 
@@ -45,6 +43,7 @@ public class AppInitializer implements CommandLineRunner {
                 .address("ul. Św. Filipa 15, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(10)
+                .pitchType(PitchType.HARD_GROUND)
                 .build();
         pitchRepository.save(pitch2);
 
