@@ -6,6 +6,7 @@ import com.codete.codeball.model.EnrollmentStatus;
 import com.codete.codeball.model.Game;
 import com.codete.codeball.model.TeamAssignment;
 import com.codete.codeball.model.User;
+import com.codete.codeball.model.requests.GameScoreRequest;
 import com.codete.codeball.repositories.GameRepository;
 import com.codete.codeball.services.teams.TeamAssigner;
 import com.codete.codeball.utils.ContextUtils;
@@ -74,6 +75,13 @@ public class GameController {
         Game game = gameRepository.findOne(gameId);
         game.setEnrollmentOver(true);
         drawTeams(game);
+        return gameRepository.save(game);
+    }
+
+    @RequestMapping(value = "/{id}/score")
+    public Game setGameScore(@PathVariable("id") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
+        Game game = gameRepository.findOne(gameId);
+        game.setScore(gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
         return gameRepository.save(game);
     }
 

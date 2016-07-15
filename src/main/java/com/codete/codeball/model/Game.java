@@ -76,4 +76,9 @@ public class Game {
         }
     }
 
+    public void setScore(int teamAScore, int teamBScore) {
+        this.teamAScore = teamAScore;
+        this.teamBScore = teamBScore;
+    }
+
 }
