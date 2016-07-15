@@ -68,8 +68,7 @@ public class GameController {
         if (game.isGameOver()) {
             throw new GameOverException(gameId);
         }
-        TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
-        game.assignTeams(teamAssignment);
+        drawTeams(game);
         return gameRepository.save(game);
     }
 
@@ -77,7 +76,13 @@ public class GameController {
     public Game finishEnrollment(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
         game.setEnrollmentOver(true);
+        drawTeams(game);
         return gameRepository.save(game);
+    }
+
+    private void drawTeams(Game game) {
+        TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
+        game.assignTeams(teamAssignment);
     }
 
 }
