@@ -3,9 +3,6 @@ apply plugin: 'maven'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-
 description = """codeball"""
 
 sourceCompatibility = 1.8
@@ -44,7 +41,15 @@ dependencies {
     compile 'com.h2database:h2'
 }
 
+task copyFrontendBuild(type: Copy) {
+    from "$projectDir/src/frontend/build"
+    into "$buildDir/frontend/static"
+}
+
 compileJava.dependsOn(processResources)
+processResources.dependsOn("copyFrontendBuild")
+
+sourceSets.main.resources.srcDirs = ["$projectDir/src/main/resources", "$buildDir/frontend"]
 
 buildscript {
     repositories {
