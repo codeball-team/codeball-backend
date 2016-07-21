@@ -25,7 +25,8 @@ export default class NewGame extends Component {
     onDurationChange: PropTypes.func.isRequired,
     onHourChange: PropTypes.func.isRequired,
     onMinuteChange: PropTypes.func.isRequired,
-    onPitchIdChange: PropTypes.func.isRequired
+    onPitchIdChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func
   };
 
   onPitchIdChange = ({ value }) => {
@@ -49,7 +50,8 @@ export default class NewGame extends Component {
       pitchId,
       onDurationChange,
       onHourChange,
-      onMinuteChange
+      onMinuteChange,
+      onSubmit
     } = this.props;
 
     const pitchesOptions = pitches.map(({ id, name }) => ({
@@ -65,6 +67,7 @@ export default class NewGame extends Component {
           className
         )}>
         <Form
+          onSubmit={onSubmit}
           inputs={[
             {
               label: 'Pitch',

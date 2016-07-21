@@ -111,7 +111,8 @@ class NewGame extends Component {
               onDurationChange={this.onDurationChange}
               onHourChange={this.onHourChange}
               onMinuteChange={this.onMinuteChange}
-              onPitchIdChange={this.onPitchIdChange} />
+              onPitchIdChange={this.onPitchIdChange}
+              onSubmit={this.onSubmit} />
           </section>
         )} />
     );
