@@ -12,9 +12,10 @@ export default class App extends Component {
 
     return (
       <div>
-        <Page GlobalSpinnerComponent={AjaxSpinner}>
+        <Page>
           {children}
         </Page>
+        <AjaxSpinner />
       </div>
     );
   }

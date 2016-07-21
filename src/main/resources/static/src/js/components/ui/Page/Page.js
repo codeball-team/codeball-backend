@@ -4,8 +4,7 @@ import './Page.scss';
 
 export default class Page extends Component {
   static propTypes = {
-    children: PropTypes.element.isRequired,
-    GlobalSpinnerComponent: PropTypes.func.isRequired
+    children: PropTypes.element.isRequired
   };
 
   static contextTypes = {
@@ -19,10 +18,7 @@ export default class Page extends Component {
   };
 
   render() {
-    const {
-      children,
-      GlobalSpinnerComponent
-    } = this.props;
+    const { children } = this.props;
 
     return (
       <div className="page">
@@ -36,7 +32,6 @@ export default class Page extends Component {
             </a>
           </div>
         </div>
-        <GlobalSpinnerComponent />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import { now } from 'utils';
+import { now, safeGet } from 'utils';
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE } from 'constants/actionTypes';
 
 export default function ajax(getOptions) {
@@ -20,14 +20,15 @@ export default function ajax(getOptions) {
     const time = now();
 
     request.end((error, response) => {
+      const body = safeGet(response, ['body'], error);
       if (error || !response.ok) {
         dispatch({
           type: failureAction,
           time,
           error,
-          response
+          response: body
         });
-        dispatch({ type: AJAX_FAILURE });
+        dispatch({ type: AJAX_FAILURE, response: body });
         failureCallback(response);
       } else {
         dispatch({

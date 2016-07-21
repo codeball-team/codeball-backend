@@ -4,16 +4,16 @@ import { Spinner } from 'components/ui';
 
 class AjaxSpinner extends Component {
   static propTypes = {
-    ajaxRequests: PropTypes.number.isRequired
+    ajaxRequests: PropTypes.object.isRequired
   };
 
   render() {
-    const { ajaxRequests } = this.props;
+    const { ajaxRequests: { numberOfPendingRequests } } = this.props;
 
     return (
       <Spinner
         placement="fixed"
-        show={ajaxRequests > 0} />
+        show={numberOfPendingRequests > 0} />
     );
   }
 }

@@ -37,7 +37,7 @@ export const ROLES_PERMISSIONS = {
   },
 
   [ROLE_USER]: {
-    [PERMISSION_ADD_GAME]: false,
+    [PERMISSION_ADD_GAME]: true,
     [PERMISSION_ADD_PITCH]: false,
     [PERMISSION_ADD_USER]: false,
     [PERMISSION_CLOSE_ENROLMENT]: false,
