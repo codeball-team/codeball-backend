@@ -1,11 +1,11 @@
 codeball:
-  authorizationDomain: codete.co
+  authorizationDomain: codete.com
 
 spring:
   application:
     index: index.html
   resources:
-    static-locations: classpath:/resources/,classpath:/static/build/,classpath:/META-INF/resources/
+    static-locations: classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
 
 security:
   basic:
@@ -34,4 +34,4 @@ development:
     firstName: Codeball
     lastName: Developer
     pictureUrl: https://gpkt.files.wordpress.com/2008/05/012.jpg
-    role: ROLE_USER
+    role: ROLE_ADMIN

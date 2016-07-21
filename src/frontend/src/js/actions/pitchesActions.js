@@ -5,7 +5,8 @@ import { pitchesUrl } from 'constants';
 
 export function pitchesLoad() {
   return ajax(() => ({
-    request: request('GET', pitchesUrl()),
+    request: request('GET', pitchesUrl())
+      .set('Content-Type', 'application/json'),
     startAction: PITCHES_LOAD,
     successAction: PITCHES_LOAD_SUCCESS,
     failureAction: PITCHES_LOAD_FAILURE

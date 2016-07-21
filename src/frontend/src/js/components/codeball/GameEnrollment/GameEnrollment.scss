@@ -1,0 +1,17 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.game-enrollment {
+  .game-enrollment-list {
+    .game-enrollment-list-item {
+      .enrollment-status {
+        @include flex-child;
+        margin-left: $spacing-s;
+
+        @include phone {
+          display: none;
+        }
+      }
+    }
+  }
+}

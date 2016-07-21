@@ -106,7 +106,8 @@ export function gameEnd(gameId) {
 
 export function gameLoad(gameId) {
   return ajax(() => ({
-    request: request('GET', gameUrl(gameId)),
+    request: request('GET', gameUrl(gameId))
+      .set('Content-Type', 'application/json'),
     startAction: GAME_LOAD,
     successAction: GAME_LOAD_SUCCESS,
     failureAction: GAME_LOAD_FAILURE,
@@ -129,7 +130,8 @@ export function gameSave(gameId, data) {
 
 export function gamesLoad() {
   return ajax(() => ({
-    request: request('GET', gamesUrl()),
+    request: request('GET', gamesUrl())
+      .set('Content-Type', 'application/json'),
     startAction: GAMES_LOAD,
     successAction: GAMES_LOAD_SUCCESS,
     failureAction: GAMES_LOAD_FAILURE

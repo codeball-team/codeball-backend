@@ -2,9 +2,9 @@ const BASE_API_URL = 'http://localhost:8080/api';
 
 const ADMIN = 'admin';
 const CURRENT_USER = 'me';
-const GAMES = 'games';
-const PITCHES = 'pitches';
-const USERS = 'users';
+const GAMES = 'game';
+const PITCHES = 'pitch';
+const USERS = 'user';
 
 export function currentUserUrl() {
   return `${usersUrl()}/${CURRENT_USER}`;
@@ -12,9 +12,9 @@ export function currentUserUrl() {
 
 export function gameAdminUrl(gameId) {
   if (gameId) {
-    return `${BASE_API_URL}/${ADMIN}/game/${gameId}`;
+    return `${BASE_API_URL}/${ADMIN}/${GAMES}/${gameId}`;
   }
-  return `${BASE_API_URL}/${ADMIN}/game`;
+  return `${BASE_API_URL}/${ADMIN}/${GAMES}`;
 }
 
 export function gameDrawTeamsUrl(gameId) {
@@ -35,9 +35,9 @@ export function gamesUrl() {
 
 export function pitchAdminUrl(pitchId) {
   if (pitchId) {
-    return `${BASE_API_URL}/${ADMIN}/pitch/${pitchId}`;
+    return `${BASE_API_URL}/${ADMIN}/${PITCHES}/${pitchId}`;
   }
-  return `${BASE_API_URL}/${ADMIN}/pitch`;
+  return `${BASE_API_URL}/${ADMIN}/${PITCHES}`;
 }
 
 export function pitchUrl(pitchId) {
@@ -50,9 +50,9 @@ export function pitchesUrl() {
 
 export function userAdminUrl(userId) {
   if (userId) {
-    return `${BASE_API_URL}/${ADMIN}/user/${userId}`;
+    return `${BASE_API_URL}/${ADMIN}/${USERS}/${userId}`;
   }
-  return `${BASE_API_URL}/${ADMIN}/user`;
+  return `${BASE_API_URL}/${ADMIN}/${USERS}`;
 }
 
 export function usersUrl() {

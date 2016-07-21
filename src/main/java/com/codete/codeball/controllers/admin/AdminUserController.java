@@ -7,35 +7,35 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/admin/user")
+@RequestMapping(value = "/api/admin/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdminUserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable long id) {
         return userRepository.findOne(id);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         user.setId(null);
         return userRepository.save(user);
     }
 
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public User updateUser(@PathVariable long id, @RequestBody User user) {
         user.setId(id);
         return userRepository.save(user);
     }
 
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable long id) {
         userRepository.delete(id);
     }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping(value = "/api/users")
+@RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
 
     @Autowired
@@ -20,22 +20,22 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/me", method = RequestMethod.GET)
     public User getCurrentUser(Principal principal) {
         return contextUtils.getUser(principal);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable long id) {
         return userRepository.findOne(id);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         user.setId(null);
         user.setRole(UserRole.ROLE_USER.name());
