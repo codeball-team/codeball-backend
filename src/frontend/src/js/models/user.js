@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 export default class UserModel {
-  constructor(attributes) {
+  constructor(attributes = {}) {
     _.extend(this, _({ ...attributes }).defaults({
       id: undefined,
       firstName: undefined,
@@ -13,6 +13,10 @@ export default class UserModel {
   }
 
   static fromServerFormat(serverResponse) {
+    if (!serverResponse) {
+      return new UserModel();
+    }
+
     return new UserModel({
       id: serverResponse.id,
       email: serverResponse.email,

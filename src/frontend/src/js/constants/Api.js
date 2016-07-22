@@ -17,12 +17,16 @@ export function gameAdminUrl(gameId) {
   return `${BASE_API_URL}/${ADMIN}/${GAMES}`;
 }
 
+export function gameCloseEnrollmentUrl(gameId) {
+  return `${gameUrl(gameId)}/finishEnrollment`;
+}
+
 export function gameDrawTeamsUrl(gameId) {
   return `${gameUrl(gameId)}/team`;
 }
 
 export function gameEnrollmentUrl(gameId) {
-  return `${gamesUrl()}/enrollment/${gameId}`;
+  return `${gameUrl(gameId)}/enrollment`;
 }
 
 export function gameUrl(gameId) {

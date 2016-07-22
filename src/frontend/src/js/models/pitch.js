@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 export default class PitchModel {
-  constructor(attributes) {
+  constructor(attributes = {}) {
     _.extend(this, _({ ...attributes }).defaults({
       id: undefined,
       name: '',
@@ -14,6 +14,10 @@ export default class PitchModel {
   }
 
   static fromServerFormat(serverResponse) {
+    if (!serverResponse) {
+      return new PitchModel();
+    }
+
     return new PitchModel({
       id: serverResponse.id,
       name: serverResponse.name,

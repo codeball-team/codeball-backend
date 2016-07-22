@@ -7,7 +7,7 @@ import {
 } from 'constants';
 
 export default class GameModel {
-  constructor(attributes) {
+  constructor(attributes = {}) {
     _.extend(this, _({ ...attributes }).defaults({
       date: '1970/01/01',
       time: '00:00',
@@ -28,8 +28,13 @@ export default class GameModel {
   }
 
   static fromServerFormat(serverResponse) {
-    const enrolledUsers = _(serverResponse.enrollmentIds || {}).reduce(
-      (sum, enrollmentStatus, userId) => {
+    if (!serverResponse) {
+      return new GameModel();
+    }
+
+    const enrolledUsers = _(serverResponse.enrollments || []).reduce(
+      (sum, enrollment) => {
+        const { enrollmentStatus, userId } = enrollment;
         sum[enrollmentStatus].push(Number(userId));
         return sum;
       },

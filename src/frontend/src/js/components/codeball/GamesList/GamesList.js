@@ -36,7 +36,7 @@ export default class GamesList extends Component {
             teamBScore,
             time
           } = game;
-          const { name: pitchName } = pitches[pitchId];
+          const { name: pitchName } = pitches[pitchId] || {};
 
           return (
             <Link key={id} to={formatUrl(id)}>

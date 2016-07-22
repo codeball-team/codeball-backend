@@ -13,6 +13,7 @@ import {
 } from 'constants/actionTypes';
 import {
   gameAdminUrl,
+  gameCloseEnrollmentUrl,
   gameDrawTeamsUrl,
   gameEnrollmentUrl,
   gameUrl,
@@ -21,7 +22,7 @@ import {
 
 export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
   return ajax(() => ({
-    request: request('PUT', gameUrl(gameId))
+    request: request('PUT', gameEnrollmentUrl(gameId))
       .set('Content-Type', 'application/json')
       .send(`"${enrollmentStatus}"`),
     startAction: GAME_CHANGE_ENROLLMENT_STATUS,
@@ -37,7 +38,7 @@ export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
 
 export function gameCloseEnrollment(gameId) {
   return ajax(() => ({
-    request: request('PUT', gameEnrollmentUrl(gameId))
+    request: request('PUT', gameCloseEnrollmentUrl(gameId))
       .set('Content-Type', 'application/json'),
     startAction: GAME_CLOSE_ENROLLMENT,
     successAction: GAME_CLOSE_ENROLLMENT_SUCCESS,
