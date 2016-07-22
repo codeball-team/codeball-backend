@@ -6,6 +6,7 @@ import {
   GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B, GAME_END_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
+  GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
 
@@ -30,7 +31,13 @@ export default ajaxReducer(
 
     [GAME_DRAW_TEAMS_SUCCESS]: gameLoaded,
 
-    [GAME_EDIT]: continueEditing,
+    [GAME_EDIT]: state => ({
+      ...state,
+      editedGame: {
+        ...state.game
+      },
+      isEditing: true
+    }),
 
     [GAME_EDIT_CANCEL]: state => ({
       ...state,
@@ -67,6 +74,10 @@ export default ajaxReducer(
     [GAME_SAVE_FAILURE]: continueEditing,
 
     [GAME_SAVE_SUCCESS]: gameLoaded,
+
+    [GAME_SET_SCORE_SUCCESS]: gameLoaded,
+
+    [GAME_SET_SCORE_FAILURE]: continueEditing,
 
     [NEW_GAME_SUBMIT]: continueEditing,
 

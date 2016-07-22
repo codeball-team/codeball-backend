@@ -29,6 +29,10 @@ export function gameEnrollmentUrl(gameId) {
   return `${gameUrl(gameId)}/enrollment`;
 }
 
+export function gameSetScoreUrl(gameId) {
+  return `${gameUrl(gameId)}/score`;
+}
+
 export function gameUrl(gameId) {
   return `${gamesUrl()}/${gameId}`;
 }

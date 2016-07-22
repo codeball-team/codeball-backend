@@ -9,6 +9,7 @@ import {
   GAME_END, GAME_END_FAILURE, GAME_END_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SAVE, GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
+  GAME_SET_SCORE, GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
 } from 'constants/actionTypes';
 import {
@@ -16,6 +17,7 @@ import {
   gameCloseEnrollmentUrl,
   gameDrawTeamsUrl,
   gameEnrollmentUrl,
+  gameSetScoreUrl,
   gameUrl,
   gamesUrl
 } from 'constants';
@@ -126,6 +128,17 @@ export function gameSave(gameId, data) {
     startAction: GAME_SAVE,
     successAction: GAME_SAVE_SUCCESS,
     failureAction: GAME_SAVE_FAILURE
+  }));
+}
+
+export function gameSetScore(gameId, teamAScore, teamBScore) {
+  return ajax(() => ({
+    request: request('PUT', gameSetScoreUrl(gameId))
+      .set('Content-Type', 'application/json')
+      .send({ teamAScore, teamBScore }),
+    startAction: GAME_SET_SCORE,
+    successAction: GAME_SET_SCORE_SUCCESS,
+    failureAction: GAME_SET_SCORE_FAILURE
   }));
 }
 

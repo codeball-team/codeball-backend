@@ -36,16 +36,19 @@ export default function GenerateGame(getGameId) {
     onSave = () => {
       const {
         actions: {
-          gameSave
+          gameSetScore
         },
         gameData: {
-          editedGame,
+          editedGame: {
+            teamAScore,
+            teamBScore
+          },
           game: {
             id: gameId
           }
         }
       } = this.props;
-      gameSave(gameId, editedGame);
+      gameSetScore(gameId, teamAScore, teamBScore);
     }
 
     updateData = props => {
@@ -98,7 +101,7 @@ export default function GenerateGame(getGameId) {
       } = this.props;
 
       const { pitchId, teamA, teamB } = game;
-      const pitch = pitches[pitchId];
+      const pitch = pitches[pitchId] || {};
 
       const isContentLoading = [
         arePitchesLoading,
