@@ -1,3 +1,4 @@
+export const AJAX_ERROR_ACKNOWLEDGE = 'AJAX_ERROR_ACKNOWLEDGE';
 export const AJAX_START = 'AJAX_START';
 export const AJAX_FAILURE = 'AJAX_FAILURE';
 export const AJAX_SUCCESS = 'AJAX_SUCCESS';

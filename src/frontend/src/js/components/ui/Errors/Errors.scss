@@ -1,0 +1,50 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.errors {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 75vh;
+  overflow: auto;
+  background-color: $darken-color;
+  color: $fg-color;
+  padding: $spacing-l 0;
+
+  &:empty {
+    padding: 0;
+  }
+
+  .error {
+    background-color: $bg-color-danger;
+    position: relative;
+    padding: $spacing-l;
+    margin: $spacing-l;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-start;
+
+      .title {
+        flex: 1 1 100%;
+        font-size: $font-size-m;
+        padding-bottom: $spacing-s;
+        margin-right: $spacing-l;
+      }
+
+      .dismiss {
+        flex: 1 0 auto;
+        font-size: $font-size-m;
+      }
+    }
+  }
+}

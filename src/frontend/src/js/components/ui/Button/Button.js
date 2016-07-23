@@ -16,24 +16,19 @@ export default class Button extends Component {
     onClick: _.noop
   };
 
-  onClick = () => {
-    const { onClick } = this.props;
-    onClick();
-  }
-
   render() {
     const {
       children,
       className,
-      isDisabled
+      isDisabled,
+      onClick
     } = this.props;
 
     return (
       <div
-        onClick={this.onClick}
+        onClick={onClick}
         className={classNames(
           'button',
-          'ellipsis',
           {
             'is-disabled': isDisabled
           },

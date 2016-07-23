@@ -1,4 +1,5 @@
 export { push as redirect } from 'react-router-redux';
+export * from './ajaxRequestsActions';
 export * from './currentUserActions';
 export * from './gamesActions';
 export * from './newGameActions';

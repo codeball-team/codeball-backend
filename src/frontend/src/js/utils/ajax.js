@@ -19,16 +19,22 @@ export default function ajax(getOptions) {
     };
     const time = now();
 
-    request.end((error, response) => {
-      const body = safeGet(response, ['body'], error);
+    request.end((error, response = {}) => {
+      const [title, message] = safeGet(error, ['message'], '').split('\n');
+      const body = safeGet(response, ['body'], {
+        error: title,
+        message
+      });
       if (error || !response.ok) {
         dispatch({
           type: failureAction,
           time,
-          error,
           response: body
         });
-        dispatch({ type: AJAX_FAILURE, response: body });
+        dispatch({
+          type: AJAX_FAILURE,
+          response: body
+        });
         failureCallback(response);
       } else {
         dispatch({

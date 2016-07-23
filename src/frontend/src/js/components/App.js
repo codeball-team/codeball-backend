@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
+import AjaxErrors from 'containers/AjaxErrors/AjaxErrors';
 import { Page } from 'components/ui';
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
           {children}
         </Page>
         <AjaxSpinner />
+        <AjaxErrors />
       </div>
     );
   }
