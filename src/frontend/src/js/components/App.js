@@ -1,11 +1,28 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionsAndConnect } from 'utils';
 import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
 import AjaxErrors from 'containers/AjaxErrors/AjaxErrors';
 import { Page } from 'components/ui';
 
-export default class App extends Component {
+class App extends Component {
   static propTypes = {
+    actions: PropTypes.object.isRequired,
     children: PropTypes.element.isRequired
+  };
+
+  componentWillMount = () => {
+    const {
+      actions: {
+        currentUserLoad,
+        gamesLoad,
+        pitchesLoad,
+        usersLoad
+      }
+    } = this.props;
+    currentUserLoad();
+    gamesLoad();
+    pitchesLoad();
+    usersLoad();
   };
 
   render() {
@@ -22,3 +39,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default bindActionsAndConnect(App, () => ({}));

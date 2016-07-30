@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, safeGet } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 
@@ -22,8 +22,8 @@ class Pitch extends Component {
   };
 
   updateData = () => {
-    const { actions: { pitchesLoad } } = this.props;
-    pitchesLoad();
+    const { actions: { pitchesLoad }, pitchesData } = this.props;
+    refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
   render() {

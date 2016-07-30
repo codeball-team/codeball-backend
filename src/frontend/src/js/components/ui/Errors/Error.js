@@ -37,7 +37,8 @@ export default class Errors extends Component {
           </div>
 
           <Button className="dismiss" onClick={this.onErrorAcknowledge}>
-            &times; Dismiss
+            <span className="icon">&times;</span>
+            <span className="label">Dismiss</span>
           </Button>
         </div>
 

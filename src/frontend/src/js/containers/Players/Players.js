@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect, renderConditionally } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
@@ -16,9 +16,8 @@ class Players extends Component {
   };
 
   componentWillMount = () => {
-    const { actions: { currentUserLoad, usersLoad } } = this.props;
-    currentUserLoad();
-    usersLoad();
+    const { actions: { usersLoad }, usersData } = this.props;
+    refreshDataIfNecessary(usersData, usersLoad);
   };
 
   render() {

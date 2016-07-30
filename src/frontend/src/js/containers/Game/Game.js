@@ -54,19 +54,16 @@ export default function GenerateGame(getGameId) {
     updateData = props => {
       const {
         actions: {
-          currentUserLoad,
           gameLoad,
           pitchesLoad,
           usersLoad
         },
-        currentUserData,
         params: { gameId },
         pitchesData,
         usersData
       } = props;
 
       gameLoad(gameId);
-      refreshDataIfNecessary(currentUserData, currentUserLoad);
       refreshDataIfNecessary(pitchesData, pitchesLoad);
       refreshDataIfNecessary(usersData, usersLoad);
     };

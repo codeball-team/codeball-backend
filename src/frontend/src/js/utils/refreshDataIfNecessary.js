@@ -1,9 +1,9 @@
 import isDataInvalidated from './isDataInvalidated';
 
-export default function refreshDataIfNecessary(data, loadDataActionCallback) {
+export default function refreshDataIfNecessary(data, refreshDataCallback) {
   const { isLoading, lastUpdate } = data;
 
   if (!isLoading && isDataInvalidated(lastUpdate)) {
-    loadDataActionCallback();
+    refreshDataCallback();
   }
 }

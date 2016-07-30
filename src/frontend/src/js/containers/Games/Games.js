@@ -29,11 +29,12 @@ class Games extends Component {
         pitchesLoad,
         usersLoad
       },
+      gamesData,
       pitchesData,
       usersData
     } = this.props;
 
-    gamesLoad();
+    refreshDataIfNecessary(gamesData, gamesLoad);
     refreshDataIfNecessary(pitchesData, pitchesLoad);
     refreshDataIfNecessary(usersData, usersLoad);
   };

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, safeGet } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PlayerProfileSection } from 'components/sections';
 
@@ -22,8 +22,8 @@ class Player extends Component {
   };
 
   updateData = () => {
-    const { actions: { usersLoad } } = this.props;
-    usersLoad();
+    const { actions: { usersLoad }, usersData } = this.props;
+    refreshDataIfNecessary(usersData, usersLoad);
   };
 
   render() {

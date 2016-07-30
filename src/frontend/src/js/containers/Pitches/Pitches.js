@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect, renderConditionally } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
@@ -15,8 +15,8 @@ class Pitches extends Component {
   };
 
   componentWillMount = () => {
-    const { actions: { pitchesLoad } } = this.props;
-    pitchesLoad();
+    const { actions: { pitchesLoad }, pitchesData } = this.props;
+    refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
   render() {
