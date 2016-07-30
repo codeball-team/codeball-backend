@@ -91,7 +91,8 @@ class NewPitch extends Component {
           onMinNumberOfPlayersChange={this.onMinNumberOfPlayersChange}
           onMaxNumberOfPlayersChange={this.onMaxNumberOfPlayersChange}
           onNameChange={this.onNameChange}
-          onTypeChange={this.onTypeChange} />
+          onTypeChange={this.onTypeChange}
+          onSubmit={this.onSubmit} />
       </section>
     );
   }

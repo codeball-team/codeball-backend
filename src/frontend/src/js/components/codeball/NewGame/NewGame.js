@@ -26,7 +26,7 @@ export default class NewGame extends Component {
     onHourChange: PropTypes.func.isRequired,
     onMinuteChange: PropTypes.func.isRequired,
     onPitchIdChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func.isRequired
   };
 
   onPitchIdChange = ({ value }) => {

@@ -83,7 +83,8 @@ class NewPlayer extends Component {
           onEmailChange={this.onEmailChange}
           onFirstNameChange={this.onFirstNameChange}
           onLastNameChange={this.onLastNameChange}
-          onRoleChange={this.onRoleChange} />
+          onRoleChange={this.onRoleChange}
+          onSubmit={this.onSubmit} />
       </section>
     );
   }

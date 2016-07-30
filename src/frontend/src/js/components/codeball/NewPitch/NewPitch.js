@@ -20,6 +20,7 @@ export default class NewPitch extends Component {
     onMaxNumberOfPlayersChange: PropTypes.func.isRequired,
     onMinNumberOfPlayersChange: PropTypes.func.isRequired,
     onNameChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     onTypeChange: PropTypes.func.isRequired
   };
 
@@ -35,7 +36,8 @@ export default class NewPitch extends Component {
       onMaxNumberOfPlayersChange,
       onMinNumberOfPlayersChange,
       onNameChange,
-      onTypeChange
+      onTypeChange,
+      onSubmit
     } = this.props;
 
     const capacity = minNumberOfPlayers === maxNumberOfPlayers
@@ -49,6 +51,7 @@ export default class NewPitch extends Component {
           className
         )}>
         <Form
+          onSubmit={onSubmit}
           inputs={[
             {
               label: 'Name',

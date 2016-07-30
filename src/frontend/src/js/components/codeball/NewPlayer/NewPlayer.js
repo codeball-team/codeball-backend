@@ -15,7 +15,8 @@ export default class NewPlayer extends Component {
     onEmailChange: PropTypes.func.isRequired,
     onFirstNameChange: PropTypes.func.isRequired,
     onLastNameChange: PropTypes.func.isRequired,
-    onRoleChange: PropTypes.func.isRequired
+    onRoleChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
   };
 
   render() {
@@ -28,7 +29,8 @@ export default class NewPlayer extends Component {
       onEmailChange,
       onFirstNameChange,
       onLastNameChange,
-      onRoleChange
+      onRoleChange,
+      onSubmit
     } = this.props;
 
     return (
@@ -38,6 +40,7 @@ export default class NewPlayer extends Component {
           className
         )}>
         <Form
+          onSubmit={onSubmit}
           inputs={[
             {
               label: 'First name',

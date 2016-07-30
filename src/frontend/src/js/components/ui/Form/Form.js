@@ -9,7 +9,7 @@ export default class Form extends Component {
   static propTypes = {
     className: PropTypes.string,
     inputs: PropTypes.array.isRequired,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func.isRequired
   };
 
   render() {
@@ -46,15 +46,13 @@ export default class Form extends Component {
           ))}
         </div>
         <div className="submit-button-container">
-          {onSubmit && (
-            <Button
-              className="submit-button"
-              isDisabled={!areAllInputsValid}
-              onClick={onSubmit}>
-              <IconSave className="icon" />
-              <span className="label">Save</span>
-            </Button>
-          )}
+          <Button
+            className="submit-button"
+            isDisabled={!areAllInputsValid}
+            onClick={onSubmit}>
+            <IconSave className="icon" />
+            <span className="label">Save</span>
+          </Button>
         </div>
       </div>
     );
