@@ -24,10 +24,10 @@ export const PITCH_TYPE_SOFT_GROUND = 'SOFT_GROUND';
 export const PITCH_TYPE_ARTIFICIAL_SOFT = 'ARTIFICIAL_SOFT';
 export const PITCH_TYPE_INDOOR = 'INDOOR';
 export const PITCH_TYPE_STRING = {
-  [PITCH_TYPE_FIRM_GROUND]: 'Firm Ground',
-  [PITCH_TYPE_HARD_GROUND]: 'Hard Ground',
-  [PITCH_TYPE_SOFT_GROUND]: 'Soft Ground',
-  [PITCH_TYPE_ARTIFICIAL_SOFT]: 'Artificial Soft (Turf)',
+  [PITCH_TYPE_FIRM_GROUND]: 'Firm ground',
+  [PITCH_TYPE_HARD_GROUND]: 'Hard ground',
+  [PITCH_TYPE_SOFT_GROUND]: 'Soft ground',
+  [PITCH_TYPE_ARTIFICIAL_SOFT]: 'Artificial soft (turf)',
   [PITCH_TYPE_INDOOR]: 'Indoor'
 };
 export const PITCH_TYPE_OPTIONS = _(PITCH_TYPE_STRING).map((label, value) => ({
