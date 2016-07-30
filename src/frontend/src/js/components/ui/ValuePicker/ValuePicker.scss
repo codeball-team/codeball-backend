@@ -12,6 +12,7 @@
     margin: $spacing-xs;
     cursor: pointer;
     border: $border-transparent;
+    text-align: center;
 
     &.is-selected {
       border: $border-solid;
