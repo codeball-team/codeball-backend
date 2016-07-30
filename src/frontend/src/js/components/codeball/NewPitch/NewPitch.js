@@ -57,7 +57,7 @@ export default class NewPitch extends Component {
               label: 'Name',
               value: name,
               isValid: NewPitchModel.isNameValid(name),
-              render: () => (
+              component: (
                 <EditableText
                   isEditing={true}
                   text={name}
@@ -68,7 +68,7 @@ export default class NewPitch extends Component {
               label: 'Address',
               value: address,
               isValid: NewPitchModel.isAddressValid(address),
-              render: () => (
+              component: (
                 <EditableText
                   isEditing={true}
                   text={address}
@@ -79,7 +79,7 @@ export default class NewPitch extends Component {
               label: 'Pitch type',
               value: PITCH_TYPE_STRING[type],
               isValid: NewPitchModel.isTypeValid(type),
-              render: () => (
+              component: (
                 <ValuePicker
                   options={PITCH_TYPE_OPTIONS}
                   value={type}
@@ -90,7 +90,7 @@ export default class NewPitch extends Component {
               label: 'Capacity',
               value: capacity,
               isValid: NewPitchModel.isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers),
-              render: () => (
+              component: (
                 <RangePicker
                   min={minNumberOfPlayers}
                   minOptions={_.range(MIN_PITCH_CAPACITY, maxNumberOfPlayers + 1, 2)}

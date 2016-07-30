@@ -73,7 +73,7 @@ export default class NewGame extends Component {
               label: 'Pitch',
               value: findLabelByValue(pitchesOptions, pitchId),
               isValid: NewGameModel.isPitchIdValid(pitchId),
-              render: () => (
+              component: (
                 <Select
                   placeholder="Select pitch..."
                   options={pitchesOptions}
@@ -87,7 +87,7 @@ export default class NewGame extends Component {
               label: 'Duration',
               value: findLabelByValue(DURATION_OPTIONS, duration),
               isValid: NewGameModel.isDurationValid(duration),
-              render: () => (
+              component: (
                 <ValuePicker
                   options={DURATION_OPTIONS}
                   value={duration}
@@ -98,7 +98,7 @@ export default class NewGame extends Component {
               label: 'Start time',
               value: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
               isValid: NewGameModel.isStartTimeValid(hour, minute),
-              render: () => (
+              component: (
                 <RangePicker
                   formatter={formatter}
                   min={hour}
@@ -115,7 +115,7 @@ export default class NewGame extends Component {
               label: 'Start date',
               value: selectedStartDate.format(DATE_FORMAT),
               isValid: NewGameModel.isDateValid(date),
-              render: () => (
+              component: (
                 <Calendar
                   className="editable-text-input"
                   dateFormat={MONTH_YEAR_FORMAT}

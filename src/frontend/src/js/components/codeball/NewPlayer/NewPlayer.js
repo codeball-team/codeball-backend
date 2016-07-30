@@ -46,7 +46,7 @@ export default class NewPlayer extends Component {
               label: 'First name',
               value: firstName,
               isValid: NewUserModel.isFirstNameValid(firstName),
-              render: () => (
+              component: (
                 <EditableText
                   isEditing={true}
                   text={firstName}
@@ -57,7 +57,7 @@ export default class NewPlayer extends Component {
               label: 'Last name',
               value: lastName,
               isValid: NewUserModel.isLastNameValid(lastName),
-              render: () => (
+              component: (
                 <EditableText
                   isEditing={true}
                   text={lastName}
@@ -68,7 +68,7 @@ export default class NewPlayer extends Component {
               label: 'Email',
               value: email,
               isValid: NewUserModel.isEmailValid(email),
-              render: () => (
+              component: (
                 <EditableText
                   isEditing={true}
                   text={email}
@@ -79,7 +79,7 @@ export default class NewPlayer extends Component {
               label: 'Role',
               value: ROLE_STRING[role],
               isValid: NewUserModel.isRoleValid(role),
-              render: () => (
+              component: (
                 <ValuePicker
                   className="role-picker"
                   options={ROLE_OPTIONS}

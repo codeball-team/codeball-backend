@@ -35,13 +35,13 @@ export default class Form extends Component {
           className
         )}>
         <div className="inputs">
-          {visibleInputs.map(({ label, value, isValid, render }, index) => (
+          {visibleInputs.map(({ label, value, isValid, component }, index) => (
             <InputWrapper
               key={index}
               label={label}
               value={value}
               isValid={isValid}>
-              {render()}
+              {component}
             </InputWrapper>
           ))}
         </div>
