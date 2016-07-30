@@ -61,7 +61,9 @@ export default class PitchInfo extends Component {
           render: () => (
             <div className="ellipsis" title="Pitch type">
               <IconLayers className="icon" />
-              {PITCH_TYPE_STRING[type]}
+              <a href="http://www.worldsoccershop.com/buyers-guide-boots.html">
+                {PITCH_TYPE_STRING[type]}
+              </a>
             </div>
           )
         })}

@@ -6,7 +6,8 @@ export default class NewPitchModel {
       address: undefined,
       minNumberOfPlayers: 6,
       maxNumberOfPlayers: 10,
-      name: undefined
+      name: undefined,
+      type: undefined
     }));
   }
 
@@ -34,24 +35,30 @@ export default class NewPitchModel {
     return typeof name === 'string' && name.length > 0;
   }
 
+  static isTypeValid(type) {
+    return typeof type === 'string' && type.length > 0;
+  }
+
   static isValid(newPitchModel) {
-    const { address, minNumberOfPlayers, maxNumberOfPlayers, name } = newPitchModel;
+    const { address, minNumberOfPlayers, maxNumberOfPlayers, name, type } = newPitchModel;
 
     return [
       NewPitchModel.isAddressValid(address),
       NewPitchModel.isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers),
-      NewPitchModel.isNameValid(name)
+      NewPitchModel.isNameValid(name),
+      NewPitchModel.isTypeValid(type)
     ].every(Boolean);
   }
 
   static toServerFormat(newPitchModel) {
-    const { address, minNumberOfPlayers, maxNumberOfPlayers, name } = newPitchModel;
+    const { address, minNumberOfPlayers, maxNumberOfPlayers, name, type } = newPitchModel;
 
     return {
       address,
       minNumberOfPlayers,
       maxNumberOfPlayers,
-      name
+      name,
+      pitchType: type
     };
   }
 }

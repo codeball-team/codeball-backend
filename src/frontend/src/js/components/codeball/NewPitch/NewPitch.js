@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import { MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY } from 'constants';
+import {
+  MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY,
+  PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
+} from 'constants';
 import { NewPitchModel } from 'models';
-import { EditableText, Form, RangePicker } from 'components/ui';
+import { EditableText, Form, RangePicker, ValuePicker } from 'components/ui';
 
 export default class NewPitch extends Component {
   static propTypes = {
@@ -12,10 +15,12 @@ export default class NewPitch extends Component {
     maxNumberOfPlayers: PropTypes.number,
     minNumberOfPlayers: PropTypes.number,
     name: PropTypes.string,
+    type: PropTypes.string,
     onAddressChange: PropTypes.func.isRequired,
     onMaxNumberOfPlayersChange: PropTypes.func.isRequired,
     onMinNumberOfPlayersChange: PropTypes.func.isRequired,
-    onNameChange: PropTypes.func.isRequired
+    onNameChange: PropTypes.func.isRequired,
+    onTypeChange: PropTypes.func.isRequired
   };
 
   render() {
@@ -25,10 +30,12 @@ export default class NewPitch extends Component {
       minNumberOfPlayers,
       maxNumberOfPlayers,
       name,
+      type,
       onAddressChange,
       onMaxNumberOfPlayersChange,
       onMinNumberOfPlayersChange,
-      onNameChange
+      onNameChange,
+      onTypeChange
     } = this.props;
 
     const capacity = minNumberOfPlayers === maxNumberOfPlayers
@@ -63,6 +70,17 @@ export default class NewPitch extends Component {
                   isEditing={true}
                   text={address}
                   onChange={onAddressChange} />
+              )
+            },
+            {
+              label: 'Pitch type',
+              value: PITCH_TYPE_STRING[type],
+              isValid: NewPitchModel.isTypeValid(type),
+              render: () => (
+                <ValuePicker
+                  options={PITCH_TYPE_OPTIONS}
+                  value={type}
+                  onChange={onTypeChange} />
               )
             },
             {

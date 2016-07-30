@@ -21,6 +21,7 @@ export default class PitchModel {
     return new PitchModel({
       id: serverResponse.id,
       name: serverResponse.name,
+      type: serverResponse.pitchType,
       address: serverResponse.address,
       minNumberOfPlayers: serverResponse.minNumberOfPlayers,
       maxNumberOfPlayers: serverResponse.maxNumberOfPlayers
@@ -31,7 +32,7 @@ export default class PitchModel {
     return new PitchModel({
       id: 1,
       name: 'Boisko - ul. Św. Filipa',
-      type: 5,
+      type: 'Hard Ground',
       address: 'ul. Św. Filipa 15, Kraków',
       url: 'https://www.facebook.com/Boisko-ul-%C5%9Aw-Filipa-1429435503967371/',
       minNumberOfPlayers: 8,

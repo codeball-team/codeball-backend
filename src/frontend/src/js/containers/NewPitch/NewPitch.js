@@ -43,6 +43,11 @@ class NewPitch extends Component {
     newPitchChangeName(name);
   };
 
+  onTypeChange = type => {
+    const { actions: { newPitchChangeType } } = this.props;
+    newPitchChangeType(type);
+  };
+
   onSubmit = () => {
     const { actions: { newPitchSubmit }, newPitch } = this.props;
     newPitchSubmit(newPitch);
@@ -54,7 +59,8 @@ class NewPitch extends Component {
       address,
       minNumberOfPlayers,
       maxNumberOfPlayers,
-      name
+      name,
+      type
     } = newPitch;
 
     return (
@@ -65,6 +71,7 @@ class NewPitch extends Component {
           minNumberOfPlayers={minNumberOfPlayers}
           maxNumberOfPlayers={maxNumberOfPlayers}
           name={name}
+          type={type}
           buttons={[
             <Link key="cancel" to="/pitches">
               <Button>
@@ -83,7 +90,8 @@ class NewPitch extends Component {
           onAddressChange={this.onAddressChange}
           onMinNumberOfPlayersChange={this.onMinNumberOfPlayersChange}
           onMaxNumberOfPlayersChange={this.onMaxNumberOfPlayersChange}
-          onNameChange={this.onNameChange} />
+          onNameChange={this.onNameChange}
+          onTypeChange={this.onTypeChange} />
       </section>
     );
   }
