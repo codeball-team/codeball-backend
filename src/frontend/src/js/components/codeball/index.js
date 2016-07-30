@@ -1,5 +1,6 @@
 export GameEnrollment from './GameEnrollment/GameEnrollment';
 export GameEnrollmentForm from './GameEnrollmentForm/GameEnrollmentForm';
+export GameEnrollPlayerForm from './GameEnrollPlayerForm/GameEnrollPlayerForm';
 export GameInfo from './GameInfo/GameInfo';
 export GameLineup from './GameLineup/GameLineup';
 export GameScore from './GameScore/GameScore';

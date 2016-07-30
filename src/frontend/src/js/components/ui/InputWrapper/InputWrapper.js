@@ -31,7 +31,7 @@ export default class InputWrapper extends Component {
         )}>
         <div className="label">
           <div className="title">
-            {label} {renderConditionally({
+            {label}{renderConditionally({
               when: isValid,
               render: () => (
                 <span>

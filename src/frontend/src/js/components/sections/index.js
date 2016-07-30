@@ -2,6 +2,7 @@ import { Section } from 'components/ui';
 import {
   GameEnrollment,
   GameEnrollmentForm,
+  GameEnrollPlayerForm,
   GameInfo,
   GameLineup,
   GameScore,
@@ -17,6 +18,7 @@ import {
 
 export const GameEnrollmentSection = Section(GameEnrollment);
 export const GameEnrollmentFormSection = Section(GameEnrollmentForm);
+export const GameEnrollPlayerFormSection = Section(GameEnrollPlayerForm);
 export const GameInfoSection = Section(GameInfo);
 export const GameLineupSection = Section(GameLineup);
 export const GameScoreSection = Section(GameScore);

@@ -20,6 +20,7 @@ export default class GameModel {
         [ENROLLMENT_STATUS_MAYBE]: [],
         [ENROLLMENT_STATUS_NO]: []
       },
+      enrolledUsersIds: [],
       teamA: [],
       teamAScore: undefined,
       teamB: [],
@@ -41,7 +42,7 @@ export default class GameModel {
 
       new GameModel().enrolledUsers
     );
-
+    const enrolledUsersIds = _(serverResponse.enrollments).pluck('userId');
     const date = moment(javaToUnixTimestamp(serverResponse.startTimestamp));
 
     return new GameModel({
@@ -53,6 +54,7 @@ export default class GameModel {
       isEnrollmentOver: serverResponse.isEnrollmentOver,
       isGameOver: serverResponse.isGameOver,
       enrolledUsers,
+      enrolledUsersIds,
       teamAScore: serverResponse.teamAScore,
       teamA: [...serverResponse.teamAIds],
       teamBScore: serverResponse.teamBScore,
@@ -74,6 +76,7 @@ export default class GameModel {
         [ENROLLMENT_STATUS_MAYBE]: [],
         [ENROLLMENT_STATUS_NO]: []
       },
+      enrolledUsersIds: [1],
       teamAScore: 13,
       teamA: [],
       teamBScore: 7,

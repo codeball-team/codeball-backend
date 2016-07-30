@@ -7,6 +7,9 @@ import {
   GAME_DRAW_TEAMS, GAME_DRAW_TEAMS_FAILURE, GAME_DRAW_TEAMS_SUCCESS,
   GAME_EDIT, GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B,
   GAME_END, GAME_END_FAILURE, GAME_END_SUCCESS,
+  GAME_ENROLL_USER_CHANGE_USER_ID, GAME_ENROLL_USER_EDIT, GAME_ENROLL_USER_EDIT_CANCEL,
+  GAME_ENROLL_USER_RESET, GAME_ENROLL_USER_SUBMIT,
+  GAME_ENROLL_USER_SUBMIT_FAILURE, GAME_ENROLL_USER_SUBMIT_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SAVE, GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
   GAME_SET_SCORE, GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
@@ -88,6 +91,45 @@ export function gameEditScoreB(teamBScore) {
     type: GAME_EDIT_SCORE_B,
     teamBScore
   };
+}
+
+export function gameEnrollUserCancel() {
+  return {
+    type: GAME_ENROLL_USER_EDIT_CANCEL
+  };
+}
+
+export function gameEnrollUserChangeUserId(userId) {
+  return {
+    type: GAME_ENROLL_USER_CHANGE_USER_ID,
+    userId
+  };
+}
+
+export function gameEnrollUserEdit() {
+  return {
+    type: GAME_ENROLL_USER_EDIT
+  };
+}
+
+export function gameEnrollUserReset() {
+  return {
+    type: GAME_ENROLL_USER_RESET
+  };
+}
+
+export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
+  return ajax(dispatch => ({
+    request: request('PUT', gameEnrollmentUrl(gameId, userId))
+      .set('Content-Type', 'application/json')
+      .send(`"${enrollmentStatus}"`),
+    startAction: GAME_ENROLL_USER_SUBMIT,
+    successAction: GAME_ENROLL_USER_SUBMIT_SUCCESS,
+    failureAction: GAME_ENROLL_USER_SUBMIT_FAILURE,
+    successCallback: () => {
+      dispatch(gameEnrollUserReset());
+    }
+  }));
 }
 
 export function gameEnd(gameId) {

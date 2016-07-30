@@ -3,15 +3,15 @@ import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
 import {
   PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS, PERMISSION_END_GAME,
-  PERMISSION_ENROLL, ENROLLMENT_STATUS_YES
+  PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_PLAYER, ENROLLMENT_STATUS_YES
 } from 'constants';
-import { PitchModel } from 'models';
+import { EnrollUserModel, PitchModel } from 'models';
 import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import IconShuffle from 'react-icons/lib/io/shuffle';
 import { Button, LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection, GameEnrollmentFormSection,
-  GameInfoSection, GameLineupSection
+  GameEnrollPlayerFormSection, GameInfoSection, GameLineupSection
 } from 'components/sections';
 
 export default function GenerateUpcomingGame(getGameId) {
@@ -19,6 +19,7 @@ export default function GenerateUpcomingGame(getGameId) {
     static propTypes = {
       actions: PropTypes.object.isRequired,
       currentUserData: PropTypes.object.isRequired,
+      enrollUser: PropTypes.object.isRequired,
       gameData: PropTypes.object.isRequired,
       hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
@@ -76,10 +77,27 @@ export default function GenerateUpcomingGame(getGameId) {
       gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus);
     };
 
+    onEnrollUserSubmit = () => {
+      const {
+        actions: { gameEnrollUserSubmit },
+        gameData: { game: { id: gameId } },
+        enrollUser: { userId, enrollmentStatus }
+      } = this.props;
+      gameEnrollUserSubmit(gameId, userId, enrollmentStatus);
+    };
+
+    onEnrollUserIdChange = userId => {
+      const {
+        actions: { gameEnrollUserChangeUserId }
+      } = this.props;
+      gameEnrollUserChangeUserId(userId);
+    };
+
     updateData = props => {
       const {
         actions: {
           currentUserLoad,
+          gameEnrollUserReset,
           gameLoad,
           pitchesLoad,
           usersLoad
@@ -90,6 +108,7 @@ export default function GenerateUpcomingGame(getGameId) {
         usersData
       } = props;
 
+      gameEnrollUserReset();
       gameLoad(gameId);
       refreshDataIfNecessary(usersData, usersLoad);
       refreshDataIfNecessary(currentUserData, currentUserLoad);
@@ -98,16 +117,22 @@ export default function GenerateUpcomingGame(getGameId) {
 
     render() {
       const {
+        actions: {
+          gameEnrollUserCancel,
+          gameEnrollUserEdit
+        },
         hasPermission,
         currentUserData: {
           currentUser,
           isLoading: isCurrentUserLoading
         },
+        enrollUser,
         gameData: {
           game: {
             date,
             duration,
             enrolledUsers,
+            enrolledUsersIds,
             isEnrollmentOver,
             isGameOver,
             pitchId,
@@ -134,6 +159,9 @@ export default function GenerateUpcomingGame(getGameId) {
         (enrollmentStatus, userIds, status) => (userIds.includes(userId) ? status : enrollmentStatus),
         undefined
       );
+      const unenrolledUsers = _(users).values()
+        .filter(({ id }) => !enrolledUsersIds.includes(id));
+      const { isEditing: isEnrollUserEditing } = enrollUser;
 
       const isContentLoading = [
         arePitchesLoading,
@@ -229,6 +257,24 @@ export default function GenerateUpcomingGame(getGameId) {
                 title={`Enrolled players (${numberOfEnrolledPlayers})`}
                 users={users}
                 enrolledUsers={enrolledUsers} />
+
+              {renderConditionally({
+                when: hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER) && unenrolledUsers.length > 0,
+                render: () => (
+                  <GameEnrollPlayerFormSection
+                    title="Enroll another player"
+                    canEdit={true}
+                    canSubmit={EnrollUserModel.isValid(enrollUser)}
+                    isEditable={true}
+                    isEditing={isEnrollUserEditing}
+                    enrollUser={enrollUser}
+                    users={unenrolledUsers}
+                    onEdit={gameEnrollUserEdit}
+                    onCancel={gameEnrollUserCancel}
+                    onSave={this.onEnrollUserSubmit}
+                    onUserIdChange={this.onEnrollUserIdChange} />
+                )
+              })}
             </section>
           )} />
       );
@@ -236,9 +282,10 @@ export default function GenerateUpcomingGame(getGameId) {
   }
 
   return bindActionsAndConnect(UpcomingGame, state => ({
+    currentUserData: state.currentUserData,
+    enrollUser: state.enrollUser,
     gameData: state.gameData,
     pitchesData: state.pitchesData,
-    usersData: state.usersData,
-    currentUserData: state.currentUserData
+    usersData: state.usersData
   }));
 }

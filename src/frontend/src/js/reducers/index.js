@@ -4,6 +4,7 @@ import ajaxRequests from './ajaxRequests';
 import currentUserData from './currentUserData';
 import gameData from './gameData';
 import gamesData from './gamesData';
+import enrollUser from './enrollUser';
 import newGame from './newGame';
 import newPitch from './newPitch';
 import newUser from './newUser';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   currentUserData,
   gameData,
   gamesData,
+  enrollUser,
   newGame,
   newPitch,
   newUser,

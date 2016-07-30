@@ -13,6 +13,7 @@ export default function SectionDecorator(ChildComponent) {
     static propTypes = {
       buttons: PropTypes.node,
       canEdit: PropTypes.bool,
+      canSubmit: PropTypes.bool,
       isEditable: PropTypes.bool,
       isEditing: PropTypes.bool,
       title: PropTypes.node.isRequired,
@@ -23,6 +24,7 @@ export default function SectionDecorator(ChildComponent) {
 
     static defaultProps = {
       canEdit: false,
+      canSubmit: true,
       isEditable: false,
       isEditing: false,
       onCancel: _.noop,
@@ -34,6 +36,7 @@ export default function SectionDecorator(ChildComponent) {
       const {
         buttons,
         canEdit,
+        canSubmit,
         isEditable,
         isEditing,
         title,
@@ -75,7 +78,7 @@ export default function SectionDecorator(ChildComponent) {
                         <span className="label">Cancel</span>
                       </Button>,
 
-                      <Button key="save" onClick={onSave}>
+                      <Button key="save" isDisabled={!canSubmit} onClick={onSave}>
                         <IconSave className="icon" />
                         <span className="label">Save</span>
                       </Button>
