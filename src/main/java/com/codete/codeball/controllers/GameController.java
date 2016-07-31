@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GameController {
 
     @Autowired
@@ -97,7 +97,7 @@ public class GameController {
         return gameRepository.save(game);
     }
 
-    @RequestMapping(value = "/{id}/score")
+    @RequestMapping(value = "/{id}/score", method = RequestMethod.PUT)
     public Game setGameScore(@PathVariable("id") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
         Game game = gameRepository.findOne(gameId);
         game.setScore(gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
