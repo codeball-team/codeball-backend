@@ -1,13 +1,13 @@
-import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
-import { PitchModel } from 'models';
+import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
 import {
   NEW_PITCH_SUBMIT_SUCCESS,
   PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
 } from 'constants/actionTypes';
+import { PitchModel } from 'models';
 
 const initialState = {
   ...ajaxReducerInitialState,
-  pitches: {}
+  pitches: []
 };
 
 export default ajaxReducer(
@@ -21,21 +21,25 @@ export default ajaxReducer(
     [NEW_PITCH_SUBMIT_SUCCESS]: (state, action) => {
       const responsePitch = safeGet(action, ['response', 'body'], {});
       const mappedPitch = PitchModel.fromServerFormat(responsePitch);
-      const { id } = mappedPitch;
+
       return {
         ...state,
-        pitches: {
+        pitches: [
           ...state.pitches,
-          [id]: mappedPitch
-        }
+          mappedPitch
+        ]
       };
     },
 
     [PITCHES_LOAD_SUCCESS]: (state, action) => {
       const responsePitches = safeGet(action, ['response', 'body'], []);
       const mappedPitches = responsePitches.map(PitchModel.fromServerFormat);
-      const pitches = objectify(mappedPitches);
-      return { ...initialState, pitches };
+      const sortedPitches = sortByMany(mappedPitches, ['name']);
+
+      return {
+        ...initialState,
+        pitches: sortedPitches
+      };
     }
   }
 );

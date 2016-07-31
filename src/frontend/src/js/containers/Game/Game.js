@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
+import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
 import { PERMISSION_EDIT_GAME_SCORE } from 'constants';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
@@ -98,7 +98,7 @@ export default function GenerateGame(getGameId) {
       } = this.props;
 
       const { pitchId, teamA, teamB } = game;
-      const pitch = pitches[pitchId] || {};
+      const pitch = findById(pitches, pitchId);
 
       const isContentLoading = [
         arePitchesLoading,

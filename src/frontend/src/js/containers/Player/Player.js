@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
+import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PlayerProfileSection } from 'components/sections';
 
@@ -37,7 +37,7 @@ class Player extends Component {
       }
     } = this.props;
 
-    const { [userId]: user } = users;
+    const user = findById(users, Number(userId));
     const firstName = safeGet(user, ['firstName']);
     const lastName = safeGet(user, ['lastName']);
 
@@ -47,7 +47,7 @@ class Player extends Component {
         render={() => (
           <section className="player">
             <PlayerProfileSection
-              title={`${firstName} ${lastName}`}
+              title={`${lastName} ${firstName}`}
               user={user} />
           </section>
         )} />

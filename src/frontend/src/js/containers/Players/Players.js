@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
 import { Link } from 'react-router';
@@ -33,8 +32,6 @@ class Players extends Component {
       }
     } = this.props;
 
-    const numberOfUsers = Object.keys(users).length;
-
     const isContentLoading = [
       isCurrentUserLoading,
       areUsersLoading
@@ -46,9 +43,9 @@ class Players extends Component {
         render={() => (
           <section className="players">
             <PlayersListSection
-              title={`Players (${numberOfUsers})`}
+              title={`Players (${users.length})`}
               currentUser={currentUser}
-              users={_(users).values()}
+              users={users}
               buttons={[
                 renderConditionally({
                   when: hasPermission(PERMISSION_ADD_USER),

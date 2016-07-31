@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { sortByMany } from 'utils';
+import { findById, sortByMany } from 'utils';
 import PlayersList from '../PlayersList/PlayersList';
 import './TeamLineup.scss';
 
@@ -10,7 +10,7 @@ export default class TeamLineup extends Component {
     currentUser: PropTypes.object.isRequired,
     team: PropTypes.array.isRequired,
     teamName: PropTypes.string.isRequired,
-    users: PropTypes.object.isRequired
+    users: PropTypes.array.isRequired
   };
 
   render() {
@@ -22,8 +22,8 @@ export default class TeamLineup extends Component {
       users
     } = this.props;
 
-    const teamUsers = team.map(userId => users[userId]).filter(Boolean);
-    const sortedTeamUsers = sortByMany(teamUsers, 'lastName', 'firstName');
+    const teamUsers = team.map(userId => findById(users, userId, null)).filter(Boolean);
+    const sortedTeamUsers = sortByMany(teamUsers, ['lastName', 'firstName']);
 
     return (
       <div

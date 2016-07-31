@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, safeGet } from 'utils';
+import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 
@@ -35,7 +35,7 @@ class Pitch extends Component {
       }
     } = this.props;
 
-    const { [pitchId]: pitch } = pitches;
+    const pitch = findById(pitches, pitchId);
     const name = safeGet(pitch, ['name']);
 
     return (

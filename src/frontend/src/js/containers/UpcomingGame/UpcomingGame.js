@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
-import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally, safeGet } from 'utils';
+import {
+  bindActionsAndConnect, findById, refreshDataIfNecessary, renderConditionally, safeGet
+} from 'utils';
 import {
   PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS, PERMISSION_END_GAME,
   PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_PLAYER, ENROLLMENT_STATUS_YES
@@ -153,7 +155,8 @@ export default function GenerateUpcomingGame(getGameId) {
       } = this.props;
 
       const { id: userId } = currentUser;
-      const pitch = new PitchModel(pitches[pitchId]);
+      const pitch = findById(pitches, pitchId);
+      const pitchModel = new PitchModel(pitch);
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
       const selectedEnrollmentStatus = _(enrolledUsers).reduce(
         (enrollmentStatus, userIds, status) => (userIds.includes(userId) ? status : enrollmentStatus),
@@ -176,11 +179,11 @@ export default function GenerateUpcomingGame(getGameId) {
           render={() => (
             <section>
               <GameInfoSection
-                title={pitch.name}
+                title={pitchModel.name}
                 date={date}
                 time={time}
                 duration={duration}
-                pitch={pitch}
+                pitch={pitchModel}
                 buttons={
                   [
                     renderConditionally({

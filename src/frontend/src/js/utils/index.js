@@ -1,6 +1,7 @@
 export ajax from './ajax';
 export ajaxReducer, { ajaxReducerInitialState } from './ajaxReducer';
 export bindActionsAndConnect from './bindActionsAndConnect';
+export findById from './findById';
 export findLabelByValue from './findLabelByValue';
 export isDataInvalidated from './isDataInvalidated';
 export isInRange from './isInRange';

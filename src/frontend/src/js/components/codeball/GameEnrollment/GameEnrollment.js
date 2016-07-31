@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { renderConditionally } from 'utils';
+import { findById, renderConditionally } from 'utils';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   ENROLLMENT_STATUS_STRING
@@ -20,7 +20,7 @@ export default class GameEnrollment extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrolledUsers: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired
+    users: PropTypes.array.isRequired
   };
 
   render() {
@@ -37,7 +37,9 @@ export default class GameEnrollment extends Component {
           className
         )}>
         {ENROLLMENT_STATUSES.map(enrollmentStatus => {
-          const enrollmentStatusUsers = enrolledUsers[enrollmentStatus].map(userId => users[userId]).filter(Boolean);
+          const enrollmentStatusUsers = enrolledUsers[enrollmentStatus]
+            .map(userId => findById(users, userId, null))
+            .filter(Boolean);
 
           return renderConditionally({
             when: enrollmentStatusUsers.length > 0,

@@ -1,10 +1,10 @@
-import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
+import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
 import { GameModel } from 'models';
 import { GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS } from 'constants/actionTypes';
 
 const initialState = {
   ...ajaxReducerInitialState,
-  games: {}
+  games: []
 };
 
 export default ajaxReducer(
@@ -18,8 +18,12 @@ export default ajaxReducer(
     [GAMES_LOAD_SUCCESS]: (state, action) => {
       const responseGames = safeGet(action, ['response', 'body'], []);
       const mappedGames = responseGames.map(GameModel.fromServerFormat);
-      const games = objectify(mappedGames);
-      return { ...initialState, games };
+      const sortedGames = sortByMany(mappedGames, ['date']).reverse();
+
+      return {
+        ...initialState,
+        games: sortedGames
+      };
     }
   }
 );

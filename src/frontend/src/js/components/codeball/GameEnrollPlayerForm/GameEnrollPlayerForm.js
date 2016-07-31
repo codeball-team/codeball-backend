@@ -30,7 +30,7 @@ export default class GameEnrollPlayerForm extends Component {
     } = this.props;
 
     const usersOptions = users.map(({ id, firstName, lastName }) => ({
-      label: `${firstName} ${lastName}`,
+      label: `${lastName} ${firstName}`,
       value: id
     }));
 

@@ -33,7 +33,7 @@ export default class PlayersListItem extends Component {
             }} />
 
           <div className="name ellipsis">
-            {firstName} {lastName}
+            {lastName} {firstName}
           </div>
 
           {children}

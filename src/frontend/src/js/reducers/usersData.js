@@ -1,13 +1,13 @@
-import { ajaxReducer, ajaxReducerInitialState, objectify, safeGet } from 'utils';
-import { UserModel } from 'models';
+import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
 import {
   NEW_USER_SUBMIT_SUCCESS,
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
 } from 'constants/actionTypes';
+import { UserModel } from 'models';
 
 const initialState = {
   ...ajaxReducerInitialState,
-  users: {}
+  users: []
 };
 
 export default ajaxReducer(
@@ -21,22 +21,25 @@ export default ajaxReducer(
     [NEW_USER_SUBMIT_SUCCESS]: (state, action) => {
       const responseUser = safeGet(action, ['response', 'body'], {});
       const mappedUser = UserModel.fromServerFormat(responseUser);
-      const { id } = mappedUser;
 
       return {
         ...state,
-        users: {
+        users: [
           ...state.users,
-          [id]: mappedUser
-        }
+          mappedUser
+        ]
       };
     },
 
     [USERS_LOAD_SUCCESS]: (state, action) => {
       const responseUsers = safeGet(action, ['response', 'body'], []);
       const mappedUsers = responseUsers.map(UserModel.fromServerFormat);
-      const users = objectify(mappedUsers);
-      return { ...initialState, users };
+      const sortedUsers = sortByMany(mappedUsers, ['lastName', 'firstName']);
+
+      return {
+        ...initialState,
+        users: sortedUsers
+      };
     }
   }
 );

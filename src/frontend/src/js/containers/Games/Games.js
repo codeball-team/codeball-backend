@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import {
-  bindActionsAndConnect, refreshDataIfNecessary,
-  renderConditionally, sortByMany
-} from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
 import { Link } from 'react-router';
 import IconAdd from 'react-icons/lib/io/plus';
@@ -57,9 +53,8 @@ class Games extends Component {
     } = this.props;
 
     const gamesListProps = { pitches, users };
-    const sortedGames = sortByMany(_(games).values(), 'date').reverse();
-    const upcomingGames = sortedGames.filter(game => !game.isGameOver);
-    const previousGames = sortedGames.filter(game => game.isGameOver);
+    const upcomingGames = games.filter(game => !game.isGameOver);
+    const previousGames = games.filter(game => game.isGameOver);
 
     const isContentLoading = [
       areGamesLoading,

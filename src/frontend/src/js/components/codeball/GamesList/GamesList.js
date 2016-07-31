@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { findById } from 'utils';
 import { Link } from 'react-router';
 import { List, ListItem } from 'components/ui';
 import './GamesList.scss';
@@ -9,8 +10,8 @@ export default class GamesList extends Component {
     className: PropTypes.string,
     formatUrl: PropTypes.func.isRequired,
     games: PropTypes.array.isRequired,
-    pitches: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired
+    pitches: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired
   };
 
   render() {
@@ -36,7 +37,8 @@ export default class GamesList extends Component {
             teamBScore,
             time
           } = game;
-          const { name: pitchName } = pitches[pitchId] || {};
+          const pitch = findById(pitches, pitchId);
+          const { name: pitchName } = pitch;
 
           return (
             <Link key={id} to={formatUrl(id)}>

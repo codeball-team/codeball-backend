@@ -27,7 +27,6 @@ class Pitches extends Component {
         isLoading: arePitchesLoading
       }
     } = this.props;
-    const numberOfPitches = Object.keys(pitches).length;
 
     return (
       <LoadableContent
@@ -35,7 +34,7 @@ class Pitches extends Component {
         render={() => (
           <section className="pitches">
             <PitchesListSection
-              title={`Pitches (${numberOfPitches})`}
+              title={`Pitches (${pitches.length})`}
               pitches={_(pitches).values()}
               buttons={[
                 renderConditionally({

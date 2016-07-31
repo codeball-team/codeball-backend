@@ -9,7 +9,7 @@ export default class GameLineup extends Component {
     currentUser: PropTypes.object.isRequired,
     teamA: PropTypes.array.isRequired,
     teamB: PropTypes.array.isRequired,
-    users: PropTypes.object.isRequired
+    users: PropTypes.array.isRequired
   };
 
   render() {
