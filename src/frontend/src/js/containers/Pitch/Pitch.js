@@ -35,7 +35,7 @@ class Pitch extends Component {
       }
     } = this.props;
 
-    const pitch = findById(pitches, pitchId);
+    const pitch = findById(pitches, Number(pitchId));
     const name = safeGet(pitch, ['name']);
 
     return (
