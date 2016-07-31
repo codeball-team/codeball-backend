@@ -11,15 +11,12 @@ const initialState = {
 };
 
 export default reducer(initialState, {
-  [GAME_ENROLL_USER_EDIT_CANCEL]: state => ({
-    ...state,
-    isEditing: false
-  }),
-
   [GAME_ENROLL_USER_EDIT]: state => ({
     ...state,
     isEditing: true
   }),
+
+  [GAME_ENROLL_USER_EDIT_CANCEL]: () => initialState,
 
   [GAME_ENROLL_USER_CHANGE_USER_ID]: (state, action) => {
     const { userId } = action;
