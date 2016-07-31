@@ -4,6 +4,7 @@ import com.codete.codeball.model.*;
 import com.codete.codeball.repositories.GameRepository;
 import com.codete.codeball.repositories.PitchRepository;
 import com.codete.codeball.repositories.UserRepository;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -69,7 +70,7 @@ public class AppInitializer implements CommandLineRunner {
                 .durationInMinutes(120)
                 .pitch(pitch1)
                 .enrollmentOver(false)
-                .enrollments(Sets.newHashSet())
+                .enrollments(Lists.newArrayList())
                 .gameOver(false)
                 .build();
         gameRepository.save(game1);
@@ -82,10 +83,10 @@ public class AppInitializer implements CommandLineRunner {
                 .durationInMinutes(90)
                 .pitch(pitch2)
                 .enrollmentOver(true)
-                .enrollments(Sets.newHashSet())
+                .enrollments(Lists.newArrayList())
                 .gameOver(true)
-                .teamA(Sets.newHashSet(user1))
-                .teamB(Sets.newHashSet(user2))
+                .teamA(Lists.newArrayList(user1))
+                .teamB(Lists.newArrayList(user2))
                 .teamAScore(7)
                 .teamBScore(71)
                 .build();

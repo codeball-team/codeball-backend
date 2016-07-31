@@ -11,18 +11,13 @@ import java.util.Set;
 public class TeamAssignment {
 
     @JsonProperty("teamA")
-    private final Set<User> teamA;
+    private final List<User> teamA;
     @JsonProperty("teamB")
-    private final Set<User> teamB;
-
-    public TeamAssignment(Set<User> teamA, Set<User> teamB) {
-        this.teamA = teamA;
-        this.teamB = teamB;
-    }
+    private final List<User> teamB;
 
     public TeamAssignment(List<User> teamA, List<User> teamB) {
-        this.teamA = Sets.newLinkedHashSet(teamA);
-        this.teamB = Sets.newLinkedHashSet(teamB);
+        this.teamA = teamA;
+        this.teamB = teamB;
     }
 
 }

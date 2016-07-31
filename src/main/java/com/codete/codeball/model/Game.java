@@ -2,6 +2,7 @@ package com.codete.codeball.model;
 
 import com.codete.codeball.repositories.EntityByIdResolver;
 import com.fasterxml.jackson.annotation.*;
+import com.google.common.collect.Lists;
 import lombok.*;
 import lombok.experimental.Tolerate;
 
@@ -34,20 +35,20 @@ public class Game {
     @JsonProperty("enrollments")
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "enrollment_game", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "enrollment_id"))
-    private Set<Enrollment> enrollments = new HashSet<>();
+    private List<Enrollment> enrollments = Lists.newArrayList();
     @JsonProperty("teamAIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = User.class)
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "teamA", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> teamA = new HashSet<>();
+    private List<User> teamA = Lists.newArrayList();
     private int teamAScore;
     @JsonProperty("teamBIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = User.class)
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "teamB", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> teamB = new HashSet<>();
+    private List<User> teamB = Lists.newArrayList();
     private int teamBScore;
 
     @Tolerate
