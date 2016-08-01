@@ -2,6 +2,7 @@ package com.codeball.config;
 
 import com.codeball.exceptions.EnrollmentOverException;
 import com.codeball.exceptions.GameOverException;
+import com.codeball.exceptions.ResourceNotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,12 +30,22 @@ public class GlobalExceptionController {
     }
 
     /**
+     * Logs not found request exceptions
+     */
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({ResourceNotFoundException.class})
+    @ResponseBody
+    public MessageWrapper logNotFoundException(HttpServletRequest request, Exception exception) {
+        return new MessageWrapper(exception.getMessage());
+    }
+
+    /**
      * Logs bad request exceptions
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({EnrollmentOverException.class, GameOverException.class})
     @ResponseBody
-    public MessageWrapper logThirdPartyAuthenticationException(HttpServletRequest request, Exception exception) {
+    public MessageWrapper logBadRequestException(HttpServletRequest request, Exception exception) {
         LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));
         return new MessageWrapper(exception.getMessage());
     }

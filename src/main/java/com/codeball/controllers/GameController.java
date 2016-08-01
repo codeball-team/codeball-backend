@@ -1,6 +1,7 @@
 package com.codeball.controllers;
 
 import com.codeball.exceptions.EnrollmentOverException;
+import com.codeball.exceptions.ResourceNotFoundException;
 import com.codeball.model.requests.GameScoreRequest;
 import com.codeball.utils.ContextUtils;
 import com.codeball.exceptions.GameOverException;
@@ -37,29 +38,34 @@ public class GameController {
 
     @RequestMapping(value = "/last", method = RequestMethod.GET)
     public Game getLastGame() {
-        return gameRepository.findLastGame();
+        Game lastGame = gameRepository.findLastGame();
+        if (lastGame == null) {
+            throw new ResourceNotFoundException("last game");
+        }
+        return lastGame;
     }
 
     @RequestMapping(value = "/upcoming", method = RequestMethod.GET)
     public Game getUpcomingGame() {
-        return gameRepository.findUpcomingGame();
+        Game upcomingGame = gameRepository.findUpcomingGame();
+        if (upcomingGame == null) {
+            throw new ResourceNotFoundException("upcoming game");
+        }
+        return upcomingGame;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Game getGameById(@PathVariable long id) {
-        return gameRepository.findOne(id);
+        Game game = gameRepository.findOne(id);
+        if (game == null) {
+            throw new ResourceNotFoundException("game with ID: " + id);
+        }
+        return game;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Game> getGames() {
         return gameRepository.findAll(new Sort(Sort.Direction.DESC, "startTimestamp"));
-    }
-
-    @Deprecated
-    @Transactional
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Game deprecatedSetEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
-        return setEnrollmentStatus(principal, gameId, status);
     }
 
     @Transactional
@@ -75,6 +81,9 @@ public class GameController {
         User currentUser = contextUtils.getUser(principal);
         User userToEnroll = userRepository.findOne(userId);
         Game game = gameRepository.findOne(gameId);
+        if (game == null) {
+            throw new ResourceNotFoundException("game with ID: " + gameId);
+        }
         if (game.isEnrollmentOver()) {
             throw new EnrollmentOverException(gameId);
         }
@@ -85,6 +94,9 @@ public class GameController {
     @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT)
     public Game drawTeams(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
+        if (game == null) {
+            throw new ResourceNotFoundException("game with ID: " + gameId);
+        }
         drawTeams(game);
         return gameRepository.save(game);
     }
@@ -92,6 +104,9 @@ public class GameController {
     @RequestMapping(value = "/{id}/finishEnrollment", method = RequestMethod.PUT)
     public Game finishEnrollment(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
+        if (game == null) {
+            throw new ResourceNotFoundException("game with ID: " + gameId);
+        }
         game.setEnrollmentOver(true);
         drawTeams(game);
         return gameRepository.save(game);
@@ -100,6 +115,9 @@ public class GameController {
     @RequestMapping(value = "/{id}/score", method = RequestMethod.PUT)
     public Game setGameScore(@PathVariable("id") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
         Game game = gameRepository.findOne(gameId);
+        if (game == null) {
+            throw new ResourceNotFoundException("game with ID: " + gameId);
+        }
         game.setScore(gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
         return gameRepository.save(game);
     }
