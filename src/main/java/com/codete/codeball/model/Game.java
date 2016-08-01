@@ -64,8 +64,11 @@ public class Game {
     }
 
     public void assignTeams(TeamAssignment teamAssignment) {
-        this.teamA = teamAssignment.getTeamA();
-        this.teamB = teamAssignment.getTeamB();
+        teamA.clear();
+        teamA.addAll(teamAssignment.getTeamA());
+
+        teamB.clear();
+        teamB.addAll(teamAssignment.getTeamB());
     }
 
     public void enrollUser(User userToBeEnrolled, EnrollmentStatus status, User enroller) {

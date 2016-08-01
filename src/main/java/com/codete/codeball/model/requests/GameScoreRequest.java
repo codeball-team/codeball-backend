@@ -3,9 +3,11 @@ package com.codete.codeball.model.requests;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 @Getter
+@Setter
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GameScoreRequest {
 

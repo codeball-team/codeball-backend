@@ -17,8 +17,8 @@ public class RandomTeamAssigner implements TeamAssigner {
         int teamSize = players.size() / 2;
         Collections.shuffle(playersToAssign);
         return new TeamAssignment(
-                playersToAssign.subList(0, teamSize),
-                playersToAssign.subList(teamSize, playersToAssign.size()));
+                playersToAssign.subList(teamSize, playersToAssign.size()),
+                playersToAssign.subList(0, teamSize));
     }
 
 }
