@@ -1,4 +1,5 @@
 set -xe
+cd ..
 cd src/frontend
 mkdir -p build
 npm install rimraf
