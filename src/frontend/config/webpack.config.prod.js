@@ -76,7 +76,8 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
-      __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+      __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false')),
+      API_URL: JSON.stringify(process.env.API_URL || 'http://localhost:8080/api')
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
