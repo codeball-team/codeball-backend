@@ -262,7 +262,10 @@ export default function GenerateUpcomingGame(getGameId) {
                 enrolledUsers={enrolledUsers} />
 
               {renderConditionally({
-                when: hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER) && unenrolledUsers.length > 0,
+                when: [
+                  hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER) && unenrolledUsers.length > 0,
+                  !isEnrollmentOver
+                ].every(Boolean),
                 render: () => (
                   <GameEnrollPlayerFormSection
                     title="Enroll another player"
