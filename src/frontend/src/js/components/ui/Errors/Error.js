@@ -20,7 +20,7 @@ export default class Errors extends Component {
     const {
       className,
       error: {
-        title,
+        title = 'Error',
         message
       }
     } = this.props;
