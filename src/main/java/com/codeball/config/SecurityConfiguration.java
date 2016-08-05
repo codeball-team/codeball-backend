@@ -2,6 +2,7 @@ package com.codeball.config;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -17,9 +18,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable();
 
         http
-                .antMatcher("/**").authorizeRequests()
-                .antMatchers("/login**", "/webjars/**").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "*").permitAll()
+                .antMatchers("/login", "/webjars/**").permitAll()
+                .antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated();
     }
 

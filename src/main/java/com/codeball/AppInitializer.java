@@ -4,6 +4,7 @@ import com.codeball.model.*;
 import com.codeball.repositories.GameRepository;
 import com.codeball.repositories.PitchRepository;
 import com.codeball.repositories.UserRepository;
+import com.codeball.utils.development.DevelopmentProperties;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +19,9 @@ import java.time.ZoneOffset;
 public class AppInitializer implements CommandLineRunner {
 
     @Autowired
+    private DevelopmentProperties developmentProperties;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -29,6 +33,12 @@ public class AppInitializer implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... strings) throws Exception {
+        if (developmentProperties.getDataInitializer().isEnabled()) {
+            populateSampleData();
+        }
+    }
+
+    private void populateSampleData() {
         Pitch pitch1 = Pitch.builder()
                 .name("Piastowska")
                 .address("ul. Piastowska 69, Kraków")

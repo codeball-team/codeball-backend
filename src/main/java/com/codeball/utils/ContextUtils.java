@@ -69,7 +69,8 @@ public class ContextUtils {
 
     @SuppressWarnings("unchecked")
     private Map<String, String> getAuthenticationDetails(Principal principal) {
-        return ((Map<String, String>) ((Authentication) principal).getDetails());
+        Object details = ((Authentication) principal).getDetails();
+        return ((Map<String, String>) details);
     }
 
 }

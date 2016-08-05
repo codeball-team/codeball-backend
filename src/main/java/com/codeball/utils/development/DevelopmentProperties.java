@@ -11,8 +11,15 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "development")
 public class DevelopmentProperties {
 
+    private final DataInitializer dataInitializer = new DataInitializer();
     private final SecurityContext securityContext = new SecurityContext();
     private final User user = new User();
+
+    @Getter
+    @Setter
+    public static class DataInitializer {
+        private boolean enabled;
+    }
 
     @Getter
     @Setter
