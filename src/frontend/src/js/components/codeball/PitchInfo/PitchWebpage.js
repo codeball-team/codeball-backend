@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { getDomain } from 'constants';
+import { getDomain } from 'utils';
 import { ConditionalRender } from 'components/base';
 import { Icon } from 'components/ui';
 

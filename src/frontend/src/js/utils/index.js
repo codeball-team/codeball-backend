@@ -3,6 +3,7 @@ export ajaxReducer, { ajaxReducerInitialState } from './ajaxReducer';
 export bindActionsAndConnect from './bindActionsAndConnect';
 export findById from './findById';
 export findLabelByValue from './findLabelByValue';
+export getDomain from './getDomain';
 export isDataInvalidated from './isDataInvalidated';
 export isInRange from './isInRange';
 export model from './model';

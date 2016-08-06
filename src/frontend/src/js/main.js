@@ -46,7 +46,6 @@ function renderContent() {
 
 /* TODO:
   - ConditionalRender dodac do (Link)
-  - Icon component
 
   - classnames i underscore do utilsow
   - relatywne importy komponentow zmienic na referencje do components/xxx
