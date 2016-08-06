@@ -12,21 +12,22 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
   const ajaxHandlers = {
     [startAction]: onAjaxStart,
     [failureAction]: onAjaxFail,
-    [successAction]: onAjaxEnd
+    [successAction]: onAjaxSuccess
   };
 
   const originalReducer = reducer(initialState, handlers);
 
   return (state = initialState, action) => {
     const { type } = action;
-    let ajaxEnhancedState = state;
+    const newState = originalReducer(state, action);
 
     if (_(ajaxHandlers).has(type)) {
       const handler = ajaxHandlers[type];
-      ajaxEnhancedState = handler(state, action);
+      const enhancedNewState = handler(newState, action);
+      return enhancedNewState;
     }
 
-    return originalReducer(ajaxEnhancedState, action);
+    return newState;
   };
 }
 
@@ -34,12 +35,16 @@ function onAjaxStart(state, action) {
   return onUpdate({ ...state, isLoading: true }, action);
 }
 
-function onAjaxEnd(state, action) {
-  return onUpdate({ ...state, isLoading: false, hasLoaded: true }, action);
+function onAjaxSuccess(state, action) {
+  return { ...onAjaxEnd(state, action), hasLoaded: true };
 }
 
 function onAjaxFail(state, action) {
   return { ...onAjaxEnd(state, action), hasLoaded: false };
+}
+
+function onAjaxEnd(state, action) {
+  return onUpdate({ ...state, isLoading: false }, action);
 }
 
 function onUpdate(state, action) {

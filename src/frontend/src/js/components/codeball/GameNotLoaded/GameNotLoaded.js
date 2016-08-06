@@ -22,7 +22,11 @@ class GameNotLoaded extends Component {
           'game-not-loaded',
           className
         )}>
-        <ButtonAddGame renderWhen={canAddNewGame} />
+        <div className="message">
+          There is no such game
+        </div>
+
+        <ButtonAddGame renderWhen={canAddNewGame} label="Add new game" />
       </div>
     );
   }

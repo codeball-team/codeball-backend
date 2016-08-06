@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
-import { PERMISSION_EDIT_GAME_SCORE } from 'constants';
+import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
+import { GameNotLoaded } from 'components/codeball';
 
 export default function GenerateGame(getGameId) {
   class Game extends Component {
@@ -85,7 +86,8 @@ export default function GenerateGame(getGameId) {
           editedGame,
           game,
           isEditing,
-          isLoading: isGameLoading
+          isLoading: isGameLoading,
+          hasLoaded: hasGameLoaded
         },
         pitchesData: {
           pitches,
@@ -112,7 +114,12 @@ export default function GenerateGame(getGameId) {
           isLoading={isContentLoading}
           render={() => (
             <section>
+              <GameNotLoaded
+                renderWhen={!hasGameLoaded}
+                canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
+
               <GameScoreSection
+                renderWhen={hasGameLoaded}
                 title="Result"
                 canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
                 isEditable={true}
@@ -126,6 +133,7 @@ export default function GenerateGame(getGameId) {
                 onEditGameScoreB={gameEditScoreB} />
 
               <GameLineupSection
+                renderWhen={hasGameLoaded}
                 title="Lineups"
                 teamA={teamA}
                 teamB={teamB}

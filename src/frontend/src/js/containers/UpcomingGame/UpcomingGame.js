@@ -180,6 +180,7 @@ export default function GenerateUpcomingGame(getGameId) {
                 canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
 
               <GameInfoSection
+                renderWhen={hasGameLoaded}
                 title={pitchModel.name}
                 date={date}
                 time={time}
@@ -218,6 +219,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
               <GameEnrollmentFormSection
                 renderWhen={[
+                  hasGameLoaded,
                   !isEnrollmentOver,
                   hasPermission(PERMISSION_ENROLL)
                 ]}
@@ -226,7 +228,10 @@ export default function GenerateUpcomingGame(getGameId) {
                 onChange={this.onEnrollmentStatusChange} />
 
               <GameLineupSection
-                renderWhen={isEnrollmentOver}
+                renderWhen={[
+                  hasGameLoaded,
+                  isEnrollmentOver
+                ]}
                 title="Lineups"
                 currentUser={currentUser}
                 users={users}
@@ -234,12 +239,14 @@ export default function GenerateUpcomingGame(getGameId) {
                 teamB={teamB} />
 
               <GameEnrollmentSection
+                renderWhen={hasGameLoaded}
                 title={`Enrolled players (${numberOfEnrolledPlayers})`}
                 users={users}
                 enrolledUsers={enrolledUsers} />
 
               <GameEnrollPlayerFormSection
                 renderWhen={[
+                  hasGameLoaded,
                   !isEnrollmentOver,
                   unenrolledUsers.length > 0,
                   hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER)
