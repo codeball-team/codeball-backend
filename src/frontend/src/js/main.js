@@ -53,8 +53,6 @@ function renderContent() {
   - base/BaseComponentDecorator niech uzywa base/ConditionalRenderDecorator
   - wszystkie komponenty z bibliotek wrzucic do components/ui
   - permissions decorator zamiast wstrzykiwania w bind & connect
-  - getDomain z contants do utils
   - loadable content -> bool or array prop (isLoading)
   - w implementacjach mapstatetoprops dla kontenerow obliczac od razu wszystkie potrzebne rzeczy (przemyslec wydajnosc)
-  - pousuwac .filter(Boolean) i .every(Boolean)
 */
