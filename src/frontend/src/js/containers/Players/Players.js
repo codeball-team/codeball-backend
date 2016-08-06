@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
+import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PlayersListSection } from 'components/sections';
 import { ButtonAddPlayer } from 'components/codeball';
@@ -10,11 +10,16 @@ class Players extends Component {
     actions: PropTypes.object.isRequired,
     currentUserData: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired,
     usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions: { usersLoad }, usersData } = this.props;
+    const {
+      refreshDataIfNecessary,
+      actions: { usersLoad },
+      usersData
+    } = this.props;
     refreshDataIfNecessary(usersData, usersLoad);
   };
 
@@ -54,7 +59,7 @@ class Players extends Component {
   }
 }
 
-export default bindActionsAndConnect(Players, state => ({
+export default Container(Players, state => ({
   currentUserData: state.currentUserData,
   usersData: state.usersData
 }));

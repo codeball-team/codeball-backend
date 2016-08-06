@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
+import { _ } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
+import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PitchesListSection } from 'components/sections';
 import { ButtonAddPitch } from 'components/codeball';
@@ -10,11 +10,16 @@ class Pitches extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
-    pitchesData: PropTypes.object.isRequired
+    pitchesData: PropTypes.object.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired
   };
 
   componentWillMount = () => {
-    const { actions: { pitchesLoad }, pitchesData } = this.props;
+    const {
+      refreshDataIfNecessary,
+      actions: { pitchesLoad },
+      pitchesData
+    } = this.props;
     refreshDataIfNecessary(pitchesData, pitchesLoad);
   };
 
@@ -44,6 +49,6 @@ class Pitches extends Component {
   }
 }
 
-export default bindActionsAndConnect(Pitches, state => ({
+export default Container(Pitches, state => ({
   pitchesData: state.pitchesData
 }));

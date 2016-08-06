@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
+import { _ } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
 import { NewGameModel } from 'models';
+import { Container } from 'components/base';
 import { ButtonCancel, ButtonSave, LoadableContent } from 'components/ui';
 import { NewGameSection } from 'components/sections';
 
@@ -11,11 +11,13 @@ class NewGame extends Component {
     actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
     newGame: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired
+    pitchesData: PropTypes.object.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired
   };
 
   componentWillMount = () => {
     const {
+      refreshDataIfNecessary,
       actions: {
         newGameReset,
         pitchesLoad
@@ -111,7 +113,7 @@ class NewGame extends Component {
   }
 }
 
-export default bindActionsAndConnect(NewGame, state => ({
+export default Container(NewGame, state => ({
   newGame: state.newGame,
   pitchesData: state.pitchesData
 }));

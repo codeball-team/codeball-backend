@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import Error from './Error';
 import './Errors.scss';
 
@@ -36,4 +36,4 @@ class Errors extends Component {
   }
 }
 
-export default ConditionalRender(Errors);
+export default BaseComponent(Errors);

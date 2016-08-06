@@ -1,6 +1,4 @@
-import _ from 'underscore';
-import moment from 'moment';
-import { isInRange } from 'utils';
+import { _, isInRange, moment } from 'utils';
 import { unixToJavaTimestamp } from 'constants';
 
 export default class NewGameModel {

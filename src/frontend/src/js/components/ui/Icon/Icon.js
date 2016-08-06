@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import icons from 'components/ui/icons';
 
 class Icon extends Component {
@@ -23,4 +23,4 @@ class Icon extends Component {
   }
 }
 
-export default ConditionalRender(Icon);
+export default BaseComponent(Icon);

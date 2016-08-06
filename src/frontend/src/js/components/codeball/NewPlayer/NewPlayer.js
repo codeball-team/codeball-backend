@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
 import { ROLE_STRING, ROLE_OPTIONS } from 'constants';
+import { classNames } from 'utils';
 import { NewUserModel } from 'models';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { EditableText, Form, ValuePicker } from 'components/ui';
 import './NewPlayer.scss';
 
@@ -94,4 +94,4 @@ class NewPlayer extends Component {
   }
 }
 
-export default ConditionalRender(NewPlayer);
+export default BaseComponent(NewPlayer);

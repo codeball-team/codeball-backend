@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 
 class Value extends Component {
   static propTypes = {
@@ -17,4 +17,4 @@ class Value extends Component {
   }
 }
 
-export default ConditionalRender(Value);
+export default BaseComponent(Value);

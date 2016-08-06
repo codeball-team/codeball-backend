@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { List } from 'components/ui';
 import GameEnrollmentListItem from './GameEnrollmentListItem';
 
@@ -39,4 +39,4 @@ class GameEnrollmentListItems extends Component {
   }
 }
 
-export default ConditionalRender(GameEnrollmentListItems);
+export default BaseComponent(GameEnrollmentListItems);

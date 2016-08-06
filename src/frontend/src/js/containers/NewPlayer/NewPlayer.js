@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
 import { NewUserModel } from 'models';
+import { Container } from 'components/base';
 import { NewPlayerSection } from 'components/sections';
 import { ButtonCancel, ButtonSave } from 'components/ui';
 
@@ -82,6 +82,6 @@ class NewPlayer extends Component {
   }
 }
 
-export default bindActionsAndConnect(NewPlayer, state => ({
+export default Container(NewPlayer, state => ({
   newUser: state.newUser
 }));

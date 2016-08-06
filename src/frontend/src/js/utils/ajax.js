@@ -1,5 +1,4 @@
-import _ from 'underscore';
-import { now, safeGet } from 'utils';
+import { _, now, safeGet } from 'utils';
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE } from 'constants/actionTypes';
 
 export default function ajax(getOptions) {

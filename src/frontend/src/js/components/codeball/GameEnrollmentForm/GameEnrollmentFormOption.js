@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Button } from 'components/ui';
 
 class GameEnrollmentFormOption extends Component {
@@ -40,4 +40,4 @@ class GameEnrollmentFormOption extends Component {
   }
 }
 
-export default ConditionalRender(GameEnrollmentFormOption);
+export default BaseComponent(GameEnrollmentFormOption);

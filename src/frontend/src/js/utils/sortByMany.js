@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 
 export default function sortByMany(list, attributes, options = { caseSensitive: false }) {
   const { caseSensitive } = options;

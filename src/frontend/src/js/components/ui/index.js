@@ -1,7 +1,7 @@
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Link as ReactRouterLink } from 'react-router';
 
-export const Link = ConditionalRender(ReactRouterLink);
+export const Link = BaseComponent(ReactRouterLink);
 
 export * from './buttons';
 

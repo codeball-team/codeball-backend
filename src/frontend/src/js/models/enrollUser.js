@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 
 export default class EnrollUserModel {

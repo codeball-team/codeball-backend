@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
 import { ROLE_STRING, USER_MISSING_PICTURE_URL } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 import './PlayerProfile.scss';
 
@@ -49,4 +49,4 @@ class PlayerProfile extends Component {
   }
 }
 
-export default ConditionalRender(PlayerProfile);
+export default BaseComponent(PlayerProfile);

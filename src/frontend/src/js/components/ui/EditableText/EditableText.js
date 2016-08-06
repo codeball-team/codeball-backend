@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { _, classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import './EditableText.scss';
 
 class EditableText extends Component {
@@ -61,4 +60,4 @@ class EditableText extends Component {
   }
 }
 
-export default ConditionalRender(EditableText);
+export default BaseComponent(EditableText);

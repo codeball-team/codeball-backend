@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 
 export default function objectify(list, idAttribute = 'id') {
   return _.object(

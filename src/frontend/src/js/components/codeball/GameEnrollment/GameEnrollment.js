@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findById } from 'utils';
+import { classNames, findById } from 'utils';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   ENROLLMENT_STATUS_STRING
 } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import GameEnrollmentListItems from './GameEnrollmentListItems';
 import './GameEnrollment.scss';
 
@@ -56,4 +55,4 @@ class GameEnrollment extends Component {
   }
 }
 
-export default ConditionalRender(GameEnrollment);
+export default BaseComponent(GameEnrollment);

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { USER_MISSING_PICTURE_URL } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Link, ListItem } from 'components/ui';
 import './PlayersListItem.scss';
 
@@ -43,4 +43,4 @@ class PlayersListItem extends Component {
   }
 }
 
-export default ConditionalRender(PlayersListItem);
+export default BaseComponent(PlayersListItem);

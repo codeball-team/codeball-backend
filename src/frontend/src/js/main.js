@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { BodyBackground } from 'components/ui';
 import { BACKGROUND_IMAGES } from 'constants';
+import { BodyBackground } from 'components/ui';
 import routes from './routes';
 const store = configureStore(undefined, browserHistory);
 const rootElement = document.getElementById('app');
@@ -45,12 +45,9 @@ function renderContent() {
 }
 
 /* TODO:
-  - classnames i underscore do utilsow
   - relatywne importy komponentow zmienic na referencje do components/xxx
 
-  - base/BaseComponentDecorator niech uzywa base/ConditionalRenderDecorator
   - wszystkie komponenty z bibliotek wrzucic do components/ui
-  - permissions decorator zamiast wstrzykiwania w bind & connect
   - loadable content -> bool or array prop (isLoading)
   - w implementacjach mapstatetoprops dla kontenerow obliczac od razu wszystkie potrzebne rzeczy (przemyslec wydajnosc)
 */

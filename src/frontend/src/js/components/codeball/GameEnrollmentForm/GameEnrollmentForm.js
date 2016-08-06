@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 
@@ -65,4 +65,4 @@ class GameEnrollmentForm extends Component {
   }
 }
 
-export default ConditionalRender(GameEnrollmentForm);
+export default BaseComponent(GameEnrollmentForm);

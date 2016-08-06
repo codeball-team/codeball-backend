@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Link, ListItem } from 'components/ui';
 
 class PitchesListItem extends Component {
@@ -38,4 +38,4 @@ class PitchesListItem extends Component {
   }
 }
 
-export default ConditionalRender(PitchesListItem);
+export default BaseComponent(PitchesListItem);

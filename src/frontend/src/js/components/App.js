@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
+import { Container } from 'components/base';
 import AjaxSpinner from 'containers/AjaxSpinner/AjaxSpinner';
 import AjaxErrors from 'containers/AjaxErrors/AjaxErrors';
 import { Page } from 'components/ui';
@@ -40,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default bindActionsAndConnect(App, () => ({}));
+export default Container(App);

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Button, Icon } from 'components/ui';
 import './IconButton.scss';
 
@@ -34,5 +34,5 @@ export default function IconButtonDecorator(props) {
     }
   }
 
-  return ConditionalRender(IconButton);
+  return BaseComponent(IconButton);
 }

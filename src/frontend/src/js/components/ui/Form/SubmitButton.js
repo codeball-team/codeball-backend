@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { ButtonSave } from 'components/ui';
 
 class SubmitButton extends Component {
@@ -22,4 +22,4 @@ class SubmitButton extends Component {
   }
 }
 
-export default ConditionalRender(SubmitButton);
+export default BaseComponent(SubmitButton);

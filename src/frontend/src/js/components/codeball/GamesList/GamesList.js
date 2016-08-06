@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findById } from 'utils';
-import { ConditionalRender } from 'components/base';
+import { classNames, findById } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Link, List, ListItem } from 'components/ui';
 import './GamesList.scss';
 
@@ -63,4 +62,4 @@ class GamesList extends Component {
   }
 }
 
-export default ConditionalRender(GamesList);
+export default BaseComponent(GamesList);

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
 import { PITCH_TYPE_STRING } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { _, classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import PitchAddress from './PitchAddress';
 import PitchCapacity from './PitchCapacity';
 import PitchType from './PitchType';
@@ -48,4 +47,4 @@ class PitchInfo extends Component {
   }
 }
 
-export default ConditionalRender(PitchInfo);
+export default BaseComponent(PitchInfo);

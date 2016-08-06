@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { _, classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Link } from 'components/ui';
 import './Button.scss';
 
@@ -54,4 +53,4 @@ class Button extends Component {
   }
 }
 
-export default ConditionalRender(Button);
+export default BaseComponent(Button);

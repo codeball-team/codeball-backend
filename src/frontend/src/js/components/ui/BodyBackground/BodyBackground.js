@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { randomInteger } from 'utils';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 
 class BodyBackground extends Component {
   static propTypes = {
@@ -25,4 +25,4 @@ class BodyBackground extends Component {
   }
 }
 
-export default ConditionalRender(BodyBackground);
+export default BaseComponent(BodyBackground);

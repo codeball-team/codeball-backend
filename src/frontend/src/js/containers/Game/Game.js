@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
+import { findById, safeGet } from 'utils';
 import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
+import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
@@ -14,6 +15,7 @@ export default function GenerateGame(getGameId) {
       hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
+      refreshDataIfNecessary: PropTypes.func.isRequired,
       usersData: PropTypes.object.isRequired
     };
 
@@ -54,6 +56,7 @@ export default function GenerateGame(getGameId) {
 
     updateData = props => {
       const {
+        refreshDataIfNecessary,
         actions: {
           gameLoad,
           pitchesLoad,
@@ -145,7 +148,7 @@ export default function GenerateGame(getGameId) {
     }
   }
 
-  return bindActionsAndConnect(Game, state => ({
+  return Container(Game, state => ({
     currentUserData: state.currentUserData,
     gameData: state.gameData,
     pitchesData: state.pitchesData,

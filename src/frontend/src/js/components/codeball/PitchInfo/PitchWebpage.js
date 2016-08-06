@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { getDomain } from 'utils';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 
 class PitchWebpage extends Component {
@@ -22,4 +22,4 @@ class PitchWebpage extends Component {
   }
 }
 
-export default ConditionalRender(PitchWebpage);
+export default BaseComponent(PitchWebpage);

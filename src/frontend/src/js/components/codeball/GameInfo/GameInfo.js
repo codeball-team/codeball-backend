@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 import PitchInfo from '../PitchInfo/PitchInfo';
 import './GameInfo.scss';
@@ -45,4 +45,4 @@ class GameInfo extends Component {
   }
 }
 
-export default ConditionalRender(GameInfo);
+export default BaseComponent(GameInfo);

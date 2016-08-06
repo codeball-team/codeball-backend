@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findById, sortByMany } from 'utils';
-import { ConditionalRender } from 'components/base';
+import { classNames, findById, sortByMany } from 'utils';
+import { BaseComponent } from 'components/base';
 import PlayersList from '../PlayersList/PlayersList';
 import './TeamLineup.scss';
 
@@ -45,4 +44,4 @@ class TeamLineup extends Component {
   }
 }
 
-export default ConditionalRender(TeamLineup);
+export default BaseComponent(TeamLineup);

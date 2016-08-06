@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 import Button from '../Button/Button';
 import EditableText from '../EditableText/EditableText';
@@ -71,4 +71,4 @@ class NumberPicker extends Component {
   }
 }
 
-export default ConditionalRender(NumberPicker);
+export default BaseComponent(NumberPicker);

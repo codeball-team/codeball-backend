@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 
 class PitchCapacity extends Component {
@@ -23,4 +23,4 @@ class PitchCapacity extends Component {
   }
 }
 
-export default ConditionalRender(PitchCapacity);
+export default BaseComponent(PitchCapacity);

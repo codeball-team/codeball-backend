@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { ConditionalRender } from 'components/base';
+import { _ } from 'utils';
+import { BaseComponent } from 'components/base';
 import { ButtonCancel, ButtonEdit, ButtonSave } from 'components/ui';
 import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
 import './Section.scss';
@@ -94,5 +94,5 @@ export default function SectionDecorator(ChildComponent) {
     }
   }
 
-  return ConditionalRender(Section);
+  return BaseComponent(Section);
 }

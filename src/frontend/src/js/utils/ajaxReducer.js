@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 import reducer from './reducer';
 
 export const ajaxReducerInitialState = {

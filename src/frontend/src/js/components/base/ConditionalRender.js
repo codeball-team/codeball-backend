@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
+import { _ } from 'utils';
 
-export default function ConditionalRender(ComponentClass) {
+export default function BaseComponent(ComponentClass) {
   return class EnhancedComponent extends Component {
     static propTypes = {
       renderWhen: PropTypes.oneOfType([

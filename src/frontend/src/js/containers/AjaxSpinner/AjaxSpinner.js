@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
+import { Container } from 'components/base';
 import { Spinner } from 'components/ui';
 
 class AjaxSpinner extends Component {
@@ -18,6 +18,6 @@ class AjaxSpinner extends Component {
   }
 }
 
-export default bindActionsAndConnect(AjaxSpinner, state => ({
+export default Container(AjaxSpinner, state => ({
   ajaxRequests: state.ajaxRequests
 }));

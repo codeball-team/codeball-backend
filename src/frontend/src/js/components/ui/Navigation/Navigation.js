@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Icon, Link } from 'components/ui';
 import './Navigation.scss';
 
@@ -62,4 +62,4 @@ class Navigation extends Component {
   }
 }
 
-export default ConditionalRender(Navigation);
+export default BaseComponent(Navigation);

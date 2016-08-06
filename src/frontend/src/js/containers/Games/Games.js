@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
+import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
 import { ButtonAddGame } from 'components/codeball';
@@ -14,11 +14,13 @@ class Games extends Component {
     gamesData: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
     pitchesData: PropTypes.object.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired,
     usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
     const {
+      refreshDataIfNecessary,
       actions: {
         gamesLoad,
         pitchesLoad,
@@ -87,7 +89,7 @@ class Games extends Component {
   }
 }
 
-export default bindActionsAndConnect(Games, state => ({
+export default Container(Games, state => ({
   gamesData: state.gamesData,
   pitchesData: state.pitchesData,
   usersData: state.usersData

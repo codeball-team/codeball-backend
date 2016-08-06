@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import NumberPicker from '../NumberPicker/NumberPicker';
 import './RangePicker.scss';
 
@@ -65,4 +65,4 @@ class RangePicker extends Component {
   }
 }
 
-export default ConditionalRender(RangePicker);
+export default BaseComponent(RangePicker);

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
+import { _, findById, safeGet } from 'utils';
 import {
   PERMISSION_ADD_GAME, PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS,
   PERMISSION_END_GAME, PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_PLAYER,
   ENROLLMENT_STATUS_YES
 } from 'constants';
 import { EnrollUserModel, PitchModel } from 'models';
+import { Container } from 'components/base';
 import { ButtonSave, ButtonShuffle, LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection, GameEnrollmentFormSection, GameEnrollPlayerFormSection,
@@ -24,6 +24,7 @@ export default function GenerateUpcomingGame(getGameId) {
       hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
+      refreshDataIfNecessary: PropTypes.func.isRequired,
       usersData: PropTypes.object.isRequired
     };
 
@@ -93,6 +94,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
     updateData = props => {
       const {
+        refreshDataIfNecessary,
         actions: {
           currentUserLoad,
           gameEnrollUserReset,
@@ -268,7 +270,7 @@ export default function GenerateUpcomingGame(getGameId) {
     }
   }
 
-  return bindActionsAndConnect(UpcomingGame, state => ({
+  return Container(UpcomingGame, state => ({
     currentUserData: state.currentUserData,
     enrollUser: state.enrollUser,
     gameData: state.gameData,

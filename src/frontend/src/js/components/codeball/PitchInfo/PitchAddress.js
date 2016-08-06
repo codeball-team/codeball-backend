@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { mapsUrl } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 
 class PitchAddress extends Component {
@@ -22,4 +22,4 @@ class PitchAddress extends Component {
   }
 }
 
-export default ConditionalRender(PitchAddress);
+export default BaseComponent(PitchAddress);

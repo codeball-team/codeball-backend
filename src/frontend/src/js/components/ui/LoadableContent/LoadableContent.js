@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { renderConditionally } from 'utils';
-import { ConditionalRender } from 'components/base';
+import { classNames, renderConditionally } from 'utils';
+import { BaseComponent } from 'components/base';
 import './LoadableContent.scss';
 
 class LoadableContent extends Component {
@@ -36,4 +35,4 @@ class LoadableContent extends Component {
   }
 }
 
-export default ConditionalRender(LoadableContent);
+export default BaseComponent(LoadableContent);

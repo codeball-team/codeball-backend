@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
-import moment from 'moment';
-import { findLabelByValue, padLeft } from 'utils';
+import { _, classNames, findLabelByValue, moment, padLeft } from 'utils';
 import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import { NewGameModel } from 'models';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Form, RangePicker, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
@@ -133,4 +130,4 @@ class NewGame extends Component {
   }
 }
 
-export default ConditionalRender(NewGame);
+export default BaseComponent(NewGame);

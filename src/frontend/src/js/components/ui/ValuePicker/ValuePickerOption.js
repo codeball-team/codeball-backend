@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 
 class ValuePickerOption extends Component {
   static propTypes = {
@@ -31,4 +31,4 @@ class ValuePickerOption extends Component {
   }
 }
 
-export default ConditionalRender(ValuePickerOption);
+export default BaseComponent(ValuePickerOption);

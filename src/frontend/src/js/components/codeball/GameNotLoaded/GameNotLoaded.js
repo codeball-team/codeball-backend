@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { ButtonAddGame } from 'components/codeball';
 import './GameNotLoaded.scss';
 
@@ -32,4 +32,4 @@ class GameNotLoaded extends Component {
   }
 }
 
-export default ConditionalRender(GameNotLoaded);
+export default BaseComponent(GameNotLoaded);

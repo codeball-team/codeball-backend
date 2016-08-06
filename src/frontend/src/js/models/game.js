@@ -1,10 +1,9 @@
-import _ from 'underscore';
-import moment from 'moment';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   DATE_FORMAT, TIME_FORMAT,
   javaToUnixTimestamp
 } from 'constants';
+import { _, moment } from 'utils';
 
 export default class GameModel {
   constructor(attributes = {}) {

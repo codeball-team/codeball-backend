@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import './ButtonsPanel.scss';
 
 class ButtonsPanel extends Component {
@@ -27,4 +27,4 @@ class ButtonsPanel extends Component {
   }
 }
 
-export default ConditionalRender(ButtonsPanel);
+export default BaseComponent(ButtonsPanel);

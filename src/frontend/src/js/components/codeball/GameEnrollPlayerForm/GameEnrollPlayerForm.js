@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findLabelByValue } from 'utils';
+import { classNames, findLabelByValue } from 'utils';
 import { EnrollUserModel } from 'models';
 import Select from 'react-select';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Form } from 'components/ui';
 
 class GameEnrollPlayerForm extends Component {
@@ -64,4 +63,4 @@ class GameEnrollPlayerForm extends Component {
   }
 }
 
-export default ConditionalRender(GameEnrollPlayerForm);
+export default BaseComponent(GameEnrollPlayerForm);

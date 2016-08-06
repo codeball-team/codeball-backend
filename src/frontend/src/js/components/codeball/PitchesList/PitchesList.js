@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { List } from 'components/ui';
 import PitchesListItem from './PitchesListItem';
 import './PitchesList.scss';
@@ -35,4 +35,4 @@ class PitchesList extends Component {
   }
 }
 
-export default ConditionalRender(PitchesList);
+export default BaseComponent(PitchesList);

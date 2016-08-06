@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
+import { Container } from 'components/base';
 import { Errors } from 'components/ui';
 
 class AjaxErrors extends Component {
@@ -24,6 +24,6 @@ class AjaxErrors extends Component {
   }
 }
 
-export default bindActionsAndConnect(AjaxErrors, state => ({
+export default Container(AjaxErrors, state => ({
   errors: state.ajaxRequests.errors
 }));

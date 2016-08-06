@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 import { ROLES } from 'constants';
 
 export default class NewUserModel {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import InputWrapper from '../InputWrapper/InputWrapper';
 import SubmitButton from './SubmitButton';
 import './Form.scss';
@@ -55,4 +55,4 @@ class Form extends Component {
   }
 }
 
-export default ConditionalRender(Form);
+export default BaseComponent(Form);

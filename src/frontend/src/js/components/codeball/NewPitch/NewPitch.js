@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
 import {
   MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY,
   PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
 } from 'constants';
+import { _, classNames } from 'utils';
 import { NewPitchModel } from 'models';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { EditableText, Form, RangePicker, ValuePicker } from 'components/ui';
 
 class NewPitch extends Component {
@@ -109,4 +108,4 @@ class NewPitch extends Component {
   }
 }
 
-export default ConditionalRender(NewPitch);
+export default BaseComponent(NewPitch);

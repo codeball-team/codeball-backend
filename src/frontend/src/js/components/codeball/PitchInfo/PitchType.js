@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PITCH_TYPE_STRING } from 'constants';
-import { ConditionalRender } from 'components/base';
+import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
 
 class PitchType extends Component {
@@ -22,4 +22,4 @@ class PitchType extends Component {
   }
 }
 
-export default ConditionalRender(PitchType);
+export default BaseComponent(PitchType);

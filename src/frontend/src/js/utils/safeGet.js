@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 
 export default function safeGet(object, path, defaultValue = undefined) {
   return path.reduce((result, attribute) => {

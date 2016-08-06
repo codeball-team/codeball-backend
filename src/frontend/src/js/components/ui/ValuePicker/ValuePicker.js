@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ConditionalRender } from 'components/base';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import ValuePickerOption from './ValuePickerOption';
 import './ValuePicker.scss';
 
@@ -50,4 +50,4 @@ class ValuePicker extends Component {
   }
 }
 
-export default ConditionalRender(ValuePicker);
+export default BaseComponent(ValuePicker);
