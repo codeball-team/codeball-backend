@@ -6,7 +6,7 @@ import './PlayersListItem.scss';
 
 class PlayersListItem extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.node,
     className: PropTypes.string,
     user: PropTypes.object.isRequired
   };

@@ -79,36 +79,34 @@ class NewGame extends Component {
     } = newGame;
 
     return (
-      <LoadableContent
-        isLoading={arePitchesLoading}
-        render={() => (
-          <section className="new-game">
-            <NewGameSection
-              title="New game"
-              date={date}
-              duration={duration}
-              minute={minute}
-              hour={hour}
-              pitches={_(pitches).values()}
-              pitchId={pitchId}
-              buttons={[
-                <ButtonCancel
-                  key="cancel"
-                  redirect="/games" />,
+      <LoadableContent isLoading={arePitchesLoading}>
+        <section className="new-game">
+          <NewGameSection
+            title="New game"
+            date={date}
+            duration={duration}
+            minute={minute}
+            hour={hour}
+            pitches={_(pitches).values()}
+            pitchId={pitchId}
+            buttons={[
+              <ButtonCancel
+                key="cancel"
+                redirect="/games" />,
 
-                <ButtonSave
-                  key="save"
-                  isDisabled={!NewGameModel.isValid(newGame)}
-                  onClick={this.onSubmit} />
-              ]}
-              onDateChange={this.onDateChange}
-              onDurationChange={this.onDurationChange}
-              onHourChange={this.onHourChange}
-              onMinuteChange={this.onMinuteChange}
-              onPitchIdChange={this.onPitchIdChange}
-              onSubmit={this.onSubmit} />
-          </section>
-        )} />
+              <ButtonSave
+                key="save"
+                isDisabled={!NewGameModel.isValid(newGame)}
+                onClick={this.onSubmit} />
+            ]}
+            onDateChange={this.onDateChange}
+            onDurationChange={this.onDurationChange}
+            onHourChange={this.onHourChange}
+            onMinuteChange={this.onMinuteChange}
+            onPitchIdChange={this.onPitchIdChange}
+            onSubmit={this.onSubmit} />
+        </section>
+      </LoadableContent>
     );
   }
 }

@@ -64,27 +64,25 @@ class Games extends Component {
     ].some(Boolean);
 
     return (
-      <LoadableContent
-        isLoading={isContentLoading}
-        render={() => (
-          <section className="games">
-            <GamesListSection
-              {...gamesListProps}
-              className="upcoming-games"
-              title={`Upcoming games (${upcomingGames.length})`}
-              formatUrl={formatUpcomingGameUrl}
-              games={upcomingGames}
-              buttons={[
-                <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
-              ]} />
+      <LoadableContent isLoading={isContentLoading}>
+        <section className="games">
+          <GamesListSection
+            {...gamesListProps}
+            className="upcoming-games"
+            title={`Upcoming games (${upcomingGames.length})`}
+            formatUrl={formatUpcomingGameUrl}
+            games={upcomingGames}
+            buttons={[
+              <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
+            ]} />
 
-            <GamesListSection
-              {...gamesListProps}
-              title={`Previous games (${previousGames.length})`}
-              formatUrl={formatPreviousGameUrl}
-              games={previousGames} />
-          </section>
-        )} />
+          <GamesListSection
+            {...gamesListProps}
+            title={`Previous games (${previousGames.length})`}
+            formatUrl={formatPreviousGameUrl}
+            games={previousGames} />
+        </section>
+      </LoadableContent>
     );
   }
 }

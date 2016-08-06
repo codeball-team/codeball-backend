@@ -45,13 +45,11 @@ class Pitch extends Component {
     const name = safeGet(pitch, ['name']);
 
     return (
-      <LoadableContent
-        isLoading={arePitchesLoading}
-        render={() => (
-          <PitchInfoSection
-            title={name}
-            pitch={pitch} />
-        )} />
+      <LoadableContent isLoading={arePitchesLoading}>
+        <PitchInfoSection
+          title={name}
+          pitch={pitch} />
+      </LoadableContent>
     );
   }
 }

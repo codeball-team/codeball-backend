@@ -7,7 +7,7 @@ import { Page } from 'components/ui';
 class App extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    children: PropTypes.element.isRequired
+    children: PropTypes.node.isRequired
   };
 
   componentWillMount = () => {

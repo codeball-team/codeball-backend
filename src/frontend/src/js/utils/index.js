@@ -15,6 +15,5 @@ export padLeft from './padLeft';
 export parseNumber from './parseNumber';
 export randomInteger from './random';
 export reducer from './reducer';
-export renderConditionally from './renderConditionally';
 export safeGet from './safeGet';
 export sortByMany from './sortByMany';

@@ -5,7 +5,7 @@ import './Page.scss';
 
 class Page extends Component {
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.node.isRequired
   };
 
   static contextTypes = {

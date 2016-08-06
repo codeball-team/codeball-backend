@@ -42,19 +42,17 @@ class Players extends Component {
     ].some(Boolean);
 
     return (
-      <LoadableContent
-        isLoading={isContentLoading}
-        render={() => (
-          <section className="players">
-            <PlayersListSection
-              title={`Players (${users.length})`}
-              currentUser={currentUser}
-              users={users}
-              buttons={[
-                <ButtonAddPlayer key="add" renderWhen={hasPermission(PERMISSION_ADD_USER)} />
-              ]} />
-          </section>
-        )} />
+      <LoadableContent isLoading={isContentLoading}>
+        <section className="players">
+          <PlayersListSection
+            title={`Players (${users.length})`}
+            currentUser={currentUser}
+            users={users}
+            buttons={[
+              <ButtonAddPlayer key="add" renderWhen={hasPermission(PERMISSION_ADD_USER)} />
+            ]} />
+        </section>
+      </LoadableContent>
     );
   }
 }

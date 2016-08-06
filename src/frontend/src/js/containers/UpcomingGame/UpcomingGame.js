@@ -173,99 +173,97 @@ export default function GenerateUpcomingGame(getGameId) {
       ].some(Boolean);
 
       return (
-        <LoadableContent
-          isLoading={isContentLoading}
-          render={() => (
-            <section>
-              <GameNotLoaded
-                renderWhen={!hasGameLoaded}
-                canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
+        <LoadableContent isLoading={isContentLoading}>
+          <section>
+            <GameNotLoaded
+              renderWhen={!hasGameLoaded}
+              canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
 
-              <GameInfoSection
-                renderWhen={hasGameLoaded}
-                title={pitchModel.name}
-                date={date}
-                time={time}
-                duration={duration}
-                pitch={pitchModel}
-                buttons={[
-                  <ButtonSave
-                    renderWhen={[
-                      !isEnrollmentOver,
-                      hasPermission(PERMISSION_CLOSE_ENROLMENT)
-                    ]}
-                    key="close-enrollment"
-                    label="Close enrollment"
-                    onClick={this.onCloseEnrollment} />,
+            <GameInfoSection
+              renderWhen={hasGameLoaded}
+              title={pitchModel.name}
+              date={date}
+              time={time}
+              duration={duration}
+              pitch={pitchModel}
+              buttons={[
+                <ButtonSave
+                  renderWhen={[
+                    !isEnrollmentOver,
+                    hasPermission(PERMISSION_CLOSE_ENROLMENT)
+                  ]}
+                  key="close-enrollment"
+                  label="Close enrollment"
+                  onClick={this.onCloseEnrollment} />,
 
-                  <ButtonShuffle
-                    renderWhen={[
-                      isEnrollmentOver,
-                      !isGameOver,
-                      hasPermission(PERMISSION_DRAW_TEAMS)
-                    ]}
-                    key="draw-teams"
-                    label="Draw teams"
-                    onClick={this.onDrawTeams} />,
+                <ButtonShuffle
+                  renderWhen={[
+                    isEnrollmentOver,
+                    !isGameOver,
+                    hasPermission(PERMISSION_DRAW_TEAMS)
+                  ]}
+                  key="draw-teams"
+                  label="Draw teams"
+                  onClick={this.onDrawTeams} />,
 
-                  <ButtonSave
-                    renderWhen={[
-                      isEnrollmentOver,
-                      !isGameOver,
-                      hasPermission(PERMISSION_END_GAME)
-                    ]}
-                    key="end-game"
-                    label="End game"
-                    onClick={this.onEndGame} />
-                ]} />
+                <ButtonSave
+                  renderWhen={[
+                    isEnrollmentOver,
+                    !isGameOver,
+                    hasPermission(PERMISSION_END_GAME)
+                  ]}
+                  key="end-game"
+                  label="End game"
+                  onClick={this.onEndGame} />
+              ]} />
 
-              <GameEnrollmentFormSection
-                renderWhen={[
-                  hasGameLoaded,
-                  !isEnrollmentOver,
-                  hasPermission(PERMISSION_ENROLL)
-                ]}
-                title="Are you going?"
-                value={selectedEnrollmentStatus}
-                onChange={this.onEnrollmentStatusChange} />
+            <GameEnrollmentFormSection
+              renderWhen={[
+                hasGameLoaded,
+                !isEnrollmentOver,
+                hasPermission(PERMISSION_ENROLL)
+              ]}
+              title="Are you going?"
+              value={selectedEnrollmentStatus}
+              onChange={this.onEnrollmentStatusChange} />
 
-              <GameLineupSection
-                renderWhen={[
-                  hasGameLoaded,
-                  isEnrollmentOver
-                ]}
-                title="Lineups"
-                currentUser={currentUser}
-                users={users}
-                teamA={teamA}
-                teamB={teamB} />
+            <GameLineupSection
+              renderWhen={[
+                hasGameLoaded,
+                isEnrollmentOver
+              ]}
+              title="Lineups"
+              currentUser={currentUser}
+              users={users}
+              teamA={teamA}
+              teamB={teamB} />
 
-              <GameEnrollmentSection
-                renderWhen={hasGameLoaded}
-                title={`Enrolled players (${numberOfEnrolledPlayers})`}
-                users={users}
-                enrolledUsers={enrolledUsers} />
+            <GameEnrollmentSection
+              renderWhen={hasGameLoaded}
+              title={`Enrolled players (${numberOfEnrolledPlayers})`}
+              users={users}
+              enrolledUsers={enrolledUsers} />
 
-              <GameEnrollPlayerFormSection
-                renderWhen={[
-                  hasGameLoaded,
-                  !isEnrollmentOver,
-                  unenrolledUsers.length > 0,
-                  hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER)
-                ]}
-                title="Enroll another player"
-                canEdit={true}
-                canSubmit={EnrollUserModel.isValid(enrollUser)}
-                isEditable={true}
-                isEditing={isEnrollUserEditing}
-                enrollUser={enrollUser}
-                users={unenrolledUsers}
-                onEdit={gameEnrollUserEdit}
-                onCancel={gameEnrollUserCancel}
-                onSave={this.onEnrollUserSubmit}
-                onUserIdChange={this.onEnrollUserIdChange} />
-            </section>
-          )} />
+            <GameEnrollPlayerFormSection
+              renderWhen={[
+                hasGameLoaded,
+                !isEnrollmentOver,
+                unenrolledUsers.length > 0,
+                hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER)
+              ]}
+              title="Enroll another player"
+              canEdit={true}
+              canSubmit={EnrollUserModel.isValid(enrollUser)}
+              isEditable={true}
+              isEditing={isEnrollUserEditing}
+              enrollUser={enrollUser}
+              users={unenrolledUsers}
+              onEdit={gameEnrollUserEdit}
+              onCancel={gameEnrollUserCancel}
+              onSave={this.onEnrollUserSubmit}
+              onUserIdChange={this.onEnrollUserIdChange} />
+          </section>
+        </LoadableContent>
       );
     }
   }

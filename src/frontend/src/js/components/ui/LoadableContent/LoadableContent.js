@@ -1,20 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { classNames, renderConditionally } from 'utils';
+import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
 import './LoadableContent.scss';
 
 class LoadableContent extends Component {
   static propTypes = {
+    children: PropTypes.node.isRequired,
     className: PropTypes.string,
-    isLoading: PropTypes.bool.isRequired,
-    render: PropTypes.func.isRequired
+    isLoading: PropTypes.bool.isRequired
   };
 
   render() {
     const {
+      children,
       className,
-      isLoading,
-      render
+      isLoading
     } = this.props;
 
     return (
@@ -26,10 +26,7 @@ class LoadableContent extends Component {
           },
           className
         )}>
-        {renderConditionally({
-          when: !isLoading,
-          render
-        })}
+        {!isLoading && children}
       </div>
     );
   }

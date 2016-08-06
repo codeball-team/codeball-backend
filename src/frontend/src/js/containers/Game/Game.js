@@ -113,37 +113,35 @@ export default function GenerateGame(getGameId) {
       ].some(Boolean);
 
       return (
-        <LoadableContent
-          isLoading={isContentLoading}
-          render={() => (
-            <section>
-              <GameNotLoaded
-                renderWhen={!hasGameLoaded}
-                canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
+        <LoadableContent isLoading={isContentLoading}>
+          <section>
+            <GameNotLoaded
+              renderWhen={!hasGameLoaded}
+              canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
 
-              <GameScoreSection
-                renderWhen={hasGameLoaded}
-                title="Result"
-                canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
-                isEditable={true}
-                isEditing={isEditing}
-                pitch={pitch}
-                game={isEditing ? Object.assign({}, game, editedGame) : game}
-                onEdit={gameEdit}
-                onCancel={gameEditCancel}
-                onSave={this.onSave}
-                onEditGameScoreA={gameEditScoreA}
-                onEditGameScoreB={gameEditScoreB} />
+            <GameScoreSection
+              renderWhen={hasGameLoaded}
+              title="Result"
+              canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
+              isEditable={true}
+              isEditing={isEditing}
+              pitch={pitch}
+              game={isEditing ? Object.assign({}, game, editedGame) : game}
+              onEdit={gameEdit}
+              onCancel={gameEditCancel}
+              onSave={this.onSave}
+              onEditGameScoreA={gameEditScoreA}
+              onEditGameScoreB={gameEditScoreB} />
 
-              <GameLineupSection
-                renderWhen={hasGameLoaded}
-                title="Lineups"
-                teamA={teamA}
-                teamB={teamB}
-                currentUser={currentUser}
-                users={users} />
-            </section>
-          )} />
+            <GameLineupSection
+              renderWhen={hasGameLoaded}
+              title="Lineups"
+              teamA={teamA}
+              teamB={teamB}
+              currentUser={currentUser}
+              users={users} />
+          </section>
+        </LoadableContent>
       );
     }
   }

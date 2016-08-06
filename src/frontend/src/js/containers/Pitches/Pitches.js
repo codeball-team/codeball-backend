@@ -33,18 +33,16 @@ class Pitches extends Component {
     } = this.props;
 
     return (
-      <LoadableContent
-        isLoading={arePitchesLoading}
-        render={() => (
-          <section className="pitches">
-            <PitchesListSection
-              title={`Pitches (${pitches.length})`}
-              pitches={_(pitches).values()}
-              buttons={[
-                <ButtonAddPitch key="add" renderWhen={hasPermission(PERMISSION_ADD_PITCH)} />
-              ]} />
-          </section>
-        )} />
+      <LoadableContent isLoading={arePitchesLoading}>
+        <section className="pitches">
+          <PitchesListSection
+            title={`Pitches (${pitches.length})`}
+            pitches={_(pitches).values()}
+            buttons={[
+              <ButtonAddPitch key="add" renderWhen={hasPermission(PERMISSION_ADD_PITCH)} />
+            ]} />
+        </section>
+      </LoadableContent>
     );
   }
 }

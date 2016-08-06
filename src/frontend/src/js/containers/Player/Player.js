@@ -48,15 +48,13 @@ class Player extends Component {
     const lastName = safeGet(user, ['lastName']);
 
     return (
-      <LoadableContent
-        isLoading={areUsersLoading}
-        render={() => (
-          <section className="player">
-            <PlayerProfileSection
-              title={`${lastName} ${firstName}`}
-              user={user} />
-          </section>
-        )} />
+      <LoadableContent isLoading={areUsersLoading}>
+        <section className="player">
+          <PlayerProfileSection
+            title={`${lastName} ${firstName}`}
+            user={user} />
+        </section>
+      </LoadableContent>
     );
   }
 }

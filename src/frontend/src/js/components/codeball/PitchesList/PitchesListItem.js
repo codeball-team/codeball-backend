@@ -4,7 +4,7 @@ import { Link, ListItem } from 'components/ui';
 
 class PitchesListItem extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.node,
     className: PropTypes.string,
     pitch: PropTypes.object.isRequired
   };
