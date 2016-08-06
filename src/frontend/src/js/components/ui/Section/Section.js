@@ -42,7 +42,6 @@ export default function SectionDecorator(ChildComponent) {
         onSave
       } = this.props;
 
-      const areEditingButtonsEnabled = canEdit && isEditable;
       const childProps = {
         ..._(this.props).omit(_(Section.propTypes).keys()),
         isEditing
@@ -59,7 +58,8 @@ export default function SectionDecorator(ChildComponent) {
               {[
                 <ButtonEdit
                   renderWhen={[
-                    areEditingButtonsEnabled,
+                    canEdit,
+                    isEditable,
                     !isEditing
                   ]}
                   key="section-edit"
@@ -67,7 +67,8 @@ export default function SectionDecorator(ChildComponent) {
 
                 <ButtonCancel
                   renderWhen={[
-                    areEditingButtonsEnabled,
+                    canEdit,
+                    isEditable,
                     isEditing
                   ]}
                   key="section-cancel"
@@ -75,7 +76,8 @@ export default function SectionDecorator(ChildComponent) {
 
                 <ButtonSave
                   renderWhen={[
-                    areEditingButtonsEnabled,
+                    canEdit,
+                    isEditable,
                     isEditing
                   ]}
                   key="section-save"
