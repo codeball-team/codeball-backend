@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import NumberPicker from '../NumberPicker/NumberPicker';
 import './RangePicker.scss';
 
-export default class RangePicker extends Component {
+class RangePicker extends Component {
   static propTypes = {
     className: PropTypes.string,
     formatter: PropTypes.func,
@@ -63,3 +64,5 @@ export default class RangePicker extends Component {
     );
   }
 }
+
+export default ConditionalRender(RangePicker);

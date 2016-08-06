@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import IconAdd from 'react-icons/lib/io/plus';
-import IconSubtract from 'react-icons/lib/io/minus';
+import { ConditionalRender } from 'components/base';
+import { Icon } from 'components/ui';
 import Button from '../Button/Button';
 import EditableText from '../EditableText/EditableText';
 import './NumberPicker.scss';
 
-export default class NumberPicker extends Component {
+class NumberPicker extends Component {
   static propTypes = {
     className: PropTypes.string,
     formatter: PropTypes.func,
@@ -54,7 +54,7 @@ export default class NumberPicker extends Component {
           className
         )}>
         <Button className="subtract" onClick={this.onSubtract}>
-          <IconSubtract className="icon" />
+          <Icon name="subtract" />
         </Button>
 
         <EditableText
@@ -64,9 +64,11 @@ export default class NumberPicker extends Component {
           text={formatter(value)} />
 
         <Button className="add" onClick={this.onAdd}>
-          <IconAdd className="icon" />
+          <Icon name="add" />
         </Button>
       </div>
     );
   }
 }
+
+export default ConditionalRender(NumberPicker);

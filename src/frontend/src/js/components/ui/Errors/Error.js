@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import Button from '../Button/Button';
 
-export default class Errors extends Component {
+class Error extends Component {
   static propTypes = {
     className: PropTypes.string,
     error: PropTypes.object.isRequired,
@@ -49,3 +50,5 @@ export default class Errors extends Component {
     );
   }
 }
+
+export default ConditionalRender(Error);

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import './ListItem.scss';
 
 export default class ListItem extends Component {
@@ -25,3 +26,5 @@ export default class ListItem extends Component {
     );
   }
 }
+
+export default ConditionalRender(ListItem);

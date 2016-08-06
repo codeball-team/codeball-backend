@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import IconAlarm from 'react-icons/lib/io/ios-alarm-outline';
-import IconLocation from 'react-icons/lib/io/ios-location';
-import IconPodium from 'react-icons/lib/io/podium';
-import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
-import IconPeople from 'react-icons/lib/io/ios-people';
+import { ConditionalRender } from 'components/base';
+import { Icon } from 'components/ui';
 import './Navigation.scss';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   render() {
     return (
       <nav className="navigation">
@@ -18,7 +15,7 @@ export default class Navigation extends Component {
         <ul>
           <li>
             <Link activeClassName="focus" to="/upcoming-game">
-              <IconAlarm className="icon" />
+              <Icon name="alarm" />
               <span className="label">
                 Upcoming game
               </span>
@@ -27,7 +24,7 @@ export default class Navigation extends Component {
 
           <li>
             <Link activeClassName="focus" to="/last-game">
-              <IconPodium className="icon" />
+              <Icon name="podium" />
               <span className="label">
                 Last game
               </span>
@@ -36,7 +33,7 @@ export default class Navigation extends Component {
 
           <li>
             <Link activeClassName="focus" to="/games">
-              <IconCalendar className="icon" />
+              <Icon name="calendar" />
               <span className="label">
                 Games
               </span>
@@ -45,7 +42,7 @@ export default class Navigation extends Component {
 
           <li>
             <Link activeClassName="focus" to="/players" >
-              <IconPeople className="icon" />
+              <Icon name="people" />
               <span className="label">
                 Players
               </span>
@@ -54,7 +51,7 @@ export default class Navigation extends Component {
 
           <li>
             <Link activeClassName="focus" to="/pitches" >
-              <IconLocation className="icon" />
+              <Icon name="location" />
               <span className="label">
                 Pitches
               </span>
@@ -65,3 +62,5 @@ export default class Navigation extends Component {
     );
   }
 }
+
+export default ConditionalRender(Navigation);

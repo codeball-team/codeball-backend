@@ -25,7 +25,8 @@ module.exports = {
   ],
 
   "globals": {
-    "define": true
+    "define": true,
+    "API_URL": true
   },
 
   "import/ignore": [
@@ -328,7 +329,7 @@ module.exports = {
     "react/no-did-update-set-state": "error",
     "react/no-direct-mutation-state": "error",
     "react/no-is-mounted": "error",
-    "react/no-multi-comp": "error",
+    "react/no-multi-comp": ["error", { "ignoreStateless": true }],
     "react/no-render-return-value": "error",
     "react/no-set-state": "error",
     "react/no-string-refs": "error",

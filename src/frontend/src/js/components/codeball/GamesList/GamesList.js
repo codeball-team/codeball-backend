@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { findById } from 'utils';
 import { Link } from 'react-router';
+import { ConditionalRender } from 'components/base';
 import { List, ListItem } from 'components/ui';
 import './GamesList.scss';
 
-export default class GamesList extends Component {
+class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
     formatUrl: PropTypes.func.isRequired,
@@ -62,3 +63,5 @@ export default class GamesList extends Component {
     );
   }
 }
+
+export default ConditionalRender(GamesList);

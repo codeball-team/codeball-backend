@@ -3,10 +3,7 @@ import _ from 'underscore';
 import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
 import { NewGameModel } from 'models';
-import { Link } from 'react-router';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
-import { Button, LoadableContent } from 'components/ui';
+import { ButtonCancel, ButtonSave, LoadableContent } from 'components/ui';
 import { NewGameSection } from 'components/sections';
 
 class NewGame extends Component {
@@ -93,19 +90,14 @@ class NewGame extends Component {
               pitches={_(pitches).values()}
               pitchId={pitchId}
               buttons={[
-                <Link key="cancel" to="/games">
-                  <Button>
-                    <IconCancel className="icon" />
-                    <span className="label">Cancel</span>
-                  </Button>
-                </Link>,
-                <Button
+                <ButtonCancel
+                  key="cancel"
+                  redirect="/games" />,
+
+                <ButtonSave
                   key="save"
                   isDisabled={!NewGameModel.isValid(newGame)}
-                  onClick={this.onSubmit}>
-                  <IconSave className="icon" />
-                  <span className="label">Save</span>
-                </Button>
+                  onClick={this.onSubmit} />
               ]}
               onDateChange={this.onDateChange}
               onDurationChange={this.onDurationChange}

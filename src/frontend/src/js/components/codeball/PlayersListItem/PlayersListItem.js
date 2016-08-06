@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { USER_MISSING_PICTURE_URL } from 'constants';
 import { Link } from 'react-router';
+import { ConditionalRender } from 'components/base';
 import { ListItem } from 'components/ui';
 import './PlayersListItem.scss';
 
-export default class PlayersListItem extends Component {
+class PlayersListItem extends Component {
   static propTypes = {
     children: PropTypes.element,
     className: PropTypes.string,
@@ -42,3 +43,5 @@ export default class PlayersListItem extends Component {
     );
   }
 }
+
+export default ConditionalRender(PlayersListItem);

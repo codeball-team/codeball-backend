@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import './ButtonsPanel.scss';
 
-export default class ButtonsPanel extends Component {
+class ButtonsPanel extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     className: PropTypes.string
@@ -25,3 +26,5 @@ export default class ButtonsPanel extends Component {
     );
   }
 }
+
+export default ConditionalRender(ButtonsPanel);

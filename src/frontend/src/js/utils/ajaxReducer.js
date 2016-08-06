@@ -3,6 +3,7 @@ import reducer from './reducer';
 
 export const ajaxReducerInitialState = {
   isLoading: false,
+  hasLoaded: false,
   lastUpdate: undefined
 };
 
@@ -10,7 +11,7 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
   const { startAction, failureAction, successAction } = ajaxActions;
   const ajaxHandlers = {
     [startAction]: onAjaxStart,
-    [failureAction]: onAjaxEnd,
+    [failureAction]: onAjaxFail,
     [successAction]: onAjaxEnd
   };
 
@@ -34,7 +35,11 @@ function onAjaxStart(state, action) {
 }
 
 function onAjaxEnd(state, action) {
-  return onUpdate({ ...state, isLoading: false }, action);
+  return onUpdate({ ...state, isLoading: false, hasLoaded: true }, action);
+}
+
+function onAjaxFail(state, action) {
+  return { ...onAjaxEnd(state, action), hasLoaded: false };
 }
 
 function onUpdate(state, action) {

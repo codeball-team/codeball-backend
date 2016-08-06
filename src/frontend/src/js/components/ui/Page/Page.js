@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { ConditionalRender } from 'components/base';
 import Navigation from '../Navigation/Navigation';
 import './Page.scss';
 
-export default class Page extends Component {
+class Page extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired
   };
@@ -36,3 +37,5 @@ export default class Page extends Component {
     );
   }
 }
+
+export default ConditionalRender(Page);

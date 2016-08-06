@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { renderConditionally } from 'utils';
+import { ConditionalRender } from 'components/base';
 import './LoadableContent.scss';
 
-export default class LoadableContent extends Component {
+class LoadableContent extends Component {
   static propTypes = {
     className: PropTypes.string,
     isLoading: PropTypes.bool.isRequired,
@@ -34,3 +35,5 @@ export default class LoadableContent extends Component {
     );
   }
 }
+
+export default ConditionalRender(LoadableContent);

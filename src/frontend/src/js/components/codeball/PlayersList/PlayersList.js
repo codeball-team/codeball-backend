@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import { List } from 'components/ui';
 import PlayersListItem from '../PlayersListItem/PlayersListItem';
 
-export default class PlayersList extends Component {
+class PlayersList extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
@@ -33,3 +34,5 @@ export default class PlayersList extends Component {
     );
   }
 }
+
+export default ConditionalRender(PlayersList);

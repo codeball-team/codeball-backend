@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { ConditionalRender } from 'components/base';
 import PlayersListItem from '../PlayersListItem/PlayersListItem';
 import classNames from 'classnames';
 
-export default class GameEnrollmentListItem extends Component {
+class GameEnrollmentListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollmentStatus: PropTypes.string.isRequired,
@@ -30,3 +31,5 @@ export default class GameEnrollmentListItem extends Component {
     );
   }
 }
+
+export default ConditionalRender(GameEnrollmentListItem);

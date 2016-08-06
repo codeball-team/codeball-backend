@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
-import { Link } from 'react-router';
-import IconAdd from 'react-icons/lib/io/plus';
-import { Button, LoadableContent } from 'components/ui';
+import { LoadableContent } from 'components/ui';
 import { PlayersListSection } from 'components/sections';
+import { ButtonAddPlayer } from 'components/codeball';
 
 class Players extends Component {
   static propTypes = {
@@ -47,17 +46,7 @@ class Players extends Component {
               currentUser={currentUser}
               users={users}
               buttons={[
-                renderConditionally({
-                  when: hasPermission(PERMISSION_ADD_USER),
-                  render: () => (
-                    <Link key="new" to="players/new">
-                      <Button>
-                        <IconAdd className="icon" />
-                        <span className="label">Add</span>
-                      </Button>
-                    </Link>
-                  )
-                })
+                <ButtonAddPlayer key="add" renderWhen={hasPermission(PERMISSION_ADD_USER)} />
               ]} />
           </section>
         )} />

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import './EditableText.scss';
 
-export default class EditableText extends Component {
+class EditableText extends Component {
   static propTypes = {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
@@ -59,3 +60,5 @@ export default class EditableText extends Component {
     );
   }
 }
+
+export default ConditionalRender(EditableText);

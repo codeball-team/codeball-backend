@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { renderConditionally } from 'utils';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { ConditionalRender } from 'components/base';
+import { Icon } from 'components/ui';
+import Value from './Value';
 import './InputWrapper.scss';
 
-export default class InputWrapper extends Component {
+class InputWrapper extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
@@ -31,15 +31,7 @@ export default class InputWrapper extends Component {
         )}>
         <div className="label">
           <div className="title">
-            {label}{renderConditionally({
-              when: isValid,
-              render: () => (
-                <span>
-                  <span>:</span>
-                  <span className="text-highlight">{` ${value}`}</span>
-                </span>
-              )
-            })}
+            {label}<Value renderWhen={isValid} value={value} />
           </div>
 
           <div
@@ -50,19 +42,8 @@ export default class InputWrapper extends Component {
                 invalid: !isValid
               }
             )}>
-            {renderConditionally({
-              when: isValid,
-              render: () => (
-                <IconSave className="icon" />
-              )
-            })}
-
-            {renderConditionally({
-              when: !isValid,
-              render: () => (
-                <IconCancel className="icon" />
-              )
-            })}
+            <Icon name="save" renderWhen={isValid} />
+            <Icon name="cancel" renderWhen={!isValid} />
           </div>
         </div>
 
@@ -73,3 +54,5 @@ export default class InputWrapper extends Component {
     );
   }
 }
+
+export default ConditionalRender(InputWrapper);

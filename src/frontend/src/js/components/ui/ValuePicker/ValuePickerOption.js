@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 
-export default class ValuePickerOption extends Component {
+class ValuePickerOption extends Component {
   static propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
@@ -29,3 +30,5 @@ export default class ValuePickerOption extends Component {
     );
   }
 }
+
+export default ConditionalRender(ValuePickerOption);

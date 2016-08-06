@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { ROLE_STRING, USER_MISSING_PICTURE_URL } from 'constants';
-import IconEmail from 'react-icons/lib/io/ios-email-outline';
-import IconAccessLevel from 'react-icons/lib/io/key';
+import { ConditionalRender } from 'components/base';
+import { Icon } from 'components/ui';
 import './PlayerProfile.scss';
 
-export default class PlayerProfile extends Component {
+class PlayerProfile extends Component {
   static propTypes = {
     className: PropTypes.string,
     user: PropTypes.object.isRequired
@@ -35,12 +35,12 @@ export default class PlayerProfile extends Component {
 
         <div className="info">
           <div>
-            <IconAccessLevel className="icon" />
+            <Icon name="access" />
             {ROLE_STRING[role]}
           </div>
 
           <div className="ellipsis">
-            <IconEmail className="icon" />
+            <Icon name="email" />
             <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
@@ -48,3 +48,5 @@ export default class PlayerProfile extends Component {
     );
   }
 }
+
+export default ConditionalRender(PlayerProfile);

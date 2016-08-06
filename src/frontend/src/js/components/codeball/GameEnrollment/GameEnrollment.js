@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { findById, renderConditionally } from 'utils';
+import { findById } from 'utils';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   ENROLLMENT_STATUS_STRING
 } from 'constants';
+import { ConditionalRender } from 'components/base';
 import GameEnrollmentListItems from './GameEnrollmentListItems';
 import './GameEnrollment.scss';
 
@@ -16,7 +17,7 @@ const ENROLLMENT_STATUS_CLASSNAMES = {
 
 const ENROLLMENT_STATUSES = Object.keys(ENROLLMENT_STATUS_STRING);
 
-export default class GameEnrollment extends Component {
+class GameEnrollment extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrolledUsers: PropTypes.object.isRequired,
@@ -41,18 +42,18 @@ export default class GameEnrollment extends Component {
             .map(userId => findById(users, userId, null))
             .filter(Boolean);
 
-          return renderConditionally({
-            when: enrollmentStatusUsers.length > 0,
-            render: () => (
-              <GameEnrollmentListItems
-                key={enrollmentStatus}
-                className={ENROLLMENT_STATUS_CLASSNAMES[enrollmentStatus]}
-                enrollmentStatus={ENROLLMENT_STATUS_STRING[enrollmentStatus]}
-                enrolledUsers={enrollmentStatusUsers} />
-            )
-          });
+          return (
+            <GameEnrollmentListItems
+              key={enrollmentStatus}
+              renderWhen={enrollmentStatusUsers.length > 0}
+              className={ENROLLMENT_STATUS_CLASSNAMES[enrollmentStatus]}
+              enrollmentStatus={ENROLLMENT_STATUS_STRING[enrollmentStatus]}
+              enrolledUsers={enrollmentStatusUsers} />
+          );
         })}
       </div>
     );
   }
 }
+
+export default ConditionalRender(GameEnrollment);

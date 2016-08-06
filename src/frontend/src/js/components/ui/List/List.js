@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import './List.scss';
 
-export default class List extends Component {
+class List extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string
@@ -25,3 +26,5 @@ export default class List extends Component {
     );
   }
 }
+
+export default ConditionalRender(List);

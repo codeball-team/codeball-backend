@@ -7,12 +7,13 @@ import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_
 import { NewGameModel } from 'models';
 import Select from 'react-select';
 import Calendar from 'react-datepicker/lib/calendar';
+import { ConditionalRender } from 'components/base';
 import { Form, RangePicker, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
 const formatter = value => padLeft(value, 2);
 
-export default class NewGame extends Component {
+class NewGame extends Component {
   static propTypes = {
     className: PropTypes.string,
     date: PropTypes.number,
@@ -131,3 +132,5 @@ export default class NewGame extends Component {
     );
   }
 }
+
+export default ConditionalRender(NewGame);

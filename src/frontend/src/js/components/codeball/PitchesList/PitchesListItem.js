@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { ConditionalRender } from 'components/base';
 import { ListItem } from 'components/ui';
-import './PitchesListItem.scss';
 
-export default class PitchesListItem extends Component {
+class PitchesListItem extends Component {
   static propTypes = {
     children: PropTypes.element,
     className: PropTypes.string,
@@ -38,3 +38,5 @@ export default class PitchesListItem extends Component {
     );
   }
 }
+
+export default ConditionalRender(PitchesListItem);

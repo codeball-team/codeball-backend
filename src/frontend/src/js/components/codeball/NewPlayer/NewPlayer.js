@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { ROLE_STRING, ROLE_OPTIONS } from 'constants';
 import { NewUserModel } from 'models';
+import { ConditionalRender } from 'components/base';
 import { EditableText, Form, ValuePicker } from 'components/ui';
 import './NewPlayer.scss';
 
-export default class NewPlayer extends Component {
+class NewPlayer extends Component {
   static propTypes = {
     className: PropTypes.string,
     email: PropTypes.string,
@@ -92,3 +93,5 @@ export default class NewPlayer extends Component {
     );
   }
 }
+
+export default ConditionalRender(NewPlayer);

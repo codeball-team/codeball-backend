@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
 } from 'constants';
+import { ConditionalRender } from 'components/base';
 import GameEnrollmentFormOption from './GameEnrollmentFormOption';
 import './GameEnrollmentForm.scss';
 
@@ -24,7 +25,7 @@ const GAME_ENROLLMENT_FORM_OPTIONS = [
   }
 ];
 
-export default class GameEnrollmentForm extends Component {
+class GameEnrollmentForm extends Component {
   static propTypes = {
     className: PropTypes.string,
     value: PropTypes.oneOf([
@@ -63,3 +64,5 @@ export default class GameEnrollmentForm extends Component {
     );
   }
 }
+
+export default ConditionalRender(GameEnrollmentForm);

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import ValuePickerOption from './ValuePickerOption';
 import './ValuePicker.scss';
 
-export default class ValuePicker extends Component {
+class ValuePicker extends Component {
   static propTypes = {
     className: PropTypes.string,
     optionClassName: PropTypes.string,
@@ -48,3 +49,5 @@ export default class ValuePicker extends Component {
     );
   }
 }
+
+export default ConditionalRender(ValuePicker);

@@ -2,11 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
 import { NewUserModel } from 'models';
-import { Link } from 'react-router';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
 import { NewPlayerSection } from 'components/sections';
-import { Button } from 'components/ui';
+import { ButtonCancel, ButtonSave } from 'components/ui';
 
 class NewPlayer extends Component {
   static propTypes = {
@@ -66,19 +63,14 @@ class NewPlayer extends Component {
           lastName={lastName}
           role={role}
           buttons={[
-            <Link key="cancel" to="/players">
-              <Button>
-                <IconCancel className="icon" />
-                <span className="label">Cancel</span>
-              </Button>
-            </Link>,
-            <Button
+            <ButtonCancel
+              key="cancel"
+              redirect="/players" />,
+
+            <ButtonSave
               key="save"
               isDisabled={!NewUserModel.isValid(newUser)}
-              onClick={this.onSubmit}>
-              <IconSave className="icon" />
-              <span className="label">Save</span>
-            </Button>
+              onClick={this.onSubmit} />
           ]}
           onEmailChange={this.onEmailChange}
           onFirstNameChange={this.onFirstNameChange}

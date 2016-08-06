@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { renderConditionally } from 'utils';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { ConditionalRender } from 'components/base';
 import InputWrapper from '../InputWrapper/InputWrapper';
-import Button from '../Button/Button';
+import SubmitButton from './SubmitButton';
 import './Form.scss';
 
-export default class Form extends Component {
+class Form extends Component {
   static propTypes = {
     className: PropTypes.string,
     inputs: PropTypes.array.isRequired,
@@ -47,21 +46,13 @@ export default class Form extends Component {
           ))}
         </div>
 
-        {renderConditionally({
-          when: Boolean(onSubmit),
-          render: () => (
-            <div className="submit-button-container">
-              <Button
-                className="submit-button"
-                isDisabled={!areAllInputsValid}
-                onClick={onSubmit}>
-                <IconSave className="icon" />
-                <span className="label">Save</span>
-              </Button>
-            </div>
-          )
-        })}
+        <SubmitButton
+          renderWhen={Boolean(onSubmit)}
+          isDisabled={!areAllInputsValid}
+          onClick={onSubmit} />
       </div>
     );
   }
 }
+
+export default ConditionalRender(Form);

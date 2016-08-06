@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
+import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { Link } from 'react-router';
-import IconAdd from 'react-icons/lib/io/plus';
-import { Button, LoadableContent } from 'components/ui';
+import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
+import { ButtonAddGame } from 'components/codeball';
 
 const formatUpcomingGameUrl = id => `/games/upcoming/${id}`;
 const formatPreviousGameUrl = id => `/games/previous/${id}`;
@@ -68,30 +67,20 @@ class Games extends Component {
         render={() => (
           <section className="games">
             <GamesListSection
+              {...gamesListProps}
               className="upcoming-games"
               title={`Upcoming games (${upcomingGames.length})`}
               formatUrl={formatUpcomingGameUrl}
               games={upcomingGames}
               buttons={[
-                renderConditionally({
-                  when: hasPermission(PERMISSION_ADD_GAME),
-                  render: () => (
-                    <Link key="new" to="/games/new">
-                      <Button>
-                        <IconAdd className="icon" />
-                        <span className="label">Add</span>
-                      </Button>
-                    </Link>
-                  )
-                })
-              ].filter(Boolean)}
-              {...gamesListProps} />
+                <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
+              ]} />
 
             <GamesListSection
+              {...gamesListProps}
               title={`Previous games (${previousGames.length})`}
               formatUrl={formatPreviousGameUrl}
-              games={previousGames}
-              {...gamesListProps} />
+              games={previousGames} />
           </section>
         )} />
     );

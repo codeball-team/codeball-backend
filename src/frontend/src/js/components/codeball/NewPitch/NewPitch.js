@@ -6,9 +6,10 @@ import {
   PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
 } from 'constants';
 import { NewPitchModel } from 'models';
+import { ConditionalRender } from 'components/base';
 import { EditableText, Form, RangePicker, ValuePicker } from 'components/ui';
 
-export default class NewPitch extends Component {
+class NewPitch extends Component {
   static propTypes = {
     address: PropTypes.string,
     className: PropTypes.string,
@@ -107,3 +108,5 @@ export default class NewPitch extends Component {
     );
   }
 }
+
+export default ConditionalRender(NewPitch);

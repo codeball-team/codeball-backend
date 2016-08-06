@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import { ConditionalRender } from 'components/base';
 import TeamLineup from '../TeamLineup/TeamLineup';
 import './GameLineup.scss';
 
-export default class GameLineup extends Component {
+class GameLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
@@ -42,3 +43,5 @@ export default class GameLineup extends Component {
     );
   }
 }
+
+export default ConditionalRender(GameLineup);

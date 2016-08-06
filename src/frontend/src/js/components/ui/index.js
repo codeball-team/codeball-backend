@@ -1,9 +1,13 @@
+export * from './buttons';
+
 export BodyBackground from './BodyBackground/BodyBackground';
 export Button from './Button/Button';
 export ButtonsPanel from './ButtonsPanel/ButtonsPanel';
 export EditableText from './EditableText/EditableText';
 export Errors from './Errors/Errors';
 export Form from './Form/Form';
+export Icon from './Icon/Icon';
+export IconButton from './IconButton/IconButton';
 export InputWrapper from './InputWrapper/InputWrapper';
 export List from './List/List';
 export ListItem from './ListItem/ListItem';
