@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { findById, safeGet } from 'utils';
+import { PERMISSION_ADD_USER } from 'constants';
 import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PlayerProfileSection } from 'components/sections';
+import { PlayerNotLoaded } from 'components/codeball';
 
 class Player extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     params: PropTypes.object,
     refreshDataIfNecessary: PropTypes.func.isRequired,
     usersData: PropTypes.object.isRequired
@@ -34,11 +37,13 @@ class Player extends Component {
 
   render() {
     const {
+      hasPermission,
       params: {
         userId
       },
       usersData: {
         users,
+        hasLoaded: hasUserLoaded,
         isLoading: areUsersLoading
       }
     } = this.props;
@@ -50,7 +55,12 @@ class Player extends Component {
     return (
       <LoadableContent isLoading={areUsersLoading}>
         <section className="player">
+          <PlayerNotLoaded
+            renderWhen={!hasUserLoaded}
+            canAddNew={hasPermission(PERMISSION_ADD_USER)} />
+
           <PlayerProfileSection
+            renderWhen={hasUserLoaded}
             title={`${lastName} ${firstName}`}
             user={user} />
         </section>

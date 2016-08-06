@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { BaseComponent } from 'components/base';
 import { NotLoaded } from 'components/ui';
-import { ButtonAddGame } from 'components/codeball';
+import { ButtonAddPlayer } from 'components/codeball';
 
-class GameNotLoaded extends Component {
+class PlayerNotLoaded extends Component {
   static propTypes = {
     canAddNew: PropTypes.bool
   };
@@ -12,11 +12,11 @@ class GameNotLoaded extends Component {
     const { canAddNew } = this.props;
 
     return (
-      <NotLoaded message="There is no such game">
-        <ButtonAddGame renderWhen={canAddNew} label="Add new game" />
+      <NotLoaded message="There is no such player">
+        <ButtonAddPlayer renderWhen={canAddNew} label="Add new player" />
       </NotLoaded>
     );
   }
 }
 
-export default BaseComponent(GameNotLoaded);
+export default BaseComponent(PlayerNotLoaded);

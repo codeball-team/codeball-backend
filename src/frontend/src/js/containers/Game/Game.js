@@ -116,7 +116,7 @@ export default function GenerateGame(getGameId) {
           <section>
             <GameNotLoaded
               renderWhen={!hasGameLoaded}
-              canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
+              canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
 
             <GameScoreSection
               renderWhen={hasGameLoaded}

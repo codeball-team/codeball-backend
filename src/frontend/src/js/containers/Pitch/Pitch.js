@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
+import { PERMISSION_ADD_PITCH } from 'constants';
 import { findById, safeGet } from 'utils';
 import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
+import { PitchNotLoaded } from 'components/codeball';
 
 class Pitch extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    hasPermission: PropTypes.func.isRequired,
     params: PropTypes.object,
     pitchesData: PropTypes.object.isRequired,
     refreshDataIfNecessary: PropTypes.func.isRequired
@@ -34,9 +37,11 @@ class Pitch extends Component {
 
   render() {
     const {
+      hasPermission,
       params: { pitchId },
       pitchesData: {
         pitches,
+        hasLoaded: hasPlayerLoaded,
         isLoading: arePitchesLoading
       }
     } = this.props;
@@ -46,7 +51,12 @@ class Pitch extends Component {
 
     return (
       <LoadableContent isLoading={arePitchesLoading}>
+        <PitchNotLoaded
+          renderWhen={!hasPlayerLoaded}
+          canAddNew={hasPermission(PERMISSION_ADD_PITCH)} />
+
         <PitchInfoSection
+          renderWhen={hasPlayerLoaded}
           title={name}
           pitch={pitch} />
       </LoadableContent>

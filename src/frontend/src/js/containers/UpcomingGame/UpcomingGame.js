@@ -117,11 +117,11 @@ export default function GenerateUpcomingGame(getGameId) {
 
     render() {
       const {
+        hasPermission,
         actions: {
           gameEnrollUserCancel,
           gameEnrollUserEdit
         },
-        hasPermission,
         currentUserData: {
           currentUser,
           isLoading: isCurrentUserLoading
@@ -176,7 +176,7 @@ export default function GenerateUpcomingGame(getGameId) {
           <section>
             <GameNotLoaded
               renderWhen={!hasGameLoaded}
-              canAddNewGame={hasPermission(PERMISSION_ADD_GAME)} />
+              canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
 
             <GameInfoSection
               renderWhen={hasGameLoaded}
