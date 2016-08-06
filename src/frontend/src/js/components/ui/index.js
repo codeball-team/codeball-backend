@@ -23,6 +23,7 @@ export ListItem from './ListItem/ListItem';
 export LoadableContent from './LoadableContent/LoadableContent';
 export Navigation from './Navigation/Navigation';
 export NotLoaded from './NotLoaded/NotLoaded';
+export NumberPicker from './NumberPicker/NumberPicker';
 export Page from './Page/Page';
 export RangePicker from './RangePicker/RangePicker';
 export Section from './Section/Section';
