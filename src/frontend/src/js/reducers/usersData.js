@@ -1,4 +1,4 @@
-import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
+import { ajaxReducer, safeGet, sortByMany } from 'utils';
 import {
   NEW_USER_SUBMIT_SUCCESS,
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
@@ -6,7 +6,6 @@ import {
 import { UserModel } from 'models';
 
 const initialState = {
-  ...ajaxReducerInitialState,
   users: []
 };
 

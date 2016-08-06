@@ -1,7 +1,7 @@
 import { _ } from 'utils';
 import reducer from './reducer';
 
-export const ajaxReducerInitialState = {
+const ajaxReducerInitialState = {
   isLoading: false,
   hasLoaded: false,
   lastUpdate: undefined
@@ -15,11 +15,18 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
     [successAction]: onAjaxSuccess
   };
 
-  const originalReducer = reducer(initialState, handlers);
+  const reducerInitialState = {
+    ...ajaxReducerInitialState,
+    ...initialState
+  };
+  const originalReducer = reducer(reducerInitialState, handlers);
 
   return (state = initialState, action) => {
     const { type } = action;
-    const newState = originalReducer(state, action);
+    const newState = {
+      ...state,
+      ...originalReducer(state, action)
+    };
 
     if (_(ajaxHandlers).has(type)) {
       const handler = ajaxHandlers[type];

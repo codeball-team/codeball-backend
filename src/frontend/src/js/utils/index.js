@@ -1,6 +1,6 @@
 export _ from 'underscore';
 export ajax from './ajax';
-export ajaxReducer, { ajaxReducerInitialState } from './ajaxReducer';
+export ajaxReducer from './ajaxReducer';
 export classNames from 'classnames';
 export findById from './findById';
 export findLabelByValue from './findLabelByValue';
