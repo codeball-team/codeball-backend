@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { classNames, findById } from 'utils';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
-  ENROLLMENT_STATUS_STRING
+  ENROLLMENT_STATUS_STRING, ENROLLMENT_STATUSES
 } from 'constants';
 import { BaseComponent } from 'components/base';
 import GameEnrollmentListItems from './GameEnrollmentListItems';
@@ -13,8 +13,6 @@ const ENROLLMENT_STATUS_CLASSNAMES = {
   [ENROLLMENT_STATUS_MAYBE]: 'bg-default-alert',
   [ENROLLMENT_STATUS_NO]: 'bg-danger'
 };
-
-const ENROLLMENT_STATUSES = Object.keys(ENROLLMENT_STATUS_STRING);
 
 class GameEnrollment extends Component {
   static propTypes = {
