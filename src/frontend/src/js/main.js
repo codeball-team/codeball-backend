@@ -45,7 +45,6 @@ function renderContent() {
 }
 
 /* TODO:
-  - Link z react-router do components/ui
   - ConditionalRender dodac do (Link)
   - Icon component
 

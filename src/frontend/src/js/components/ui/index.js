@@ -1,3 +1,5 @@
+export { Link } from 'react-router';
+
 export * from './buttons';
 
 export BodyBackground from './BodyBackground/BodyBackground';

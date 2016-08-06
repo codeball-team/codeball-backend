@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { findById } from 'utils';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
-import { List, ListItem } from 'components/ui';
+import { Link, List, ListItem } from 'components/ui';
 import './GamesList.scss';
 
 class GamesList extends Component {

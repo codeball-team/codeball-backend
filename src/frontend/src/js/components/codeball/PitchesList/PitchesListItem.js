@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
-import { ListItem } from 'components/ui';
+import { Link, ListItem } from 'components/ui';
 
 class PitchesListItem extends Component {
   static propTypes = {

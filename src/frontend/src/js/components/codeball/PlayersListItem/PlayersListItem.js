@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { USER_MISSING_PICTURE_URL } from 'constants';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
-import { ListItem } from 'components/ui';
+import { Link, ListItem } from 'components/ui';
 import './PlayersListItem.scss';
 
 class PlayersListItem extends Component {
@@ -25,7 +24,7 @@ class PlayersListItem extends Component {
     } = this.props;
 
     return (
-      <Link className={className} key={id} to={`/players/${id}`}>
+      <Link key={id} className={className} to={`/players/${id}`}>
         <ListItem className="players-list-item">
           <div
             className="picture"

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
-import { EditableText } from 'components/ui';
+import { EditableText, Link } from 'components/ui';
 import './GameScore.scss';
 
 class GameScore extends Component {

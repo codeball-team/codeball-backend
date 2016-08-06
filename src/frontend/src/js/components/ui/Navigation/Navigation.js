@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
-import { Icon } from 'components/ui';
+import { Icon, Link } from 'components/ui';
 import './Navigation.scss';
 
 class Navigation extends Component {

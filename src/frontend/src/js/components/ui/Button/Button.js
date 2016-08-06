@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import { Link } from 'react-router';
 import { ConditionalRender } from 'components/base';
+import { Link } from 'components/ui';
 import './Button.scss';
 
 class Button extends Component {
