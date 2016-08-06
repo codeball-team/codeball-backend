@@ -1,7 +1,7 @@
 import { BaseComponent } from 'components/base';
-import Calendar as ReactDatepickerCalendar from 'react-datepicker/lib/calendar';
+import ReactDatepickerCalendar from 'react-datepicker/lib/calendar';
 import { Link as ReactRouterLink } from 'react-router';
-import Select as ReactSelect from 'react-select';
+import ReactSelect from 'react-select';
 
 export const Calendar = BaseComponent(ReactDatepickerCalendar);
 export const Link = BaseComponent(ReactRouterLink);

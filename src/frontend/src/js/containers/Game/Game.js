@@ -105,15 +105,14 @@ export default function GenerateGame(getGameId) {
       const { pitchId, teamA, teamB } = game;
       const pitch = findById(pitches, pitchId);
 
-      const isContentLoading = [
-        arePitchesLoading,
-        areUsersLoading,
-        isCurrentUserLoading,
-        isGameLoading
-      ].some(Boolean);
-
       return (
-        <LoadableContent isLoading={isContentLoading}>
+        <LoadableContent
+          isLoading={[
+            arePitchesLoading,
+            areUsersLoading,
+            isCurrentUserLoading,
+            isGameLoading
+          ]}>
           <section>
             <GameNotLoaded
               renderWhen={!hasGameLoaded}

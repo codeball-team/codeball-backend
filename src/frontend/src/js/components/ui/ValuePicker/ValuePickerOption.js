@@ -6,7 +6,10 @@ class ValuePickerOption extends Component {
   static propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     onClick: PropTypes.func.isRequired
   };
 

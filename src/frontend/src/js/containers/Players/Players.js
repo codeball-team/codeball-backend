@@ -36,13 +36,12 @@ class Players extends Component {
       }
     } = this.props;
 
-    const isContentLoading = [
-      isCurrentUserLoading,
-      areUsersLoading
-    ].some(Boolean);
-
     return (
-      <LoadableContent isLoading={isContentLoading}>
+      <LoadableContent
+        isLoading={[
+          areUsersLoading,
+          isCurrentUserLoading
+        ]}>
         <section className="players">
           <PlayersListSection
             title={`Players (${users.length})`}

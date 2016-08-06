@@ -9,7 +9,10 @@ class ValuePicker extends Component {
     className: PropTypes.string,
     optionClassName: PropTypes.string,
     options: PropTypes.array.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     onChange: PropTypes.func.isRequired
   };
 

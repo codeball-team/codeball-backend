@@ -57,14 +57,13 @@ class Games extends Component {
     const upcomingGames = games.filter(game => !game.isGameOver);
     const previousGames = games.filter(game => game.isGameOver);
 
-    const isContentLoading = [
-      areGamesLoading,
-      arePitchesLoading,
-      areUsersLoading
-    ].some(Boolean);
-
     return (
-      <LoadableContent isLoading={isContentLoading}>
+      <LoadableContent
+        isLoading={[
+          areGamesLoading,
+          arePitchesLoading,
+          areUsersLoading
+        ]}>
         <section className="games">
           <GamesListSection
             {...gamesListProps}

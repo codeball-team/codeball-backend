@@ -46,6 +46,5 @@ function renderContent() {
 
 /* TODO:
   - relatywne importy komponentow zmienic na referencje do components/xxx
-  - loadable content -> bool or array prop (isLoading)
   - w implementacjach mapstatetoprops dla kontenerow obliczac od razu wszystkie potrzebne rzeczy (przemyslec wydajnosc)
 */

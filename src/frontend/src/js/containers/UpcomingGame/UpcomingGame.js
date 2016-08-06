@@ -165,15 +165,14 @@ export default function GenerateUpcomingGame(getGameId) {
         .filter(({ id }) => !enrolledUsersIds.includes(id));
       const { isEditing: isEnrollUserEditing } = enrollUser;
 
-      const isContentLoading = [
-        arePitchesLoading,
-        areUsersLoading,
-        isCurrentUserLoading,
-        isGameLoading
-      ].some(Boolean);
-
       return (
-        <LoadableContent isLoading={isContentLoading}>
+        <LoadableContent
+          isLoading={[
+            arePitchesLoading,
+            areUsersLoading,
+            isCurrentUserLoading,
+            isGameLoading
+          ]}>
           <section>
             <GameNotLoaded
               renderWhen={!hasGameLoaded}

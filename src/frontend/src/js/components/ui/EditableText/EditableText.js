@@ -8,7 +8,10 @@ class EditableText extends Component {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     isEditing: PropTypes.bool,
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    text: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     onChange: PropTypes.func
   };
 
