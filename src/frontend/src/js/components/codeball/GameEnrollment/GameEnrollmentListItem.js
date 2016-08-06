@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import PlayersListItem from '../PlayersListItem/PlayersListItem';
+import { PlayersListItem } from 'components/codeball';
 
 class GameEnrollmentListItem extends Component {
   static propTypes = {

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
 import { Icon } from 'components/ui';
-import PitchInfo from '../PitchInfo/PitchInfo';
+import { PitchInfo } from 'components/codeball';
 import './GameInfo.scss';
 
 class GameInfo extends Component {

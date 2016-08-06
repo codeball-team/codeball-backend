@@ -15,4 +15,5 @@ export PitchInfo from './PitchInfo/PitchInfo';
 export PitchesList from './PitchesList/PitchesList';
 export PlayerProfile from './PlayerProfile/PlayerProfile';
 export PlayersList from './PlayersList/PlayersList';
+export PlayersListItem from './PlayersListItem/PlayersListItem';
 export TeamLineup from './TeamLineup/TeamLineup';

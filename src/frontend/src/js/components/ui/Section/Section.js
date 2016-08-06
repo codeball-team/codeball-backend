@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { _ } from 'utils';
 import { BaseComponent } from 'components/base';
-import { ButtonCancel, ButtonEdit, ButtonSave } from 'components/ui';
-import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
+import { ButtonCancel, ButtonEdit, ButtonSave, ButtonsPanel } from 'components/ui';
 import './Section.scss';
 
 export default function SectionDecorator(ChildComponent) {

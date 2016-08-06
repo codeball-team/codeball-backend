@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import Button from '../Button/Button';
+import { Button } from 'components/ui';
 
 class Error extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import InputWrapper from '../InputWrapper/InputWrapper';
+import { InputWrapper } from 'components/ui';
 import SubmitButton from './SubmitButton';
 import './Form.scss';
 

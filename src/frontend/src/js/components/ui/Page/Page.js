@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { BaseComponent } from 'components/base';
-import Navigation from '../Navigation/Navigation';
+import { Navigation } from 'components/ui';
 import './Page.scss';
 
 class Page extends Component {

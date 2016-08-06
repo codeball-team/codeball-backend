@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import TeamLineup from '../TeamLineup/TeamLineup';
+import { TeamLineup } from 'components/codeball';
 import './GameLineup.scss';
 
 class GameLineup extends Component {

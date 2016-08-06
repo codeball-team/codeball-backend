@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import { Icon } from 'components/ui';
-import Button from '../Button/Button';
-import EditableText from '../EditableText/EditableText';
+import { Button, EditableText, Icon } from 'components/ui';
 import './NumberPicker.scss';
 
 class NumberPicker extends Component {

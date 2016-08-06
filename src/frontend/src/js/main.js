@@ -43,8 +43,3 @@ function renderContent() {
     </div>
   );
 }
-
-/* TODO:
-  - relatywne importy komponentow zmienic na referencje do components/xxx
-  - w implementacjach mapstatetoprops dla kontenerow obliczac od razu wszystkie potrzebne rzeczy (przemyslec wydajnosc)
-*/

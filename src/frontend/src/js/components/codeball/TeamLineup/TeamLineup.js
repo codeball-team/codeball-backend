@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames, findById, sortByMany } from 'utils';
 import { BaseComponent } from 'components/base';
-import PlayersList from '../PlayersList/PlayersList';
+import { PlayersList } from 'components/codeball';
 import './TeamLineup.scss';
 
 class TeamLineup extends Component {
