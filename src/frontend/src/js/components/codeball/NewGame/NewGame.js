@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { _, classNames, findLabelByValue, moment, padLeft } from 'utils';
 import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import { NewGameModel } from 'models';
-import Select from 'react-select';
-import Calendar from 'react-datepicker/lib/calendar';
 import { BaseComponent } from 'components/base';
-import { Form, RangePicker, ValuePicker } from 'components/ui';
+import { Calendar, Form, RangePicker, Select, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
 const formatter = value => padLeft(value, 2);

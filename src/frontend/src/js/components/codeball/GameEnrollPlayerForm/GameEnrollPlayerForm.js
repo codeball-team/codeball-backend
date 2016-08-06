@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames, findLabelByValue } from 'utils';
 import { EnrollUserModel } from 'models';
-import Select from 'react-select';
 import { BaseComponent } from 'components/base';
-import { Form } from 'components/ui';
+import { Form, Select } from 'components/ui';
 
 class GameEnrollPlayerForm extends Component {
   static propTypes = {
