@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BaseComponent } from 'components/base';
 import { Icon, Link } from 'components/ui';
 import './Navigation.scss';
 
-class Navigation extends Component {
+export default class Navigation extends Component {
   render() {
     return (
       <nav className="navigation">
@@ -61,5 +60,3 @@ class Navigation extends Component {
     );
   }
 }
-
-export default BaseComponent(Navigation);

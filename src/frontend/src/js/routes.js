@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute, Redirect } from 'react-router';
+import { IndexRedirect, IndexRoute, Redirect, Route } from 'react-router';
 
 import App from 'components/App';
 import Game from 'containers/Game/Game';
@@ -15,10 +15,9 @@ import Players from 'containers/Players/Players';
 import Unauthorized from 'containers/Unauthorized/Unauthorized';
 import UpcomingGame from 'containers/UpcomingGame/UpcomingGame';
 
-export default ([
-  <Redirect key="initial-redirect" from="/" to="/upcoming-game" />,
-
+export default (
   <Route key="app" path="/" component={App}>
+    <IndexRedirect to="/upcoming-game" />
     <Route path="404" component={NotFound} />
     <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
     <Route path="last-game" component={Game(() => 'last')} />
@@ -39,8 +38,7 @@ export default ([
       <Route path=":userId" component={Player} />
     </Route>
     <Route path="players" component={NotFound} />
-
     <Route path="unauthorized" component={Unauthorized} />
     <Redirect from="*" to="/404" />
   </Route>
-]);
+);

@@ -18,7 +18,7 @@ class EditableText extends Component {
   static defaultProps = {
     isDisabled: false,
     isEditing: false,
-    inputType: 'text',
+    type: 'text',
     text: '',
     onChange: _.noop
   };
