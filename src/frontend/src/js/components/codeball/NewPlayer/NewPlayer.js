@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ROLE_STRING, ROLE_OPTIONS } from 'constants';
+import { ROLE_STRING } from 'constants';
 import { classNames } from 'utils';
 import { NewUserModel } from 'models';
 import { BaseComponent } from 'components/base';
@@ -10,6 +10,7 @@ class NewPlayer extends Component {
   static propTypes = {
     className: PropTypes.string,
     newUser: PropTypes.object.isRequired,
+    roleOptions: PropTypes.array.isRequired,
     onEmailChange: PropTypes.func.isRequired,
     onFirstNameChange: PropTypes.func.isRequired,
     onLastNameChange: PropTypes.func.isRequired,
@@ -27,6 +28,7 @@ class NewPlayer extends Component {
         lastName,
         role
       },
+      roleOptions,
       onEmailChange,
       onFirstNameChange,
       onLastNameChange,
@@ -83,7 +85,7 @@ class NewPlayer extends Component {
               component: (
                 <ValuePicker
                   className="role-picker"
-                  options={ROLE_OPTIONS}
+                  options={roleOptions}
                   value={role}
                   onChange={onRoleChange} />
               )

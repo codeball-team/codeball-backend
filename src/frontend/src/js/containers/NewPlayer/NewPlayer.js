@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { PERMISSION_ADD_USER } from 'constants';
+import { PERMISSION_ADD_USER, ROLE_OPTIONS } from 'constants';
 import { NewUserModel } from 'models';
 import { Container } from 'components/base';
 import { NewPlayerSection } from 'components/sections';
@@ -46,13 +46,16 @@ class NewPlayer extends Component {
   };
 
   render() {
-    const { newUser } = this.props;
+    const { hasPermission, newUser } = this.props;
+    const rule = hasPermission(PERMISSION_ADD_USER);
+    const roleOptions = ROLE_OPTIONS.filter(({ value }) => rule.includes(value));
 
     return (
       <section className="new-player">
         <NewPlayerSection
           title="New player"
           newUser={newUser}
+          roleOptions={roleOptions}
           buttons={[
             <ButtonCancel
               key="cancel"
