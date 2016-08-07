@@ -16,3 +16,4 @@ export randomInteger from './randomInteger';
 export reducer from './reducer';
 export safeGet from './safeGet';
 export sortByMany from './sortByMany';
+export { javaToUnixTimestamp, unixToJavaTimestamp } from './timestamp';

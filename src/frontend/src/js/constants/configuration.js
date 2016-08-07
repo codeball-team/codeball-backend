@@ -7,7 +7,6 @@ export const DATE_FORMAT = 'YYYY/MM/DD (ddd)';
 export const MONTH_YEAR_FORMAT = 'YYYY/MM';
 export const TIME_FORMAT = 'HH:mm';
 export const DATE_TIME_FORMAT = `${DATE_FORMAT} ${TIME_FORMAT}`;
-export const UNIX_JAVA_TIMESTAMP_FACTOR = 1000;
 
 export const ENROLLMENT_STATUS_YES = 'YES';
 export const ENROLLMENT_STATUS_MAYBE = 'MAYBE';
@@ -47,12 +46,4 @@ export const HOUR_OPTIONS = _.range(0, 24);
 
 export function mapsUrl(address) {
   return `https://www.google.com/maps/?q=${address}`;
-}
-
-export function javaToUnixTimestamp(javaTimestamp) {
-  return javaTimestamp * UNIX_JAVA_TIMESTAMP_FACTOR;
-}
-
-export function unixToJavaTimestamp(unixTimestamp) {
-  return unixTimestamp / UNIX_JAVA_TIMESTAMP_FACTOR;
 }

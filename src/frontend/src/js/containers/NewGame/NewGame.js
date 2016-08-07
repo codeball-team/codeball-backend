@@ -70,25 +70,14 @@ class NewGame extends Component {
         isLoading: arePitchesLoading
       }
     } = this.props;
-    const {
-      date,
-      duration,
-      hour,
-      minute,
-      pitchId
-    } = newGame;
 
     return (
       <LoadableContent isLoading={arePitchesLoading}>
         <section className="new-game">
           <NewGameSection
             title="New game"
-            date={date}
-            duration={duration}
-            minute={minute}
-            hour={hour}
+            newGame={newGame}
             pitches={_(pitches).values()}
-            pitchId={pitchId}
             buttons={[
               <ButtonCancel
                 key="cancel"

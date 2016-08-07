@@ -11,12 +11,8 @@ const formatter = value => padLeft(value, 2);
 class NewGame extends Component {
   static propTypes = {
     className: PropTypes.string,
-    date: PropTypes.number,
-    duration: PropTypes.number,
-    hour: PropTypes.number,
-    minute: PropTypes.number,
+    newGame: PropTypes.object.isRequired,
     pitches: PropTypes.array.isRequired,
-    pitchId: PropTypes.number,
     onDateChange: PropTypes.func.isRequired,
     onDurationChange: PropTypes.func.isRequired,
     onHourChange: PropTypes.func.isRequired,
@@ -38,12 +34,15 @@ class NewGame extends Component {
   render() {
     const {
       className,
-      date,
-      duration,
-      hour,
-      minute,
+      newGame,
+      newGame: {
+        date,
+        duration,
+        hour,
+        minute,
+        pitchId
+      },
       pitches,
-      pitchId,
       onDurationChange,
       onHourChange,
       onMinuteChange,
@@ -68,7 +67,7 @@ class NewGame extends Component {
             {
               label: 'Pitch',
               value: findLabelByValue(pitchesOptions, pitchId),
-              isValid: NewGameModel.isPitchIdValid(pitchId),
+              isValid: NewGameModel.isPitchIdValid(newGame),
               component: (
                 <Select
                   placeholder="Select pitch..."
@@ -82,7 +81,7 @@ class NewGame extends Component {
             {
               label: 'Duration',
               value: findLabelByValue(DURATION_OPTIONS, duration),
-              isValid: NewGameModel.isDurationValid(duration),
+              isValid: NewGameModel.isDurationValid(newGame),
               component: (
                 <ValuePicker
                   options={DURATION_OPTIONS}
@@ -93,7 +92,7 @@ class NewGame extends Component {
             {
               label: 'Start time',
               value: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
-              isValid: NewGameModel.isStartTimeValid(hour, minute),
+              isValid: NewGameModel.isStartTimeValid(newGame),
               component: (
                 <RangePicker
                   formatter={formatter}
@@ -110,7 +109,7 @@ class NewGame extends Component {
             {
               label: 'Start date',
               value: selectedStartDate.format(DATE_FORMAT),
-              isValid: NewGameModel.isDateValid(date),
+              isValid: NewGameModel.isDateValid(newGame),
               component: (
                 <Calendar
                   className="editable-text-input"

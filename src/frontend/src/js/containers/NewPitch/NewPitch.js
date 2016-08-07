@@ -52,23 +52,12 @@ class NewPitch extends Component {
 
   render() {
     const { newPitch } = this.props;
-    const {
-      address,
-      minNumberOfPlayers,
-      maxNumberOfPlayers,
-      name,
-      type
-    } = newPitch;
 
     return (
       <section className="new-pitch">
         <NewPitchSection
           title="New pitch"
-          address={address}
-          minNumberOfPlayers={minNumberOfPlayers}
-          maxNumberOfPlayers={maxNumberOfPlayers}
-          name={name}
-          type={type}
+          newPitch={newPitch}
           buttons={[
             <ButtonCancel
               key="cancel"

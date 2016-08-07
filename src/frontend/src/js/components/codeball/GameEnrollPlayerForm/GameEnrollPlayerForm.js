@@ -21,6 +21,7 @@ class GameEnrollPlayerForm extends Component {
   render() {
     const {
       className,
+      enrollUser,
       enrollUser: {
         userId
       },
@@ -45,7 +46,7 @@ class GameEnrollPlayerForm extends Component {
             {
               label: 'Player',
               value: findLabelByValue(usersOptions, userId),
-              isValid: EnrollUserModel.isUserIdValid(userId),
+              isValid: EnrollUserModel.isUserIdValid(enrollUser),
               component: (
                 <Select
                   placeholder="Select player..."

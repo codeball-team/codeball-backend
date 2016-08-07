@@ -1,44 +1,31 @@
-import { _ } from 'utils';
+import { model } from 'utils';
 import { ROLES } from 'constants';
 
-export default class NewUserModel {
-  constructor(attributes) {
-    _.extend(this, _({ ...attributes }).defaults({
-      email: undefined,
-      firstName: undefined,
-      lastName: undefined,
-      role: undefined
-    }));
-  }
+const NewUserModel = model({
+  defaultAttributes: () => ({
+    email: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    role: undefined
+  }),
+  validators: {
+    isEmailValid({ email }) {
+      return typeof email === 'string' && email.length > 0;
+    },
 
-  static isEmailValid(email) {
-    return typeof email === 'string' && email.length > 0;
-  }
+    isFirstNameValid({ firstName }) {
+      return typeof firstName === 'string' && firstName.length > 0;
+    },
 
-  static isFirstNameValid(firstName) {
-    return typeof firstName === 'string' && firstName.length > 0;
-  }
+    isLastNameValid({ lastName }) {
+      return typeof lastName === 'string' && lastName.length > 0;
+    },
 
-  static isLastNameValid(lastName) {
-    return typeof lastName === 'string' && lastName.length > 0;
-  }
-
-  static isRoleValid(role) {
-    return ROLES.includes(role);
-  }
-
-  static isValid(newUserModel) {
-    const { email, firstName, lastName, role } = newUserModel;
-
-    return [
-      NewUserModel.isEmailValid(email),
-      NewUserModel.isFirstNameValid(firstName),
-      NewUserModel.isLastNameValid(lastName),
-      NewUserModel.isRoleValid(role)
-    ].every(Boolean);
-  }
-
-  static toServerFormat(newUserModel) {
+    isRoleValid({ role }) {
+      return ROLES.includes(role);
+    }
+  },
+  toServerFormat(newUserModel) {
     const { email, firstName, lastName, role } = newUserModel;
 
     return {
@@ -48,4 +35,6 @@ export default class NewUserModel {
       role
     };
   }
-}
+});
+
+export default NewUserModel;

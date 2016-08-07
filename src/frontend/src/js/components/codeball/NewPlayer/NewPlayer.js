@@ -9,10 +9,7 @@ import './NewPlayer.scss';
 class NewPlayer extends Component {
   static propTypes = {
     className: PropTypes.string,
-    email: PropTypes.string,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    role: PropTypes.string,
+    newUser: PropTypes.object.isRequired,
     onEmailChange: PropTypes.func.isRequired,
     onFirstNameChange: PropTypes.func.isRequired,
     onLastNameChange: PropTypes.func.isRequired,
@@ -23,10 +20,13 @@ class NewPlayer extends Component {
   render() {
     const {
       className,
-      email,
-      firstName,
-      lastName,
-      role,
+      newUser,
+      newUser: {
+        email,
+        firstName,
+        lastName,
+        role
+      },
       onEmailChange,
       onFirstNameChange,
       onLastNameChange,
@@ -46,7 +46,7 @@ class NewPlayer extends Component {
             {
               label: 'First name',
               value: firstName,
-              isValid: NewUserModel.isFirstNameValid(firstName),
+              isValid: NewUserModel.isFirstNameValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -57,7 +57,7 @@ class NewPlayer extends Component {
             {
               label: 'Last name',
               value: lastName,
-              isValid: NewUserModel.isLastNameValid(lastName),
+              isValid: NewUserModel.isLastNameValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -68,7 +68,7 @@ class NewPlayer extends Component {
             {
               label: 'Email',
               value: email,
-              isValid: NewUserModel.isEmailValid(email),
+              isValid: NewUserModel.isEmailValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -79,7 +79,7 @@ class NewPlayer extends Component {
             {
               label: 'Role',
               value: ROLE_STRING[role],
-              isValid: NewUserModel.isRoleValid(role),
+              isValid: NewUserModel.isRoleValid(newUser),
               component: (
                 <ValuePicker
                   className="role-picker"

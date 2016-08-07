@@ -47,21 +47,12 @@ class NewPlayer extends Component {
 
   render() {
     const { newUser } = this.props;
-    const {
-      email,
-      firstName,
-      lastName,
-      role
-    } = newUser;
 
     return (
       <section className="new-player">
         <NewPlayerSection
           title="New player"
-          email={email}
-          firstName={firstName}
-          lastName={lastName}
-          role={role}
+          newUser={newUser}
           buttons={[
             <ButtonCancel
               key="cancel"
