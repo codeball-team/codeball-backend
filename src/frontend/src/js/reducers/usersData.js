@@ -1,6 +1,6 @@
 import { ajaxReducer, safeGet, sortByMany } from 'utils';
 import {
-  NEW_USER_SUBMIT_SUCCESS,
+  CURRENT_USER_LOAD_SUCCESS, NEW_USER_SUBMIT_SUCCESS,
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
 } from 'constants/actionTypes';
 import { UserModel } from 'models';
@@ -17,6 +17,23 @@ export default ajaxReducer(
     successAction: USERS_LOAD_SUCCESS
   },
   {
+    [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
+      const responseUser = safeGet(action, ['response', 'body'], {});
+      const mappedUser = UserModel.fromServerFormat(responseUser);
+      const { id: userId } = responseUser;
+      const currentUsers = state.users;
+      const userIndex = currentUsers.findIndex(({ id }) => id === userId);
+
+      return {
+        ...state,
+        users: [
+          ...state.users.slice(0, userIndex),
+          mappedUser,
+          ...state.users.slice(userIndex + 1)
+        ]
+      };
+    },
+
     [NEW_USER_SUBMIT_SUCCESS]: (state, action) => {
       const responseUser = safeGet(action, ['response', 'body'], {});
       const mappedUser = UserModel.fromServerFormat(responseUser);
