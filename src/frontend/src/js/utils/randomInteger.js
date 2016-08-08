@@ -1,3 +1,3 @@
 export default function randomInteger(max) {
-  return Math.round((Math.random() * max)) % max;
+  return Math.floor(Math.random() * max);
 }
