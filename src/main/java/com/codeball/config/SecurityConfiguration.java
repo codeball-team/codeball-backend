@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "*").permitAll()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers("/login", "/webjars/**").permitAll()
                 .antMatchers("/management/**").permitAll()
                 .antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')")
