@@ -3,14 +3,17 @@
 
 .errors {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-height: 75vh;
+  top: 10vh;
+  left: 10vw;
+  right: 10vw;
+  max-height: 80vh;
+  max-width: 800px;
+  margin: 0 auto;
   overflow: auto;
   background-color: $darken-color;
   color: $fg-color;
   padding: $spacing-l 0;
+  box-shadow: $shadow;
 
   &:empty {
     padding: 0;
@@ -45,6 +48,10 @@
         flex: 1 0 auto;
         font-size: $font-size-m;
       }
+    }
+
+    .message {
+      word-wrap: break-word;
     }
   }
 }
