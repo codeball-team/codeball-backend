@@ -70,6 +70,7 @@ class NewGame extends Component {
               isValid: NewGameModel.isPitchIdValid(newGame),
               component: (
                 <Select
+                  noResultsText="There are no pitches"
                   placeholder="Select pitch..."
                   options={pitchesOptions}
                   value={pitchId}

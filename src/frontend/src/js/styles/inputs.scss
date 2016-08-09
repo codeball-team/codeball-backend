@@ -55,6 +55,13 @@
         background-color: white;
       }
     }
+
+    .Select-noresults {
+      padding: $spacing-xs $spacing-s;
+      text-align: center;
+      background-color: white;
+      color: $bg-color;
+    }
   }
 }
 

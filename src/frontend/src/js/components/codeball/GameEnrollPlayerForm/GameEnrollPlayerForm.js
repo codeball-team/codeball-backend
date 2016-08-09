@@ -49,6 +49,7 @@ class GameEnrollPlayerForm extends Component {
               isValid: EnrollUserModel.isUserIdValid(enrollUser),
               component: (
                 <Select
+                  noResultsText="There are no players"
                   placeholder="Select player..."
                   options={usersOptions}
                   value={userId}
