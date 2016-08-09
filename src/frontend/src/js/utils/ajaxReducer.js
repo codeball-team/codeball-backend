@@ -1,8 +1,9 @@
-import _ from 'underscore';
+import { _ } from 'utils';
 import reducer from './reducer';
 
-export const ajaxReducerInitialState = {
+const ajaxReducerInitialState = {
   isLoading: false,
+  hasLoaded: false,
   lastUpdate: undefined
 };
 
@@ -10,27 +11,43 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
   const { startAction, failureAction, successAction } = ajaxActions;
   const ajaxHandlers = {
     [startAction]: onAjaxStart,
-    [failureAction]: onAjaxEnd,
-    [successAction]: onAjaxEnd
+    [failureAction]: onAjaxFail,
+    [successAction]: onAjaxSuccess
   };
 
-  const originalReducer = reducer(initialState, handlers);
+  const reducerInitialState = {
+    ...ajaxReducerInitialState,
+    ...initialState
+  };
+  const originalReducer = reducer(reducerInitialState, handlers);
 
   return (state = initialState, action) => {
     const { type } = action;
-    let ajaxEnhancedState = state;
+    const newState = {
+      ...state,
+      ...originalReducer(state, action)
+    };
 
     if (_(ajaxHandlers).has(type)) {
       const handler = ajaxHandlers[type];
-      ajaxEnhancedState = handler(state, action);
+      const enhancedNewState = handler(newState, action);
+      return enhancedNewState;
     }
 
-    return originalReducer(ajaxEnhancedState, action);
+    return newState;
   };
 }
 
 function onAjaxStart(state, action) {
   return onUpdate({ ...state, isLoading: true }, action);
+}
+
+function onAjaxSuccess(state, action) {
+  return { ...onAjaxEnd(state, action), hasLoaded: true };
+}
+
+function onAjaxFail(state, action) {
+  return { ...onAjaxEnd(state, action), hasLoaded: false };
 }
 
 function onAjaxEnd(state, action) {

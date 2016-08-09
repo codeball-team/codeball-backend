@@ -1,17 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { renderConditionally } from 'utils';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconEdit from 'react-icons/lib/io/ios-compose-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
-import Button from '../Button/Button';
-import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
+import { _ } from 'utils';
+import { BaseComponent } from 'components/base';
+import { ButtonCancel, ButtonEdit, ButtonSave, ButtonsPanel } from 'components/ui';
 import './Section.scss';
 
 export default function SectionDecorator(ChildComponent) {
-  return class Section extends Component {
+  class Section extends Component {
     static propTypes = {
-      buttons: PropTypes.node,
+      buttons: PropTypes.array,
       canEdit: PropTypes.bool,
       canSubmit: PropTypes.bool,
       isEditable: PropTypes.bool,
@@ -23,6 +19,7 @@ export default function SectionDecorator(ChildComponent) {
     };
 
     static defaultProps = {
+      buttons: [],
       canEdit: false,
       canSubmit: true,
       isEditable: false,
@@ -58,36 +55,37 @@ export default function SectionDecorator(ChildComponent) {
             </div>
 
             <ButtonsPanel>
-              {renderConditionally({
-                when: canEdit && isEditable,
-                render: () => [
-                  renderConditionally({
-                    when: !isEditing,
-                    render: () => (
-                      <Button key="edit" onClick={onEdit}>
-                        <IconEdit className="icon" />
-                        <span className="label">Edit</span>
-                      </Button>
-                    )
-                  }),
-                  renderConditionally({
-                    when: isEditing,
-                    render: () => [
-                      <Button key="cancel" onClick={onCancel}>
-                        <IconCancel className="icon" />
-                        <span className="label">Cancel</span>
-                      </Button>,
+              {[
+                <ButtonEdit
+                  renderWhen={[
+                    canEdit,
+                    isEditable,
+                    !isEditing
+                  ]}
+                  key="section-edit"
+                  onClick={onEdit} />,
 
-                      <Button key="save" isDisabled={!canSubmit} onClick={onSave}>
-                        <IconSave className="icon" />
-                        <span className="label">Save</span>
-                      </Button>
-                    ]
-                  })
-                ].filter(Boolean)
-              })}
+                <ButtonCancel
+                  renderWhen={[
+                    canEdit,
+                    isEditable,
+                    isEditing
+                  ]}
+                  key="section-cancel"
+                  onClick={onCancel} />,
 
-              {buttons}
+                <ButtonSave
+                  renderWhen={[
+                    canEdit,
+                    isEditable,
+                    isEditing
+                  ]}
+                  key="section-save"
+                  isDisabled={!canSubmit}
+                  onClick={onSave} />,
+
+                ...buttons.filter(Boolean)
+              ]}
             </ButtonsPanel>
           </div>
 
@@ -95,5 +93,7 @@ export default function SectionDecorator(ChildComponent) {
         </div>
       );
     }
-  };
+  }
+
+  return BaseComponent(Section);
 }

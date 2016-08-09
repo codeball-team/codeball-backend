@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { USER_MISSING_PICTURE_URL } from 'constants';
-import { Link } from 'react-router';
-import { ListItem } from 'components/ui';
+import { BaseComponent } from 'components/base';
+import { Link, ListItem } from 'components/ui';
 import './PlayersListItem.scss';
 
-export default class PlayersListItem extends Component {
+class PlayersListItem extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.node,
     className: PropTypes.string,
     user: PropTypes.object.isRequired
   };
@@ -24,7 +24,7 @@ export default class PlayersListItem extends Component {
     } = this.props;
 
     return (
-      <Link className={className} key={id} to={`/players/${id}`}>
+      <Link key={id} className={className} to={`/players/${id}`}>
         <ListItem className="players-list-item">
           <div
             className="picture"
@@ -42,3 +42,5 @@ export default class PlayersListItem extends Component {
     );
   }
 }
+
+export default BaseComponent(PlayersListItem);

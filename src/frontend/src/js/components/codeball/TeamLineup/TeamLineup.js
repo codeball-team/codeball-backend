@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findById, sortByMany } from 'utils';
-import PlayersList from '../PlayersList/PlayersList';
+import { classNames, findById, sortByMany } from 'utils';
+import { BaseComponent } from 'components/base';
+import { PlayersList } from 'components/codeball';
 import './TeamLineup.scss';
 
-export default class TeamLineup extends Component {
+class TeamLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
@@ -43,3 +43,5 @@ export default class TeamLineup extends Component {
     );
   }
 }
+
+export default BaseComponent(TeamLineup);

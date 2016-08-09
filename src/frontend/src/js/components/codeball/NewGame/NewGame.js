@@ -1,26 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
-import moment from 'moment';
-import { findLabelByValue, padLeft } from 'utils';
+import { _, classNames, findLabelByValue, moment, padLeft } from 'utils';
 import { DATE_FORMAT, MONTH_YEAR_FORMAT, DURATION_OPTIONS, HOUR_OPTIONS, MINUTE_OPTIONS } from 'constants';
 import { NewGameModel } from 'models';
-import Select from 'react-select';
-import Calendar from 'react-datepicker/lib/calendar';
-import { Form, RangePicker, ValuePicker } from 'components/ui';
+import { BaseComponent } from 'components/base';
+import { Calendar, Form, RangePicker, Select, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
 const formatter = value => padLeft(value, 2);
 
-export default class NewGame extends Component {
+class NewGame extends Component {
   static propTypes = {
     className: PropTypes.string,
-    date: PropTypes.number,
-    duration: PropTypes.number,
-    hour: PropTypes.number,
-    minute: PropTypes.number,
+    newGame: PropTypes.object.isRequired,
     pitches: PropTypes.array.isRequired,
-    pitchId: PropTypes.number,
     onDateChange: PropTypes.func.isRequired,
     onDurationChange: PropTypes.func.isRequired,
     onHourChange: PropTypes.func.isRequired,
@@ -42,12 +34,15 @@ export default class NewGame extends Component {
   render() {
     const {
       className,
-      date,
-      duration,
-      hour,
-      minute,
+      newGame,
+      newGame: {
+        date,
+        duration,
+        hour,
+        minute,
+        pitchId
+      },
       pitches,
-      pitchId,
       onDurationChange,
       onHourChange,
       onMinuteChange,
@@ -72,7 +67,7 @@ export default class NewGame extends Component {
             {
               label: 'Pitch',
               value: findLabelByValue(pitchesOptions, pitchId),
-              isValid: NewGameModel.isPitchIdValid(pitchId),
+              isValid: NewGameModel.isPitchIdValid(newGame),
               component: (
                 <Select
                   placeholder="Select pitch..."
@@ -86,7 +81,7 @@ export default class NewGame extends Component {
             {
               label: 'Duration',
               value: findLabelByValue(DURATION_OPTIONS, duration),
-              isValid: NewGameModel.isDurationValid(duration),
+              isValid: NewGameModel.isDurationValid(newGame),
               component: (
                 <ValuePicker
                   options={DURATION_OPTIONS}
@@ -97,7 +92,7 @@ export default class NewGame extends Component {
             {
               label: 'Start time',
               value: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
-              isValid: NewGameModel.isStartTimeValid(hour, minute),
+              isValid: NewGameModel.isStartTimeValid(newGame),
               component: (
                 <RangePicker
                   formatter={formatter}
@@ -114,7 +109,7 @@ export default class NewGame extends Component {
             {
               label: 'Start date',
               value: selectedStartDate.format(DATE_FORMAT),
-              isValid: NewGameModel.isDateValid(date),
+              isValid: NewGameModel.isDateValid(newGame),
               component: (
                 <Calendar
                   className="editable-text-input"
@@ -131,3 +126,5 @@ export default class NewGame extends Component {
     );
   }
 }
+
+export default BaseComponent(NewGame);

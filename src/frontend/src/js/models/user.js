@@ -1,18 +1,15 @@
-import _ from 'underscore';
+import { model } from 'utils';
 
-export default class UserModel {
-  constructor(attributes = {}) {
-    _.extend(this, _({ ...attributes }).defaults({
-      id: undefined,
-      firstName: undefined,
-      lastName: undefined,
-      email: undefined,
-      pictureUrl: undefined,
-      role: undefined
-    }));
-  }
-
-  static fromServerFormat(serverResponse) {
+const UserModel = model({
+  defaultAttributes: () => ({
+    id: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    email: undefined,
+    pictureUrl: undefined,
+    role: undefined
+  }),
+  fromServerFormat(serverResponse) {
     if (!serverResponse) {
       return new UserModel();
     }
@@ -26,15 +23,6 @@ export default class UserModel {
       pictureUrl: serverResponse.pictureUrl
     });
   }
+});
 
-  static example() {
-    return new UserModel({
-      id: 1,
-      firstName: 'Codeball',
-      lastName: 'Developer',
-      email: 'development@codeball.com',
-      pictureUrl: '',
-      role: 'ROLE_ADMIN'
-    });
-  }
-}
+export default UserModel;

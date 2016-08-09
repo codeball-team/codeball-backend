@@ -1,4 +1,4 @@
-import { ajaxReducer, ajaxReducerInitialState, safeGet, parseNumber } from 'utils';
+import { ajaxReducer, safeGet, parseNumber } from 'utils';
 import { GameModel } from 'models';
 import {
   GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
@@ -12,7 +12,6 @@ import {
 } from 'constants/actionTypes';
 
 const initialState = {
-  ...ajaxReducerInitialState,
   isEditing: false,
   game: new GameModel(),
   editedGame: {}

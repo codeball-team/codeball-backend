@@ -1,11 +1,9 @@
-import _ from 'underscore';
-import moment from 'moment';
-import { DATA_INVALIDATION_TIME } from 'constants';
+import { _, moment } from 'utils';
 
-export default function isDataInvalidated(lastUpdate) {
-  return _.isUndefined(lastUpdate) || hasInvalidationTimePassed(lastUpdate);
+export default function isDataInvalidated(lastUpdate, dataInvalidationTime) {
+  return _.isUndefined(lastUpdate) || hasInvalidationTimePassed(lastUpdate, dataInvalidationTime);
 }
 
-function hasInvalidationTimePassed(lastUpdate) {
-  return moment().isAfter(lastUpdate + DATA_INVALIDATION_TIME);
+function hasInvalidationTimePassed(lastUpdate, dataInvalidationTime) {
+  return moment().isAfter(lastUpdate + dataInvalidationTime);
 }

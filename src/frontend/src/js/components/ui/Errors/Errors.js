@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import Error from './Error';
 import './Errors.scss';
 
-export default class Errors extends Component {
+class Errors extends Component {
   static propTypes = {
     className: PropTypes.string,
     errors: PropTypes.array.isRequired,
@@ -34,3 +35,5 @@ export default class Errors extends Component {
     );
   }
 }
+
+export default BaseComponent(Errors);

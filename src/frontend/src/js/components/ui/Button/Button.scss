@@ -18,34 +18,8 @@
     color: $fg-color-inactive;
   }
 
-  .icon {
-    font-size: $font-size-m;
-    margin-top: -$spacing-xs;
-    margin-right: $spacing-s;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
   @include tablet-and-smaller {
     padding: 0 $spacing-xs;
     font-size: $font-size-m;
-
-    .icon {
-      font-size: $font-size-s;
-      margin-right: $spacing-xs;
-    }
-  }
-
-  @include small-phone {
-    .icon {
-      font-size: $font-size-m;
-      margin-right: 0;
-    }
-
-    .label {
-      display: none;
-    }
   }
 }

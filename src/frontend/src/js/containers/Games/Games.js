@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, refreshDataIfNecessary, renderConditionally } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { Link } from 'react-router';
-import IconAdd from 'react-icons/lib/io/plus';
-import { Button, LoadableContent } from 'components/ui';
+import { Container } from 'components/base';
+import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
+import { ButtonAddGame } from 'components/codeball';
 
 const formatUpcomingGameUrl = id => `/games/upcoming/${id}`;
 const formatPreviousGameUrl = id => `/games/previous/${id}`;
@@ -15,11 +14,13 @@ class Games extends Component {
     gamesData: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
     pitchesData: PropTypes.object.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired,
     usersData: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
     const {
+      refreshDataIfNecessary,
       actions: {
         gamesLoad,
         pitchesLoad,
@@ -56,49 +57,36 @@ class Games extends Component {
     const upcomingGames = games.filter(game => !game.isGameOver);
     const previousGames = games.filter(game => game.isGameOver);
 
-    const isContentLoading = [
-      areGamesLoading,
-      arePitchesLoading,
-      areUsersLoading
-    ].some(Boolean);
-
     return (
       <LoadableContent
-        isLoading={isContentLoading}
-        render={() => (
-          <section className="games">
-            <GamesListSection
-              className="upcoming-games"
-              title={`Upcoming games (${upcomingGames.length})`}
-              formatUrl={formatUpcomingGameUrl}
-              games={upcomingGames}
-              buttons={[
-                renderConditionally({
-                  when: hasPermission(PERMISSION_ADD_GAME),
-                  render: () => (
-                    <Link key="new" to="/games/new">
-                      <Button>
-                        <IconAdd className="icon" />
-                        <span className="label">Add</span>
-                      </Button>
-                    </Link>
-                  )
-                })
-              ].filter(Boolean)}
-              {...gamesListProps} />
+        isLoading={[
+          areGamesLoading,
+          arePitchesLoading,
+          areUsersLoading
+        ]}>
+        <section className="games">
+          <GamesListSection
+            {...gamesListProps}
+            className="upcoming-games"
+            title={`Upcoming games (${upcomingGames.length})`}
+            formatUrl={formatUpcomingGameUrl}
+            games={upcomingGames}
+            buttons={[
+              <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
+            ]} />
 
-            <GamesListSection
-              title={`Previous games (${previousGames.length})`}
-              formatUrl={formatPreviousGameUrl}
-              games={previousGames}
-              {...gamesListProps} />
-          </section>
-        )} />
+          <GamesListSection
+            {...gamesListProps}
+            title={`Previous games (${previousGames.length})`}
+            formatUrl={formatPreviousGameUrl}
+            games={previousGames} />
+        </section>
+      </LoadableContent>
     );
   }
 }
 
-export default bindActionsAndConnect(Games, state => ({
+export default Container(Games, state => ({
   gamesData: state.gamesData,
   pitchesData: state.pitchesData,
   usersData: state.usersData

@@ -1,9 +1,8 @@
-import { ajaxReducer, ajaxReducerInitialState, safeGet } from 'utils';
+import { ajaxReducer, safeGet } from 'utils';
 import { UserModel } from 'models';
 import { CURRENT_USER_LOAD, CURRENT_USER_LOAD_FAILURE, CURRENT_USER_LOAD_SUCCESS } from 'constants/actionTypes';
 
 const initialState = {
-  ...ajaxReducerInitialState,
   currentUser: new UserModel()
 };
 

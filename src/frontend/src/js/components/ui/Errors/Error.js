@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import Button from '../Button/Button';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
+import { Button } from 'components/ui';
 
-export default class Errors extends Component {
+class Error extends Component {
   static propTypes = {
     className: PropTypes.string,
     error: PropTypes.object.isRequired,
@@ -20,7 +21,7 @@ export default class Errors extends Component {
     const {
       className,
       error: {
-        title,
+        title = 'Error',
         message
       }
     } = this.props;
@@ -49,3 +50,5 @@ export default class Errors extends Component {
     );
   }
 }
+
+export default BaseComponent(Error);

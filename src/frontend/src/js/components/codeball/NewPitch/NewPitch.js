@@ -1,21 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
 import {
   MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY,
   PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
 } from 'constants';
+import { _, classNames } from 'utils';
 import { NewPitchModel } from 'models';
+import { BaseComponent } from 'components/base';
 import { EditableText, Form, RangePicker, ValuePicker } from 'components/ui';
 
-export default class NewPitch extends Component {
+class NewPitch extends Component {
   static propTypes = {
-    address: PropTypes.string,
     className: PropTypes.string,
-    maxNumberOfPlayers: PropTypes.number,
-    minNumberOfPlayers: PropTypes.number,
-    name: PropTypes.string,
-    type: PropTypes.string,
+    newPitch: PropTypes.object.isRequired,
     onAddressChange: PropTypes.func.isRequired,
     onMaxNumberOfPlayersChange: PropTypes.func.isRequired,
     onMinNumberOfPlayersChange: PropTypes.func.isRequired,
@@ -26,12 +22,15 @@ export default class NewPitch extends Component {
 
   render() {
     const {
-      address,
       className,
-      minNumberOfPlayers,
-      maxNumberOfPlayers,
-      name,
-      type,
+      newPitch,
+      newPitch: {
+        address,
+        minNumberOfPlayers,
+        maxNumberOfPlayers,
+        name,
+        type
+      },
       onAddressChange,
       onMaxNumberOfPlayersChange,
       onMinNumberOfPlayersChange,
@@ -56,7 +55,7 @@ export default class NewPitch extends Component {
             {
               label: 'Name',
               value: name,
-              isValid: NewPitchModel.isNameValid(name),
+              isValid: NewPitchModel.isNameValid(newPitch),
               component: (
                 <EditableText
                   isEditing={true}
@@ -67,7 +66,7 @@ export default class NewPitch extends Component {
             {
               label: 'Address',
               value: address,
-              isValid: NewPitchModel.isAddressValid(address),
+              isValid: NewPitchModel.isAddressValid(newPitch),
               component: (
                 <EditableText
                   isEditing={true}
@@ -78,7 +77,7 @@ export default class NewPitch extends Component {
             {
               label: 'Pitch type',
               value: PITCH_TYPE_STRING[type],
-              isValid: NewPitchModel.isTypeValid(type),
+              isValid: NewPitchModel.isTypeValid(newPitch),
               component: (
                 <ValuePicker
                   options={PITCH_TYPE_OPTIONS}
@@ -89,7 +88,7 @@ export default class NewPitch extends Component {
             {
               label: 'Capacity',
               value: capacity,
-              isValid: NewPitchModel.isCapacityValid(minNumberOfPlayers, maxNumberOfPlayers),
+              isValid: NewPitchModel.isCapacityValid(newPitch),
               component: (
                 <RangePicker
                   min={minNumberOfPlayers}
@@ -107,3 +106,5 @@ export default class NewPitch extends Component {
     );
   }
 }
+
+export default BaseComponent(NewPitch);

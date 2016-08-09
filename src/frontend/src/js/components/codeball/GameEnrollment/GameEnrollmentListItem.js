@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import PlayersListItem from '../PlayersListItem/PlayersListItem';
-import classNames from 'classnames';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
+import { PlayersListItem } from 'components/codeball';
 
-export default class GameEnrollmentListItem extends Component {
+class GameEnrollmentListItem extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollmentStatus: PropTypes.string.isRequired,
@@ -30,3 +31,5 @@ export default class GameEnrollmentListItem extends Component {
     );
   }
 }
+
+export default BaseComponent(GameEnrollmentListItem);

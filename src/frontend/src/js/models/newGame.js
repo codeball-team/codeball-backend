@@ -1,54 +1,39 @@
-import _ from 'underscore';
-import moment from 'moment';
-import { isInRange } from 'utils';
-import { unixToJavaTimestamp } from 'constants';
+import { isInRange, model, moment, unixToJavaTimestamp } from 'utils';
 
-export default class NewGameModel {
-  constructor(attributes) {
-    _.extend(this, _({ ...attributes }).defaults({
-      date: undefined,
-      duration: undefined,
-      hour: 18,
-      minute: 0,
-      pitchId: undefined
-    }));
-  }
+const NewGameModel = model({
+  defaultAttributes: () => ({
+    date: undefined,
+    duration: undefined,
+    hour: 18,
+    minute: 0,
+    pitchId: undefined
+  }),
+  validators: {
+    isDateValid({ date }) {
+      return Number.isInteger(date);
+    },
 
-  static isDateValid(date) {
-    return Number.isInteger(date);
-  }
+    isDurationValid({ duration }) {
+      return Number.isInteger(duration) && duration > 0;
+    },
 
-  static isDurationValid(duration) {
-    return Number.isInteger(duration) && duration > 0;
-  }
+    isStartTimeValid({ hour, minute }) {
+      return this.isHourValid({ hour }) && this.isMinuteValid({ minute });
+    },
 
-  static isStartTimeValid(hour, minute) {
-    return NewGameModel.isHourValid(hour) && NewGameModel.isMinuteValid(minute);
-  }
+    isHourValid({ hour }) {
+      return Number.isInteger(hour) && isInRange(hour, 0, 23);
+    },
 
-  static isHourValid(hour) {
-    return Number.isInteger(hour) && isInRange(hour, 0, 23);
-  }
+    isMinuteValid({ minute }) {
+      return Number.isInteger(minute) && isInRange(minute, 0, 59);
+    },
 
-  static isMinuteValid(minute) {
-    return Number.isInteger(minute) && isInRange(minute, 0, 59);
-  }
-
-  static isPitchIdValid(pitchId) {
-    return Number.isInteger(pitchId);
-  }
-
-  static isValid(newGameModel) {
-    const { date, duration, hour, minute, pitchId } = newGameModel;
-    return [
-      NewGameModel.isDateValid(date),
-      NewGameModel.isDurationValid(duration),
-      NewGameModel.isStartTimeValid(hour, minute),
-      NewGameModel.isPitchIdValid(pitchId)
-    ].every(Boolean);
-  }
-
-  static toServerFormat(newGameModel) {
+    isPitchIdValid({ pitchId }) {
+      return Number.isInteger(pitchId);
+    }
+  },
+  toServerFormat(newGameModel) {
     const { date, duration, hour, minute, pitchId } = newGameModel;
     const startTimestamp = moment(date)
       .add('hours', hour)
@@ -61,4 +46,6 @@ export default class NewGameModel {
       pitchId
     };
   }
-}
+});
+
+export default NewGameModel;

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import IconLoad from 'react-icons/lib/io/load-d';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
+import { Icon } from 'components/ui';
 import './Spinner.scss';
 
-export default class Spinner extends Component {
+class Spinner extends Component {
   static propTypes = {
     className: PropTypes.string,
     placement: PropTypes.oneOf(['fixed', 'relative']),
@@ -31,8 +32,10 @@ export default class Spinner extends Component {
           },
           className
         )}>
-        <IconLoad className="spinner-image" />
+        <Icon name="load" className="spinner-image" />
       </div>
     );
   }
 }
+
+export default BaseComponent(Spinner);

@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { List } from 'components/ui';
-import PitchesListItem from '../PitchesListItem/PitchesListItem';
+import PitchesListItem from './PitchesListItem';
+import './PitchesList.scss';
 
-export default class PitchesList extends Component {
+class PitchesList extends Component {
   static propTypes = {
     className: PropTypes.string,
     pitches: PropTypes.array.isRequired
@@ -32,3 +34,5 @@ export default class PitchesList extends Component {
     );
   }
 }
+
+export default BaseComponent(PitchesList);

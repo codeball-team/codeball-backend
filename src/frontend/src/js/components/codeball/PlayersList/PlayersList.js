@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { List } from 'components/ui';
-import PlayersListItem from '../PlayersListItem/PlayersListItem';
+import { PlayersListItem } from 'components/codeball';
 
-export default class PlayersList extends Component {
+class PlayersList extends Component {
   static propTypes = {
     className: PropTypes.string,
     currentUser: PropTypes.object.isRequired,
@@ -33,3 +34,5 @@ export default class PlayersList extends Component {
     );
   }
 }
+
+export default BaseComponent(PlayersList);

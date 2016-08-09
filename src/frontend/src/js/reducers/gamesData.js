@@ -1,9 +1,8 @@
-import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
+import { ajaxReducer, safeGet, sortByMany } from 'utils';
 import { GameModel } from 'models';
 import { GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS } from 'constants/actionTypes';
 
 const initialState = {
-  ...ajaxReducerInitialState,
   games: []
 };
 

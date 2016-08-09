@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
-import { bindActionsAndConnect, refreshDataIfNecessary } from 'utils';
+import { _ } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
 import { NewGameModel } from 'models';
-import { Link } from 'react-router';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
-import { Button, LoadableContent } from 'components/ui';
+import { Container } from 'components/base';
+import { ButtonCancel, ButtonSave, LoadableContent } from 'components/ui';
 import { NewGameSection } from 'components/sections';
 
 class NewGame extends Component {
@@ -14,11 +11,13 @@ class NewGame extends Component {
     actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
     newGame: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired
+    pitchesData: PropTypes.object.isRequired,
+    refreshDataIfNecessary: PropTypes.func.isRequired
   };
 
   componentWillMount = () => {
     const {
+      refreshDataIfNecessary,
       actions: {
         newGameReset,
         pitchesLoad
@@ -71,55 +70,37 @@ class NewGame extends Component {
         isLoading: arePitchesLoading
       }
     } = this.props;
-    const {
-      date,
-      duration,
-      hour,
-      minute,
-      pitchId
-    } = newGame;
 
     return (
-      <LoadableContent
-        isLoading={arePitchesLoading}
-        render={() => (
-          <section className="new-game">
-            <NewGameSection
-              title="New game"
-              date={date}
-              duration={duration}
-              minute={minute}
-              hour={hour}
-              pitches={_(pitches).values()}
-              pitchId={pitchId}
-              buttons={[
-                <Link key="cancel" to="/games">
-                  <Button>
-                    <IconCancel className="icon" />
-                    <span className="label">Cancel</span>
-                  </Button>
-                </Link>,
-                <Button
-                  key="save"
-                  isDisabled={!NewGameModel.isValid(newGame)}
-                  onClick={this.onSubmit}>
-                  <IconSave className="icon" />
-                  <span className="label">Save</span>
-                </Button>
-              ]}
-              onDateChange={this.onDateChange}
-              onDurationChange={this.onDurationChange}
-              onHourChange={this.onHourChange}
-              onMinuteChange={this.onMinuteChange}
-              onPitchIdChange={this.onPitchIdChange}
-              onSubmit={this.onSubmit} />
-          </section>
-        )} />
+      <LoadableContent isLoading={arePitchesLoading}>
+        <section className="new-game">
+          <NewGameSection
+            title="New game"
+            newGame={newGame}
+            pitches={_(pitches).values()}
+            buttons={[
+              <ButtonCancel
+                key="cancel"
+                redirect="/games" />,
+
+              <ButtonSave
+                key="save"
+                isDisabled={!NewGameModel.isValid(newGame)}
+                onClick={this.onSubmit} />
+            ]}
+            onDateChange={this.onDateChange}
+            onDurationChange={this.onDurationChange}
+            onHourChange={this.onHourChange}
+            onMinuteChange={this.onMinuteChange}
+            onPitchIdChange={this.onPitchIdChange}
+            onSubmit={this.onSubmit} />
+        </section>
+      </LoadableContent>
     );
   }
 }
 
-export default bindActionsAndConnect(NewGame, state => ({
+export default Container(NewGame, state => ({
   newGame: state.newGame,
   pitchesData: state.pitchesData
 }));

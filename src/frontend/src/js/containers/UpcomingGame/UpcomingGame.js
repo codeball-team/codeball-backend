@@ -1,20 +1,18 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
+import { _, findById, safeGet } from 'utils';
 import {
-  bindActionsAndConnect, findById, refreshDataIfNecessary, renderConditionally, safeGet
-} from 'utils';
-import {
-  PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS, PERMISSION_END_GAME,
-  PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_PLAYER, ENROLLMENT_STATUS_YES
+  PERMISSION_ADD_GAME, PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS,
+  PERMISSION_END_GAME, PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_PLAYER,
+  ENROLLMENT_STATUS_YES
 } from 'constants';
 import { EnrollUserModel, PitchModel } from 'models';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
-import IconShuffle from 'react-icons/lib/io/shuffle';
-import { Button, LoadableContent } from 'components/ui';
+import { Container } from 'components/base';
+import { ButtonSave, ButtonShuffle, LoadableContent } from 'components/ui';
 import {
-  GameEnrollmentSection, GameEnrollmentFormSection,
-  GameEnrollPlayerFormSection, GameInfoSection, GameLineupSection
+  GameEnrollmentSection, GameEnrollmentFormSection, GameEnrollPlayerFormSection,
+  GameInfoSection, GameLineupSection
 } from 'components/sections';
+import { GameNotLoaded } from 'components/codeball';
 
 export default function GenerateUpcomingGame(getGameId) {
   class UpcomingGame extends Component {
@@ -26,6 +24,7 @@ export default function GenerateUpcomingGame(getGameId) {
       hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
+      refreshDataIfNecessary: PropTypes.func.isRequired,
       usersData: PropTypes.object.isRequired
     };
 
@@ -89,14 +88,13 @@ export default function GenerateUpcomingGame(getGameId) {
     };
 
     onEnrollUserIdChange = userId => {
-      const {
-        actions: { gameEnrollUserChangeUserId }
-      } = this.props;
+      const { actions: { gameEnrollUserChangeUserId } } = this.props;
       gameEnrollUserChangeUserId(userId);
     };
 
     updateData = props => {
       const {
+        refreshDataIfNecessary,
         actions: {
           currentUserLoad,
           gameEnrollUserReset,
@@ -119,11 +117,11 @@ export default function GenerateUpcomingGame(getGameId) {
 
     render() {
       const {
+        hasPermission,
         actions: {
           gameEnrollUserCancel,
           gameEnrollUserEdit
         },
-        hasPermission,
         currentUserData: {
           currentUser,
           isLoading: isCurrentUserLoading
@@ -142,7 +140,8 @@ export default function GenerateUpcomingGame(getGameId) {
             teamB,
             time
           },
-          isLoading: isGameLoading
+          isLoading: isGameLoading,
+          hasLoaded: hasGameLoaded
         },
         pitchesData: {
           pitches,
@@ -166,125 +165,109 @@ export default function GenerateUpcomingGame(getGameId) {
         .filter(({ id }) => !enrolledUsersIds.includes(id));
       const { isEditing: isEnrollUserEditing } = enrollUser;
 
-      const isContentLoading = [
-        arePitchesLoading,
-        areUsersLoading,
-        isCurrentUserLoading,
-        isGameLoading
-      ].some(Boolean);
-
       return (
         <LoadableContent
-          isLoading={isContentLoading}
-          render={() => (
-            <section>
-              <GameInfoSection
-                title={pitchModel.name}
-                date={date}
-                time={time}
-                duration={duration}
-                pitch={pitchModel}
-                buttons={
-                  [
-                    renderConditionally({
-                      when: [
-                        hasPermission(PERMISSION_CLOSE_ENROLMENT),
-                        !isEnrollmentOver
-                      ].every(Boolean),
-                      render: () => (
-                        <Button
-                          key="close-enrollment"
-                          onClick={this.onCloseEnrollment}>
-                          <IconSave className="icon" />
-                          <span className="label">Close enrollment</span>
-                        </Button>
-                      )
-                    }),
-                    renderConditionally({
-                      when: isEnrollmentOver && !isGameOver,
-                      render: () => [
-                        renderConditionally({
-                          when: hasPermission(PERMISSION_DRAW_TEAMS),
-                          render: () => (
-                            <Button
-                              key="draw-teams"
-                              onClick={this.onDrawTeams}>
-                              <IconShuffle className="icon" />
-                              <span className="label">Draw teams</span>
-                            </Button>
-                          )
-                        }),
+          isLoading={[
+            arePitchesLoading,
+            areUsersLoading,
+            isCurrentUserLoading,
+            isGameLoading
+          ]}>
+          <section>
+            <GameNotLoaded
+              renderWhen={!hasGameLoaded}
+              canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
 
-                        renderConditionally({
-                          when: hasPermission(PERMISSION_END_GAME),
-                          render: () => (
-                            <Button
-                              key="end-game"
-                              onClick={this.onEndGame}>
-                              <IconSave className="icon" />
-                              <span className="label">End game</span>
-                            </Button>
-                          )
-                        })
-                      ].filter(Boolean)
-                    })
-                  ].filter(Boolean)
-                } />
+            <GameInfoSection
+              renderWhen={hasGameLoaded}
+              title={pitchModel.name}
+              date={date}
+              time={time}
+              duration={duration}
+              pitch={pitchModel}
+              buttons={[
+                <ButtonSave
+                  renderWhen={[
+                    !isEnrollmentOver,
+                    hasPermission(PERMISSION_CLOSE_ENROLMENT)
+                  ]}
+                  key="close-enrollment"
+                  label="Close enrollment"
+                  onClick={this.onCloseEnrollment} />,
 
-              {renderConditionally({
-                when: [
-                  hasPermission(PERMISSION_ENROLL),
-                  !isEnrollmentOver
-                ].every(Boolean),
-                render: () => (
-                  <GameEnrollmentFormSection
-                    title="Are you going?"
-                    value={selectedEnrollmentStatus}
-                    onChange={this.onEnrollmentStatusChange} />
-                )
-              })}
+                <ButtonShuffle
+                  renderWhen={[
+                    isEnrollmentOver,
+                    !isGameOver,
+                    hasPermission(PERMISSION_DRAW_TEAMS)
+                  ]}
+                  key="draw-teams"
+                  label="Draw teams"
+                  onClick={this.onDrawTeams} />,
 
-              {renderConditionally({
-                when: isEnrollmentOver,
-                render: () => (
-                  <GameLineupSection
-                    title="Lineups"
-                    currentUser={currentUser}
-                    users={users}
-                    teamA={teamA}
-                    teamB={teamB} />
-                )
-              })}
+                <ButtonSave
+                  renderWhen={[
+                    isEnrollmentOver,
+                    !isGameOver,
+                    hasPermission(PERMISSION_END_GAME)
+                  ]}
+                  key="end-game"
+                  label="End game"
+                  onClick={this.onEndGame} />
+              ]} />
 
-              <GameEnrollmentSection
-                title={`Enrolled players (${numberOfEnrolledPlayers})`}
-                users={users}
-                enrolledUsers={enrolledUsers} />
+            <GameEnrollmentFormSection
+              renderWhen={[
+                hasGameLoaded,
+                !isEnrollmentOver,
+                hasPermission(PERMISSION_ENROLL)
+              ]}
+              title="Are you going?"
+              value={selectedEnrollmentStatus}
+              onChange={this.onEnrollmentStatusChange} />
 
-              {renderConditionally({
-                when: hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER) && unenrolledUsers.length > 0,
-                render: () => (
-                  <GameEnrollPlayerFormSection
-                    title="Enroll another player"
-                    canEdit={true}
-                    canSubmit={EnrollUserModel.isValid(enrollUser)}
-                    isEditable={true}
-                    isEditing={isEnrollUserEditing}
-                    enrollUser={enrollUser}
-                    users={unenrolledUsers}
-                    onEdit={gameEnrollUserEdit}
-                    onCancel={gameEnrollUserCancel}
-                    onSave={this.onEnrollUserSubmit}
-                    onUserIdChange={this.onEnrollUserIdChange} />
-                )
-              })}
-            </section>
-          )} />
+            <GameLineupSection
+              renderWhen={[
+                hasGameLoaded,
+                isEnrollmentOver
+              ]}
+              title="Lineups"
+              currentUser={currentUser}
+              users={users}
+              teamA={teamA}
+              teamB={teamB} />
+
+            <GameEnrollmentSection
+              renderWhen={hasGameLoaded}
+              title={`Enrolled players (${numberOfEnrolledPlayers})`}
+              users={users}
+              enrolledUsers={enrolledUsers} />
+
+            <GameEnrollPlayerFormSection
+              renderWhen={[
+                hasGameLoaded,
+                !isEnrollmentOver,
+                unenrolledUsers.length > 0,
+                hasPermission(PERMISSION_ENROLL_ANOTHER_PLAYER)
+              ]}
+              title="Enroll another player"
+              canEdit={true}
+              canSubmit={EnrollUserModel.isValid(enrollUser)}
+              isEditable={true}
+              isEditing={isEnrollUserEditing}
+              enrollUser={enrollUser}
+              users={unenrolledUsers}
+              onEdit={gameEnrollUserEdit}
+              onCancel={gameEnrollUserCancel}
+              onSave={this.onEnrollUserSubmit}
+              onUserIdChange={this.onEnrollUserIdChange} />
+          </section>
+        </LoadableContent>
       );
     }
   }
 
-  return bindActionsAndConnect(UpcomingGame, state => ({
+  return Container(UpcomingGame, state => ({
     currentUserData: state.currentUserData,
     enrollUser: state.enrollUser,
     gameData: state.gameData,

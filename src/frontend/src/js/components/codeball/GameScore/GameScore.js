@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { Link } from 'react-router';
-import { EditableText } from 'components/ui';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
+import { EditableText, Link } from 'components/ui';
 import './GameScore.scss';
 
-export default class GameScore extends Component {
+class GameScore extends Component {
   static propTypes = {
     className: PropTypes.string,
     game: PropTypes.object.isRequired,
@@ -81,3 +81,5 @@ export default class GameScore extends Component {
     );
   }
 }
+
+export default BaseComponent(GameScore);

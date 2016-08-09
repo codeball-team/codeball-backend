@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { findLabelByValue, renderConditionally } from 'utils';
+import { classNames, findLabelByValue } from 'utils';
 import { EnrollUserModel } from 'models';
-import Select from 'react-select';
-import { Form } from 'components/ui';
+import { BaseComponent } from 'components/base';
+import { Form, Select } from 'components/ui';
 
-export default class GameEnrollPlayerForm extends Component {
+class GameEnrollPlayerForm extends Component {
   static propTypes = {
     className: PropTypes.string,
     enrollUser: PropTypes.object,
@@ -22,6 +21,7 @@ export default class GameEnrollPlayerForm extends Component {
   render() {
     const {
       className,
+      enrollUser,
       enrollUser: {
         userId
       },
@@ -40,29 +40,27 @@ export default class GameEnrollPlayerForm extends Component {
           'game-enroll-player-form',
           className
         )}>
-        {renderConditionally({
-          when: isEditing,
-          render: () => (
-            <Form
-              inputs={[
-                {
-                  label: 'Player',
-                  value: findLabelByValue(usersOptions, userId),
-                  isValid: EnrollUserModel.isUserIdValid(userId),
-                  component: (
-                    <Select
-                      placeholder="Select player..."
-                      options={usersOptions}
-                      value={userId}
-                      searchable={false}
-                      clearable={false}
-                      onChange={this.onUserIdChange} />
-                  )
-                }
-              ]} />
-          )
-        })}
+        <Form
+          renderWhen={isEditing}
+          inputs={[
+            {
+              label: 'Player',
+              value: findLabelByValue(usersOptions, userId),
+              isValid: EnrollUserModel.isUserIdValid(enrollUser),
+              component: (
+                <Select
+                  placeholder="Select player..."
+                  options={usersOptions}
+                  value={userId}
+                  searchable={false}
+                  clearable={false}
+                  onChange={this.onUserIdChange} />
+              )
+            }
+          ]} />
       </div>
     );
   }
 }
+
+export default BaseComponent(GameEnrollPlayerForm);

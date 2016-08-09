@@ -1,4 +1,4 @@
-import { ajaxReducer, ajaxReducerInitialState, safeGet, sortByMany } from 'utils';
+import { ajaxReducer, safeGet, sortByMany } from 'utils';
 import {
   NEW_PITCH_SUBMIT_SUCCESS,
   PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
@@ -6,7 +6,6 @@ import {
 import { PitchModel } from 'models';
 
 const initialState = {
-  ...ajaxReducerInitialState,
   pitches: []
 };
 

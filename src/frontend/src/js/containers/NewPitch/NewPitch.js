@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
 import { NewPitchModel } from 'models';
-import { Link } from 'react-router';
-import IconCancel from 'react-icons/lib/io/ios-close-outline';
-import IconSave from 'react-icons/lib/io/ios-checkmark-outline';
+import { Container } from 'components/base';
 import { NewPitchSection } from 'components/sections';
-import { Button } from 'components/ui';
+import { ButtonCancel, ButtonSave } from 'components/ui';
 
 class NewPitch extends Component {
   static propTypes = {
@@ -55,37 +52,21 @@ class NewPitch extends Component {
 
   render() {
     const { newPitch } = this.props;
-    const {
-      address,
-      minNumberOfPlayers,
-      maxNumberOfPlayers,
-      name,
-      type
-    } = newPitch;
 
     return (
       <section className="new-pitch">
         <NewPitchSection
           title="New pitch"
-          address={address}
-          minNumberOfPlayers={minNumberOfPlayers}
-          maxNumberOfPlayers={maxNumberOfPlayers}
-          name={name}
-          type={type}
+          newPitch={newPitch}
           buttons={[
-            <Link key="cancel" to="/pitches">
-              <Button>
-                <IconCancel className="icon" />
-                <span className="label">Cancel</span>
-              </Button>
-            </Link>,
-            <Button
+            <ButtonCancel
+              key="cancel"
+              redirect="/pitches" />,
+
+            <ButtonSave
               key="save"
               isDisabled={!NewPitchModel.isValid(newPitch)}
-              onClick={this.onSubmit}>
-              <IconSave className="icon" />
-              <span className="label">Save</span>
-            </Button>
+              onClick={this.onSubmit} />
           ]}
           onAddressChange={this.onAddressChange}
           onMinNumberOfPlayersChange={this.onMinNumberOfPlayersChange}
@@ -98,6 +79,6 @@ class NewPitch extends Component {
   }
 }
 
-export default bindActionsAndConnect(NewPitch, state => ({
+export default Container(NewPitch, state => ({
   newPitch: state.newPitch
 }));

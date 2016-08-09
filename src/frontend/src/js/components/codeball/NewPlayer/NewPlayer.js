@@ -1,17 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
-import { ROLE_STRING, ROLE_OPTIONS } from 'constants';
+import { ROLE_STRING } from 'constants';
+import { classNames } from 'utils';
 import { NewUserModel } from 'models';
+import { BaseComponent } from 'components/base';
 import { EditableText, Form, ValuePicker } from 'components/ui';
 import './NewPlayer.scss';
 
-export default class NewPlayer extends Component {
+class NewPlayer extends Component {
   static propTypes = {
     className: PropTypes.string,
-    email: PropTypes.string,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    role: PropTypes.string,
+    newUser: PropTypes.object.isRequired,
+    roleOptions: PropTypes.array.isRequired,
     onEmailChange: PropTypes.func.isRequired,
     onFirstNameChange: PropTypes.func.isRequired,
     onLastNameChange: PropTypes.func.isRequired,
@@ -22,10 +21,14 @@ export default class NewPlayer extends Component {
   render() {
     const {
       className,
-      email,
-      firstName,
-      lastName,
-      role,
+      newUser,
+      newUser: {
+        email,
+        firstName,
+        lastName,
+        role
+      },
+      roleOptions,
       onEmailChange,
       onFirstNameChange,
       onLastNameChange,
@@ -45,7 +48,7 @@ export default class NewPlayer extends Component {
             {
               label: 'First name',
               value: firstName,
-              isValid: NewUserModel.isFirstNameValid(firstName),
+              isValid: NewUserModel.isFirstNameValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -56,7 +59,7 @@ export default class NewPlayer extends Component {
             {
               label: 'Last name',
               value: lastName,
-              isValid: NewUserModel.isLastNameValid(lastName),
+              isValid: NewUserModel.isLastNameValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -67,7 +70,7 @@ export default class NewPlayer extends Component {
             {
               label: 'Email',
               value: email,
-              isValid: NewUserModel.isEmailValid(email),
+              isValid: NewUserModel.isEmailValid(newUser),
               component: (
                 <EditableText
                   isEditing={true}
@@ -78,11 +81,11 @@ export default class NewPlayer extends Component {
             {
               label: 'Role',
               value: ROLE_STRING[role],
-              isValid: NewUserModel.isRoleValid(role),
+              isValid: NewUserModel.isRoleValid(newUser),
               component: (
                 <ValuePicker
                   className="role-picker"
-                  options={ROLE_OPTIONS}
+                  options={roleOptions}
                   value={role}
                   onChange={onRoleChange} />
               )
@@ -92,3 +95,5 @@ export default class NewPlayer extends Component {
     );
   }
 }
+
+export default BaseComponent(NewPlayer);

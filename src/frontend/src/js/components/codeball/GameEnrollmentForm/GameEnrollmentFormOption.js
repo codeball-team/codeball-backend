@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import { classNames } from 'utils';
+import { BaseComponent } from 'components/base';
 import { Button } from 'components/ui';
 
-export default class GameEnrollmentFormOption extends Component {
+class GameEnrollmentFormOption extends Component {
   static propTypes = {
     className: PropTypes.string,
     inactive: PropTypes.bool,
@@ -38,3 +39,5 @@ export default class GameEnrollmentFormOption extends Component {
     );
   }
 }
+
+export default BaseComponent(GameEnrollmentFormOption);

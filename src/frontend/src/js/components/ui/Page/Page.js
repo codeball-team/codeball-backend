@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import Navigation from '../Navigation/Navigation';
+import { BaseComponent } from 'components/base';
+import { Navigation } from 'components/ui';
 import './Page.scss';
 
-export default class Page extends Component {
+class Page extends Component {
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.node.isRequired
   };
 
   static contextTypes = {
@@ -36,3 +37,5 @@ export default class Page extends Component {
     );
   }
 }
+
+export default BaseComponent(Page);

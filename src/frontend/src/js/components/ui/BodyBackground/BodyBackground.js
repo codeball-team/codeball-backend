@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { randomInteger } from 'utils';
+import { BaseComponent } from 'components/base';
 
-export default class BodyBackground extends Component {
+class BodyBackground extends Component {
   static propTypes = {
     images: PropTypes.array.isRequired
   };
@@ -23,3 +24,5 @@ export default class BodyBackground extends Component {
     );
   }
 }
+
+export default BaseComponent(BodyBackground);

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect, findById, refreshDataIfNecessary, safeGet } from 'utils';
-import { PERMISSION_EDIT_GAME_SCORE } from 'constants';
+import { findById, safeGet } from 'utils';
+import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
+import { Container } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
+import { GameNotLoaded } from 'components/codeball';
 
 export default function GenerateGame(getGameId) {
   class Game extends Component {
@@ -13,6 +15,7 @@ export default function GenerateGame(getGameId) {
       hasPermission: PropTypes.func.isRequired,
       params: PropTypes.object.isRequired,
       pitchesData: PropTypes.object.isRequired,
+      refreshDataIfNecessary: PropTypes.func.isRequired,
       usersData: PropTypes.object.isRequired
     };
 
@@ -53,6 +56,7 @@ export default function GenerateGame(getGameId) {
 
     updateData = props => {
       const {
+        refreshDataIfNecessary,
         actions: {
           gameLoad,
           pitchesLoad,
@@ -85,7 +89,8 @@ export default function GenerateGame(getGameId) {
           editedGame,
           game,
           isEditing,
-          isLoading: isGameLoading
+          isLoading: isGameLoading,
+          hasLoaded: hasGameLoaded
         },
         pitchesData: {
           pitches,
@@ -100,44 +105,47 @@ export default function GenerateGame(getGameId) {
       const { pitchId, teamA, teamB } = game;
       const pitch = findById(pitches, pitchId);
 
-      const isContentLoading = [
-        arePitchesLoading,
-        areUsersLoading,
-        isCurrentUserLoading,
-        isGameLoading
-      ].some(Boolean);
-
       return (
         <LoadableContent
-          isLoading={isContentLoading}
-          render={() => (
-            <section>
-              <GameScoreSection
-                title="Result"
-                canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
-                isEditable={true}
-                isEditing={isEditing}
-                pitch={pitch}
-                game={isEditing ? Object.assign({}, game, editedGame) : game}
-                onEdit={gameEdit}
-                onCancel={gameEditCancel}
-                onSave={this.onSave}
-                onEditGameScoreA={gameEditScoreA}
-                onEditGameScoreB={gameEditScoreB} />
+          isLoading={[
+            arePitchesLoading,
+            areUsersLoading,
+            isCurrentUserLoading,
+            isGameLoading
+          ]}>
+          <section>
+            <GameNotLoaded
+              renderWhen={!hasGameLoaded}
+              canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
 
-              <GameLineupSection
-                title="Lineups"
-                teamA={teamA}
-                teamB={teamB}
-                currentUser={currentUser}
-                users={users} />
-            </section>
-          )} />
+            <GameScoreSection
+              renderWhen={hasGameLoaded}
+              title="Result"
+              canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
+              isEditable={true}
+              isEditing={isEditing}
+              pitch={pitch}
+              game={isEditing ? Object.assign({}, game, editedGame) : game}
+              onEdit={gameEdit}
+              onCancel={gameEditCancel}
+              onSave={this.onSave}
+              onEditGameScoreA={gameEditScoreA}
+              onEditGameScoreB={gameEditScoreB} />
+
+            <GameLineupSection
+              renderWhen={hasGameLoaded}
+              title="Lineups"
+              teamA={teamA}
+              teamB={teamB}
+              currentUser={currentUser}
+              users={users} />
+          </section>
+        </LoadableContent>
       );
     }
   }
 
-  return bindActionsAndConnect(Game, state => ({
+  return Container(Game, state => ({
     currentUserData: state.currentUserData,
     gameData: state.gameData,
     pitchesData: state.pitchesData,
