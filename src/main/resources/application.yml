@@ -5,7 +5,7 @@ spring:
   application:
     index: index.html
   resources:
-    static-locations: classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
+    static-locations: classpath:/frontend/static/,classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
 
 security:
   basic:
