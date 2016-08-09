@@ -36,8 +36,8 @@ const NewGameModel = model({
   toServerFormat(newGameModel) {
     const { date, duration, hour, minute, pitchId } = newGameModel;
     const startTimestamp = moment(date)
-      .add('hours', hour)
-      .add('minutes', minute)
+      .add(hour, 'hours')
+      .add(minute, 'minutes')
       .valueOf();
 
     return {
