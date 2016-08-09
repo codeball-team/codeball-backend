@@ -4,7 +4,10 @@ import com.codeball.model.User;
 import com.codeball.model.UserRole;
 import com.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -69,8 +72,9 @@ public class ContextUtils {
 
     @SuppressWarnings("unchecked")
     private Map<String, String> getAuthenticationDetails(Principal principal) {
-        Object details = ((Authentication) principal).getDetails();
-        return ((Map<String, String>) details);
+        OAuth2Authentication oauth2Principal = (OAuth2Authentication) principal;
+        Authentication userAuthentication = oauth2Principal.getUserAuthentication();
+        return (Map<String, String>) userAuthentication.getDetails();
     }
 
 }
