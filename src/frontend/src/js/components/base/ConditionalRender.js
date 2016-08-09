@@ -5,7 +5,7 @@ export default function BaseComponent(ComponentClass) {
   return class EnhancedComponent extends Component {
     static propTypes = {
       renderWhen: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.bool),
+        PropTypes.array,
         PropTypes.bool
       ])
     };
