@@ -1,5 +1,5 @@
 codeball:
-  authorizationDomain: gmail.com
+  authorizationDomain:
 
 spring:
   application:
@@ -18,7 +18,7 @@ security:
       clientId: 645433820383-ks9c1u94qujptei3n7v6tuas2k4m9l1u.apps.googleusercontent.com
       clientSecret: QycJ9l6BRJvKtiuJJGPfLiS2
       accessTokenUri: https://accounts.google.com/o/oauth2/token
-      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth?hd=${codeball.authorizationDomain}
       authenticationScheme: query
       clientAuthenticationScheme: query
       scope: profile email
