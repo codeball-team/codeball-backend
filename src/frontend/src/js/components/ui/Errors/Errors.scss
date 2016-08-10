@@ -10,10 +10,8 @@
   max-width: 800px;
   margin: 0 auto;
   overflow: auto;
-  background-color: $darken-color;
   color: $fg-color;
   padding: $spacing-l 0;
-  box-shadow: $shadow;
 
   &:empty {
     padding: 0;
@@ -23,7 +21,8 @@
     background-color: $bg-color-danger;
     position: relative;
     padding: $spacing-l;
-    margin: $spacing-l;
+    margin: $spacing-l 0;
+    box-shadow: $shadow;
 
     &:first-child {
       margin-top: 0;
