@@ -28,12 +28,12 @@ import {
 export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
   return ajax(() => ({
     request: request('PUT', gameEnrollmentUrl(gameId))
-      .set('Content-Type', 'application/json')
       .send(`"${enrollmentStatus}"`),
+    json: true,
     startAction: GAME_CHANGE_ENROLLMENT_STATUS,
     successAction: GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
     failureAction: GAME_CHANGE_ENROLLMENT_STATUS_FAILURE,
-    params: {
+    actionsData: {
       gameId,
       userId,
       enrollmentStatus
@@ -43,12 +43,12 @@ export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
 
 export function gameCloseEnrollment(gameId) {
   return ajax(() => ({
-    request: request('PUT', gameCloseEnrollmentUrl(gameId))
-      .set('Content-Type', 'application/json'),
+    request: request('PUT', gameCloseEnrollmentUrl(gameId)),
+    json: true,
     startAction: GAME_CLOSE_ENROLLMENT,
     successAction: GAME_CLOSE_ENROLLMENT_SUCCESS,
     failureAction: GAME_CLOSE_ENROLLMENT_FAILURE,
-    params: {
+    actionsData: {
       gameId
     }
   }));
@@ -56,12 +56,12 @@ export function gameCloseEnrollment(gameId) {
 
 export function gameDrawTeams(gameId) {
   return ajax(() => ({
-    request: request('PUT', gameDrawTeamsUrl(gameId))
-      .set('Content-Type', 'application/json'),
+    request: request('PUT', gameDrawTeamsUrl(gameId)),
+    json: true,
     startAction: GAME_DRAW_TEAMS,
     successAction: GAME_DRAW_TEAMS_SUCCESS,
     failureAction: GAME_DRAW_TEAMS_FAILURE,
-    params: {
+    actionsData: {
       gameId
     }
   }));
@@ -121,8 +121,8 @@ export function gameEnrollUserReset() {
 export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
   return ajax(dispatch => ({
     request: request('PUT', gameEnrollmentUrl(gameId, userId))
-      .set('Content-Type', 'application/json')
       .send(`"${enrollmentStatus}"`),
+    json: true,
     startAction: GAME_ENROLL_USER_SUBMIT,
     successAction: GAME_ENROLL_USER_SUBMIT_SUCCESS,
     failureAction: GAME_ENROLL_USER_SUBMIT_FAILURE,
@@ -135,28 +135,28 @@ export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
 export function gameEnd(gameId) {
   return ajax(dispatch => ({
     request: request('PUT', gameAdminUrl(gameId))
-      .set('Content-Type', 'application/json')
       .send({ isGameOver: true }),
+    json: true,
     startAction: GAME_END,
     successAction: GAME_END_SUCCESS,
     failureAction: GAME_END_FAILURE,
+    actionsData: {
+      gameId
+    },
     successCallback: () => {
       dispatch(push(`/games/previous/${gameId}`));
-    },
-    params: {
-      gameId
     }
   }));
 }
 
 export function gameLoad(gameId) {
   return ajax(() => ({
-    request: request('GET', gameUrl(gameId))
-      .set('Content-Type', 'application/json'),
+    request: request('GET', gameUrl(gameId)),
+    json: true,
     startAction: GAME_LOAD,
     successAction: GAME_LOAD_SUCCESS,
     failureAction: GAME_LOAD_FAILURE,
-    params: {
+    actionsData: {
       gameId
     }
   }));
@@ -165,8 +165,8 @@ export function gameLoad(gameId) {
 export function gameSave(gameId, data) {
   return ajax(() => ({
     request: request('PUT', gameUrl(gameId))
-      .set('Content-Type', 'application/json')
       .send(data),
+    json: true,
     startAction: GAME_SAVE,
     successAction: GAME_SAVE_SUCCESS,
     failureAction: GAME_SAVE_FAILURE
@@ -176,8 +176,8 @@ export function gameSave(gameId, data) {
 export function gameSetScore(gameId, teamAScore, teamBScore) {
   return ajax(() => ({
     request: request('PUT', gameSetScoreUrl(gameId))
-      .set('Content-Type', 'application/json')
       .send({ teamAScore, teamBScore }),
+    json: true,
     startAction: GAME_SET_SCORE,
     successAction: GAME_SET_SCORE_SUCCESS,
     failureAction: GAME_SET_SCORE_FAILURE
@@ -186,8 +186,8 @@ export function gameSetScore(gameId, teamAScore, teamBScore) {
 
 export function gamesLoad() {
   return ajax(() => ({
-    request: request('GET', gamesUrl())
-      .set('Content-Type', 'application/json'),
+    request: request('GET', gamesUrl()),
+    json: true,
     startAction: GAMES_LOAD,
     successAction: GAMES_LOAD_SUCCESS,
     failureAction: GAMES_LOAD_FAILURE

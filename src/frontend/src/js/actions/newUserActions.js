@@ -48,8 +48,8 @@ export function newUserSubmit(newUser) {
   const data = NewUserModel.toServerFormat(newUser);
   return ajax(dispatch => ({
     request: request('POST', userAdminUrl())
-      .set('Content-Type', 'application/json')
       .send(JSON.stringify(data)),
+    json: true,
     startAction: NEW_USER_SUBMIT,
     successAction: NEW_USER_SUBMIT_SUCCESS,
     failureAction: NEW_USER_SUBMIT_FAILURE,

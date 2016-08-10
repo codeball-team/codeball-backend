@@ -5,8 +5,8 @@ import { usersUrl } from 'constants';
 
 export function usersLoad() {
   return ajax(() => ({
-    request: request('GET', usersUrl())
-      .set('Content-Type', 'application/json'),
+    request: request('GET', usersUrl()),
+    json: true,
     startAction: USERS_LOAD,
     successAction: USERS_LOAD_SUCCESS,
     failureAction: USERS_LOAD_FAILURE

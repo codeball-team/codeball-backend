@@ -55,8 +55,8 @@ export function newPitchSubmit(newPitch) {
   const data = NewPitchModel.toServerFormat(newPitch);
   return ajax(dispatch => ({
     request: request('POST', pitchAdminUrl())
-      .set('Content-Type', 'application/json')
       .send(JSON.stringify(data)),
+    json: true,
     startAction: NEW_PITCH_SUBMIT,
     successAction: NEW_PITCH_SUBMIT_SUCCESS,
     failureAction: NEW_PITCH_SUBMIT_FAILURE,

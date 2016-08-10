@@ -1,7 +1,11 @@
 import { _, now, safeGet } from 'utils';
 import { AJAX_START, AJAX_SUCCESS, AJAX_FAILURE } from 'constants/actionTypes';
 
-export default function ajax(getOptions) {
+const requestOptionsHandlers = {
+  json: request => request.set('Content-Type', 'application/json')
+};
+
+export default function ajax(getParams) {
   return dispatch => {
     const {
       request,
@@ -10,13 +14,16 @@ export default function ajax(getOptions) {
       failureAction,
       successCallback,
       failureCallback,
-      params
+      actionsData = {},
+      ...options
     } = {
       successCallback: _.noop,
       failureCallback: _.noop,
-      ...getOptions(dispatch)
+      ...getParams(dispatch)
     };
     const time = now();
+
+    applyRequestOptions(request, options);
 
     request.end((error, response = {}) => {
       const [title, message] = safeGet(error, ['message'], '').split('\n');
@@ -27,6 +34,7 @@ export default function ajax(getOptions) {
       if (error || !response.ok) {
         dispatch({
           type: failureAction,
+          ...actionsData,
           time,
           response: body
         });
@@ -38,6 +46,7 @@ export default function ajax(getOptions) {
       } else {
         dispatch({
           type: successAction,
+          ...actionsData,
           time,
           response
         });
@@ -48,11 +57,18 @@ export default function ajax(getOptions) {
 
     dispatch({
       type: startAction,
-      ...(params || {})
+      ...actionsData
     });
 
     dispatch({ type: AJAX_START });
 
     return request;
   };
+}
+
+function applyRequestOptions(request, options) {
+  return _(options).reduce(
+    (enhancedRequest, value, key) => requestOptionsHandlers[key](enhancedRequest, value),
+    request
+  );
 }
