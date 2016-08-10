@@ -1,4 +1,5 @@
-import { isInRange, model, moment, unixToJavaTimestamp } from 'utils';
+import { model, moment, unixToJavaTimestamp } from 'utils';
+import { isId, isInRange, isInteger, isPositiveInteger } from 'utils/validation';
 
 const NewGameModel = model({
   defaultAttributes: () => ({
@@ -8,13 +9,14 @@ const NewGameModel = model({
     minute: 0,
     pitchId: undefined
   }),
+
   validators: {
     isDateValid({ date }) {
-      return Number.isInteger(date);
+      return isPositiveInteger(date);
     },
 
     isDurationValid({ duration }) {
-      return Number.isInteger(duration) && duration > 0;
+      return isPositiveInteger(duration);
     },
 
     isStartTimeValid({ hour, minute }) {
@@ -22,17 +24,18 @@ const NewGameModel = model({
     },
 
     isHourValid({ hour }) {
-      return Number.isInteger(hour) && isInRange(hour, 0, 23);
+      return isInteger(hour) && isInRange(hour, 0, 23);
     },
 
     isMinuteValid({ minute }) {
-      return Number.isInteger(minute) && isInRange(minute, 0, 59);
+      return isInteger(minute) && isInRange(minute, 0, 59);
     },
 
     isPitchIdValid({ pitchId }) {
-      return Number.isInteger(pitchId);
+      return isId(pitchId);
     }
   },
+
   toServerFormat(newGameModel) {
     const { date, duration, hour, minute, pitchId } = newGameModel;
     const startTimestamp = moment(date)

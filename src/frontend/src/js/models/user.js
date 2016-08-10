@@ -9,6 +9,7 @@ const UserModel = model({
     pictureUrl: undefined,
     role: undefined
   }),
+
   fromServerFormat(serverResponse) {
     if (!serverResponse) {
       return new UserModel();

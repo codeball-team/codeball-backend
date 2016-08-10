@@ -1,4 +1,5 @@
 import { model } from 'utils';
+import { isNotEmptyString } from 'utils/validation';
 import { ROLES } from 'constants';
 
 const NewUserModel = model({
@@ -8,23 +9,25 @@ const NewUserModel = model({
     lastName: undefined,
     role: undefined
   }),
+
   validators: {
     isEmailValid({ email }) {
-      return typeof email === 'string' && email.length > 0;
+      return isNotEmptyString(email);
     },
 
     isFirstNameValid({ firstName }) {
-      return typeof firstName === 'string' && firstName.length > 0;
+      return isNotEmptyString(firstName);
     },
 
     isLastNameValid({ lastName }) {
-      return typeof lastName === 'string' && lastName.length > 0;
+      return isNotEmptyString(lastName);
     },
 
     isRoleValid({ role }) {
       return ROLES.includes(role);
     }
   },
+
   toServerFormat(newUserModel) {
     const { email, firstName, lastName, role } = newUserModel;
 

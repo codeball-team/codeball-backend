@@ -1,4 +1,5 @@
 import { model } from 'utils';
+import { isInteger, isNotEmptyString } from 'utils/validation';
 
 const NewPitchModel = model({
   defaultAttributes: () => ({
@@ -8,9 +9,10 @@ const NewPitchModel = model({
     name: undefined,
     type: undefined
   }),
+
   validators: {
     isAddressValid({ address }) {
-      return typeof address === 'string' && address.length > 0;
+      return isNotEmptyString(address);
     },
 
     isCapacityValid({ minNumberOfPlayers, maxNumberOfPlayers }) {
@@ -22,21 +24,22 @@ const NewPitchModel = model({
     },
 
     isMinNumberOfPlayersValid({ minNumberOfPlayers }) {
-      return Number.isInteger(minNumberOfPlayers) && minNumberOfPlayers >= 2;
+      return isInteger(minNumberOfPlayers) && minNumberOfPlayers >= 2;
     },
 
     isMaxNumberOfPlayersValid({ maxNumberOfPlayers }) {
-      return Number.isInteger(maxNumberOfPlayers) && maxNumberOfPlayers <= 22;
+      return isInteger(maxNumberOfPlayers) && maxNumberOfPlayers <= 22;
     },
 
     isNameValid({ name }) {
-      return typeof name === 'string' && name.length > 0;
+      return isNotEmptyString(name);
     },
 
     isTypeValid({ type }) {
-      return typeof type === 'string' && type.length > 0;
+      return isNotEmptyString(type);
     }
   },
+
   toServerFormat(newPitchModel) {
     const { address, minNumberOfPlayers, maxNumberOfPlayers, name, type } = newPitchModel;
 

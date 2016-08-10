@@ -1,8 +1,8 @@
+import { _, javaToUnixTimestamp, model, moment } from 'utils';
 import {
   ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO,
   DATE_FORMAT, TIME_FORMAT
 } from 'constants';
-import { _, javaToUnixTimestamp, model, moment } from 'utils';
 
 const GameModel = model({
   defaultAttributes: () => ({
@@ -23,6 +23,7 @@ const GameModel = model({
     teamB: [],
     teamBScore: undefined
   }),
+
   fromServerFormat(serverResponse) {
     if (!serverResponse) {
       return new GameModel();

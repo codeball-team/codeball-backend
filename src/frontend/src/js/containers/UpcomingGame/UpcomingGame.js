@@ -124,6 +124,9 @@ export default function GenerateUpcomingGame(getGameId) {
         },
         currentUserData: {
           currentUser,
+          currentUser: {
+            id: userId
+          },
           isLoading: isCurrentUserLoading
         },
         enrollUser,
@@ -153,7 +156,6 @@ export default function GenerateUpcomingGame(getGameId) {
         }
       } = this.props;
 
-      const { id: userId } = currentUser;
       const pitch = findById(pitches, pitchId);
       const pitchModel = new PitchModel(pitch);
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;

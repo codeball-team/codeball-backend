@@ -1,4 +1,5 @@
 import { model } from 'utils';
+import { isInteger } from 'utils/validation';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 
 const EnrollUserModel = model({
@@ -6,9 +7,10 @@ const EnrollUserModel = model({
     userId: undefined,
     enrollmentStatus: ENROLLMENT_STATUS_YES
   }),
+
   validators: {
     isUserIdValid({ userId }) {
-      return Number.isInteger(userId);
+      return isInteger(userId);
     }
   }
 });

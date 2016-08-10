@@ -51,6 +51,7 @@ export default function GenerateGame(getGameId) {
           }
         }
       } = this.props;
+
       gameSetScore(gameId, teamAScore, teamBScore);
     }
 
@@ -88,6 +89,11 @@ export default function GenerateGame(getGameId) {
         gameData: {
           editedGame,
           game,
+          game: {
+            pitchId,
+            teamA,
+            teamB
+          },
           isEditing,
           isLoading: isGameLoading,
           hasLoaded: hasGameLoaded
@@ -102,7 +108,6 @@ export default function GenerateGame(getGameId) {
         }
       } = this.props;
 
-      const { pitchId, teamA, teamB } = game;
       const pitch = findById(pitches, pitchId);
 
       return (

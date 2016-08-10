@@ -10,6 +10,7 @@ const PitchModel = model({
     minNumberOfPlayers: 0,
     maxNumberOfPlayers: 0
   }),
+
   fromServerFormat(serverResponse) {
     if (!serverResponse) {
       return new PitchModel();
