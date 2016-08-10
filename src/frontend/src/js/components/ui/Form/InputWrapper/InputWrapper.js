@@ -9,18 +9,18 @@ class InputWrapper extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    displayValue: PropTypes.string,
     isValid: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string
+    label: PropTypes.string.isRequired
   };
 
   render() {
     const {
       children,
       className,
+      displayValue,
       isValid,
-      label,
-      value
+      label
     } = this.props;
 
     return (
@@ -31,7 +31,7 @@ class InputWrapper extends Component {
         )}>
         <div className="label">
           <div className="title">
-            {label}<Value renderWhen={isValid} value={value} />
+            {label}<Value renderWhen={isValid} value={displayValue} />
           </div>
 
           <div

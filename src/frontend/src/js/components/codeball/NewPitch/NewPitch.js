@@ -54,7 +54,7 @@ class NewPitch extends Component {
           inputs={[
             {
               label: 'Name',
-              value: name,
+              displayValue: name,
               isValid: NewPitchModel.isNameValid(newPitch),
               component: (
                 <EditableText
@@ -65,7 +65,7 @@ class NewPitch extends Component {
             },
             {
               label: 'Address',
-              value: address,
+              displayValue: address,
               isValid: NewPitchModel.isAddressValid(newPitch),
               component: (
                 <EditableText
@@ -76,7 +76,7 @@ class NewPitch extends Component {
             },
             {
               label: 'Pitch type',
-              value: PITCH_TYPE_STRING[type],
+              displayValue: PITCH_TYPE_STRING[type],
               isValid: NewPitchModel.isTypeValid(newPitch),
               component: (
                 <ValuePicker
@@ -87,7 +87,7 @@ class NewPitch extends Component {
             },
             {
               label: 'Capacity',
-              value: capacity,
+              displayValue: capacity,
               isValid: NewPitchModel.isCapacityValid(newPitch),
               component: (
                 <RangePicker

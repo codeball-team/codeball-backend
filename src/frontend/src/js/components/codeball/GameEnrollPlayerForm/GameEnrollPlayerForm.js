@@ -45,7 +45,7 @@ class GameEnrollPlayerForm extends Component {
           inputs={[
             {
               label: 'Player',
-              value: findLabelByValue(usersOptions, userId),
+              displayValue: findLabelByValue(usersOptions, userId),
               isValid: EnrollUserModel.isUserIdValid(enrollUser),
               component: (
                 <Select

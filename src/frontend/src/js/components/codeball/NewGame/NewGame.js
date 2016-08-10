@@ -66,7 +66,7 @@ class NewGame extends Component {
           inputs={[
             {
               label: 'Pitch',
-              value: findLabelByValue(pitchesOptions, pitchId),
+              displayValue: findLabelByValue(pitchesOptions, pitchId),
               isValid: NewGameModel.isPitchIdValid(newGame),
               component: (
                 <Select
@@ -81,7 +81,7 @@ class NewGame extends Component {
             },
             {
               label: 'Duration',
-              value: findLabelByValue(DURATION_OPTIONS, duration),
+              displayValue: findLabelByValue(DURATION_OPTIONS, duration),
               isValid: NewGameModel.isDurationValid(newGame),
               component: (
                 <ValuePicker
@@ -92,7 +92,7 @@ class NewGame extends Component {
             },
             {
               label: 'Start time',
-              value: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
+              displayValue: `${padLeft(hour, 2)}:${padLeft(minute, 2)}`,
               isValid: NewGameModel.isStartTimeValid(newGame),
               component: (
                 <RangePicker
@@ -109,7 +109,7 @@ class NewGame extends Component {
             },
             {
               label: 'Start date',
-              value: selectedStartDate.format(DATE_FORMAT),
+              displayValue: selectedStartDate.format(DATE_FORMAT),
               isValid: NewGameModel.isDateValid(newGame),
               component: (
                 <Calendar

@@ -47,7 +47,7 @@ class NewPlayer extends Component {
           inputs={[
             {
               label: 'First name',
-              value: firstName,
+              displayValue: firstName,
               isValid: NewUserModel.isFirstNameValid(newUser),
               component: (
                 <EditableText
@@ -58,7 +58,7 @@ class NewPlayer extends Component {
             },
             {
               label: 'Last name',
-              value: lastName,
+              displayValue: lastName,
               isValid: NewUserModel.isLastNameValid(newUser),
               component: (
                 <EditableText
@@ -69,7 +69,7 @@ class NewPlayer extends Component {
             },
             {
               label: 'Email',
-              value: email,
+              displayValue: email,
               isValid: NewUserModel.isEmailValid(newUser),
               component: (
                 <EditableText
@@ -80,7 +80,7 @@ class NewPlayer extends Component {
             },
             {
               label: 'Role',
-              value: ROLE_STRING[role],
+              displayValue: ROLE_STRING[role],
               isValid: NewUserModel.isRoleValid(newUser),
               component: (
                 <ValuePicker

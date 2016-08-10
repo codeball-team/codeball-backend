@@ -35,11 +35,11 @@ class Form extends Component {
           className
         )}>
         <div className="inputs">
-          {visibleInputs.map(({ label, value, isValid, component }, index) => (
+          {visibleInputs.map(({ label, displayValue, isValid, component }, index) => (
             <InputWrapper
               key={index}
               label={label}
-              value={value}
+              displayValue={displayValue}
               isValid={isValid}>
               {component}
             </InputWrapper>
