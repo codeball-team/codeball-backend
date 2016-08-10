@@ -6,7 +6,7 @@ import {
   ENROLLMENT_STATUS_YES
 } from 'constants';
 import { EnrollUserModel, PitchModel } from 'models';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { ButtonSave, ButtonShuffle, LoadableContent } from 'components/ui';
 import {
   GameEnrollmentSection, GameEnrollmentFormSection, GameEnrollPlayerFormSection,
@@ -269,7 +269,7 @@ export default function GenerateUpcomingGame(getGameId) {
     }
   }
 
-  return Container(UpcomingGame, state => ({
+  return ContainerComponent(UpcomingGame, state => ({
     currentUserData: state.currentUserData,
     enrollUser: state.enrollUser,
     gameData: state.gameData,

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { Errors } from 'components/ui';
 
 class AjaxErrors extends Component {
@@ -24,6 +24,6 @@ class AjaxErrors extends Component {
   }
 }
 
-export default Container(AjaxErrors, state => ({
+export default ContainerComponent(AjaxErrors, state => ({
   errors: state.ajaxRequests.errors
 }));

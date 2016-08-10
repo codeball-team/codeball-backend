@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { findById, safeGet } from 'utils';
 import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
@@ -150,7 +150,7 @@ export default function GenerateGame(getGameId) {
     }
   }
 
-  return Container(Game, state => ({
+  return ContainerComponent(Game, state => ({
     currentUserData: state.currentUserData,
     gameData: state.gameData,
     pitchesData: state.pitchesData,

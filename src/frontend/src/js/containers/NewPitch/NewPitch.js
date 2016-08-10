@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_PITCH } from 'constants';
 import { NewPitchModel } from 'models';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { NewPitchSection } from 'components/sections';
 import { ButtonCancel, ButtonSave } from 'components/ui';
 
@@ -79,6 +79,6 @@ class NewPitch extends Component {
   }
 }
 
-export default Container(NewPitch, state => ({
+export default ContainerComponent(NewPitch, state => ({
   newPitch: state.newPitch
 }));

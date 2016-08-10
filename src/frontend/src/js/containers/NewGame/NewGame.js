@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { _ } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
 import { NewGameModel } from 'models';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { ButtonCancel, ButtonSave, LoadableContent } from 'components/ui';
 import { NewGameSection } from 'components/sections';
 
@@ -100,7 +100,7 @@ class NewGame extends Component {
   }
 }
 
-export default Container(NewGame, state => ({
+export default ContainerComponent(NewGame, state => ({
   newGame: state.newGame,
   pitchesData: state.pitchesData
 }));

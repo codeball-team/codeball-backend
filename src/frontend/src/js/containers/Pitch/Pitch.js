@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_PITCH } from 'constants';
 import { findById, safeGet } from 'utils';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 import { PitchNotLoaded } from 'components/codeball';
@@ -64,6 +64,6 @@ class Pitch extends Component {
   }
 }
 
-export default Container(Pitch, state => ({
+export default ContainerComponent(Pitch, state => ({
   pitchesData: state.pitchesData
 }));

@@ -1,12 +1,14 @@
 import ConditionalRender from './ConditionalRender';
-import shallowCompare from 'react-addons-shallow-compare';
+import PureRenderComponent from './PureRenderComponent';
+
+const baseDecorators = [
+  ConditionalRender,
+  PureRenderComponent
+];
 
 export default function BaseComponent(ComponentClass) {
-  const BaseComponentClass = ConditionalRender(ComponentClass);
-
-  BaseComponentClass.prototype.shouldComponentUpdate = function(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
-  };
-
-  return BaseComponentClass;
+  return baseDecorators.reduce(
+    (BaseComponentClass, decorator) => decorator(BaseComponentClass),
+    ComponentClass
+  );
 }

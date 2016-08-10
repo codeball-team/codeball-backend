@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_USER, ROLE_OPTIONS } from 'constants';
 import { NewUserModel } from 'models';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { NewPlayerSection } from 'components/sections';
 import { ButtonCancel, ButtonSave } from 'components/ui';
 
@@ -76,6 +76,6 @@ class NewPlayer extends Component {
   }
 }
 
-export default Container(NewPlayer, state => ({
+export default ContainerComponent(NewPlayer, state => ({
   newUser: state.newUser
 }));

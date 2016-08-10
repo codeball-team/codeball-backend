@@ -1,3 +1,4 @@
 export BaseComponent from './BaseComponent';
 export ConditionalRender from './ConditionalRender';
-export Container from './Container';
+export ContainerComponent from './ContainerComponent';
+export PureRenderComponent from './PureRenderComponent';

@@ -4,7 +4,7 @@ import { DATA_INVALIDATION_TIME, ROLE_USER, ROLES_PERMISSIONS } from 'constants'
 import { isDataInvalidated, safeGet } from 'utils';
 import * as actions from 'actions';
 
-export default function Container(ComponentClass, mapStateToProps) {
+export default function ContainerComponent(ComponentClass, mapStateToProps) {
   return connect(
     enhancePropsWithHasPermissions(mapStateToProps),
     mapDispatchToProps

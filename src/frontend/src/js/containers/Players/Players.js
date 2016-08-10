@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_USER } from 'constants';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { PlayersListSection } from 'components/sections';
 import { ButtonAddPlayer } from 'components/codeball';
@@ -56,7 +56,7 @@ class Players extends Component {
   }
 }
 
-export default Container(Players, state => ({
+export default ContainerComponent(Players, state => ({
   currentUserData: state.currentUserData,
   usersData: state.usersData
 }));

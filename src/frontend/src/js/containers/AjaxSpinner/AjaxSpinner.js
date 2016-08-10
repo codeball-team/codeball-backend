@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { Spinner } from 'components/ui';
 
 class AjaxSpinner extends Component {
@@ -18,6 +18,6 @@ class AjaxSpinner extends Component {
   }
 }
 
-export default Container(AjaxSpinner, state => ({
+export default ContainerComponent(AjaxSpinner, state => ({
   ajaxRequests: state.ajaxRequests
 }));

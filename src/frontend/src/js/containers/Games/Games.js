@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { Container } from 'components/base';
+import { ContainerComponent } from 'components/base';
 import { LoadableContent } from 'components/ui';
 import { GamesListSection } from 'components/sections';
 import { ButtonAddGame } from 'components/codeball';
@@ -86,7 +86,7 @@ class Games extends Component {
   }
 }
 
-export default Container(Games, state => ({
+export default ContainerComponent(Games, state => ({
   gamesData: state.gamesData,
   pitchesData: state.pitchesData,
   usersData: state.usersData
