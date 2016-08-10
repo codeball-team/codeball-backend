@@ -130,18 +130,19 @@ export default function GenerateUpcomingGame(getGameId) {
           isLoading: isCurrentUserLoading
         },
         enrollUser,
+        enrollUser: {
+          isEditing: isEnrollUserEditing
+        },
         gameData: {
+          game,
           game: {
-            date,
-            duration,
             enrolledUsers,
             enrolledUsersIds,
             isEnrollmentOver,
             isGameOver,
             pitchId,
             teamA,
-            teamB,
-            time
+            teamB
           },
           isLoading: isGameLoading,
           hasLoaded: hasGameLoaded
@@ -158,6 +159,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
       const pitch = findById(pitches, pitchId);
       const pitchModel = new PitchModel(pitch);
+      const { name: pitchName } = pitchModel;
       const numberOfEnrolledPlayers = enrolledUsers[ENROLLMENT_STATUS_YES].length;
       const selectedEnrollmentStatus = _(enrolledUsers).reduce(
         (enrollmentStatus, userIds, status) => (userIds.includes(userId) ? status : enrollmentStatus),
@@ -165,7 +167,6 @@ export default function GenerateUpcomingGame(getGameId) {
       );
       const unenrolledUsers = _(users).values()
         .filter(({ id }) => !enrolledUsersIds.includes(id));
-      const { isEditing: isEnrollUserEditing } = enrollUser;
 
       return (
         <LoadableContent
@@ -182,10 +183,8 @@ export default function GenerateUpcomingGame(getGameId) {
 
             <GameInfoSection
               renderWhen={hasGameLoaded}
-              title={pitchModel.name}
-              date={date}
-              time={time}
-              duration={duration}
+              title={pitchName}
+              game={game}
               pitch={pitchModel}
               buttons={[
                 <ButtonSave

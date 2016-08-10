@@ -8,19 +8,19 @@ import './GameInfo.scss';
 class GameInfo extends Component {
   static propTypes = {
     className: PropTypes.string,
-    date: PropTypes.string.isRequired,
-    duration: PropTypes.number.isRequired,
-    pitch: PropTypes.object.isRequired,
-    time: PropTypes.string.isRequired
+    game: PropTypes.object.isRequired,
+    pitch: PropTypes.object.isRequired
   };
 
   render() {
     const {
       className,
-      date,
-      duration,
-      pitch,
-      time
+      game: {
+        date,
+        duration,
+        time
+      },
+      pitch
     } = this.props;
 
     return (
