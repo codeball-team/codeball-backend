@@ -8,6 +8,6 @@ Location: `src/frontend/`
 
 `npm run build:windows` will produce a clean build in `src\frontend\build\`
 ### Development server
-`npm start` will start a server at `localhost:8008`
+`npm start` will start a server at `http://localhost:8008`
 ### ESLint
 `npm run lint`
