@@ -30,7 +30,7 @@ development:
   dataInitializer:
     enabled: true
   securityContext:
-    enabled: false
+    enabled: true
   user:
     email: development@codeball.com
     firstName: Codeball

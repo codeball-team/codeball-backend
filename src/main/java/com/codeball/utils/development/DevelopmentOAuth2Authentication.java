@@ -4,12 +4,24 @@ import com.codeball.utils.ContextUtils;
 import com.google.common.collect.Maps;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 
 import java.security.Principal;
 import java.util.Collection;
 import java.util.Map;
 
-public class DevelopmentAuthentication implements Authentication, Principal {
+public class DevelopmentOAuth2Authentication extends OAuth2Authentication {
+
+    private static OAuth2Request mockRequest = new OAuth2Request(null, null, null, true, null, null, null, null, null);
+
+    public DevelopmentOAuth2Authentication(DevelopmentProperties developmentProperties) {
+        super(mockRequest, new DevelopmentAuthentication(developmentProperties));
+    }
+
+}
+
+class DevelopmentAuthentication implements Authentication, Principal {
 
     private DevelopmentProperties.User developmentUserProperties;
 

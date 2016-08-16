@@ -5,6 +5,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -28,10 +30,8 @@ public class DevelopmentSecurityContextFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         DevelopmentProperties.SecurityContext developmentSecurityContext = developmentProperties.getSecurityContext();
         if (developmentSecurityContext.isEnabled()) {
-            DevelopmentAuthentication developmentAuthentication = new DevelopmentAuthentication(developmentProperties);
-
             SecurityContext springSecurityContext = SecurityContextHolder.getContext();
-            springSecurityContext.setAuthentication(developmentAuthentication);
+            springSecurityContext.setAuthentication(new DevelopmentOAuth2Authentication(developmentProperties));
             ((HttpServletRequest) request).getSession(true).setAttribute(SPRING_SECURITY_CONTEXT_ATTRIBUTE, springSecurityContext);
         }
 
