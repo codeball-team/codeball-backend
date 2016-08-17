@@ -10,17 +10,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Objects;
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
-public class DevelopmentSecurityContextFilter implements Filter {
-
-    private static final String SPRING_SECURITY_CONTEXT_ATTRIBUTE = "SPRING_SECURITY_CONTEXT";
+@Order(Ordered.LOWEST_PRECEDENCE)
+public class UserRegistrationFilter implements Filter {
 
     @Autowired
-    private DevelopmentProperties developmentProperties;
+    private SecurityContextUtils securityContextUtils;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,12 +27,9 @@ public class DevelopmentSecurityContextFilter implements Filter {
     @Override
     @Transactional
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        DevelopmentProperties.SecurityContext developmentSecurityContext = developmentProperties.getSecurityContext();
-        if (developmentSecurityContext.isEnabled()) {
-            SecurityContext springSecurityContext = SecurityContextHolder.getContext();
-            springSecurityContext.setAuthentication(new DevelopmentOAuth2Authentication(developmentProperties));
-            httpRequest.getSession(true).setAttribute(SPRING_SECURITY_CONTEXT_ATTRIBUTE, springSecurityContext);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        if (Objects.nonNull(securityContext.getAuthentication())) {
+            securityContextUtils.createUserIfNotExists(securityContext.getAuthentication());
         }
 
         chain.doFilter(request, response);

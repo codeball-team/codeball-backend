@@ -1,6 +1,6 @@
 package com.codeball.utils.development;
 
-import com.codeball.utils.ContextUtils;
+import com.codeball.utils.SecurityContextUtils;
 import com.google.common.collect.Maps;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,11 +42,11 @@ class DevelopmentAuthentication implements Authentication, Principal {
     @Override
     public Object getDetails() {
         Map<String, String> details = Maps.newHashMap();
-        details.put(ContextUtils.AUTH_DETAILS_EMAIL, developmentUserProperties.getEmail());
-        details.put(ContextUtils.AUTH_DETAILS_GIVEN_NAME, developmentUserProperties.getFirstName());
-        details.put(ContextUtils.AUTH_DETAILS_FAMILY_NAME, developmentUserProperties.getLastName());
-        details.put(ContextUtils.AUTH_DETAILS_PICTURE, developmentUserProperties.getPictureUrl());
-        details.put(ContextUtils.AUTH_DETAILS_ROLE, developmentUserProperties.getRole().name());
+        details.put(SecurityContextUtils.AUTH_DETAILS_EMAIL, developmentUserProperties.getEmail());
+        details.put(SecurityContextUtils.AUTH_DETAILS_GIVEN_NAME, developmentUserProperties.getFirstName());
+        details.put(SecurityContextUtils.AUTH_DETAILS_FAMILY_NAME, developmentUserProperties.getLastName());
+        details.put(SecurityContextUtils.AUTH_DETAILS_PICTURE, developmentUserProperties.getPictureUrl());
+        details.put(SecurityContextUtils.AUTH_DETAILS_ROLE, developmentUserProperties.getRole().name());
         return details;
     }
 

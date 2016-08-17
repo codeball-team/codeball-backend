@@ -3,7 +3,7 @@ package com.codeball.controllers;
 import com.codeball.exceptions.EnrollmentOverException;
 import com.codeball.exceptions.ResourceNotFoundException;
 import com.codeball.model.requests.GameScoreRequest;
-import com.codeball.utils.ContextUtils;
+import com.codeball.utils.SecurityContextUtils;
 import com.codeball.exceptions.GameOverException;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
@@ -17,8 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -34,7 +32,7 @@ public class GameController {
     private TeamAssigner teamAssigner;
 
     @Autowired
-    private ContextUtils contextUtils;
+    private SecurityContextUtils securityContextUtils;
 
     @RequestMapping(value = "/last", method = RequestMethod.GET)
     public Game getLastGame() {
@@ -70,15 +68,14 @@ public class GameController {
 
     @Transactional
     @RequestMapping(value = "/{id}/enrollment", method = RequestMethod.PUT)
-    public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
-        User currentUser = contextUtils.getUser(principal);
-        return setEnrollmentStatus(principal, gameId, currentUser.getId(), status);
+    public Game setEnrollmentStatus(@PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
+        return setEnrollmentStatus(gameId, securityContextUtils.getCurrentUserId(), status);
     }
 
     @Transactional
     @RequestMapping(value = "/{id}/enrollment/{userId}", method = RequestMethod.PUT)
-    public Game setEnrollmentStatus(Principal principal, @PathVariable("id") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
-        User currentUser = contextUtils.getUser(principal);
+    public Game setEnrollmentStatus(@PathVariable("id") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
+        User currentUser = securityContextUtils.getCurrentUser();
         User userToEnroll = userRepository.findOne(userId);
         Game game = gameRepository.findOne(gameId);
         if (game == null) {

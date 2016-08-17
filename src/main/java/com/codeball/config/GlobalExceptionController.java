@@ -1,5 +1,6 @@
 package com.codeball.config;
 
+import com.codeball.exceptions.AuthenticationException;
 import com.codeball.exceptions.EnrollmentOverException;
 import com.codeball.exceptions.GameOverException;
 import com.codeball.exceptions.ResourceNotFoundException;
@@ -46,6 +47,17 @@ public class GlobalExceptionController {
     @ExceptionHandler({EnrollmentOverException.class, GameOverException.class})
     @ResponseBody
     public MessageWrapper logBadRequestException(HttpServletRequest request, Exception exception) {
+        LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));
+        return new MessageWrapper(exception.getMessage());
+    }
+
+    /**
+     * Logs authentication exceptions
+     */
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({AuthenticationException.class})
+    @ResponseBody
+    public MessageWrapper logAuthenticationException(HttpServletRequest request, Exception exception) {
         LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));
         return new MessageWrapper(exception.getMessage());
     }
