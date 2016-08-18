@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/admin/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/admin/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdminGameController {
 
     @Autowired
@@ -23,12 +23,12 @@ public class AdminGameController {
         return gameRepository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game createGame(@RequestBody Game game) {
         return gameRepository.save(game);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game updateGame(@PathVariable long id, @RequestBody Game game) {
         game.setId(id);
         return gameRepository.save(game);

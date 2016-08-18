@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/admin/pitch", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/admin/pitch", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdminPitchController {
 
     @Autowired
@@ -23,12 +23,12 @@ public class AdminPitchController {
         return pitchRepository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Pitch createPitch(@RequestBody Pitch pitch) {
         return pitchRepository.save(pitch);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Pitch updatePitch(@PathVariable long id, @RequestBody Pitch pitch) {
         pitch.setId(id);
         return pitchRepository.save(pitch);

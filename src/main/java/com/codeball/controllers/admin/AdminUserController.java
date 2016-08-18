@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/api/admin/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/admin/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AdminUserController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class AdminUserController {
         return userRepository.findOne(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User createUser(@RequestBody User user) {
         User existingUserByEmail = userRepository.findByEmail(user.getEmail());
         if (Objects.isNull(existingUserByEmail)) {
@@ -37,7 +37,7 @@ public class AdminUserController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User updateUser(@PathVariable long id, @RequestBody User user) {
         user.setId(id);
         return userRepository.save(user);

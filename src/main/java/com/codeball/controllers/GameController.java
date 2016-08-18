@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GameController {
 
     @Autowired
@@ -73,7 +73,7 @@ public class GameController {
     }
 
     @Transactional
-    @RequestMapping(value = "/{id}/enrollment/{userId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/enrollment/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setEnrollmentStatus(@PathVariable("id") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
         User currentUser = securityContextUtils.getCurrentUser();
         User userToEnroll = userRepository.findOne(userId);
@@ -88,7 +88,7 @@ public class GameController {
         return game;
     }
 
-    @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game drawTeams(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
         if (game == null) {
@@ -98,7 +98,7 @@ public class GameController {
         return gameRepository.save(game);
     }
 
-    @RequestMapping(value = "/{id}/finishEnrollment", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/finishEnrollment", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game finishEnrollment(@PathVariable("id") long gameId) {
         Game game = gameRepository.findOne(gameId);
         if (game == null) {
@@ -109,7 +109,7 @@ public class GameController {
         return gameRepository.save(game);
     }
 
-    @RequestMapping(value = "/{id}/score", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/score", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setGameScore(@PathVariable("id") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
         Game game = gameRepository.findOne(gameId);
         if (game == null) {
