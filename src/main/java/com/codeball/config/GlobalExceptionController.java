@@ -1,9 +1,6 @@
 package com.codeball.config;
 
-import com.codeball.exceptions.AuthenticationException;
-import com.codeball.exceptions.EnrollmentOverException;
-import com.codeball.exceptions.GameOverException;
-import com.codeball.exceptions.ResourceNotFoundException;
+import com.codeball.exceptions.*;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,7 +41,7 @@ public class GlobalExceptionController {
      * Logs bad request exceptions
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({EnrollmentOverException.class, GameOverException.class})
+    @ExceptionHandler({EnrollmentOverException.class, GameOverException.class, UserEmailAlreadyExistsException.class})
     @ResponseBody
     public MessageWrapper logBadRequestException(HttpServletRequest request, Exception exception) {
         LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));

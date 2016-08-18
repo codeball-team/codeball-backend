@@ -30,7 +30,7 @@ public class SecurityContextUtils {
     @Transactional(readOnly = true)
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Map<String, String> authenticationDetails = getAuthenticationDetails(authentication);
+        Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         String userEmail = this.extractEmail(authenticationDetails);
         User user = userRepository.findByEmail(userEmail);
         if (Objects.nonNull(user)) {
@@ -39,24 +39,24 @@ public class SecurityContextUtils {
         throw new AuthenticationException();
     }
 
-    public User createUserIfNotExists(Principal principal) {
-        Map<String, String> authenticationDetails = getAuthenticationDetails(principal);
+    public User getOrCreateAppUser(Authentication authentication) {
+        Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         String userEmail = this.extractEmail(authenticationDetails);
         User user = userRepository.findByEmail(userEmail);
         if (Objects.nonNull(user)) {
             return user;
         } else {
-            return createUser(principal, userEmail);
+            return createUser(authentication, userEmail);
         }
     }
 
     @Transactional
-    private synchronized User createUser(Principal principal, String userEmail) {
+    private synchronized User createUser(Authentication authentication, String userEmail) {
         User user = userRepository.findByEmail(userEmail);
         if (Objects.nonNull(user)) {
             return user;
         } else {
-            user = this.createUserOf(principal);
+            user = this.createUserOf(authentication);
             return userRepository.save(user);
         }
     }
@@ -65,8 +65,8 @@ public class SecurityContextUtils {
         return getCurrentUser().getId();
     }
 
-    private User createUserOf(Principal principal) {
-        Map<String, String> authenticationDetails = getAuthenticationDetails(principal);
+    private User createUserOf(Authentication authentication) {
+        Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         return User.builder()
                 .email(this.extractEmail(authenticationDetails))
                 .firstName(this.extractFirstName(authenticationDetails))
@@ -109,16 +109,20 @@ public class SecurityContextUtils {
     }
 
     @SuppressWarnings("unchecked")
-    private Map<String, String> getAuthenticationDetails(Principal principal) {
-        if (principal instanceof OAuth2Authentication) {
-            OAuth2Authentication oauth2Principal = (OAuth2Authentication) principal;
-            Authentication userAuthentication = oauth2Principal.getUserAuthentication();
-            Object authenticationDetails = userAuthentication.getDetails();
-            if (authenticationDetails instanceof Map) {
-                return (Map<String, String>) authenticationDetails;
-            }
+    private Map<String, String> getAuthenticationDetailsMap(Authentication authentication) {
+        Object authenticationDetails = getAuthenticationDetails(authentication);
+        if (authenticationDetails instanceof Map) {
+            return (Map<String, String>) authenticationDetails;
         }
         throw new AuthenticationException("Invalid OAuth2 authentication.");
+    }
+
+    public Object getAuthenticationDetails(Authentication authentication) {
+        if (authentication instanceof OAuth2Authentication) {
+            return ((OAuth2Authentication) authentication).getUserAuthentication().getDetails();
+        } else {
+            return authentication.getDetails();
+        }
     }
 
 }

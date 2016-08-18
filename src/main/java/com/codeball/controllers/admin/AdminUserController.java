@@ -1,10 +1,13 @@
 package com.codeball.controllers.admin;
 
+import com.codeball.exceptions.UserEmailAlreadyExistsException;
 import com.codeball.model.User;
 import com.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/admin/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -25,8 +28,13 @@ public class AdminUserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
-        user.setId(null);
-        return userRepository.save(user);
+        User existingUserByEmail = userRepository.findByEmail(user.getEmail());
+        if (Objects.isNull(existingUserByEmail)) {
+            user.setId(null);
+            return userRepository.save(user);
+        } else {
+            throw new UserEmailAlreadyExistsException(user.getEmail());
+        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
