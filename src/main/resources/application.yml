@@ -6,6 +6,15 @@ spring:
     index: index.html
   resources:
     static-locations: classpath:/frontend/static/,classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+
+flyway:
+  enabled: true
 
 security:
   basic:
@@ -28,7 +37,7 @@ security:
 
 development:
   dataInitializer:
-    enabled: true
+    enabled: false
   securityContext:
     enabled: true
   user:
