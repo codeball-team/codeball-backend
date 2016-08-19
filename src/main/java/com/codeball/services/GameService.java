@@ -1,4 +1,4 @@
-package com.codeball.services.teams;
+package com.codeball.services;
 
 import com.codeball.exceptions.EnrollmentOverException;
 import com.codeball.exceptions.GameOverException;
@@ -10,6 +10,7 @@ import com.codeball.model.User;
 import com.codeball.model.requests.GameScoreRequest;
 import com.codeball.repositories.GameRepository;
 import com.codeball.repositories.UserRepository;
+import com.codeball.services.teams.TeamAssigner;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

@@ -1,15 +1,13 @@
 package com.codeball.controllers;
 
-import com.codeball.exceptions.UserEmailAlreadyExistsException;
 import com.codeball.model.User;
 import com.codeball.model.UserRole;
-import com.codeball.repositories.UserRepository;
+import com.codeball.services.UserService;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -19,7 +17,7 @@ public class UserController {
     private SecurityContextUtils securityContextUtils;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public User getCurrentUser() {
@@ -27,25 +25,34 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
+    public Iterable<User> listUsers() {
+        return userService.listUsers();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable long id) {
-        return userRepository.findOne(id);
+    public User getUserById(@PathVariable long id) {
+        return userService.getUserById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User createUser(@RequestBody User user) {
-        User existingUserByEmail = userRepository.findByEmail(user.getEmail());
-        if (Objects.isNull(existingUserByEmail)) {
-            user.setId(null);
-            user.setRole(UserRole.ROLE_USER.name());
-            return userRepository.save(user);
+        if (user.getRole().equals(UserRole.ROLE_USER.name())) {
+            return userService.createNormalUser(user);
         } else {
-            throw new UserEmailAlreadyExistsException(user.getEmail());
+            return userService.createAnyUser(user);
         }
+    }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public User updateUser(@PathVariable long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
     }
 
 }

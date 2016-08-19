@@ -3,7 +3,7 @@ package com.codeball.controllers;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
 import com.codeball.model.requests.GameScoreRequest;
-import com.codeball.services.teams.GameService;
+import com.codeball.services.GameService;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
