@@ -1,20 +1,13 @@
 package com.codeball.controllers;
 
-import com.codeball.exceptions.EnrollmentOverException;
-import com.codeball.exceptions.ResourceNotFoundException;
-import com.codeball.model.requests.GameScoreRequest;
-import com.codeball.utils.SecurityContextUtils;
-import com.codeball.exceptions.GameOverException;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
-import com.codeball.model.TeamAssignment;
-import com.codeball.model.User;
-import com.codeball.repositories.GameRepository;
-import com.codeball.repositories.UserRepository;
-import com.codeball.services.teams.TeamAssigner;
+import com.codeball.model.requests.GameScoreRequest;
+import com.codeball.services.teams.GameService;
+import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,108 +16,74 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
 
     @Autowired
-    private GameRepository gameRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private TeamAssigner teamAssigner;
+    private GameService gameService;
 
     @Autowired
     private SecurityContextUtils securityContextUtils;
 
-    @RequestMapping(value = "/last", method = RequestMethod.GET)
-    public Game getLastGame() {
-        Game lastGame = gameRepository.findLastGame();
-        if (lastGame == null) {
-            throw new ResourceNotFoundException("last game");
-        }
-        return lastGame;
-    }
-
-    @RequestMapping(value = "/upcoming", method = RequestMethod.GET)
-    public Game getUpcomingGame() {
-        Game upcomingGame = gameRepository.findUpcomingGame();
-        if (upcomingGame == null) {
-            throw new ResourceNotFoundException("upcoming game");
-        }
-        return upcomingGame;
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Game getGameById(@PathVariable long id) {
-        Game game = gameRepository.findOne(id);
-        if (game == null) {
-            throw new ResourceNotFoundException("game with ID: " + id);
-        }
-        return game;
+        return gameService.getGameById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public Iterable<Game> getGames() {
-        return gameRepository.findAll(new Sort(Sort.Direction.DESC, "startTimestamp"));
+        return gameService.getSortedGames();
+    }
+
+    @RequestMapping(value = "/last", method = RequestMethod.GET)
+    public Game getLastGame() {
+        return gameService.getLastGame();
+    }
+
+    @RequestMapping(value = "/upcoming", method = RequestMethod.GET)
+    public Game getUpcomingGame() {
+        return gameService.getUpcomingGame();
     }
 
     @Transactional
     @RequestMapping(value = "/{id}/enrollment", method = RequestMethod.PUT)
     public Game setEnrollmentStatus(@PathVariable("id") long gameId, @RequestBody EnrollmentStatus status) {
-        return setEnrollmentStatus(gameId, securityContextUtils.getCurrentUserId(), status);
+        return gameService.setEnrollmentStatus(gameId, securityContextUtils.getCurrentUserId(), status);
     }
 
     @Transactional
     @RequestMapping(value = "/{id}/enrollment/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setEnrollmentStatus(@PathVariable("id") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
-        User currentUser = securityContextUtils.getCurrentUser();
-        User userToEnroll = userRepository.findOne(userId);
-        Game game = gameRepository.findOne(gameId);
-        if (game == null) {
-            throw new ResourceNotFoundException("game with ID: " + gameId);
-        }
-        if (game.isEnrollmentOver()) {
-            throw new EnrollmentOverException(gameId);
-        }
-        game.enrollUser(userToEnroll, status, currentUser);
-        return game;
-    }
-
-    @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Game drawTeams(@PathVariable("id") long gameId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game == null) {
-            throw new ResourceNotFoundException("game with ID: " + gameId);
-        }
-        drawTeams(game);
-        return gameRepository.save(game);
+        return gameService.setEnrollmentStatus(gameId, userId, status);
     }
 
     @RequestMapping(value = "/{id}/finishEnrollment", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game finishEnrollment(@PathVariable("id") long gameId) {
-        Game game = gameRepository.findOne(gameId);
-        if (game == null) {
-            throw new ResourceNotFoundException("game with ID: " + gameId);
-        }
-        game.setEnrollmentOver(true);
-        drawTeams(game);
-        return gameRepository.save(game);
+        return gameService.finishEnrollment(gameId);
+    }
+
+    @RequestMapping(value = "/{id}/team", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Game drawTeams(@PathVariable("id") long gameId) {
+        return gameService.drawTeams(gameId);
     }
 
     @RequestMapping(value = "/{id}/score", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setGameScore(@PathVariable("id") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
-        Game game = gameRepository.findOne(gameId);
-        if (game == null) {
-            throw new ResourceNotFoundException("game with ID: " + gameId);
-        }
-        game.setScore(gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
-        return gameRepository.save(game);
+        return gameService.updateGameScore(gameId, gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
     }
 
-    private void drawTeams(Game game) {
-        if (game.isGameOver()) {
-            throw new GameOverException(game.getId());
-        }
-        TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
-        game.assignTeams(teamAssignment);
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Game createGame(@RequestBody Game game) {
+        return gameService.createGame(game);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Game updateGame(@PathVariable long id, @RequestBody Game game) {
+        return gameService.updateGame(id, game);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteGame(@PathVariable long id) {
+        gameService.deleteGame(id);
     }
 
 }
