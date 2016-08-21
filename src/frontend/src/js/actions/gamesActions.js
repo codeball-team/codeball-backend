@@ -134,8 +134,7 @@ export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
 
 export function gameEnd(gameId) {
   return ajax(dispatch => ({
-    request: request('PUT', gameEndUrl(gameId))
-      .send({ isGameOver: true }),
+    request: request('PUT', gameEndUrl(gameId)),
     json: true,
     startAction: GAME_END,
     successAction: GAME_END_SUCCESS,
