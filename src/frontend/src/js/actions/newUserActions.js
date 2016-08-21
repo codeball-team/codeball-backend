@@ -7,7 +7,7 @@ import {
   NEW_USER_RESET,
   NEW_USER_SUBMIT, NEW_USER_SUBMIT_FAILURE, NEW_USER_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
-import { userAdminUrl } from 'constants';
+import { usersUrl } from 'constants';
 import { NewUserModel } from 'models';
 
 export function newUserChangeEmail(email) {
@@ -47,7 +47,7 @@ export function newUserReset() {
 export function newUserSubmit(newUser) {
   const data = NewUserModel.toServerFormat(newUser);
   return ajax(dispatch => ({
-    request: request('POST', userAdminUrl())
+    request: request('POST', usersUrl())
       .send(JSON.stringify(data)),
     json: true,
     startAction: NEW_USER_SUBMIT,

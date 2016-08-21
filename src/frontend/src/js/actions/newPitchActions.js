@@ -7,7 +7,7 @@ import {
   NEW_PITCH_CHANGE_TYPE, NEW_PITCH_RESET,
   NEW_PITCH_SUBMIT, NEW_PITCH_SUBMIT_FAILURE, NEW_PITCH_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
-import { pitchAdminUrl } from 'constants';
+import { pitchesUrl } from 'constants';
 import { NewPitchModel } from 'models';
 
 export function newPitchChangeAddress(address) {
@@ -54,7 +54,7 @@ export function newPitchReset() {
 export function newPitchSubmit(newPitch) {
   const data = NewPitchModel.toServerFormat(newPitch);
   return ajax(dispatch => ({
-    request: request('POST', pitchAdminUrl())
+    request: request('POST', pitchesUrl())
       .send(JSON.stringify(data)),
     json: true,
     startAction: NEW_PITCH_SUBMIT,

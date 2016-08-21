@@ -16,7 +16,6 @@ import {
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
 } from 'constants/actionTypes';
 import {
-  gameAdminUrl,
   gameCloseEnrollmentUrl,
   gameDrawTeamsUrl,
   gameEnrollmentUrl,
@@ -134,7 +133,7 @@ export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
 
 export function gameEnd(gameId) {
   return ajax(dispatch => ({
-    request: request('PUT', gameAdminUrl(gameId))
+    request: request('PUT', gameUrl(gameId))
       .send({ isGameOver: true }),
     json: true,
     startAction: GAME_END,

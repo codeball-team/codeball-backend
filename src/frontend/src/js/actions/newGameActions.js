@@ -6,7 +6,7 @@ import {
   NEW_GAME_CHANGE_MINUTE, NEW_GAME_CHANGE_PITCH_ID, NEW_GAME_RESET,
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
-import { gameAdminUrl } from 'constants';
+import { gamesUrl } from 'constants';
 import { NewGameModel } from 'models';
 
 export function newGameChangeDate(date) {
@@ -53,7 +53,7 @@ export function newGameReset() {
 export function newGameSubmit(newGame) {
   const data = NewGameModel.toServerFormat(newGame);
   return ajax(dispatch => ({
-    request: request('POST', gameAdminUrl())
+    request: request('POST', gamesUrl())
       .send(JSON.stringify(data)),
     json: true,
     startAction: NEW_GAME_SUBMIT,
