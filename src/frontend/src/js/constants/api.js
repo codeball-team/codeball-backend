@@ -15,6 +15,10 @@ export function gameDrawTeamsUrl(gameId) {
   return `${gameUrl(gameId)}/team`;
 }
 
+export function gameEndUrl(gameId) {
+  return `${gameUrl(gameId)}/end`;
+}
+
 export function gameEnrollmentUrl(gameId, userId) {
   if (userId) {
     return `${gameUrl(gameId)}/enrollment/${userId}`;

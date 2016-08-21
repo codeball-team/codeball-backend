@@ -18,6 +18,7 @@ import {
 import {
   gameCloseEnrollmentUrl,
   gameDrawTeamsUrl,
+  gameEndUrl,
   gameEnrollmentUrl,
   gameSetScoreUrl,
   gameUrl,
@@ -133,7 +134,7 @@ export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
 
 export function gameEnd(gameId) {
   return ajax(dispatch => ({
-    request: request('PUT', gameUrl(gameId))
+    request: request('PUT', gameEndUrl(gameId))
       .send({ isGameOver: true }),
     json: true,
     startAction: GAME_END,

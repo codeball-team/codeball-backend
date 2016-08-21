@@ -27,10 +27,10 @@ export default function ajax(getParams) {
 
     request.end((error, response = {}) => {
       const [title, message] = safeGet(error, ['message'], '').split('\n');
-      const body = safeGet(response, ['body'], {
+      const body = nullToUndefined(safeGet(response, ['body'], {
         error: title,
         message
-      });
+      }));
       if (error || !response.ok) {
         dispatch({
           type: failureAction,
@@ -71,4 +71,12 @@ function applyRequestOptions(request, options) {
     (enhancedRequest, value, key) => requestOptionsHandlers[key](enhancedRequest, value),
     request
   );
+}
+
+function nullToUndefined(value) {
+  if (value === null) {
+    return undefined;
+  }
+
+  return value;
 }
