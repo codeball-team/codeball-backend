@@ -3,8 +3,9 @@ import { BaseComponent } from 'components/base';
 
 class Value extends Component {
   static propTypes = {
-    value: PropTypes.string.isRequired
+    value: PropTypes.string
   };
+
   render() {
     const { value } = this.props;
 
