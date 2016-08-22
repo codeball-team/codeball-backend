@@ -5,7 +5,8 @@
   display: flex;
   justify-content: flex-end;
 
-  > * {
+  .button {
+    @include ellipsis;
     margin-right: $spacing-s;
 
     &:last-child {

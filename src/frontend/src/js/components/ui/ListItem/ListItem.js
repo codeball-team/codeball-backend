@@ -6,13 +6,15 @@ import './ListItem.scss';
 export default class ListItem extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onClick: PropTypes.func
   };
 
   render() {
     const {
       children,
-      className
+      className,
+      onClick
     } = this.props;
 
     return (
@@ -20,7 +22,8 @@ export default class ListItem extends Component {
         className={classNames(
           'list-item',
           className
-        )}>
+        )}
+        onClick={onClick}>
         {children}
       </div>
     );

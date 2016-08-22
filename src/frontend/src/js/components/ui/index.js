@@ -4,7 +4,7 @@ import { Link as ReactRouterLink } from 'react-router';
 import ReactSelect from 'react-select';
 
 export const Calendar = BaseComponent(ReactDatepickerCalendar);
-export const Link = BaseComponent(ReactRouterLink);
+export const RouterLink = BaseComponent(ReactRouterLink);
 export const Select = BaseComponent(ReactSelect);
 
 export * from './buttons';
@@ -22,6 +22,7 @@ export Form, {
 } from './Form';
 export Icon from './Icon/Icon';
 export IconButton from './IconButton/IconButton';
+export Link from './Link/Link';
 export List from './List/List';
 export ListItem from './ListItem/ListItem';
 export LoadableContent from './LoadableContent/LoadableContent';

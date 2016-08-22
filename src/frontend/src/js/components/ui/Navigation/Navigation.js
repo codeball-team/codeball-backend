@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Link } from 'components/ui';
+import { Icon, RouterLink } from 'components/ui';
 import './Navigation.scss';
 
 export default class Navigation extends Component {
@@ -12,48 +12,48 @@ export default class Navigation extends Component {
 
         <ul>
           <li>
-            <Link activeClassName="focus" to="/upcoming-game">
+            <RouterLink activeClassName="focus" to="/upcoming-game">
               <Icon name="alarm" />
               <span className="label">
                 Upcoming game
               </span>
-            </Link>
+            </RouterLink>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/last-game">
+            <RouterLink activeClassName="focus" to="/last-game">
               <Icon name="podium" />
               <span className="label">
                 Last game
               </span>
-            </Link>
+            </RouterLink>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/games">
+            <RouterLink activeClassName="focus" to="/games">
               <Icon name="calendar" />
               <span className="label">
                 Games
               </span>
-            </Link>
+            </RouterLink>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/players" >
+            <RouterLink activeClassName="focus" to="/players" >
               <Icon name="people" />
               <span className="label">
                 Players
               </span>
-            </Link>
+            </RouterLink>
           </li>
 
           <li>
-            <Link activeClassName="focus" to="/pitches" >
+            <RouterLink activeClassName="focus" to="/pitches" >
               <Icon name="location" />
               <span className="label">
                 Pitches
               </span>
-            </Link>
+            </RouterLink>
           </li>
         </ul>
       </nav>

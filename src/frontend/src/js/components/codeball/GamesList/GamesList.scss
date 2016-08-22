@@ -6,8 +6,13 @@
     @include flex-parent;
 
     .date-time {
+      min-width: 195px;
       flex: 0 1 auto;
       margin-right: $spacing-l;
+
+      @include tablet-and-smaller {
+        min-width: 170px;
+      }
 
       @include phone {
         @include flex-child-grow;
@@ -16,7 +21,7 @@
 
     .pitch {
       @include flex-child-grow;
-      margin-left: $spacing-l;
+      margin-right: $spacing-l;
 
       @include phone {
         display: none;

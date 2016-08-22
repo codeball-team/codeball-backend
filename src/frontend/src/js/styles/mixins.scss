@@ -59,6 +59,7 @@
 @mixin clickable-effects($color) {
   background-color: $color;
   user-select: none;
+  cursor: pointer;
 
   &.inactive {
     background-color: desaturate($color, 30%);
@@ -77,6 +78,7 @@
 @mixin transparent-clickable-effects() {
   background-color: transparent;
   user-select: none;
+  cursor: pointer;
 
   &.inactive {
     background-color: rgba(255, 255, 255, 0.1);

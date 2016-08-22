@@ -5,14 +5,12 @@ import { Link, ListItem } from 'components/ui';
 class PitchesListItem extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string,
     pitch: PropTypes.object.isRequired
   };
 
   render() {
     const {
       children,
-      className,
       pitch: {
         address,
         id,
@@ -21,9 +19,9 @@ class PitchesListItem extends Component {
     } = this.props;
 
     return (
-      <Link className={className} key={id} to={`/pitches/${id}`}>
+      <Link key={id} to={`/pitches/${id}`}>
         <ListItem className="pitches-list-item">
-          <div className="name">
+          <div className="name ellipsis">
             {name}
           </div>
 

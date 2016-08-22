@@ -37,6 +37,7 @@
   }
 
   .details {
+    @include ellipsis;
     text-align: center;
     margin-bottom: $spacing-s;
   }

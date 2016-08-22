@@ -7,7 +7,7 @@
     justify-content: flex-start;
 
     .name {
-      @include flex-child;
+      @include flex-child-grow;
       margin-right: $spacing-l;
 
       @include small-phone {

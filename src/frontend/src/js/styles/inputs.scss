@@ -51,6 +51,7 @@
 
       .Select-option {
         @include input;
+        @include ellipsis;
         @include highlight-on-hover($highlight-color-dark);
         background-color: white;
       }
