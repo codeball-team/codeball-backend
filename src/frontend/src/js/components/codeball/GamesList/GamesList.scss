@@ -6,12 +6,12 @@
     @include flex-parent;
 
     .date-time {
-      min-width: 195px;
+      min-width: 200px;
       flex: 0 1 auto;
       margin-right: $spacing-l;
 
       @include tablet-and-smaller {
-        min-width: 170px;
+        min-width: 180px;
       }
 
       @include phone {
