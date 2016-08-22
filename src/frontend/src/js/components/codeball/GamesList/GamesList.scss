@@ -16,6 +16,7 @@
 
       @include phone {
         @include flex-child-grow;
+        min-width: 0;
       }
     }
 
