@@ -165,8 +165,7 @@ export default function GenerateUpcomingGame(getGameId) {
         (enrollmentStatus, userIds, status) => (userIds.includes(userId) ? status : enrollmentStatus),
         undefined
       );
-      const unenrolledUsers = _(users).values()
-        .filter(({ id }) => !enrolledUsersIds.includes(id));
+      const unenrolledUsers = users.filter(({ id }) => !enrolledUsersIds.includes(id) && id !== userId);
 
       return (
         <LoadableContent
