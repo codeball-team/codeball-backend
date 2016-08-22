@@ -30,6 +30,7 @@ public class Game {
     @Setter
     @JsonProperty("isEnrollmentOver")
     private boolean enrollmentOver = false;
+    @Setter
     @JsonProperty("isGameOver")
     private boolean gameOver = false;
     @JsonProperty("enrollments")

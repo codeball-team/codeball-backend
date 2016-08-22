@@ -41,7 +41,7 @@ public class GlobalExceptionController {
      * Logs bad request exceptions
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({EnrollmentOverException.class, GameOverException.class, UserEmailAlreadyExistsException.class})
+    @ExceptionHandler({EnrollmentOverException.class, GameOverException.class, UserEmailAlreadyExistsException.class, GameNotFoundException.class})
     @ResponseBody
     public MessageWrapper logBadRequestException(HttpServletRequest request, Exception exception) {
         LOGGER.error("Exception: " + exception + this.getAdditionalRequestContextInfo(request));

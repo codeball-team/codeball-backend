@@ -1,6 +1,7 @@
 package com.codeball.services;
 
 import com.codeball.exceptions.EnrollmentOverException;
+import com.codeball.exceptions.GameNotFoundException;
 import com.codeball.exceptions.GameOverException;
 import com.codeball.exceptions.ResourceNotFoundException;
 import com.codeball.model.EnrollmentStatus;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Objects;
 
 @Service
 public class GameService {
@@ -119,9 +122,19 @@ public class GameService {
         gameRepository.delete(gameId);
     }
 
-    public Game updateGame(long id, Game game) {
-        game.setId(id);
+    public Game updateGame(long gameId, Game game) {
+        game.setId(gameId);
         return gameRepository.save(game);
+    }
+
+    @Transactional
+    public Game endGame(long gameId) {
+        Game game = gameRepository.findOne(gameId);
+        if (Objects.nonNull(game)) {
+            game.setGameOver(true);
+            return game;
+        }
+        throw new GameNotFoundException(gameId);
     }
 
     public Game createGame(Game game) {
