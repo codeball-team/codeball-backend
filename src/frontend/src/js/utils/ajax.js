@@ -29,7 +29,8 @@ export default function ajax(getParams) {
       const [title, message] = safeGet(error, ['message'], '').split('\n');
       const body = nullToUndefined(safeGet(response, ['body'], {
         error: title,
-        message
+        message,
+        isSilent: false
       }));
       if (error || !response.ok) {
         dispatch({

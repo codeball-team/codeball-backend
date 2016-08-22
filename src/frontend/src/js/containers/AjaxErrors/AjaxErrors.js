@@ -18,7 +18,7 @@ class AjaxErrors extends Component {
 
     return (
       <Errors
-        errors={errors}
+        errors={errors.filter(({ isSilent }) => !isSilent)}
         onErrorAcknowledge={this.onErrorAcknowledge} />
     );
   }

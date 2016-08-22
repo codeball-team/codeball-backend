@@ -29,7 +29,7 @@ export default reducer(initialState, {
   }),
 
   [AJAX_FAILURE]: (state, action) => {
-    const { response: { error, message } = {} } = action;
+    const { response: { error, message, isSilent } = {} } = action;
     const { errors } = state;
 
     return {
@@ -38,10 +38,10 @@ export default reducer(initialState, {
         ...errors,
         {
           title: error,
-          message
+          message,
+          isSilent
         }
       ],
-      errorMessage: message,
       numberOfPendingRequests: state.numberOfPendingRequests - 1
     };
   },
