@@ -29,12 +29,12 @@ class GameInfo extends Component {
           'game-info',
           className
         )}>
-        <div title="Game date & time">
+        <div className="ellipsis" title="Game date & time">
           <Icon name="calendar" />
           {date}, {time}
         </div>
 
-        <div title="Game duration">
+        <div className="ellipsis" title="Game duration">
           <Icon name="clock" />
           {duration} min
         </div>
