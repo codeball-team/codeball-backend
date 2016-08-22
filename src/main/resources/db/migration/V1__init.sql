@@ -1,135 +1,80 @@
+CREATE TABLE app_user
+(
+  id          BIGINT PRIMARY KEY NOT NULL,
+  email       VARCHAR(255)       NOT NULL,
+  first_name  VARCHAR(255),
+  last_name   VARCHAR(255),
+  picture_url VARCHAR(255),
+  role        VARCHAR(255)
+);
+CREATE UNIQUE INDEX uk_1j9d9a06i600gd43uu3km82jw ON app_user (email);
 
-    create table app_user (
-        id int8 not null,
-        email varchar(255) not null,
-        first_name varchar(255),
-        last_name varchar(255),
-        picture_url varchar(255),
-        role varchar(255),
-        primary key (id)
-    );
+CREATE TABLE pitch
+(
+  id                    BIGINT PRIMARY KEY NOT NULL,
+  address               VARCHAR(255),
+  max_number_of_players INTEGER            NOT NULL,
+  min_number_of_players INTEGER            NOT NULL,
+  name                  VARCHAR(255),
+  pitch_type            VARCHAR(255)
+);
 
-    create table enrollment (
-        id int8 not null,
-        enrollment_status int4,
-        enroller_id int8,
-        game_id int8,
-        user_id int8,
-        primary key (id)
-    );
+CREATE TABLE game
+(
+  id                  BIGINT PRIMARY KEY NOT NULL,
+  duration_in_minutes INTEGER            NOT NULL,
+  enrollment_over     BOOLEAN            NOT NULL,
+  game_over           BOOLEAN            NOT NULL,
+  start_timestamp     BIGINT             NOT NULL,
+  teamascore          INTEGER            NOT NULL,
+  teambscore          INTEGER            NOT NULL,
+  pitch_id            BIGINT,
+  CONSTRAINT fkqwbrfra4d987a2jmnlfhhfljb FOREIGN KEY (pitch_id) REFERENCES pitch (id)
+);
 
-    create table enrollment_game (
-        game_id int8 not null,
-        enrollment_id int8 not null
-    );
+CREATE TABLE enrollment
+(
+  id                BIGINT PRIMARY KEY NOT NULL,
+  enrollment_status INTEGER,
+  enroller_id       BIGINT,
+  game_id           BIGINT,
+  user_id           BIGINT,
+  CONSTRAINT fkejjiyja0buf88e01rwcwwvtth FOREIGN KEY (enroller_id) REFERENCES app_user (id),
+  CONSTRAINT fkpjds1jcxiinfn6wd6tj19kldm FOREIGN KEY (game_id) REFERENCES game (id),
+  CONSTRAINT fk8bxchtid6ujtutjb908cgvreu FOREIGN KEY (user_id) REFERENCES app_user (id)
+);
 
-    create table game (
-        id int8 not null,
-        duration_in_minutes int4 not null,
-        enrollment_over boolean not null,
-        game_over boolean not null,
-        start_timestamp int8 not null,
-        teamascore int4 not null,
-        teambscore int4 not null,
-        pitch_id int8,
-        primary key (id)
-    );
+CREATE TABLE enrollment_game
+(
+  game_id       BIGINT NOT NULL,
+  enrollment_id BIGINT NOT NULL,
+  CONSTRAINT fkcny1s2rxfy46yljr7vwjyyreq FOREIGN KEY (game_id) REFERENCES game (id),
+  CONSTRAINT fk2gtk8jfk98hgjjkdi2agwk5h3 FOREIGN KEY (enrollment_id) REFERENCES enrollment (id)
+);
 
-    create table pitch (
-        id int8 not null,
-        address varchar(255),
-        max_number_of_players int4 not null,
-        min_number_of_players int4 not null,
-        name varchar(255),
-        pitch_type varchar(255),
-        primary key (id)
-    );
+CREATE TABLE rating
+(
+  id        BIGINT PRIMARY KEY NOT NULL,
+  game_id   BIGINT,
+  player_id BIGINT,
+  voter_id  BIGINT,
+  CONSTRAINT fkhotxgrgtrin4xcto6n1j4a946 FOREIGN KEY (game_id) REFERENCES game (id),
+  CONSTRAINT fkelyxghno5vf5jiv4y7yqrq5k2 FOREIGN KEY (player_id) REFERENCES app_user (id),
+  CONSTRAINT fkt3uj64lg1qjearaxsnn6a7jec FOREIGN KEY (voter_id) REFERENCES app_user (id)
+);
 
-    create table rating (
-        id int8 not null,
-        game_id int8,
-        player_id int8,
-        voter_id int8,
-        primary key (id)
-    );
+CREATE TABLE teama
+(
+  game_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
+  CONSTRAINT fkarvc764dp6mie69juaibnnnva FOREIGN KEY (game_id) REFERENCES game (id),
+  CONSTRAINT fkrdgee7nfi42dndyc1x2ftd1s0 FOREIGN KEY (user_id) REFERENCES app_user (id)
+);
 
-    create table teama (
-        game_id int8 not null,
-        user_id int8 not null
-    );
-
-    create table teamb (
-        game_id int8 not null,
-        user_id int8 not null
-    );
-
-    alter table app_user
-        drop constraint if exists UK_1j9d9a06i600gd43uu3km82jw;
-
-    alter table app_user
-        add constraint UK_1j9d9a06i600gd43uu3km82jw unique (email);
-
-    alter table enrollment
-        add constraint FKejjiyja0buf88e01rwcwwvtth
-        foreign key (enroller_id)
-        references app_user;
-
-    alter table enrollment
-        add constraint FKpjds1jcxiinfn6wd6tj19kldm
-        foreign key (game_id)
-        references game;
-
-    alter table enrollment
-        add constraint FK8bxchtid6ujtutjb908cgvreu
-        foreign key (user_id)
-        references app_user;
-
-    alter table enrollment_game
-        add constraint FK2gtk8jfk98hgjjkdi2agwk5h3
-        foreign key (enrollment_id)
-        references enrollment;
-
-    alter table enrollment_game
-        add constraint FKcny1s2rxfy46yljr7vwjyyreq
-        foreign key (game_id)
-        references game;
-
-    alter table game
-        add constraint FKqwbrfra4d987a2jmnlfhhfljb
-        foreign key (pitch_id)
-        references pitch;
-
-    alter table rating
-        add constraint FKhotxgrgtrin4xcto6n1j4a946
-        foreign key (game_id)
-        references game;
-
-    alter table rating
-        add constraint FKelyxghno5vf5jiv4y7yqrq5k2
-        foreign key (player_id)
-        references app_user;
-
-    alter table rating
-        add constraint FKt3uj64lg1qjearaxsnn6a7jec
-        foreign key (voter_id)
-        references app_user;
-
-    alter table teama
-        add constraint FKrdgee7nfi42dndyc1x2ftd1s0
-        foreign key (user_id)
-        references app_user;
-
-    alter table teama
-        add constraint FKarvc764dp6mie69juaibnnnva
-        foreign key (game_id)
-        references game;
-
-    alter table teamb
-        add constraint FKoyex00a576xhea63dflm0u2kc
-        foreign key (user_id)
-        references app_user;
-
-    alter table teamb
-        add constraint FKfg0yernx0i70frr51am8xbi0n
-        foreign key (game_id)
-        references game;
+CREATE TABLE teamb
+(
+  game_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
+  CONSTRAINT fkfg0yernx0i70frr51am8xbi0n FOREIGN KEY (game_id) REFERENCES game (id),
+  CONSTRAINT fkoyex00a576xhea63dflm0u2kc FOREIGN KEY (user_id) REFERENCES app_user (id)
+);

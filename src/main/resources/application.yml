@@ -6,12 +6,18 @@ spring:
     index: index.html
   resources:
     static-locations: classpath:/frontend/static/,classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/codeball
+#    username: postgres
+#    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#    database-platform: org.hibernate.dialect.PostgreSQL92Dialect
+    show-sql: true
 
 flyway:
   enabled: false

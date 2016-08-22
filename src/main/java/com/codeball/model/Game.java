@@ -18,7 +18,7 @@ public class Game {
 
     @Id
     @Setter
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private long startTimestamp;
     private int durationInMinutes;

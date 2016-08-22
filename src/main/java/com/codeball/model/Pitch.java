@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Pitch {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String address;

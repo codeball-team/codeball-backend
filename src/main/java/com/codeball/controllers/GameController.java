@@ -68,7 +68,6 @@ public class GameController {
         return gameService.updateGameScore(gameId, gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
     }
 
-    @Secured("ROLE_ADMIN")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game createGame(@RequestBody Game game) {
         return gameService.createGame(game);

@@ -1,27 +1,19 @@
 package com.codeball.services;
 
-import com.codeball.exceptions.EnrollmentOverException;
-import com.codeball.exceptions.GameNotFoundException;
-import com.codeball.exceptions.GameOverException;
-import com.codeball.exceptions.ResourceNotFoundException;
+import com.codeball.exceptions.*;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
 import com.codeball.model.TeamAssignment;
 import com.codeball.model.User;
-import com.codeball.model.requests.GameScoreRequest;
 import com.codeball.repositories.GameRepository;
 import com.codeball.repositories.UserRepository;
 import com.codeball.services.teams.TeamAssigner;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Objects;
 
@@ -43,7 +35,7 @@ public class GameService {
     public Game getLastGame() {
         Game lastGame = gameRepository.findLastGame();
         if (lastGame == null) {
-            throw new ResourceNotFoundException("last game");
+            throw new NoLastGameException();
         }
         return lastGame;
     }
@@ -51,7 +43,7 @@ public class GameService {
     public Game getUpcomingGame() {
         Game upcomingGame = gameRepository.findUpcomingGame();
         if (upcomingGame == null) {
-            throw new ResourceNotFoundException("upcoming game");
+            throw new NoUpcomingGameException();
         }
         return upcomingGame;
     }

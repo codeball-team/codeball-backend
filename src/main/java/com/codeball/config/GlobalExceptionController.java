@@ -28,6 +28,16 @@ public class GlobalExceptionController {
     }
 
     /**
+     * Logs bad request exceptions
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({NoLastGameException.class, NoUpcomingGameException.class})
+    @ResponseBody
+    public MessageWrapper logNoGameFoundException(HttpServletRequest request, Exception exception) {
+        return new MessageWrapper(exception.getMessage(), true);
+    }
+
+    /**
      * Logs not found request exceptions
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -71,12 +81,20 @@ public class GlobalExceptionController {
     /**
      * Wrapper class for holding messages - for Jackson to create Json from them
      */
-    public static class MessageWrapper {
+    private static class MessageWrapper {
+
+        public boolean isSilent = false;
         public String message;
 
-        public MessageWrapper(String message) {
+        MessageWrapper(String message) {
             this.message = message;
         }
+
+        MessageWrapper(String message, boolean isSilent) {
+            this.message = message;
+            this.isSilent = isSilent;
+        }
+
     }
 
 }

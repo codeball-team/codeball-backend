@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Enrollment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long id;
 

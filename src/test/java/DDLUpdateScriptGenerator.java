@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
-import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -57,6 +55,7 @@ public class DDLUpdateScriptGenerator {
         Map<String, Object> properties = new HashMap<>();
         properties.put(Environment.DATASOURCE, dataSource);
         properties.put(Environment.HBM2DDL_AUTO, "update");
+        properties.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL92Dialect");
         properties.put(Environment.IMPLICIT_NAMING_STRATEGY, "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
         properties.put(Environment.PHYSICAL_NAMING_STRATEGY, "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
         return properties;
@@ -71,6 +70,7 @@ public class DDLUpdateScriptGenerator {
     private MetadataSources buildMetadataSources(Set<Class<?>> modelClasses, StandardServiceRegistry serviceRegistry) {
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         modelClasses.forEach(metadataSources::addAnnotatedClass);
+        modelClasses.forEach(System.out::println);
         return metadataSources;
     }
 
