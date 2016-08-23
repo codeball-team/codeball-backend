@@ -3,7 +3,9 @@ apply plugin: 'maven'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
 
-description = """codeball"""
+version = "1.0.0"
+description = """Codeball"""
+jar.archiveName = "Codeball.jar"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

@@ -1,2 +1,2 @@
-CALL java -jar ../build/libs/codeball.jar
+CALL java -jar ../build/libs/Codeball.jar
 PAUSE

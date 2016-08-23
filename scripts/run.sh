@@ -1,1 +1,1 @@
-nohup java -jar ../build/libs/codeball.jar &
+nohup java -jar ../build/libs/Codeball.jar &
