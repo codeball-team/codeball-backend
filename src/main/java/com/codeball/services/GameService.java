@@ -3,7 +3,6 @@ package com.codeball.services;
 import com.codeball.exceptions.*;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
-import com.codeball.model.TeamAssignment;
 import com.codeball.model.User;
 import com.codeball.repositories.GameRepository;
 import com.codeball.repositories.UserRepository;
@@ -79,7 +78,7 @@ public class GameService {
         if (game == null) {
             throw new ResourceNotFoundException("game with ID: " + gameId);
         }
-        drawTeams(game);
+        teamAssigner.drawAndAssignNewTeams(game);
         return gameRepository.save(game);
     }
 
@@ -89,7 +88,7 @@ public class GameService {
             throw new ResourceNotFoundException("game with ID: " + gameId);
         }
         game.setEnrollmentOver(true);
-        drawTeams(game);
+        teamAssigner.drawAndAssignNewTeams(game);
         return gameRepository.save(game);
     }
 
@@ -100,14 +99,6 @@ public class GameService {
         }
         game.setScore(teamAScore, teamBScore);
         return gameRepository.save(game);
-    }
-
-    private void drawTeams(Game game) {
-        if (game.isGameOver()) {
-            throw new GameOverException(game.getId());
-        }
-        TeamAssignment teamAssignment = teamAssigner.assignTeams(game.getEnrolledUsers());
-        game.assignTeams(teamAssignment);
     }
 
     public void deleteGame(long gameId) {

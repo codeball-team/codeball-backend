@@ -91,4 +91,8 @@ public class Game {
         this.teamBScore = teamBScore;
     }
 
+    public TeamAssignment getTimeAssignment() {
+        return new TeamAssignment(teamA, teamB);
+    }
+
 }
