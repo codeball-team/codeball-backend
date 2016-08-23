@@ -36,7 +36,7 @@ public class Enrollment {
 
     @Setter
     @Getter
-    @JsonProperty("enroller")
+    @JsonProperty("enrollerId")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = User.class)
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
