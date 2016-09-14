@@ -3,7 +3,7 @@ import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
 import './ListItem.scss';
 
-export default class ListItem extends Component {
+class ListItem extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
