@@ -6,6 +6,6 @@ npm install rimraf
 npm install
 npm rebuild node-sass
 npm run clean:build
-npm run build
+API_URL=`cat ../main/resources/api.url` npm run build
 cd ../..
 ./gradlew clean build
