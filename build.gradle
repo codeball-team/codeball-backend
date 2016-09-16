@@ -44,6 +44,8 @@ dependencies {
 
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
     compile 'org.projectlombok:lombok:1.16.8'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
 
     compile("io.springfox:springfox-swagger2:2.4.0")
     compile("io.springfox:springfox-swagger-ui:2.4.0")
