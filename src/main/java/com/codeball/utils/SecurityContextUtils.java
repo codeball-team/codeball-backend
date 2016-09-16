@@ -11,9 +11,8 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class SecurityContextUtils {
@@ -32,19 +31,16 @@ public class SecurityContextUtils {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         String userEmail = this.extractEmail(authenticationDetails);
-        User user = userRepository.findByEmail(userEmail);
-        if (Objects.nonNull(user)) {
-            return user;
-        }
-        throw new AuthenticationException();
+        Optional<User> user = userRepository.findByEmail(userEmail);
+        return user.orElseThrow(AuthenticationException::new);
     }
 
     public User getOrCreateAppUser(Authentication authentication) {
         Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         String userEmail = this.extractEmail(authenticationDetails);
-        User user = userRepository.findByEmail(userEmail);
-        if (Objects.nonNull(user)) {
-            return user;
+        Optional<User> user = userRepository.findByEmail(userEmail);
+        if (user.isPresent()) {
+            return user.get();
         } else {
             return createUser(authentication, userEmail);
         }
@@ -52,12 +48,12 @@ public class SecurityContextUtils {
 
     @Transactional
     private synchronized User createUser(Authentication authentication, String userEmail) {
-        User user = userRepository.findByEmail(userEmail);
-        if (Objects.nonNull(user)) {
-            return user;
+        Optional<User> user = userRepository.findByEmail(userEmail);
+        if (user.isPresent()) {
+            return user.get();
         } else {
-            user = this.createUserOf(authentication);
-            return userRepository.save(user);
+            User newUser = this.createUserOf(authentication);
+            return userRepository.save(newUser);
         }
     }
 

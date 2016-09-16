@@ -1,5 +1,6 @@
 package com.codeball.controllers;
 
+import com.codeball.exceptions.ResourceNotFoundException;
 import com.codeball.model.Pitch;
 import com.codeball.services.PitchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PitchController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Pitch getPitchById(@PathVariable long id) {
-        return pitchService.getPitchById(id);
+        return pitchService.findPitchById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Secured("ROLE_ADMIN")

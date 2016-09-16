@@ -1,15 +1,17 @@
 package com.codeball.repositories;
 
 import com.codeball.model.User;
-import org.springframework.data.repository.CrudRepository;
+import com.codeball.repositories.types.CrudRepositoryWithOptionals;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepositoryWithOptionals<User, Long> {
 
     Long countByLastName(@Param("lastName") String lastName);
 
-    User findByEmail(@Param("email") String email);
+    Optional<User> findByEmail(@Param("email") String email);
 
 }

@@ -1,6 +1,6 @@
 package com.codeball.model;
 
-import com.codeball.repositories.EntityByIdResolver;
+import com.codeball.repositories.resolvers.EntityByIdResolver;
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.Lists;
 import lombok.*;

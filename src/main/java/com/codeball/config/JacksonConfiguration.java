@@ -1,6 +1,6 @@
 package com.codeball.config;
 
-import com.codeball.repositories.EntityByIdResolver;
+import com.codeball.repositories.resolvers.EntityByIdResolver;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.cfg.MapperConfig;

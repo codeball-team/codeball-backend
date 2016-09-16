@@ -1,5 +1,6 @@
 package com.codeball.controllers;
 
+import com.codeball.exceptions.GameNotFoundException;
 import com.codeball.model.User;
 import com.codeball.model.UserRole;
 import com.codeball.services.UserService;
@@ -31,7 +32,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUserById(@PathVariable long id) {
-        return userService.getUserById(id);
+        return userService.findUserById(id).orElseThrow(() -> new GameNotFoundException(id));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

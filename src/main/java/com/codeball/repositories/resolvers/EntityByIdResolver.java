@@ -1,4 +1,4 @@
-package com.codeball.repositories;
+package com.codeball.repositories.resolvers;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;

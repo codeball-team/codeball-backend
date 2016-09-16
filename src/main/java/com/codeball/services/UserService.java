@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,7 +20,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(long id) {
+    public Optional<User> findUserById(long id) {
         return userRepository.findOne(id);
     }
 
@@ -31,13 +31,13 @@ public class UserService {
 
     @Secured("ROLE_ADMIN")
     public User createAnyUser(User user) {
-        User existingUserByEmail = userRepository.findByEmail(user.getEmail());
-        if (Objects.isNull(existingUserByEmail)) {
-            user.setId(null);
-            return userRepository.save(user);
-        } else {
+        Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
+        if (existingUserByEmail.isPresent()) {
             throw new UserEmailAlreadyExistsException(user.getEmail());
         }
+
+        user.setId(null);
+        return userRepository.save(user);
     }
 
     public User updateUser(long id, User user) {

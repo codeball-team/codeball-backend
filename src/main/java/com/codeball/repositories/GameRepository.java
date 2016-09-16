@@ -1,22 +1,26 @@
 package com.codeball.repositories;
 
 import com.codeball.model.Game;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import com.codeball.repositories.types.PagingAndSortingRepositoryWithOptionals;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
+public interface GameRepository extends PagingAndSortingRepositoryWithOptionals<Game, Long> {
 
-    Game findTop1ByGameOverOrderByStartTimestampDesc(boolean gameOver);
+    Optional<Game> findTop1ByGameOverOrderByStartTimestampDesc(boolean gameOver);
 
-    Game findTop1ByGameOverOrderByStartTimestampAsc(boolean gameOver);
+    Optional<Game> findTop1ByGameOverOrderByStartTimestampAsc(boolean gameOver);
 
-    default Game findLastGame() {
+    default Optional<Game> findLastGame() {
         return this.findTop1ByGameOverOrderByStartTimestampDesc(true);
     }
 
-    default Game findUpcomingGame() {
+    default Optional<Game> findUpcomingGame() {
         return this.findTop1ByGameOverOrderByStartTimestampAsc(false);
     }
 
+    Iterable<Game> findAllByOrderByStartTimestampDesc();
+    
 }

@@ -5,6 +5,8 @@ import com.codeball.repositories.PitchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PitchService {
 
@@ -15,7 +17,7 @@ public class PitchService {
         return pitchRepository.findAll();
     }
 
-    public Pitch getPitchById(long id) {
+    public Optional<Pitch> findPitchById(long id) {
         return pitchRepository.findOne(id);
     }
 
