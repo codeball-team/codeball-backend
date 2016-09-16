@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import { PlayersListItem } from 'components/codeball';
+import { UsersListItem } from 'components/codeball';
 
 class GameEnrollmentListItem extends Component {
   static propTypes = {
@@ -18,7 +18,7 @@ class GameEnrollmentListItem extends Component {
     } = this.props;
 
     return (
-      <PlayersListItem
+      <UsersListItem
         user={user}
         className={classNames(
           'game-enrollment-list-item',
@@ -27,7 +27,7 @@ class GameEnrollmentListItem extends Component {
         <div className="enrollment-status">
           {enrollmentStatus}
         </div>
-      </PlayersListItem>
+      </UsersListItem>
     );
   }
 }

@@ -6,6 +6,7 @@ import IconCancel from 'react-icons/lib/io/ios-close-outline';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconEdit from 'react-icons/lib/io/ios-compose-outline';
 import IconEmail from 'react-icons/lib/io/ios-email-outline';
+import IconHourglass from './Icon/IconHourglass';
 import IconLayers from 'react-icons/lib/io/social-buffer';
 import IconLoad from 'react-icons/lib/io/load-d';
 import IconLocation from 'react-icons/lib/io/ios-location';
@@ -25,6 +26,7 @@ export default {
   clock: IconClock,
   edit: IconEdit,
   email: IconEmail,
+  hourglass: IconHourglass,
   layers: IconLayers,
   load: IconLoad,
   location: IconLocation,

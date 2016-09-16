@@ -56,6 +56,7 @@ export function newGameSubmit(newGame) {
     request: request('POST', gamesUrl())
       .send(JSON.stringify(data)),
     json: true,
+    debounce: true,
     startAction: NEW_GAME_SUBMIT,
     successAction: NEW_GAME_SUBMIT_SUCCESS,
     failureAction: NEW_GAME_SUBMIT_FAILURE,

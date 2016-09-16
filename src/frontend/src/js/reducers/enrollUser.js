@@ -20,7 +20,11 @@ export default reducer(initialState, {
 
   [GAME_ENROLL_USER_CHANGE_USER_ID]: (state, action) => {
     const { userId } = action;
-    return { ...state, userId };
+
+    return {
+      ...state,
+      userId
+    };
   },
 
   [GAME_ENROLL_USER_RESET]: () => initialState

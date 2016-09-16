@@ -1,52 +1,38 @@
 import React, { Component, PropTypes } from 'react';
-import { _ } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
+import { pitchesSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
-import { LoadableContent } from 'components/ui';
 import { PitchesListSection } from 'components/sections';
 import { ButtonAddPitch } from 'components/codeball';
 
 class Pitches extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    refreshDataIfNecessary: PropTypes.func.isRequired
-  };
-
-  componentWillMount = () => {
-    const {
-      refreshDataIfNecessary,
-      actions: { pitchesLoad },
-      pitchesData
-    } = this.props;
-    refreshDataIfNecessary(pitchesData, pitchesLoad);
+    pitches: PropTypes.array.isRequired
   };
 
   render() {
     const {
       hasPermission,
-      pitchesData: {
-        pitches,
-        isLoading: arePitchesLoading
-      }
+      pitches
     } = this.props;
 
     return (
-      <LoadableContent isLoading={arePitchesLoading}>
-        <section className="pitches">
-          <PitchesListSection
-            title={`Pitches (${pitches.length})`}
-            pitches={_(pitches).values()}
-            buttons={[
-              <ButtonAddPitch key="add" renderWhen={hasPermission(PERMISSION_ADD_PITCH)} />
-            ]} />
-        </section>
-      </LoadableContent>
+      <section>
+        <PitchesListSection
+          title={`Pitches (${pitches.length})`}
+          pitches={pitches}
+          buttons={[
+            <ButtonAddPitch key="add" renderWhen={hasPermission(PERMISSION_ADD_PITCH)} />
+          ]} />
+      </section>
     );
   }
 }
 
-export default ContainerComponent(Pitches, state => ({
-  pitchesData: state.pitchesData
-}));
+export default ContainerComponent(Pitches, {
+  mapStateToProps: pitchesSelector,
+  updateData: ({ actions }) => {
+    actions.pitchesLoad();
+  }
+});

@@ -57,6 +57,7 @@ export function newPitchSubmit(newPitch) {
     request: request('POST', pitchesUrl())
       .send(JSON.stringify(data)),
     json: true,
+    debounce: true,
     startAction: NEW_PITCH_SUBMIT,
     successAction: NEW_PITCH_SUBMIT_SUCCESS,
     failureAction: NEW_PITCH_SUBMIT_FAILURE,

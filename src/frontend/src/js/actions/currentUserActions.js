@@ -7,6 +7,7 @@ export function currentUserLoad() {
   return ajax(() => ({
     request: request('GET', currentUserUrl()),
     json: true,
+    throttle: true,
     startAction: CURRENT_USER_LOAD,
     successAction: CURRENT_USER_LOAD_SUCCESS,
     failureAction: CURRENT_USER_LOAD_FAILURE

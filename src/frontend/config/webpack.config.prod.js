@@ -20,8 +20,7 @@ const sassLoaders = [
 
 module.exports = {
   entry: {
-    app: path.resolve(PATHS.app, 'main.js'),
-    vendor: ['react']
+    app: path.resolve(PATHS.app, 'main.js')
   },
   output: {
     path: PATHS.build,
@@ -72,7 +71,6 @@ module.exports = {
         to: 'images'
       }
     ]),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
@@ -90,7 +88,7 @@ module.exports = {
   ],
   postcss: () => [
     autoprefixer({
-      browsers: ['last 2 versions']
+      browsers: ['> 0.1%']
     })
   ],
   devtool: 'source-map'

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { findById, safeGet } from 'utils';
 import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
+import { gameSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
-import { LoadableContent } from 'components/ui';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
 
@@ -10,30 +9,13 @@ export default function GenerateGame(getGameId) {
   class Game extends Component {
     static propTypes = {
       actions: PropTypes.object.isRequired,
-      currentUserData: PropTypes.object.isRequired,
-      gameData: PropTypes.object.isRequired,
+      game: PropTypes.object.isRequired,
+      hasGameLoaded: PropTypes.bool.isRequired,
       hasPermission: PropTypes.func.isRequired,
-      params: PropTypes.object.isRequired,
-      pitchesData: PropTypes.object.isRequired,
-      refreshDataIfNecessary: PropTypes.func.isRequired,
-      usersData: PropTypes.object.isRequired
-    };
-
-    componentWillMount = () => {
-      this.updateData({
-        ...this.props,
-        params: {
-          ...this.props.params,
-          gameId: getGameId(this.props)
-        }
-      });
-    };
-
-    componentWillReceiveProps = newProps => {
-      const gameIdPath = ['params', 'gameId'];
-      if (safeGet(newProps, gameIdPath) !== safeGet(this.props, gameIdPath)) {
-        this.updateData(newProps);
-      }
+      isGameEditing: PropTypes.bool.isRequired,
+      pitch: PropTypes.object.isRequired,
+      teamA: PropTypes.array.isRequired,
+      teamB: PropTypes.array.isRequired
     };
 
     onSave = () => {
@@ -41,119 +23,69 @@ export default function GenerateGame(getGameId) {
         actions: {
           gameSetScore
         },
-        gameData: {
-          editedGame: {
-            teamAScore,
-            teamBScore
-          },
-          game: {
-            id: gameId
-          }
+        game: {
+          id: gameId,
+          teamAScore,
+          teamBScore
         }
       } = this.props;
 
       gameSetScore(gameId, teamAScore, teamBScore);
-    }
-
-    updateData = props => {
-      const {
-        refreshDataIfNecessary,
-        actions: {
-          gameLoad,
-          pitchesLoad,
-          usersLoad
-        },
-        params: { gameId },
-        pitchesData,
-        usersData
-      } = props;
-
-      gameLoad(gameId);
-      refreshDataIfNecessary(pitchesData, pitchesLoad);
-      refreshDataIfNecessary(usersData, usersLoad);
     };
 
     render() {
       const {
-        hasPermission,
         actions: {
           gameEdit,
           gameEditCancel,
           gameEditScoreA,
           gameEditScoreB
         },
-        currentUserData: {
-          currentUser,
-          isLoading: isCurrentUserLoading
-        },
-        gameData: {
-          editedGame,
-          game,
-          game: {
-            pitchId,
-            teamA,
-            teamB
-          },
-          isEditing,
-          isLoading: isGameLoading,
-          hasLoaded: hasGameLoaded
-        },
-        pitchesData: {
-          pitches,
-          isLoading: arePitchesLoading
-        },
-        usersData: {
-          users,
-          isLoading: areUsersLoading
-        }
+        game,
+        hasGameLoaded,
+        hasPermission,
+        isGameEditing,
+        pitch,
+        teamA,
+        teamB
       } = this.props;
 
-      const pitch = findById(pitches, pitchId);
-
       return (
-        <LoadableContent
-          isLoading={[
-            arePitchesLoading,
-            areUsersLoading,
-            isCurrentUserLoading,
-            isGameLoading
-          ]}>
-          <section>
-            <GameNotLoaded
-              renderWhen={!hasGameLoaded}
-              canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
+        <section>
+          <GameNotLoaded
+            renderWhen={!hasGameLoaded}
+            canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
 
-            <GameScoreSection
-              renderWhen={hasGameLoaded}
-              title="Result"
-              canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
-              isEditable={true}
-              isEditing={isEditing}
-              pitch={pitch}
-              game={isEditing ? Object.assign({}, game, editedGame) : game}
-              onEdit={gameEdit}
-              onCancel={gameEditCancel}
-              onSave={this.onSave}
-              onEditGameScoreA={gameEditScoreA}
-              onEditGameScoreB={gameEditScoreB} />
+          <GameScoreSection
+            renderWhen={hasGameLoaded}
+            title="Result"
+            canEdit={hasPermission(PERMISSION_EDIT_GAME_SCORE)}
+            isEditable={true}
+            isEditing={isGameEditing}
+            pitch={pitch}
+            game={game}
+            onEdit={gameEdit}
+            onCancel={gameEditCancel}
+            onSave={this.onSave}
+            onEditGameScoreA={gameEditScoreA}
+            onEditGameScoreB={gameEditScoreB} />
 
-            <GameLineupSection
-              renderWhen={hasGameLoaded}
-              title="Lineups"
-              teamA={teamA}
-              teamB={teamB}
-              currentUser={currentUser}
-              users={users} />
-          </section>
-        </LoadableContent>
+          <GameLineupSection
+            renderWhen={hasGameLoaded}
+            title="Lineups"
+            teamA={teamA}
+            teamB={teamB} />
+        </section>
       );
     }
   }
 
-  return ContainerComponent(Game, state => ({
-    currentUserData: state.currentUserData,
-    gameData: state.gameData,
-    pitchesData: state.pitchesData,
-    usersData: state.usersData
-  }));
+  return ContainerComponent(Game, {
+    mapStateToProps: gameSelector,
+    updateData: ({ actions, ...props }) => {
+      actions.gameLoad(getGameId(props));
+      actions.pitchesLoad();
+      actions.usersLoad();
+    }
+  });
 }

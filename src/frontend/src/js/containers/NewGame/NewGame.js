@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { _ } from 'utils';
 import { PERMISSION_ADD_GAME } from 'constants';
+import { newGameSelector } from 'selectors/containers';
 import { NewGameModel } from 'models';
 import { ContainerComponent } from 'components/base';
-import { ButtonCancel, ButtonSave, LoadableContent } from 'components/ui';
+import { ButtonCancel, ButtonSave } from 'components/ui';
 import { NewGameSection } from 'components/sections';
 
 class NewGame extends Component {
@@ -11,29 +11,20 @@ class NewGame extends Component {
     actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
     newGame: PropTypes.object.isRequired,
-    pitchesData: PropTypes.object.isRequired,
-    refreshDataIfNecessary: PropTypes.func.isRequired
+    pitches: PropTypes.array.isRequired
   };
 
   componentWillMount = () => {
-    const {
-      refreshDataIfNecessary,
-      actions: {
-        newGameReset,
-        pitchesLoad
-      },
-      pitchesData
-    } = this.props;
-
-    newGameReset();
-    refreshDataIfNecessary(pitchesData, pitchesLoad);
+    const { actions: { newGameReset, redirect }, hasPermission } = this.props;
+    if (hasPermission(PERMISSION_ADD_GAME)) {
+      newGameReset();
+    } else {
+      redirect('/unauthorized');
+    }
   };
 
   onDateChange = date => {
-    const { actions: { newGameChangeDate, redirect }, hasPermission } = this.props;
-    if (!hasPermission(PERMISSION_ADD_GAME)) {
-      redirect('/unauthorized');
-    }
+    const { actions: { newGameChangeDate } } = this.props;
     newGameChangeDate(date);
   };
 
@@ -65,42 +56,39 @@ class NewGame extends Component {
   render() {
     const {
       newGame,
-      pitchesData: {
-        pitches,
-        isLoading: arePitchesLoading
-      }
+      pitches
     } = this.props;
 
     return (
-      <LoadableContent isLoading={arePitchesLoading}>
-        <section className="new-game">
-          <NewGameSection
-            title="New game"
-            newGame={newGame}
-            pitches={_(pitches).values()}
-            buttons={[
-              <ButtonCancel
-                key="cancel"
-                redirect="/games" />,
+      <section>
+        <NewGameSection
+          title="New game"
+          newGame={newGame}
+          pitches={pitches}
+          buttons={[
+            <ButtonCancel
+              key="cancel"
+              redirect="/games" />,
 
-              <ButtonSave
-                key="save"
-                isDisabled={!NewGameModel.isValid(newGame)}
-                onClick={this.onSubmit} />
-            ]}
-            onDateChange={this.onDateChange}
-            onDurationChange={this.onDurationChange}
-            onHourChange={this.onHourChange}
-            onMinuteChange={this.onMinuteChange}
-            onPitchIdChange={this.onPitchIdChange}
-            onSubmit={this.onSubmit} />
-        </section>
-      </LoadableContent>
+            <ButtonSave
+              key="save"
+              isDisabled={!NewGameModel.isValid(newGame)}
+              onClick={this.onSubmit} />
+          ]}
+          onDateChange={this.onDateChange}
+          onDurationChange={this.onDurationChange}
+          onHourChange={this.onHourChange}
+          onMinuteChange={this.onMinuteChange}
+          onPitchIdChange={this.onPitchIdChange}
+          onSubmit={this.onSubmit} />
+      </section>
     );
   }
 }
 
-export default ContainerComponent(NewGame, state => ({
-  newGame: state.newGame,
-  pitchesData: state.pitchesData
-}));
+export default ContainerComponent(NewGame, {
+  mapStateToProps: newGameSelector,
+  updateData: ({ actions }) => {
+    actions.pitchesLoad();
+  }
+});

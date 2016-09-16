@@ -50,6 +50,7 @@ export function newUserSubmit(newUser) {
     request: request('POST', usersUrl())
       .send(JSON.stringify(data)),
     json: true,
+    debounce: true,
     startAction: NEW_USER_SUBMIT,
     successAction: NEW_USER_SUBMIT_SUCCESS,
     failureAction: NEW_USER_SUBMIT_FAILURE,

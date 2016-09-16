@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_PITCH } from 'constants';
+import { newPitchSelector } from 'selectors/containers';
 import { NewPitchModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { NewPitchSection } from 'components/sections';
@@ -14,10 +15,11 @@ class NewPitch extends Component {
 
   componentWillMount = () => {
     const { actions: { newPitchReset, redirect }, hasPermission } = this.props;
-    if (!hasPermission(PERMISSION_ADD_PITCH)) {
+    if (hasPermission(PERMISSION_ADD_PITCH)) {
+      newPitchReset();
+    } else {
       redirect('/unauthorized');
     }
-    newPitchReset();
   };
 
   onAddressChange = address => {
@@ -54,7 +56,7 @@ class NewPitch extends Component {
     const { newPitch } = this.props;
 
     return (
-      <section className="new-pitch">
+      <section>
         <NewPitchSection
           title="New pitch"
           newPitch={newPitch}
@@ -79,6 +81,6 @@ class NewPitch extends Component {
   }
 }
 
-export default ContainerComponent(NewPitch, state => ({
-  newPitch: state.newPitch
-}));
+export default ContainerComponent(NewPitch, {
+  mapStateToProps: newPitchSelector
+});

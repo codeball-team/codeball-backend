@@ -7,7 +7,7 @@ const UserModel = model({
     lastName: undefined,
     email: undefined,
     pictureUrl: undefined,
-    role: undefined
+    role: 'ROLE_USER'
   }),
 
   fromServerFormat(serverResponse) {

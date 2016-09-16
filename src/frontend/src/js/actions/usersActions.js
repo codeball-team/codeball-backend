@@ -7,6 +7,7 @@ export function usersLoad() {
   return ajax(() => ({
     request: request('GET', usersUrl()),
     json: true,
+    throttle: true,
     startAction: USERS_LOAD,
     successAction: USERS_LOAD_SUCCESS,
     failureAction: USERS_LOAD_FAILURE

@@ -1,32 +1,32 @@
 import { Section } from 'components/ui';
 import {
+  GameEnrollUserForm,
   GameEnrollment,
   GameEnrollmentForm,
-  GameEnrollPlayerForm,
   GameInfo,
   GameLineup,
   GameScore,
   GamesList,
   NewGame,
   NewPitch,
-  NewPlayer,
+  NewUser,
   PitchesList,
   PitchInfo,
-  PlayerProfile,
-  PlayersList
+  UserProfile,
+  UsersList
 } from 'components/codeball';
 
+export const GameEnrollUserFormSection = Section(GameEnrollUserForm);
 export const GameEnrollmentSection = Section(GameEnrollment);
 export const GameEnrollmentFormSection = Section(GameEnrollmentForm);
-export const GameEnrollPlayerFormSection = Section(GameEnrollPlayerForm);
 export const GameInfoSection = Section(GameInfo);
 export const GameLineupSection = Section(GameLineup);
 export const GameScoreSection = Section(GameScore);
 export const GamesListSection = Section(GamesList);
 export const NewGameSection = Section(NewGame);
 export const NewPitchSection = Section(NewPitch);
-export const NewPlayerSection = Section(NewPlayer);
+export const NewUserSection = Section(NewUser);
 export const PitchesListSection = Section(PitchesList);
 export const PitchInfoSection = Section(PitchInfo);
-export const PlayerProfileSection = Section(PlayerProfile);
-export const PlayersListSection = Section(PlayersList);
+export const UserProfileSection = Section(UserProfile);
+export const UsersListSection = Section(UsersList);

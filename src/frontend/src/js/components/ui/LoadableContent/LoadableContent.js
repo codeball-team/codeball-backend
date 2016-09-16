@@ -1,33 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import { _, classNames } from 'utils';
+import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
 import './LoadableContent.scss';
 
 class LoadableContent extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    isLoading: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.bool),
-      PropTypes.bool
-    ]).isRequired
+    childProps: PropTypes.object,
+    ComponentClass: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired
+  };
+
+  static defaultProps = {
+    childProps: {}
   };
 
   render() {
-    const { children, className, isLoading } = this.props;
-    const loadingConditions = _([isLoading]).flatten();
-    const shouldRender = !loadingConditions.some(Boolean);
+    const { ComponentClass, childProps, isLoading } = this.props;
 
     return (
       <div
         className={classNames(
           'loadable-content',
           {
-            'is-loading': !shouldRender
-          },
-          className
+            'is-loading': isLoading
+          }
         )}>
-        {shouldRender && children}
+        {!isLoading && (
+          <ComponentClass {...childProps} />
+        )}
       </div>
     );
   }

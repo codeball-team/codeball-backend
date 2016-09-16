@@ -11,7 +11,6 @@ import {
   GAME_ENROLL_USER_RESET, GAME_ENROLL_USER_SUBMIT,
   GAME_ENROLL_USER_SUBMIT_FAILURE, GAME_ENROLL_USER_SUBMIT_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
-  GAME_SAVE, GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
   GAME_SET_SCORE, GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
 } from 'constants/actionTypes';
@@ -30,6 +29,7 @@ export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
     request: request('PUT', gameEnrollmentUrl(gameId))
       .send(`"${enrollmentStatus}"`),
     json: true,
+    debounce: true,
     startAction: GAME_CHANGE_ENROLLMENT_STATUS,
     successAction: GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
     failureAction: GAME_CHANGE_ENROLLMENT_STATUS_FAILURE,
@@ -45,6 +45,7 @@ export function gameCloseEnrollment(gameId) {
   return ajax(() => ({
     request: request('PUT', gameCloseEnrollmentUrl(gameId)),
     json: true,
+    throttle: true,
     startAction: GAME_CLOSE_ENROLLMENT,
     successAction: GAME_CLOSE_ENROLLMENT_SUCCESS,
     failureAction: GAME_CLOSE_ENROLLMENT_FAILURE,
@@ -58,6 +59,7 @@ export function gameDrawTeams(gameId) {
   return ajax(() => ({
     request: request('PUT', gameDrawTeamsUrl(gameId)),
     json: true,
+    throttle: true,
     startAction: GAME_DRAW_TEAMS,
     successAction: GAME_DRAW_TEAMS_SUCCESS,
     failureAction: GAME_DRAW_TEAMS_FAILURE,
@@ -123,6 +125,7 @@ export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
     request: request('PUT', gameEnrollmentUrl(gameId, userId))
       .send(`"${enrollmentStatus}"`),
     json: true,
+    debounce: true,
     startAction: GAME_ENROLL_USER_SUBMIT,
     successAction: GAME_ENROLL_USER_SUBMIT_SUCCESS,
     failureAction: GAME_ENROLL_USER_SUBMIT_FAILURE,
@@ -136,6 +139,7 @@ export function gameEnd(gameId) {
   return ajax(dispatch => ({
     request: request('PUT', gameEndUrl(gameId)),
     json: true,
+    throttle: true,
     startAction: GAME_END,
     successAction: GAME_END_SUCCESS,
     failureAction: GAME_END_FAILURE,
@@ -152,6 +156,7 @@ export function gameLoad(gameId) {
   return ajax(() => ({
     request: request('GET', gameUrl(gameId)),
     json: true,
+    debounce: true,
     startAction: GAME_LOAD,
     successAction: GAME_LOAD_SUCCESS,
     failureAction: GAME_LOAD_FAILURE,
@@ -161,22 +166,12 @@ export function gameLoad(gameId) {
   }));
 }
 
-export function gameSave(gameId, data) {
-  return ajax(() => ({
-    request: request('PUT', gameUrl(gameId))
-      .send(data),
-    json: true,
-    startAction: GAME_SAVE,
-    successAction: GAME_SAVE_SUCCESS,
-    failureAction: GAME_SAVE_FAILURE
-  }));
-}
-
 export function gameSetScore(gameId, teamAScore, teamBScore) {
   return ajax(() => ({
     request: request('PUT', gameSetScoreUrl(gameId))
       .send({ teamAScore, teamBScore }),
     json: true,
+    debounce: true,
     startAction: GAME_SET_SCORE,
     successAction: GAME_SET_SCORE_SUCCESS,
     failureAction: GAME_SET_SCORE_FAILURE
@@ -187,6 +182,7 @@ export function gamesLoad() {
   return ajax(() => ({
     request: request('GET', gamesUrl()),
     json: true,
+    throttle: true,
     startAction: GAMES_LOAD,
     successAction: GAMES_LOAD_SUCCESS,
     failureAction: GAMES_LOAD_FAILURE

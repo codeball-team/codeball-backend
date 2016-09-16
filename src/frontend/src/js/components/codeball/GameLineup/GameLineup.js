@@ -7,19 +7,15 @@ import './GameLineup.scss';
 class GameLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
-    currentUser: PropTypes.object.isRequired,
     teamA: PropTypes.array.isRequired,
-    teamB: PropTypes.array.isRequired,
-    users: PropTypes.array.isRequired
+    teamB: PropTypes.array.isRequired
   };
 
   render() {
     const {
       className,
-      currentUser,
       teamA,
-      teamB,
-      users
+      teamB
     } = this.props;
 
     return (
@@ -30,15 +26,11 @@ class GameLineup extends Component {
         )}>
         <TeamLineup
           teamName="Team A"
-          currentUser={currentUser}
-          users={users}
-          team={teamA} />
+          users={teamA} />
 
         <TeamLineup
           teamName="Team B"
-          currentUser={currentUser}
-          users={users}
-          team={teamB} />
+          users={teamB} />
       </div>
     );
   }

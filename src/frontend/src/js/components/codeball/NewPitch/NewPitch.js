@@ -3,7 +3,7 @@ import {
   MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY,
   PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
 } from 'constants';
-import { _, classNames } from 'utils';
+import { _, classNames, formatRange } from 'utils';
 import { NewPitchModel } from 'models';
 import { BaseComponent } from 'components/base';
 import { EditableText, Form, RangePicker, ValuePicker } from 'components/ui';
@@ -38,10 +38,7 @@ class NewPitch extends Component {
       onTypeChange,
       onSubmit
     } = this.props;
-
-    const capacity = minNumberOfPlayers === maxNumberOfPlayers
-      ? `${minNumberOfPlayers}`
-      : `${minNumberOfPlayers} - ${maxNumberOfPlayers}`;
+    const capacity = formatRange(minNumberOfPlayers, maxNumberOfPlayers);
 
     return (
       <div

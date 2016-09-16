@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import { Icon } from 'components/ui';
 import { PitchInfo } from 'components/codeball';
+import GameDate from './GameDate';
+import GameDuration from './GameDuration';
+import GameTime from './GameTime';
 import './GameInfo.scss';
 
 class GameInfo extends Component {
@@ -29,16 +31,9 @@ class GameInfo extends Component {
           'game-info',
           className
         )}>
-        <div className="ellipsis" title="Game date & time">
-          <Icon name="calendar" />
-          {date}, {time}
-        </div>
-
-        <div className="ellipsis" title="Game duration">
-          <Icon name="clock" />
-          {duration} min
-        </div>
-
+        <GameDate date={date} />
+        <GameTime time={time} />
+        <GameDuration duration={duration} />
         <PitchInfo pitch={pitch} />
       </div>
     );

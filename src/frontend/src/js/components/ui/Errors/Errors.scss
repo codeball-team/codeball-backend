@@ -23,6 +23,7 @@
     padding: $spacing-l;
     margin: $spacing-l 0;
     box-shadow: $shadow;
+    animation: 0.2s blink;
 
     &:first-child {
       margin-top: 0;
@@ -39,7 +40,6 @@
       .title {
         flex: 1 1 100%;
         font-size: $font-size-m;
-        padding-bottom: $spacing-s;
         margin-right: $spacing-l;
       }
 
@@ -50,7 +50,12 @@
     }
 
     .message {
+      margin-top: $spacing-s;
       word-wrap: break-word;
+
+      &:empty {
+        margin-top: 0;
+      }
     }
   }
 }

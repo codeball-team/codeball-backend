@@ -11,22 +11,38 @@ const initialState = new NewUserModel();
 export default reducer(initialState, {
   [NEW_USER_CHANGE_EMAIL]: (state, action) => {
     const { email } = action;
-    return { ...state, email };
+
+    return {
+      ...state,
+      email
+    };
   },
 
   [NEW_USER_CHANGE_FIRST_NAME]: (state, action) => {
     const { firstName } = action;
-    return { ...state, firstName };
+
+    return {
+      ...state,
+      firstName
+    };
   },
 
   [NEW_USER_CHANGE_LAST_NAME]: (state, action) => {
     const { lastName } = action;
-    return { ...state, lastName };
+
+    return {
+      ...state,
+      lastName
+    };
   },
 
   [NEW_USER_CHANGE_ROLE]: (state, action) => {
     const { role } = action;
-    return { ...state, role };
+
+    return {
+      ...state,
+      role
+    };
   },
 
   [NEW_USER_RESET]: () => initialState

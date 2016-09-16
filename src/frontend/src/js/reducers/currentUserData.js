@@ -17,7 +17,11 @@ export default ajaxReducer(
     [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
       const responseUser = safeGet(action, ['response', 'body'], {});
       const currentUser = UserModel.fromServerFormat(responseUser);
-      return { ...initialState, currentUser };
+
+      return {
+        ...initialState,
+        currentUser
+      };
     }
   }
 );

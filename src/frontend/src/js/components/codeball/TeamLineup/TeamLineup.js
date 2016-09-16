@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { classNames, findById, sortByMany } from 'utils';
+import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
-import { PlayersList } from 'components/codeball';
+import { UsersList } from 'components/codeball';
 import './TeamLineup.scss';
 
 class TeamLineup extends Component {
   static propTypes = {
     className: PropTypes.string,
-    currentUser: PropTypes.object.isRequired,
-    team: PropTypes.array.isRequired,
     teamName: PropTypes.string.isRequired,
     users: PropTypes.array.isRequired
   };
@@ -16,14 +14,9 @@ class TeamLineup extends Component {
   render() {
     const {
       className,
-      currentUser,
-      team,
       teamName,
       users
     } = this.props;
-
-    const teamUsers = team.map(userId => findById(users, userId, null)).filter(Boolean);
-    const sortedTeamUsers = sortByMany(teamUsers, ['lastName', 'firstName']);
 
     return (
       <div
@@ -36,9 +29,7 @@ class TeamLineup extends Component {
           {teamName}
         </div>
 
-        <PlayersList
-          users={sortedTeamUsers}
-          currentUser={currentUser} />
+        <UsersList users={users} />
       </div>
     );
   }

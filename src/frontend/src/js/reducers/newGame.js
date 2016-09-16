@@ -10,27 +10,46 @@ const initialState = new NewGameModel();
 export default reducer(initialState, {
   [NEW_GAME_CHANGE_DATE]: (state, action) => {
     const { date } = action;
-    return { ...state, date };
+
+    return {
+      ...state,
+      date
+    };
   },
 
   [NEW_GAME_CHANGE_DURATION]: (state, action) => {
     const { duration } = action;
-    return { ...state, duration };
+
+    return {
+      ...state,
+      duration
+    };
   },
 
   [NEW_GAME_CHANGE_HOUR]: (state, action) => {
     const { hour } = action;
-    return { ...state, hour };
+    return {
+      ...state,
+      hour
+    };
   },
 
   [NEW_GAME_CHANGE_MINUTE]: (state, action) => {
     const { minute } = action;
-    return { ...state, minute };
+
+    return {
+      ...state,
+      minute
+    };
   },
 
   [NEW_GAME_CHANGE_PITCH_ID]: (state, action) => {
     const { pitchId } = action;
-    return { ...state, pitchId };
+
+    return {
+      ...state,
+      pitchId
+    };
   },
 
   [NEW_GAME_RESET]: () => initialState

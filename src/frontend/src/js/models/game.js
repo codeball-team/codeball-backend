@@ -6,6 +6,7 @@ import {
 
 const GameModel = model({
   defaultAttributes: () => ({
+    id: undefined,
     date: '1970/01/01',
     time: '00:00',
     duration: 0,

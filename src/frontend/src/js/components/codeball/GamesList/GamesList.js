@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames, findById } from 'utils';
 import { BaseComponent } from 'components/base';
-import { Link, List, ListItem } from 'components/ui';
+import { List } from 'components/ui';
+import { GamesListItem } from 'components/codeball';
 import './GamesList.scss';
 
 class GamesList extends Component {
@@ -9,8 +10,7 @@ class GamesList extends Component {
     className: PropTypes.string,
     formatUrl: PropTypes.func.isRequired,
     games: PropTypes.array.isRequired,
-    pitches: PropTypes.array.isRequired,
-    users: PropTypes.array.isRequired
+    pitches: PropTypes.array.isRequired
   };
 
   render() {
@@ -28,33 +28,15 @@ class GamesList extends Component {
           className
         )}>
         {games.map(game => {
-          const {
-            id,
-            date,
-            pitchId,
-            teamAScore,
-            teamBScore,
-            time
-          } = game;
+          const { id, pitchId } = game;
           const pitch = findById(pitches, pitchId);
-          const { name: pitchName } = pitch;
 
           return (
-            <Link key={id} to={formatUrl(id)}>
-              <ListItem className="games-list-item">
-                <div className="date-time ellipsis">
-                  {date} {time}
-                </div>
-
-                <div className="pitch ellipsis">
-                  {pitchName}
-                </div>
-
-                <div className="score">
-                  {teamAScore} : {teamBScore}
-                </div>
-              </ListItem>
-            </Link>
+            <GamesListItem
+              key={id}
+              formatUrl={formatUrl}
+              game={game}
+              pitch={pitch} />
           );
         })}
       </List>

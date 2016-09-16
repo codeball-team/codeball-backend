@@ -1,6 +1,5 @@
 import { _ } from 'utils';
 
-export const DATA_INVALIDATION_TIME = 1000;
 export const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
 
 export const DATE_FORMAT = 'YYYY/MM/DD (ddd)';

@@ -18,8 +18,7 @@ const sassLoaders = [
 module.exports = {
   env: process.env.NODE_ENV,
   entry: {
-    app: path.resolve(PATHS.app, 'main.js'),
-    vendor: ['react']
+    app: path.resolve(PATHS.app, 'main.js')
   },
   output: {
     path: PATHS.build,
@@ -60,7 +59,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
@@ -71,7 +69,7 @@ module.exports = {
   ],
   postcss: () => [
     autoprefixer({
-      browsers: ['last 2 versions']
+      browsers: ['> 0.1%']
     })
   ],
   devServer: {
@@ -79,5 +77,5 @@ module.exports = {
     port: 8008,
     historyApiFallback: true
   },
-  devtool: 'eval'
+  devtool: 'cheap-source-map'
 };

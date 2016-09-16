@@ -1,6 +1,6 @@
 import { reducer } from 'utils';
 import {
-  AJAX_ERROR_ACKNOWLEDGE,
+  AJAX_ABORT, AJAX_ERROR_ACKNOWLEDGE,
   AJAX_START, AJAX_FAILURE, AJAX_SUCCESS
 } from 'constants/actionTypes';
 
@@ -10,6 +10,11 @@ const initialState = {
 };
 
 export default reducer(initialState, {
+  [AJAX_ABORT]: state => ({
+    ...state,
+    numberOfPendingRequests: state.numberOfPendingRequests - 1
+  }),
+
   [AJAX_ERROR_ACKNOWLEDGE]: (state, action) => {
     const { errorIndex } = action;
     const { errors } = state;

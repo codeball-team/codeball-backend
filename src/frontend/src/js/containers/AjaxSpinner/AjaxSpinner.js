@@ -1,23 +1,24 @@
 import React, { Component, PropTypes } from 'react';
+import { ajaxSpinnerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { Spinner } from 'components/ui';
 
 class AjaxSpinner extends Component {
   static propTypes = {
-    numberOfPendingRequests: PropTypes.number.isRequired
+    areTherePendingRequests: PropTypes.bool.isRequired
   };
 
   render() {
-    const { numberOfPendingRequests } = this.props;
+    const { areTherePendingRequests } = this.props;
 
     return (
       <Spinner
         placement="fixed"
-        show={numberOfPendingRequests > 0} />
+        show={areTherePendingRequests} />
     );
   }
 }
 
-export default ContainerComponent(AjaxSpinner, state => ({
-  numberOfPendingRequests: state.ajaxRequests.numberOfPendingRequests
-}));
+export default ContainerComponent(AjaxSpinner, {
+  mapStateToProps: ajaxSpinnerSelector
+});

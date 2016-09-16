@@ -1,69 +1,48 @@
 import React, { Component, PropTypes } from 'react';
+import { findById } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
-import { findById, safeGet } from 'utils';
+import { pitchSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
-import { LoadableContent } from 'components/ui';
 import { PitchInfoSection } from 'components/sections';
 import { PitchNotLoaded } from 'components/codeball';
 
 class Pitch extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired,
     hasPermission: PropTypes.func.isRequired,
-    params: PropTypes.object,
-    pitchesData: PropTypes.object.isRequired,
-    refreshDataIfNecessary: PropTypes.func.isRequired
-  };
-
-  componentWillMount = () => {
-    this.updateData();
-  };
-
-  componentWillReceiveProps = newProps => {
-    const pitchIdPath = ['params', 'pitchId'];
-    if (safeGet(newProps, pitchIdPath) !== safeGet(this.props, pitchIdPath)) {
-      this.updateData();
-    }
-  };
-
-  updateData = () => {
-    const {
-      refreshDataIfNecessary,
-      actions: { pitchesLoad },
-      pitchesData
-    } = this.props;
-    refreshDataIfNecessary(pitchesData, pitchesLoad);
+    hasPitchLoaded: PropTypes.bool.isRequired,
+    params: PropTypes.object.isRequired,
+    pitches: PropTypes.array.isRequired
   };
 
   render() {
     const {
       hasPermission,
-      params: { pitchId },
-      pitchesData: {
-        pitches,
-        hasLoaded: hasPlayerLoaded,
-        isLoading: arePitchesLoading
-      }
+      hasPitchLoaded,
+      params: { id: pitchId },
+      pitches
     } = this.props;
 
     const pitch = findById(pitches, Number(pitchId));
-    const name = safeGet(pitch, ['name']);
+    const { name } = pitch;
 
     return (
-      <LoadableContent isLoading={arePitchesLoading}>
+      <section>
         <PitchNotLoaded
-          renderWhen={!hasPlayerLoaded}
+          renderWhen={!hasPitchLoaded}
           canAddNew={hasPermission(PERMISSION_ADD_PITCH)} />
 
         <PitchInfoSection
-          renderWhen={hasPlayerLoaded}
+          renderWhen={hasPitchLoaded}
           title={name}
           pitch={pitch} />
-      </LoadableContent>
+      </section>
     );
   }
 }
 
-export default ContainerComponent(Pitch, state => ({
-  pitchesData: state.pitchesData
-}));
+export default ContainerComponent(Pitch, {
+  mapStateToProps: pitchSelector,
+  updateData: ({ actions }) => {
+    actions.pitchesLoad();
+  }
+});

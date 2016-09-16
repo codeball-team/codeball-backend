@@ -6,7 +6,6 @@ import {
   GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B,
   GAME_END_SUCCESS, GAME_ENROLL_USER_SUBMIT_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
-  GAME_SAVE_FAILURE, GAME_SAVE_SUCCESS,
   GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
   NEW_GAME_SUBMIT, NEW_GAME_SUBMIT_FAILURE, NEW_GAME_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
@@ -47,6 +46,7 @@ export default ajaxReducer(
 
     [GAME_EDIT_SCORE_A]: (state, action) => {
       const { teamAScore } = action;
+
       return {
         ...state,
         editedGame: {
@@ -58,6 +58,7 @@ export default ajaxReducer(
 
     [GAME_EDIT_SCORE_B]: (state, action) => {
       const { teamBScore } = action;
+
       return {
         ...state,
         editedGame: {
@@ -72,10 +73,6 @@ export default ajaxReducer(
     [GAME_ENROLL_USER_SUBMIT_SUCCESS]: gameLoaded,
 
     [GAME_LOAD_SUCCESS]: gameLoaded,
-
-    [GAME_SAVE_FAILURE]: continueEditing,
-
-    [GAME_SAVE_SUCCESS]: gameLoaded,
 
     [GAME_SET_SCORE_SUCCESS]: gameLoaded,
 
@@ -92,9 +89,16 @@ export default ajaxReducer(
 function gameLoaded(state, action) {
   const responseGame = safeGet(action, ['response', 'body'], {});
   const game = GameModel.fromServerFormat(responseGame);
-  return { ...initialState, game };
+
+  return {
+    ...initialState,
+    game
+  };
 }
 
 function continueEditing(state) {
-  return { ...state, isEditing: true };
+  return {
+    ...state,
+    isEditing: true
+  };
 }

@@ -29,7 +29,7 @@ class PitchInfo extends Component {
     return (
       <div
         className={classNames(
-          'pitch',
+          'pitch-info',
           className
         )}>
         <PitchAddress address={address} />

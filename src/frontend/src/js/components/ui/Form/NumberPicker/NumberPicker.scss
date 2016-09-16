@@ -19,6 +19,7 @@
     display: inline-block;
     width: 41px;
     text-align: center;
+    padding: $spacing-xs 0;
 
     @include phone {
       width: 39px;

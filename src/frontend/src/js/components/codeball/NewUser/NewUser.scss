@@ -1,0 +1,8 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.new-user {
+  .role-picker {
+    justify-content: initial;
+  }
+}

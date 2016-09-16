@@ -1,11 +1,12 @@
 export _ from 'underscore';
-export ajax from './ajax';
-export ajaxReducer from './ajaxReducer';
+
+export * from 'utils/ajax';
+
 export classNames from 'classnames';
 export findById from './findById';
 export findLabelByValue from './findLabelByValue';
+export formatRange from './formatRange';
 export getDomain from './getDomain';
-export isDataInvalidated from './isDataInvalidated';
 export model from './model';
 export moment from 'moment';
 export now from './now';

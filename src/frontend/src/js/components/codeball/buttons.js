@@ -12,7 +12,7 @@ export const ButtonAddPitch = IconButton({
   redirect: '/pitches/new'
 });
 
-export const ButtonAddPlayer = IconButton({
+export const ButtonAddUser = IconButton({
   icon: 'add',
   label: 'Add',
   redirect: '/players/new'

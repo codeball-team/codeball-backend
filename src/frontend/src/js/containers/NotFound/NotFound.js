@@ -7,6 +7,7 @@ export default class NotFound extends Component {
         <h1 className="fg-danger">
           Error 404 :(
         </h1>
+
         <p>
           {window.location.hash} not found!
         </p>

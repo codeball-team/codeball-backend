@@ -356,6 +356,7 @@ module.exports = {
         "ignoreCase": true,
         "callbacksLast": true
     }],
+    "react/unused-prop-types": "error",
     "react/wrap-multilines": "error",
 
     // JSX-specific rules
