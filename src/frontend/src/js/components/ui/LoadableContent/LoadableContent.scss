@@ -3,7 +3,7 @@
 
 .loadable-content {
   opacity: 1;
-  animation: 0.2s blink;
+  animation: 0.1s blink;
 
   &.is-loading {
     animation: none;
