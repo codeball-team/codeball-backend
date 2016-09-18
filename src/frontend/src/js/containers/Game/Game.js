@@ -82,7 +82,9 @@ export default function GenerateGame(getGameId) {
 
   return ContainerComponent(Game, {
     mapStateToProps: gameSelector,
+    periodicDataUpdates: true,
     updateData: ({ actions, ...props }) => {
+      actions.currentUserLoad();
       actions.gameLoad(getGameId(props));
       actions.pitchesLoad();
       actions.usersLoad();

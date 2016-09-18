@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { _ } from 'utils';
+import PureRenderComponent from './PureRenderComponent';
 
-export default function BaseComponent(ComponentClass) {
-  return class EnhancedComponent extends Component {
+export default function ConditionalRender(ComponentClass) {
+  class EnhancedComponent extends Component {
     static propTypes = {
       renderWhen: PropTypes.oneOfType([
         PropTypes.array,
@@ -27,5 +28,7 @@ export default function BaseComponent(ComponentClass) {
         <ComponentClass {...restProps} />
       );
     }
-  };
+  }
+
+  return PureRenderComponent(EnhancedComponent);
 }

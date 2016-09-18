@@ -35,6 +35,7 @@ class Users extends Component {
 
 export default ContainerComponent(Users, {
   mapStateToProps: usersSelector,
+  periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
     actions.usersLoad();

@@ -2,13 +2,10 @@ import ConditionalRender from './ConditionalRender';
 import PureRenderComponent from './PureRenderComponent';
 
 const baseDecorators = [
-  ConditionalRender,
-  PureRenderComponent
+  PureRenderComponent,
+  ConditionalRender
 ];
 
 export default function BaseComponent(ComponentClass) {
-  return baseDecorators.reduce(
-    (BaseComponentClass, decorator) => decorator(BaseComponentClass),
-    ComponentClass
-  );
+  return ConditionalRender(PureRenderComponent(ComponentClass));
 }

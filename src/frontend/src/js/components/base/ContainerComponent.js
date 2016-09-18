@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { _, safeGet } from 'utils';
-import { ROLE_USER, ROLES_PERMISSIONS } from 'constants';
+import { _, periodicCallback, safeGet } from 'utils';
+import { AUTO_REFRESH_DELAY, ROLE_USER, ROLES_PERMISSIONS } from 'constants';
 import * as actions from 'actions';
 import { LoadableContent } from 'components/ui';
 import PureRenderComponent from './PureRenderComponent';
 
-export default function ContainerComponent(ComponentClass, options = {}) {
+export default function ContainerComponent(ComponentClass, options) {
   const {
-    mapStateToProps = () => ({}),
-    updateData = _.noop
-  } = options;
-  const doesNotNeedUpdatingData = updateData === _.noop;
+    doesNotNeedUpdatingData,
+    mapStateToProps,
+    periodicUpdateData,
+    updateData
+  } = handleOptions(options);
 
   class Container extends Component {
     static propTypes = {
@@ -24,15 +25,21 @@ export default function ContainerComponent(ComponentClass, options = {}) {
     };
 
     componentWillMount = () => {
-      updateData(this.props);
+      periodicUpdateData.start(this.updateDataCallback(this.props));
     };
 
     componentWillReceiveProps = newProps => {
       const idPath = ['params', 'id'];
       if (safeGet(newProps, idPath) !== safeGet(this.props, idPath)) {
-        updateData(newProps);
+        periodicUpdateData.restart(this.updateDataCallback(newProps));
       }
     };
+
+    componentWillUnmount = () => {
+      periodicUpdateData.end();
+    };
+
+    updateDataCallback = props => () => updateData(props);
 
     render() {
       const { isLoading, ...childProps } = this.props;
@@ -50,6 +57,29 @@ export default function ContainerComponent(ComponentClass, options = {}) {
     enhanceProps(mapStateToProps),
     mapDispatchToProps
   )(PureRenderComponent(Container));
+}
+
+function handleOptions(options = {}) {
+  const {
+    mapStateToProps = () => ({}),
+    periodicDataUpdates = false,
+    updateData = _.noop
+  } = options;
+
+  return {
+    doesNotNeedUpdatingData: updateData === _.noop,
+    mapStateToProps,
+    periodicUpdateData: applyPeriodicUpdates(periodicDataUpdates),
+    updateData
+  };
+}
+
+function applyPeriodicUpdates(periodicDataUpdates) {
+  if (periodicDataUpdates) {
+    return periodicCallback(AUTO_REFRESH_DELAY);
+  }
+
+  return periodicCallback();
 }
 
 function enhanceProps(mapStateToProps) {

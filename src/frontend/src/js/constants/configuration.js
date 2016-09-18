@@ -1,5 +1,6 @@
 import { _ } from 'utils';
 
+export const AUTO_REFRESH_DELAY = 10000;
 export const USER_MISSING_PICTURE_URL = '/images/user-missing-picture.png';
 
 export const DATE_FORMAT = 'YYYY/MM/DD (ddd)';

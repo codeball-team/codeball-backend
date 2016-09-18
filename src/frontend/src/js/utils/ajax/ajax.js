@@ -27,7 +27,7 @@ export default function ajax(getParams) {
       failureCallback,
       actionsData = {}
     } = options;
-    const time = now();
+    const timestamp = now();
 
     applyRequestOptions(requestOptionsHandlers, request, options);
     applyRequestEnhancers(requestManagerHandlers, request, options).then(() => {
@@ -41,7 +41,7 @@ export default function ajax(getParams) {
           dispatch({
             type: failureAction,
             ...actionsData,
-            time,
+            timestamp,
             response: body
           });
           dispatch({
@@ -53,7 +53,7 @@ export default function ajax(getParams) {
           dispatch({
             type: successAction,
             ...actionsData,
-            time,
+            timestamp,
             response
           });
           dispatch({ type: AJAX_SUCCESS });
@@ -63,7 +63,7 @@ export default function ajax(getParams) {
 
       request.xhr.onabort = () => {
         dispatch({ type: AJAX_ABORT });
-        dispatch({ type: failureAction, time });
+        dispatch({ type: failureAction, timestamp });
       };
 
       dispatch({

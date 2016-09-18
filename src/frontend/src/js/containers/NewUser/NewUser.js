@@ -80,5 +80,8 @@ class NewUser extends Component {
 }
 
 export default ContainerComponent(NewUser, {
-  mapStateToProps: newUserSelector
+  mapStateToProps: newUserSelector,
+  updateData: ({ actions }) => {
+    actions.currentUserLoad();
+  }
 });

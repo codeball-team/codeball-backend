@@ -1,34 +1,22 @@
 import { _ } from 'utils';
 
-export default function safeGet(source, path = [], defaultValue = undefined) {
-  return path.reduce((result, attribute, attributeIndex) => {
-    const isLastAttribute = attributeIndex === path.length - 1;
-
-    if ([
-      result === defaultValue,
-      isLastAttribute && shouldReturnDefaultValue(result, attribute, defaultValue),
-      !canGetDeeper(result, attribute)
-    ].some(Boolean)) {
-      return defaultValue;
-    }
-
-    return result[attribute];
-  }, source);
+export default function safeGet(object, path = [], defaultValue = undefined) {
+  const result = baseGet(object, path);
+  return result === undefined ? defaultValue : result;
 }
 
-function shouldReturnDefaultValue(currentValue, attribute, defaultValue) {
-  if (!canGetDeeper(currentValue, attribute)) {
-    return true;
+function baseGet(object, path) {
+  let currentObject = object;
+  let index = 0;
+  const { length } = path;
+
+  while (index < length && canGetDeeper(currentObject, path[index])) {
+    currentObject = currentObject[path[index++]];
   }
 
-  const value = currentValue[attribute];
-  const defaultValueType = typeof defaultValue;
-  return [
-    value === null,
-    !['undefined', typeof value].includes(defaultValueType)
-  ].some(Boolean);
+  return (index && index === length) ? currentObject : undefined;
 }
 
-function canGetDeeper(currentValue, attribute) {
-  return _(currentValue).has(attribute);
+function canGetDeeper(object, attribute) {
+  return _(object).has(attribute);
 }

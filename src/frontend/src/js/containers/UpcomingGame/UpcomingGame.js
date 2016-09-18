@@ -192,6 +192,7 @@ export default function GenerateUpcomingGame(getGameId) {
 
   return ContainerComponent(UpcomingGame, {
     mapStateToProps: upcomingGameSelector,
+    periodicDataUpdates: true,
     updateData: ({ actions, ...props }) => {
       actions.currentUserLoad();
       actions.gameLoad(getGameId(props));

@@ -14,18 +14,37 @@ class LoadableContent extends Component {
     childProps: {}
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasBeenFullyLoaded: false
+    };
+  };
+
+  componentWillReceiveProps = newProps => {
+    const { hasBeenFullyLoaded } = this.state;
+    if (!hasBeenFullyLoaded) {
+      const { isLoading: wasLoading } = this.props;
+      const { isLoading } = newProps;
+      const hasFinishedLoading = wasLoading && !isLoading;
+      this.setState({ hasBeenFullyLoaded: hasFinishedLoading });
+    }
+  };
+
   render() {
     const { ComponentClass, childProps, isLoading } = this.props;
+    const { hasBeenFullyLoaded } = this.state;
+    const displayLoadingState = !hasBeenFullyLoaded && isLoading;
 
     return (
       <div
         className={classNames(
           'loadable-content',
           {
-            'is-loading': isLoading
+            'is-loading': displayLoadingState
           }
         )}>
-        {!isLoading && (
+        {!displayLoadingState && (
           <ComponentClass {...childProps} />
         )}
       </div>

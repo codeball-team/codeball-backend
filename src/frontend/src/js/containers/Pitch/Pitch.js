@@ -42,7 +42,9 @@ class Pitch extends Component {
 
 export default ContainerComponent(Pitch, {
   mapStateToProps: pitchSelector,
+  periodicDataUpdates: true,
   updateData: ({ actions }) => {
+    actions.currentUserLoad();
     actions.pitchesLoad();
   }
 });
