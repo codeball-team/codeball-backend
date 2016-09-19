@@ -14,14 +14,11 @@
 
   .page-menu {
     @include content-scrolling;
-    flex: 0 0 auto;
-    min-height: 100%;
   }
 
   .page-content-container {
     @include content-scrolling;
-    flex: 1 1 auto;
-    min-height: 100%;
+    flex: 1;
     padding: $spacing-xxl $spacing-xxxl;
     background-color: $content-bg-color;
     color: $content-fg-color;

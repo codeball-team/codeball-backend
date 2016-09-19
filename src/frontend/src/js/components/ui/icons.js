@@ -3,6 +3,7 @@ import IconAdd from 'react-icons/lib/io/plus';
 import IconAlarm from 'react-icons/lib/io/ios-alarm-outline';
 import IconCalendar from 'react-icons/lib/io/ios-calendar-outline';
 import IconCancel from 'react-icons/lib/io/ios-close-outline';
+import IconClipboard from 'react-icons/lib/io/clipboard';
 import IconClock from 'react-icons/lib/io/ios-time-outline';
 import IconEdit from 'react-icons/lib/io/ios-compose-outline';
 import IconEmail from 'react-icons/lib/io/ios-email-outline';
@@ -23,6 +24,7 @@ export default {
   alarm: IconAlarm,
   calendar: IconCalendar,
   cancel: IconCancel,
+  clipboard: IconClipboard,
   clock: IconClock,
   edit: IconEdit,
   email: IconEmail,

@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexRedirect, IndexRoute, Redirect, Route } from 'react-router';
 
 import App from 'components/App';
+import Changelog from 'containers/Changelog/Changelog';
 import Game from 'containers/Game/Game';
 import Games from 'containers/Games/Games';
 import NewGame from 'containers/NewGame/NewGame';
@@ -19,8 +20,9 @@ export default (
   <Route key="app" path="/" component={App}>
     <IndexRedirect to="/upcoming-game" />
     <Route path="404" component={NotFound} />
-    <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
+    <Route path="changelog" component={Changelog} />
     <Route path="last-game" component={Game(() => 'last')} />
+    <Route path="upcoming-game" component={UpcomingGame(() => 'upcoming')} />
     <Route path="games">
       <IndexRoute component={Games} />
       <Route path="new" component={NewGame} />

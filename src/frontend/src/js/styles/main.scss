@@ -41,9 +41,21 @@ h1 {
 }
 
 h2 {
-  font-size: $font-size-xl;
+  font-size: $font-size-l;
   font-weight: 300;
   margin-top: 0;
+}
+
+h3 {
+  font-size: $font-size-m;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin: $spacing-xl 0;
 }
 
 .ellipsis {
