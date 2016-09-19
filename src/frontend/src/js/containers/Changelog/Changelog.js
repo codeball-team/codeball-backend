@@ -5,15 +5,62 @@ class Changelog extends Component {
   render() {
     return (
       <section>
-        {release1()}
-        <hr />
         {release2()}
+        <hr />
+        {release1()}
       </section>
     );
   }
 }
 
-export default ContainerComponent(Changelog);
+function release2() {
+  return (
+    <div>
+      <h2>Relase 2 (2016/10/04)</h2>
+      <h3>Features</h3>
+      <ul>
+        <li>Auto-refreshing data every 10 seconds</li>
+        <li>Changelog</li>
+      </ul>
+
+      <h3>Bugfixes</h3>
+      <ul>
+        <li>Backend</li>
+        <ul>
+          <li>TODO</li>
+        </ul>
+
+        <li>Frontend</li>
+        <ul>
+          <li>Removing Team Lineup sorting</li>
+          <li>Fixing invisible Team Lineup component on iOS</li>
+          <li>Minor UI improvements</li>
+        </ul>
+      </ul>
+
+      <h3>Technical improvements</h3>
+      <ul>
+        <li>Backend</li>
+        <ul>
+          <li>TODO</li>
+        </ul>
+
+        <li>Frontend</li>
+        <ul>
+          <li>Severe refactoring</li>
+          <li>Microsoft Edge & Microsoft Internet Explorer support</li>
+          <li>Improving frontend performance</li>
+          <ul>
+            <li>Avoiding redundant AJAX calls</li>
+            <li>Computing API response hashes to detect and avoid redundant in-memory re-renders</li>
+            <li>Introducing reselect library</li>
+          </ul>
+          <li>Updating frontend libraries</li>
+        </ul>
+      </ul>
+    </div>
+  );
+}
 
 function release1() {
   return (
@@ -55,49 +102,5 @@ function release1() {
   );
 }
 
-function release2() {
-  return (
-    <div>
-      <h2>Relase 2 (2016/10/04)</h2>
-      <h3>Features</h3>
-      <ul>
-        <li>Auto-refreshing data every 10 seconds</li>
-        <li>Changelog</li>
-      </ul>
+export default ContainerComponent(Changelog);
 
-      <h3>Bugfixes</h3>
-      <ul>
-        <li>Backend</li>
-        <ul>
-          <li>TODO</li>
-        </ul>
-        <li>Frontend</li>
-        <ul>
-          <li>Removing Team Lineup sorting</li>
-          <li>Fixing invisible Team Lineup component on iOS</li>
-          <li>Minor UI improvements</li>
-        </ul>
-      </ul>
-
-      <h3>Technical improvements</h3>
-      <ul>
-        <li>Backend</li>
-        <ul>
-          <li>TODO</li>
-        </ul>
-        <li>Frontend</li>
-        <ul>
-          <li>Severe refactoring</li>
-          <li>Microsoft Edge & Microsoft Internet Explorer support</li>
-          <li>Improving frontend performance</li>
-          <ul>
-            <li>Avoiding redundant AJAX calls</li>
-            <li>Computing API response hashes to detect and avoid redundant in-memory re-renders</li>
-            <li>Introducing reselect library</li>
-          </ul>
-          <li>Updating frontend libraries</li>
-        </ul>
-      </ul>
-    </div>
-  );
-}
