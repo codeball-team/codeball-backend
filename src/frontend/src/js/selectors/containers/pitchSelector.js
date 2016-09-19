@@ -1,20 +1,20 @@
 import { createSelector } from 'reselect';
 import {
   isLoadingSelector,
-  isPitchesDataLoadingSelector
+  isPitchDataLoadingSelector
 } from 'selectors/isLoading';
 
 const isPitchLoadingSelector = isLoadingSelector(
-  isPitchesDataLoadingSelector
+  isPitchDataLoadingSelector
 );
 
 export default createSelector(
   isPitchLoadingSelector,
-  state => state.pitchesData,
+  state => state.pitchData,
 
-  (isPitchLoading, pitchesData) => ({
+  (isPitchLoading, pitchData) => ({
     isLoading: isPitchLoading,
-    hasPitchLoaded: pitchesData.hasLoaded,
-    pitches: pitchesData.pitches
+    hasPitchLoaded: pitchData.hasLoaded,
+    pitch: pitchData.pitch
   })
 );

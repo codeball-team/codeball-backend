@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { findById } from 'utils';
 import { PERMISSION_ADD_PITCH } from 'constants';
 import { pitchSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
@@ -10,20 +9,18 @@ class Pitch extends Component {
   static propTypes = {
     hasPermission: PropTypes.func.isRequired,
     hasPitchLoaded: PropTypes.bool.isRequired,
-    params: PropTypes.object.isRequired,
-    pitches: PropTypes.array.isRequired
+    pitch: PropTypes.object.isRequired
   };
 
   render() {
     const {
       hasPermission,
       hasPitchLoaded,
-      params: { id: pitchId },
-      pitches
+      pitch,
+      pitch: {
+        name
+      }
     } = this.props;
-
-    const pitch = findById(pitches, Number(pitchId));
-    const { name } = pitch;
 
     return (
       <section>
@@ -43,8 +40,8 @@ class Pitch extends Component {
 export default ContainerComponent(Pitch, {
   mapStateToProps: pitchSelector,
   periodicDataUpdates: true,
-  updateData: ({ actions }) => {
+  updateData: ({ actions, ...props }) => {
     actions.currentUserLoad();
-    actions.pitchesLoad();
+    actions.pitchLoad(props.params.id);
   }
 });

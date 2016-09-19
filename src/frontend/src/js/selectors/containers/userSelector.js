@@ -1,20 +1,20 @@
 import { createSelector } from 'reselect';
 import {
   isLoadingSelector,
-  isUsersDataLoadingSelector
+  isUserDataLoadingSelector
 } from 'selectors/isLoading';
 
 const isUserLoadingSelector = isLoadingSelector(
-  isUsersDataLoadingSelector
+  isUserDataLoadingSelector
 );
 
 export default createSelector(
   isUserLoadingSelector,
-  state => state.usersData,
+  state => state.userData,
 
-  (isUserLoading, usersData) => ({
+  (isUserLoading, userData) => ({
     isLoading: isUserLoading,
-    hasUserLoaded: usersData.hasLoaded,
-    users: usersData.users
+    hasUserLoaded: userData.hasLoaded,
+    user: userData.user
   })
 );

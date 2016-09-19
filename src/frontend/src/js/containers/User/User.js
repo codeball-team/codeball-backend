@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { findById } from 'utils';
 import { PERMISSION_ADD_USER } from 'constants';
 import { userSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
@@ -10,20 +9,19 @@ class User extends Component {
   static propTypes = {
     hasPermission: PropTypes.func.isRequired,
     hasUserLoaded: PropTypes.bool.isRequired,
-    params: PropTypes.object.isRequired,
-    users: PropTypes.array.isRequired
+    user: PropTypes.object.isRequired
   };
 
   render() {
     const {
       hasPermission,
       hasUserLoaded,
-      params: { id: userId },
-      users
+      user,
+      user: {
+        firstName,
+        lastName
+      }
     } = this.props;
-
-    const user = findById(users, Number(userId));
-    const { firstName, lastName } = user;
 
     return (
       <section>
@@ -43,8 +41,8 @@ class User extends Component {
 export default ContainerComponent(User, {
   mapStateToProps: userSelector,
   periodicDataUpdates: true,
-  updateData: ({ actions }) => {
+  updateData: ({ actions, ...props }) => {
     actions.currentUserLoad();
-    actions.usersLoad();
+    actions.userLoad(props.params.id);
   }
 });
