@@ -37,7 +37,7 @@ class EditableText extends Component {
       ...childProps
     } = this.props;
 
-    if (isEditing) {
+    if(isEditing) {
       return (
         <input
           {...childProps}

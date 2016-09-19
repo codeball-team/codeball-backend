@@ -27,7 +27,7 @@ export default function ajaxReducer(initialState, ajaxActions, handlers) {
       ...originalReducer(state, action)
     };
 
-    if (_(ajaxHandlers).has(type)) {
+    if(_(ajaxHandlers).has(type)) {
       const handler = ajaxHandlers[type];
       const enhancedNewState = handler(newState, action);
       return enhancedNewState;

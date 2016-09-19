@@ -37,7 +37,7 @@ export default function ajax(getParams) {
         const [title, message] = safeGet(error, ['message'], '').split('\n');
         const body = nullToUndefined(safeGet(response, ['body'], { error: title, message }));
 
-        if (error || !response.ok) {
+        if(error || !response.ok) {
           dispatch({
             type: failureAction,
             ...actionsData,
@@ -82,7 +82,7 @@ export default function ajax(getParams) {
 function applyRequestOptions(enhancers, request, options) {
   return _(options).reduce(
     (enhancedRequest, isEnabled, key) => {
-      if (isEnabled && enhancers.hasOwnProperty(key)) {
+      if(isEnabled && enhancers.hasOwnProperty(key)) {
         return enhancers[key](enhancedRequest, options);
       }
 
@@ -96,7 +96,7 @@ function applyRequestEnhancers(enhancers, request, options) {
   return Promise.all(
     _(options).reduce(
       (enhancements, isEnabled, key) => {
-        if (isEnabled && enhancers.hasOwnProperty(key)) {
+        if(isEnabled && enhancers.hasOwnProperty(key)) {
           return [
             ...enhancements,
             enhancers[key](request, options)
@@ -111,7 +111,7 @@ function applyRequestEnhancers(enhancers, request, options) {
 }
 
 function nullToUndefined(value) {
-  if (value === null) {
+  if(value === null) {
     return undefined;
   }
 

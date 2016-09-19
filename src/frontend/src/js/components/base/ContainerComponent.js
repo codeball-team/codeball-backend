@@ -30,7 +30,7 @@ export default function ContainerComponent(ComponentClass, options) {
 
     componentWillReceiveProps = newProps => {
       const idPath = ['params', 'id'];
-      if (safeGet(newProps, idPath) !== safeGet(this.props, idPath)) {
+      if(safeGet(newProps, idPath) !== safeGet(this.props, idPath)) {
         periodicUpdateData.restart(this.updateDataCallback(newProps));
       }
     };
@@ -75,7 +75,7 @@ function handleOptions(options = {}) {
 }
 
 function applyPeriodicUpdates(periodicDataUpdates) {
-  if (periodicDataUpdates) {
+  if(periodicDataUpdates) {
     return periodicCallback(AUTO_REFRESH_DELAY);
   }
 

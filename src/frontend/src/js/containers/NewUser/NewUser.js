@@ -16,7 +16,7 @@ class NewUser extends Component {
 
   componentWillMount = () => {
     const { actions: { newUserReset, redirect }, hasPermission } = this.props;
-    if (hasPermission(PERMISSION_ADD_USER)) {
+    if(hasPermission(PERMISSION_ADD_USER)) {
       newUserReset();
     } else {
       redirect('/unauthorized');

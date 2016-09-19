@@ -4,7 +4,7 @@ export default function sortByMany(list, attributes, options = { caseSensitive: 
   const { caseSensitive } = options;
   const reversedAttributes = [...attributes].reverse();
 
-  if (caseSensitive) {
+  if(caseSensitive) {
     return sortByManyCaseSensitive(list, reversedAttributes);
   }
 

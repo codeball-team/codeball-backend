@@ -12,7 +12,7 @@ const PitchModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if (!serverResponse) {
+    if(!serverResponse) {
       return new PitchModel();
     }
 

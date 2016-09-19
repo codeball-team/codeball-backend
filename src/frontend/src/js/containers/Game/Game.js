@@ -18,6 +18,26 @@ export default function GenerateGame(getGameId) {
       teamB: PropTypes.array.isRequired
     };
 
+    onCancel = () => {
+      const { actions: { gameEditCancel } } = this.props;
+      gameEditCancel();
+    };
+
+    onEdit = () => {
+      const { actions: { gameEdit } } = this.props;
+      gameEdit();
+    };
+
+    onEditGameScoreA = teamAScore => {
+      const { actions: { gameEditScoreA } } = this.props;
+      gameEditScoreA(teamAScore);
+    };
+
+    onEditGameScoreB = teamBScore => {
+      const { actions: { gameEditScoreB } } = this.props;
+      gameEditScoreB(teamBScore);
+    };
+
     onSave = () => {
       const {
         actions: {
@@ -29,18 +49,11 @@ export default function GenerateGame(getGameId) {
           teamBScore
         }
       } = this.props;
-
       gameSetScore(gameId, teamAScore, teamBScore);
     };
 
     render() {
       const {
-        actions: {
-          gameEdit,
-          gameEditCancel,
-          gameEditScoreA,
-          gameEditScoreB
-        },
         game,
         hasGameLoaded,
         hasPermission,
@@ -64,11 +77,11 @@ export default function GenerateGame(getGameId) {
             isEditing={isGameEditing}
             pitch={pitch}
             game={game}
-            onEdit={gameEdit}
-            onCancel={gameEditCancel}
+            onEdit={this.onEdit}
+            onCancel={this.onCancel}
             onSave={this.onSave}
-            onEditGameScoreA={gameEditScoreA}
-            onEditGameScoreB={gameEditScoreB} />
+            onEditGameScoreA={this.onEditGameScoreA}
+            onEditGameScoreB={this.onEditGameScoreB} />
 
           <GameLineupSection
             renderWhen={hasGameLoaded}

@@ -16,7 +16,7 @@ class NewGame extends Component {
 
   componentWillMount = () => {
     const { actions: { newGameReset, redirect }, hasPermission } = this.props;
-    if (hasPermission(PERMISSION_ADD_GAME)) {
+    if(hasPermission(PERMISSION_ADD_GAME)) {
       newGameReset();
     } else {
       redirect('/unauthorized');

@@ -11,7 +11,7 @@ const UserModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if (!serverResponse) {
+    if(!serverResponse) {
       return new UserModel();
     }
 

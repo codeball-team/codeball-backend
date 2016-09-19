@@ -20,7 +20,7 @@ export default function ConditionalRender(ComponentClass) {
       const renderConditions = _([renderWhen]).flatten();
       const shouldRender = renderConditions.every(Boolean);
 
-      if (!shouldRender) {
+      if(!shouldRender) {
         return null;
       }
 

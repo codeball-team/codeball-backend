@@ -20,7 +20,7 @@ export function gameEndUrl(gameId) {
 }
 
 export function gameEnrollmentUrl(gameId, userId) {
-  if (userId) {
+  if(userId) {
     return `${gameUrl(gameId)}/enrollment/${userId}`;
   }
   return `${gameUrl(gameId)}/enrollment`;

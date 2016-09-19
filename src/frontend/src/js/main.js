@@ -26,7 +26,7 @@ ReactDOM.render(
 );
 
 function renderContent() {
-  if (process.env.NODE_ENV !== 'production') {
+  if(process.env.NODE_ENV !== 'production') {
     const DevTools = require('./containers/DevTools').default;
 
     return (

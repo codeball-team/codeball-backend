@@ -26,7 +26,7 @@ const GameModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if (!serverResponse) {
+    if(!serverResponse) {
       return new GameModel();
     }
 

@@ -10,7 +10,7 @@ export default function configureStore(initialState, history) {
 }
 
 function createEnhancer(history) {
-  if (process.env.NODE_ENV !== 'production') {
+  if(process.env.NODE_ENV !== 'production') {
     return createDevelopmentEnhancer(createDevelopmentMiddleware(history));
   }
 
@@ -55,7 +55,7 @@ function createDevelopmentEnhancer(middleware) {
 }
 
 function enableWebpackHMRForReducers(store) {
-  if (module.hot) {
+  if(module.hot) {
     module.hot.accept('../reducers', () =>
       store.replaceReducer(require('../reducers').default)
     );

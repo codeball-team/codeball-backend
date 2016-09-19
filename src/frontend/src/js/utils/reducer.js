@@ -3,7 +3,7 @@ export default function reducer(initialState, handlers = {}) {
     const { type } = action;
     const handler = handlers[type];
 
-    if (handler) {
+    if(handler) {
       return handler(state, action);
     }
 

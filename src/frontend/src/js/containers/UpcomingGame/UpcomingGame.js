@@ -53,9 +53,14 @@ export default function GenerateUpcomingGame(getGameId) {
       gameEnd(gameId);
     };
 
-    onEnrollmentStatusChange = enrollmentStatus => {
-      const { actions: { gameChangeEnrollmentStatus }, currentUserId, gameId } = this.props;
-      gameChangeEnrollmentStatus(gameId, currentUserId, enrollmentStatus);
+    onEnrollUserCancel = () => {
+      const { actions: { gameEnrollUserCancel } } = this.props;
+      gameEnrollUserCancel();
+    };
+
+    onEnrollUserEdit = () => {
+      const { actions: { gameEnrollUserEdit } } = this.props;
+      gameEnrollUserEdit();
     };
 
     onEnrollUserSubmit = () => {
@@ -72,13 +77,14 @@ export default function GenerateUpcomingGame(getGameId) {
       gameEnrollUserChangeUserId(userId);
     };
 
+    onEnrollmentStatusChange = enrollmentStatus => {
+      const { actions: { gameChangeEnrollmentStatus }, currentUserId, gameId } = this.props;
+      gameChangeEnrollmentStatus(gameId, currentUserId, enrollmentStatus);
+    };
+
     render() {
       const {
         hasPermission,
-        actions: {
-          gameEnrollUserCancel,
-          gameEnrollUserEdit
-        },
         enrollUser,
         game,
         game: {
@@ -181,8 +187,8 @@ export default function GenerateUpcomingGame(getGameId) {
             isEditing={isEnrollUserEditing}
             enrollUser={enrollUser}
             users={unenrolledUsers}
-            onEdit={gameEnrollUserEdit}
-            onCancel={gameEnrollUserCancel}
+            onEdit={this.onEnrollUserEdit}
+            onCancel={this.onEnrollUserCancel}
             onSave={this.onEnrollUserSubmit}
             onUserIdChange={this.onEnrollUserIdChange} />
         </section>

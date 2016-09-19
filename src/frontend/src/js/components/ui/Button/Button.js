@@ -41,7 +41,7 @@ class Button extends Component {
       </div>
     );
 
-    if (redirect) {
+    if(redirect) {
       return (
         <Link to={redirect}>
           {button}

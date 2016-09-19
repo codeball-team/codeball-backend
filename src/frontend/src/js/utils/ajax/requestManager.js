@@ -16,7 +16,7 @@ export default function requestManager() {
 
     throttle(key, request) {
       return new Promise((resolve, reject) => {
-        if (!isPending(key)) {
+        if(!isPending(key)) {
           add(key, request);
           resolve();
         }
@@ -34,7 +34,7 @@ export default function requestManager() {
   }
 
   function abortIfPending(key) {
-    if (isPending(key)) {
+    if(isPending(key)) {
       const request = requests.get(key);
       request.abort();
       remove(key);

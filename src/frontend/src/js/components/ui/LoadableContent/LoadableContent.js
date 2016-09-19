@@ -23,7 +23,7 @@ class LoadableContent extends Component {
 
   componentWillReceiveProps = newProps => {
     const { hasBeenFullyLoaded } = this.state;
-    if (!hasBeenFullyLoaded) {
+    if(!hasBeenFullyLoaded) {
       const { isLoading: wasLoading } = this.props;
       const { isLoading } = newProps;
       const hasFinishedLoading = wasLoading && !isLoading;

@@ -27,7 +27,7 @@ export default class Link extends Component {
       onClick
     } = this.props;
 
-    if (!children) {
+    if(!children) {
       return null;
     }
 
@@ -37,7 +37,7 @@ export default class Link extends Component {
       onClick(...args);
     };
 
-    if (!type) {
+    if(!type) {
       return (
         <a className="link" onClick={onClickCallback}>
           {children}
