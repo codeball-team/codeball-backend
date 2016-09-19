@@ -58,6 +58,14 @@ hr {
   margin: $spacing-xl 0;
 }
 
+section {
+  ul {
+    li {
+      padding-bottom: 2px;
+    }
+  }
+}
+
 .ellipsis {
   @include ellipsis;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ContainerComponent } from 'components/base';
+import './Changelog.scss';
 
 class Changelog extends Component {
   render() {
@@ -20,7 +21,8 @@ function release2() {
       <h3>Features</h3>
       <ul>
         <li>Auto-refreshing data every 10 seconds</li>
-        <li>Changelog</li>
+        <li>Microsoft Edge & Microsoft Internet Explorer support</li>
+        <li>Changelog page</li>
       </ul>
 
       <h3>Bugfixes</h3>
@@ -48,11 +50,10 @@ function release2() {
         <li>Frontend</li>
         <ul>
           <li>Severe refactoring</li>
-          <li>Microsoft Edge & Microsoft Internet Explorer support</li>
-          <li>Improving frontend performance</li>
+          <li>Improving performance</li>
           <ul>
             <li>Avoiding redundant AJAX calls</li>
-            <li>Computing API response hashes to detect and avoid redundant in-memory re-renders</li>
+            <li>Computing API response hashes to detect and avoid redundant virtual DOM re-renders</li>
             <li>Introducing reselect library</li>
           </ul>
           <li>Updating frontend libraries</li>
