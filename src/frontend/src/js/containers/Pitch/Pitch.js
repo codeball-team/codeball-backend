@@ -23,7 +23,7 @@ class Pitch extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <PitchNotLoaded
           renderWhen={!hasPitchLoaded}
           canAddNew={hasPermission(PERMISSION_ADD_PITCH)} />
@@ -32,7 +32,7 @@ class Pitch extends Component {
           renderWhen={hasPitchLoaded}
           title={name}
           pitch={pitch} />
-      </section>
+      </main>
     );
   }
 }

@@ -5,11 +5,11 @@ import './Changelog.scss';
 class Changelog extends Component {
   render() {
     return (
-      <section>
+      <main>
         {release2()}
         <hr />
         {release1()}
-      </section>
+      </main>
     );
   }
 }
@@ -27,38 +27,48 @@ function release2() {
 
       <h3>Bugfixes</h3>
       <ul>
-        <li>Backend</li>
-        <ul>
-          <li>TODO</li>
-        </ul>
+        <li>
+          Backend
+          <ul>
+            <li>TODO</li>
+          </ul>
+        </li>
 
-        <li>Frontend</li>
-        <ul>
-          <li>Removing Team Lineup sorting</li>
-          <li>Fixing Polish characters sorting</li>
-          <li>Fixing invisible Team Lineup component on iOS</li>
-          <li>Minor UI improvements</li>
-        </ul>
+        <li>
+          Frontend
+          <ul>
+            <li>Removing Team Lineup sorting</li>
+            <li>Fixing Polish characters sorting</li>
+            <li>Fixing invisible Team Lineup component on iOS</li>
+            <li>Minor UI improvements</li>
+          </ul>
+        </li>
       </ul>
 
       <h3>Technical improvements</h3>
       <ul>
-        <li>Backend</li>
-        <ul>
-          <li>TODO</li>
-        </ul>
-
-        <li>Frontend</li>
-        <ul>
-          <li>Severe refactoring</li>
-          <li>Improving performance</li>
+        <li>
+          Backend
           <ul>
-            <li>Avoiding redundant AJAX calls</li>
-            <li>Computing API response hashes to detect and avoid redundant virtual DOM re-renders</li>
-            <li>Introducing reselect library</li>
+            <li>TODO</li>
           </ul>
-          <li>Updating frontend libraries</li>
-        </ul>
+        </li>
+
+        <li>
+          Frontend
+          <ul>
+            <li>Severe refactoring</li>
+            <li>
+              Improving performance
+              <ul>
+                <li>Avoiding redundant AJAX calls</li>
+                <li>Computing API response hashes to detect and avoid redundant virtual DOM re-renders</li>
+                <li>Introducing reselect library</li>
+              </ul>
+            </li>
+            <li>Updating frontend libraries</li>
+          </ul>
+        </li>
       </ul>
     </div>
   );
@@ -70,35 +80,45 @@ function release1() {
       <h2>Relase 1 (2016/08/23)</h2>
       <h3>Features</h3>
       <ul>
-        <li>Pitches</li>
-        <ul>
-          <li>List of pitches page</li>
-          <li>Pitch page</li>
-          <li>Add pitch page</li>
-        </ul>
-        <li>Players</li>
-        <ul>
-          <li>List of players page</li>
-          <li>Player page</li>
-          <li>Add player page</li>
-        </ul>
-        <li>Games</li>
-        <ul>
-          <li>List of upcoming & previous games page</li>
-          <li>Previous game page</li>
+        <li>
+          Pitches
           <ul>
-            <li>Edit game score</li>
+            <li>List of pitches page</li>
+            <li>Pitch page</li>
+            <li>Add pitch page</li>
           </ul>
-          <li>Upcoming game page</li>
+        </li>
+        <li>
+          Players
           <ul>
-            <li>Enrollment</li>
-            <li>Enroll another player</li>
-            <li>Close enrollment</li>
-            <li>Draw teams</li>
-            <li>End game</li>
+            <li>List of players page</li>
+            <li>Player page</li>
+            <li>Add player page</li>
           </ul>
-          <li>Add game page</li>
-        </ul>
+        </li>
+        <li>
+          Games
+          <ul>
+            <li>List of upcoming & previous games page</li>
+            <li>
+              Previous game page
+              <ul>
+                <li>Edit game score</li>
+              </ul>
+            </li>
+            <li>
+              Upcoming game page
+              <ul>
+                <li>Enrollment</li>
+                <li>Enroll another player</li>
+                <li>Close enrollment</li>
+                <li>Draw teams</li>
+                <li>End game</li>
+              </ul>
+            </li>
+            <li>Add game page</li>
+          </ul>
+        </li>
       </ul>
     </div>
   );

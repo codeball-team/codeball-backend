@@ -24,7 +24,7 @@ class User extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <UserNotLoaded
           renderWhen={!hasUserLoaded}
           canAddNew={hasPermission(PERMISSION_ADD_USER)} />
@@ -33,7 +33,7 @@ class User extends Component {
           renderWhen={hasUserLoaded}
           title={`${lastName} ${firstName}`}
           user={user} />
-      </section>
+      </main>
     );
   }
 }

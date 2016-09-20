@@ -107,7 +107,7 @@ export default function GenerateUpcomingGame(getGameId) {
       } = this.props;
 
       return (
-        <section>
+        <main>
           <GameNotLoaded
             renderWhen={!hasGameLoaded}
             canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
@@ -191,7 +191,7 @@ export default function GenerateUpcomingGame(getGameId) {
             onCancel={this.onEnrollUserCancel}
             onSave={this.onEnrollUserSubmit}
             onUserIdChange={this.onEnrollUserIdChange} />
-        </section>
+        </main>
       );
     }
   }

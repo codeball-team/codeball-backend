@@ -25,7 +25,7 @@ class Games extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <GamesListSection
           className="upcoming-games"
           title={`Upcoming games (${upcomingGames.length})`}
@@ -41,7 +41,7 @@ class Games extends Component {
           formatUrl={formatPreviousGameUrl}
           games={previousGames}
           pitches={pitches} />
-      </section>
+      </main>
     );
   }
 }

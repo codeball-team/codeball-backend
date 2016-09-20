@@ -56,7 +56,7 @@ class NewPitch extends Component {
     const { newPitch } = this.props;
 
     return (
-      <section>
+      <main>
         <NewPitchSection
           title="New pitch"
           newPitch={newPitch}
@@ -76,7 +76,7 @@ class NewPitch extends Component {
           onNameChange={this.onNameChange}
           onTypeChange={this.onTypeChange}
           onSubmit={this.onSubmit} />
-      </section>
+      </main>
     );
   }
 }

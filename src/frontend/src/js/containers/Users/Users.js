@@ -20,7 +20,7 @@ class Users extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <UsersListSection
           title={`Players (${users.length})`}
           currentUser={currentUser}
@@ -28,7 +28,7 @@ class Users extends Component {
           buttons={[
             <ButtonAddUser key="add" renderWhen={hasPermission(PERMISSION_ADD_USER)} />
           ]} />
-      </section>
+      </main>
     );
   }
 }

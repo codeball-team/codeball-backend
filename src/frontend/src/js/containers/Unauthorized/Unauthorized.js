@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Unauthorized extends Component {
   render() {
     return (
-      <section>
+      <main>
         <h1 className="fg-danger">
           Unauthorized!
         </h1>
@@ -11,7 +11,7 @@ export default class Unauthorized extends Component {
         <p>
           You do not have access to this page.
         </p>
-      </section>
+      </main>
     );
   }
 }

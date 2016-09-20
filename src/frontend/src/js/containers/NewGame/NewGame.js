@@ -60,7 +60,7 @@ class NewGame extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <NewGameSection
           title="New game"
           newGame={newGame}
@@ -81,7 +81,7 @@ class NewGame extends Component {
           onMinuteChange={this.onMinuteChange}
           onPitchIdChange={this.onPitchIdChange}
           onSubmit={this.onSubmit} />
-      </section>
+      </main>
     );
   }
 }

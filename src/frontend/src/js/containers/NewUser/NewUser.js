@@ -54,7 +54,7 @@ class NewUser extends Component {
     const roleOptions = ROLE_OPTIONS.filter(({ value }) => rule.includes(value));
 
     return (
-      <section>
+      <main>
         <NewUserSection
           title="New player"
           newUser={newUser}
@@ -74,7 +74,7 @@ class NewUser extends Component {
           onLastNameChange={this.onLastNameChange}
           onRoleChange={this.onRoleChange}
           onSubmit={this.onSubmit} />
-      </section>
+      </main>
     );
   }
 }

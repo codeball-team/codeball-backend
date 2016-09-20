@@ -64,7 +64,7 @@ export default function GenerateGame(getGameId) {
       } = this.props;
 
       return (
-        <section>
+        <main>
           <GameNotLoaded
             renderWhen={!hasGameLoaded}
             canAddNew={hasPermission(PERMISSION_ADD_GAME)} />
@@ -88,7 +88,7 @@ export default function GenerateGame(getGameId) {
             title="Lineups"
             teamA={teamA}
             teamB={teamB} />
-        </section>
+        </main>
       );
     }
   }

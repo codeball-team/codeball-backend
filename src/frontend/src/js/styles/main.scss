@@ -58,10 +58,14 @@ hr {
   margin: $spacing-xl 0;
 }
 
-section {
+main {
   ul {
     li {
       padding-bottom: 2px;
+
+      > ul {
+        padding-top: 4px;
+      }
     }
   }
 }

@@ -18,14 +18,14 @@ class Pitches extends Component {
     } = this.props;
 
     return (
-      <section>
+      <main>
         <PitchesListSection
           title={`Pitches (${pitches.length})`}
           pitches={pitches}
           buttons={[
             <ButtonAddPitch key="add" renderWhen={hasPermission(PERMISSION_ADD_PITCH)} />
           ]} />
-      </section>
+      </main>
     );
   }
 }
