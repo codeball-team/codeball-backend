@@ -7,9 +7,9 @@ import {
   GAME_DRAW_TEAMS, GAME_DRAW_TEAMS_FAILURE, GAME_DRAW_TEAMS_SUCCESS,
   GAME_EDIT, GAME_EDIT_CANCEL, GAME_EDIT_SCORE_A, GAME_EDIT_SCORE_B,
   GAME_END, GAME_END_FAILURE, GAME_END_SUCCESS,
-  GAME_ENROLL_USER_CHANGE_USER_ID, GAME_ENROLL_USER_EDIT, GAME_ENROLL_USER_EDIT_CANCEL,
-  GAME_ENROLL_USER_RESET, GAME_ENROLL_USER_SUBMIT,
-  GAME_ENROLL_USER_SUBMIT_FAILURE, GAME_ENROLL_USER_SUBMIT_SUCCESS,
+  GAME_ENROLL_ANOTHER_USER_CHANGE_USER_ID, GAME_ENROLL_ANOTHER_USER_EDIT, GAME_ENROLL_ANOTHER_USER_EDIT_CANCEL,
+  GAME_ENROLL_ANOTHER_USER_RESET, GAME_ENROLL_ANOTHER_USER_SUBMIT,
+  GAME_ENROLL_ANOTHER_USER_SUBMIT_FAILURE, GAME_ENROLL_ANOTHER_USER_SUBMIT_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
   GAME_SET_SCORE, GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
   GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
@@ -95,42 +95,42 @@ export function gameEditScoreB(teamBScore) {
   };
 }
 
-export function gameEnrollUserCancel() {
+export function gameEnrollAnotherUserCancel() {
   return {
-    type: GAME_ENROLL_USER_EDIT_CANCEL
+    type: GAME_ENROLL_ANOTHER_USER_EDIT_CANCEL
   };
 }
 
-export function gameEnrollUserChangeUserId(userId) {
+export function gameEnrollAnotherUserChangeUserId(userId) {
   return {
-    type: GAME_ENROLL_USER_CHANGE_USER_ID,
+    type: GAME_ENROLL_ANOTHER_USER_CHANGE_USER_ID,
     userId
   };
 }
 
-export function gameEnrollUserEdit() {
+export function gameEnrollAnotherUserEdit() {
   return {
-    type: GAME_ENROLL_USER_EDIT
+    type: GAME_ENROLL_ANOTHER_USER_EDIT
   };
 }
 
-export function gameEnrollUserReset() {
+export function gameEnrollAnotherUserReset() {
   return {
-    type: GAME_ENROLL_USER_RESET
+    type: GAME_ENROLL_ANOTHER_USER_RESET
   };
 }
 
-export function gameEnrollUserSubmit(gameId, userId, enrollmentStatus) {
+export function gameEnrollAnotherUserSubmit(gameId, userId, enrollmentStatus) {
   return ajax(dispatch => ({
     request: request('PUT', gameEnrollmentUrl(gameId, userId))
       .send(`"${enrollmentStatus}"`),
     json: true,
     debounce: true,
-    startAction: GAME_ENROLL_USER_SUBMIT,
-    successAction: GAME_ENROLL_USER_SUBMIT_SUCCESS,
-    failureAction: GAME_ENROLL_USER_SUBMIT_FAILURE,
+    startAction: GAME_ENROLL_ANOTHER_USER_SUBMIT,
+    successAction: GAME_ENROLL_ANOTHER_USER_SUBMIT_SUCCESS,
+    failureAction: GAME_ENROLL_ANOTHER_USER_SUBMIT_FAILURE,
     successCallback: () => {
-      dispatch(gameEnrollUserReset());
+      dispatch(gameEnrollAnotherUserReset());
     }
   }));
 }

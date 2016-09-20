@@ -30,7 +30,7 @@ const isUpcomingGameLoadingSelector = isLoadingSelector(
 export default createSelector(
   isUpcomingGameLoadingSelector,
   currentUserIdSelector,
-  state => state.enrollUser,
+  state => state.enrollAnotherUser,
   enrollmentsSelector,
   gameSelector,
   gameIdSelector,
@@ -41,14 +41,14 @@ export default createSelector(
   teamASelector,
   teamBSelector,
   unenrolledUsersSelector,
-  (isLoading, currentUserId, enrollUser, enrollments, game, gameId, hasGameLoaded, numberOfEnrolledUsers, pitch, selectedEnrollmentStatus, teamA, teamB, unenrolledUsers) => ({
+  (isLoading, currentUserId, enrollAnotherUser, enrollments, game, gameId, hasGameLoaded, numberOfEnrolledUsers, pitch, selectedEnrollmentStatus, teamA, teamB, unenrolledUsers) => ({
     currentUserId,
-    enrollUser,
+    enrollAnotherUser,
     enrollments,
     game,
     gameId,
     hasGameLoaded,
-    isEnrollUserEditing: enrollUser.isEditing,
+    isEnrollAnotherUserEditing: enrollAnotherUser.isEditing,
     isLoading,
     numberOfEnrolledUsers,
     pitch,

@@ -2,7 +2,7 @@ import { model } from 'utils';
 import { isInteger } from 'utils/validation';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 
-const EnrollUserModel = model({
+const EnrollAnotherUserModel = model({
   defaultAttributes: () => ({
     userId: undefined,
     enrollmentStatus: ENROLLMENT_STATUS_YES
@@ -15,4 +15,4 @@ const EnrollUserModel = model({
   }
 });
 
-export default EnrollUserModel;
+export default EnrollAnotherUserModel;

@@ -1,6 +1,6 @@
 import { Section } from 'components/ui';
 import {
-  GameEnrollUserForm,
+  GameEnrollAnotherUserForm,
   GameEnrollment,
   GameEnrollmentForm,
   GameInfo,
@@ -16,7 +16,7 @@ import {
   UsersList
 } from 'components/codeball';
 
-export const GameEnrollUserFormSection = Section(GameEnrollUserForm);
+export const GameEnrollAnotherUserFormSection = Section(GameEnrollAnotherUserForm);
 export const GameEnrollmentSection = Section(GameEnrollment);
 export const GameEnrollmentFormSection = Section(GameEnrollmentForm);
 export const GameInfoSection = Section(GameInfo);

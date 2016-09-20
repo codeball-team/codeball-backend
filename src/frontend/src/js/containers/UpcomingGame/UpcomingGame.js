@@ -4,11 +4,11 @@ import {
   PERMISSION_END_GAME, PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_USER
 } from 'constants';
 import { upcomingGameSelector } from 'selectors/containers';
-import { EnrollUserModel } from 'models';
+import { EnrollAnotherUserModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { ButtonSave, ButtonShuffle } from 'components/ui';
 import {
-  GameEnrollmentSection, GameEnrollUserFormSection, GameEnrollmentFormSection,
+  GameEnrollmentSection, GameEnrollAnotherUserFormSection, GameEnrollmentFormSection,
   GameInfoSection, GameLineupSection
 } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
@@ -19,12 +19,12 @@ export default function GenerateUpcomingGame(getGameId) {
       actions: PropTypes.object.isRequired,
       currentUserId: PropTypes.number,
       enrollments: PropTypes.array.isRequired,
-      enrollUser: PropTypes.object.isRequired,
+      enrollAnotherUser: PropTypes.object.isRequired,
       game: PropTypes.object.isRequired,
       gameId: PropTypes.number,
       hasGameLoaded: PropTypes.bool.isRequired,
       hasPermission: PropTypes.func.isRequired,
-      isEnrollUserEditing: PropTypes.bool.isRequired,
+      isEnrollAnotherUserEditing: PropTypes.bool.isRequired,
       numberOfEnrolledUsers: PropTypes.number.isRequired,
       pitch: PropTypes.object.isRequired,
       selectedEnrollmentStatus: PropTypes.string,
@@ -34,8 +34,8 @@ export default function GenerateUpcomingGame(getGameId) {
     };
 
     componentWillMount = () => {
-      const { actions: { gameEnrollUserReset } } = this.props;
-      gameEnrollUserReset();
+      const { actions: { gameEnrollAnotherUserReset } } = this.props;
+      gameEnrollAnotherUserReset();
     };
 
     onCloseEnrollment = () => {
@@ -53,28 +53,28 @@ export default function GenerateUpcomingGame(getGameId) {
       gameEnd(gameId);
     };
 
-    onEnrollUserCancel = () => {
-      const { actions: { gameEnrollUserCancel } } = this.props;
-      gameEnrollUserCancel();
+    onEnrollAnotherUserCancel = () => {
+      const { actions: { gameEnrollAnotherUserCancel } } = this.props;
+      gameEnrollAnotherUserCancel();
     };
 
-    onEnrollUserEdit = () => {
-      const { actions: { gameEnrollUserEdit } } = this.props;
-      gameEnrollUserEdit();
+    onEnrollAnotherUserEdit = () => {
+      const { actions: { gameEnrollAnotherUserEdit } } = this.props;
+      gameEnrollAnotherUserEdit();
     };
 
-    onEnrollUserSubmit = () => {
+    onEnrollAnotherUserSubmit = () => {
       const {
-        actions: { gameEnrollUserSubmit },
-        gameId,
-        enrollUser: { userId, enrollmentStatus }
+        actions: { gameEnrollAnotherUserSubmit },
+        enrollAnotherUser: { userId, enrollmentStatus },
+        gameId
       } = this.props;
-      gameEnrollUserSubmit(gameId, userId, enrollmentStatus);
+      gameEnrollAnotherUserSubmit(gameId, userId, enrollmentStatus);
     };
 
-    onEnrollUserIdChange = userId => {
-      const { actions: { gameEnrollUserChangeUserId } } = this.props;
-      gameEnrollUserChangeUserId(userId);
+    onEnrollAnotherUserIdChange = userId => {
+      const { actions: { gameEnrollAnotherUserChangeUserId } } = this.props;
+      gameEnrollAnotherUserChangeUserId(userId);
     };
 
     onEnrollmentStatusChange = enrollmentStatus => {
@@ -85,7 +85,7 @@ export default function GenerateUpcomingGame(getGameId) {
     render() {
       const {
         hasPermission,
-        enrollUser,
+        enrollAnotherUser,
         enrollments,
         game,
         game: {
@@ -93,7 +93,7 @@ export default function GenerateUpcomingGame(getGameId) {
           isGameOver
         },
         hasGameLoaded,
-        isEnrollUserEditing,
+        isEnrollAnotherUserEditing,
         numberOfEnrolledUsers,
         pitch,
         pitch: {
@@ -171,7 +171,7 @@ export default function GenerateUpcomingGame(getGameId) {
             title={`Enrolled players (${numberOfEnrolledUsers})`}
             enrollments={enrollments} />
 
-          <GameEnrollUserFormSection
+          <GameEnrollAnotherUserFormSection
             renderWhen={[
               hasGameLoaded,
               !isEnrollmentOver,
@@ -180,15 +180,15 @@ export default function GenerateUpcomingGame(getGameId) {
             ]}
             title="Enroll another player"
             canEdit={true}
-            canSubmit={EnrollUserModel.isValid(enrollUser)}
+            canSubmit={EnrollAnotherUserModel.isValid(enrollAnotherUser)}
             isEditable={true}
-            isEditing={isEnrollUserEditing}
-            enrollUser={enrollUser}
+            isEditing={isEnrollAnotherUserEditing}
+            enrollAnotherUser={enrollAnotherUser}
             users={unenrolledUsers}
-            onEdit={this.onEnrollUserEdit}
-            onCancel={this.onEnrollUserCancel}
-            onSave={this.onEnrollUserSubmit}
-            onUserIdChange={this.onEnrollUserIdChange} />
+            onEdit={this.onEnrollAnotherUserEdit}
+            onCancel={this.onEnrollAnotherUserCancel}
+            onSave={this.onEnrollAnotherUserSubmit}
+            onUserIdChange={this.onEnrollAnotherUserIdChange} />
         </main>
       );
     }
