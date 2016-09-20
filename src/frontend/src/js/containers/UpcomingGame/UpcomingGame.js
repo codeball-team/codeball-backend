@@ -18,6 +18,7 @@ export default function GenerateUpcomingGame(getGameId) {
     static propTypes = {
       actions: PropTypes.object.isRequired,
       currentUserId: PropTypes.number,
+      enrollments: PropTypes.array.isRequired,
       enrollUser: PropTypes.object.isRequired,
       game: PropTypes.object.isRequired,
       gameId: PropTypes.number,
@@ -29,8 +30,7 @@ export default function GenerateUpcomingGame(getGameId) {
       selectedEnrollmentStatus: PropTypes.string,
       teamA: PropTypes.array.isRequired,
       teamB: PropTypes.array.isRequired,
-      unenrolledUsers: PropTypes.array.isRequired,
-      users: PropTypes.array.isRequired
+      unenrolledUsers: PropTypes.array.isRequired
     };
 
     componentWillMount = () => {
@@ -86,9 +86,9 @@ export default function GenerateUpcomingGame(getGameId) {
       const {
         hasPermission,
         enrollUser,
+        enrollments,
         game,
         game: {
-          enrolledUsers,
           isEnrollmentOver,
           isGameOver
         },
@@ -102,8 +102,7 @@ export default function GenerateUpcomingGame(getGameId) {
         selectedEnrollmentStatus,
         teamA,
         teamB,
-        unenrolledUsers,
-        users
+        unenrolledUsers
       } = this.props;
 
       return (
@@ -170,8 +169,7 @@ export default function GenerateUpcomingGame(getGameId) {
           <GameEnrollmentSection
             renderWhen={hasGameLoaded}
             title={`Enrolled players (${numberOfEnrolledUsers})`}
-            users={users}
-            enrolledUsers={enrolledUsers} />
+            enrollments={enrollments} />
 
           <GameEnrollUserFormSection
             renderWhen={[
