@@ -1,25 +1,30 @@
-import { _ } from 'utils';
-
-export default function sortByMany(list, attributes, options = { caseSensitive: false }) {
-  const { caseSensitive } = options;
+export default function sortByMany(list, attributes, options = {}) {
+  const {
+    caseSensitive = false,
+    localized = true
+  } = options;
   const reversedAttributes = [...attributes].reverse();
+  const attributeGetterCreator = caseSensitive ? createAttributeGetter : createLowerCaseAttributeGetter;
+  const attributeComparatorCreator = localized ? createLocaleAttributeComparator : createAttributeComparator;
 
-  if(caseSensitive) {
-    return sortByManyCaseSensitive(list, reversedAttributes);
-  }
-
-  return sortByManyCaseInsensitive(list, reversedAttributes);
-}
-
-function sortByManyCaseInsensitive(list, reversedAttributes) {
   return reversedAttributes.reduce(
-    (sortedList, attribute) => _(sortedList).sortBy(
-      item => String(item[attribute]).toLowerCase()
-    ),
+    (sortedList, attribute) => sortedList.sort(attributeComparatorCreator(attributeGetterCreator(attribute))),
     list
   );
 }
 
-function sortByManyCaseSensitive(list, reversedAttributes) {
-  return reversedAttributes.reduce((sortedList, attribute) => _(sortedList).sortBy(attribute), list);
+function createAttributeGetter(attribute) {
+  return item => item[attribute];
+}
+
+function createLowerCaseAttributeGetter(attribute) {
+  return item => item[attribute].toLowerCase();
+}
+
+function createLocaleAttributeComparator(attributeGetter) {
+  return (item1, item2) => attributeGetter(item1).localeCompare(attributeGetter(item2));
+}
+
+function createAttributeComparator(attributeGetter) {
+  return (item1, item2) => attributeGetter(item1) < attributeGetter(item2);
 }

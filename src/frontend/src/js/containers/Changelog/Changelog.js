@@ -20,9 +20,9 @@ function release2() {
       <h2>Relase 2 (2016/10/04)</h2>
       <h3>Features</h3>
       <ul>
-        <li>Auto-refreshing data every 10 seconds</li>
         <li>Microsoft Edge & Microsoft Internet Explorer support</li>
         <li>Changelog page</li>
+        <li>Auto-refreshing data every 10 seconds</li>
       </ul>
 
       <h3>Bugfixes</h3>
@@ -35,6 +35,7 @@ function release2() {
         <li>Frontend</li>
         <ul>
           <li>Removing Team Lineup sorting</li>
+          <li>Fixing Polish characters sorting</li>
           <li>Fixing invisible Team Lineup component on iOS</li>
           <li>Minor UI improvements</li>
         </ul>

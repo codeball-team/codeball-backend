@@ -1,7 +1,5 @@
-export _ from 'underscore';
-
 export * from 'utils/ajax';
-
+export _ from 'underscore';
 export classNames from 'classnames';
 export findById from './findById';
 export findLabelByValue from './findLabelByValue';
