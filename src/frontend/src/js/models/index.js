@@ -1,4 +1,5 @@
 export EnrollAnotherUserModel from './enrollAnotherUser';
+export EnrollmentModel from './enrollment';
 export GameModel from './game';
 export NewGameModel from './newGame';
 export NewPitchModel from './newPitch';

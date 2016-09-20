@@ -3,6 +3,9 @@ import {
   isLoadingSelector,
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
+import {
+  sortedUsersSelector
+} from 'selectors/models/users';
 
 const areUsersLoadingSelector = isLoadingSelector(
   isUsersDataLoadingSelector
@@ -11,7 +14,7 @@ const areUsersLoadingSelector = isLoadingSelector(
 export default createSelector(
   areUsersLoadingSelector,
   state => state.currentUserData.currentUser,
-  state => state.usersData.users,
+  sortedUsersSelector,
 
   (areUsersLoading, currentUser, users) => ({
     isLoading: areUsersLoading,

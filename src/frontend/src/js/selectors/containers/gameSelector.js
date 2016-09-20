@@ -9,7 +9,7 @@ import {
   pitchSelector,
   teamASelector,
   teamBSelector
-} from 'selectors/model/game';
+} from 'selectors/models/game';
 
 const isGameLoadingSelector = isLoadingSelector(
   isGameDataLoadingSelector,
@@ -23,9 +23,8 @@ export default createSelector(
   pitchSelector,
   teamASelector,
   teamBSelector,
-  state => state.usersData.users,
 
-  (gameData, isGameLoading, pitch, teamA, teamB, users) => {
+  (gameData, isGameLoading, pitch, teamA, teamB) => {
     const isGameEditing = gameData.isEditing;
     const game = isGameEditing ? gameData.editedGame : gameData.game;
 

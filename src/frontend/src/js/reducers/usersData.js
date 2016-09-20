@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet, sortByMany } from 'utils';
+import { ajaxReducer, safeGet } from 'utils';
 import {
   CURRENT_USER_LOAD_SUCCESS, NEW_USER_SUBMIT_SUCCESS,
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
@@ -50,11 +50,10 @@ export default ajaxReducer(
     [USERS_LOAD_SUCCESS]: (state, action) => {
       const responseUsers = safeGet(action, ['response', 'body'], []);
       const mappedUsers = responseUsers.map(UserModel.fromServerFormat);
-      const sortedUsers = sortByMany(mappedUsers, ['lastName', 'firstName']);
 
       return {
         ...initialState,
-        users: sortedUsers
+        users: mappedUsers
       };
     }
   }

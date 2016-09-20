@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   isLoadingSelector,
   isCurrentUserLoadingSelector,
@@ -7,8 +7,12 @@ import {
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
 import {
+  enrollAnotherUserSelector,
+  isEnrollAnotherUserEditingSelector
+} from 'selectors/models/enrollAnotherUser';
+import {
   currentUserIdSelector,
-  enrollmentsSelector,
+  enrolledUsersPerStatusSelector,
   gameSelector,
   gameIdSelector,
   hasGameLoadedSelector,
@@ -18,7 +22,7 @@ import {
   teamASelector,
   teamBSelector,
   unenrolledUsersSelector
-} from 'selectors/model/game';
+} from 'selectors/models/game';
 
 const isUpcomingGameLoadingSelector = isLoadingSelector(
   isCurrentUserLoadingSelector,
@@ -27,34 +31,19 @@ const isUpcomingGameLoadingSelector = isLoadingSelector(
   isUsersDataLoadingSelector
 );
 
-export default createSelector(
-  isUpcomingGameLoadingSelector,
-  currentUserIdSelector,
-  state => state.enrollAnotherUser,
-  enrollmentsSelector,
-  gameSelector,
-  gameIdSelector,
-  hasGameLoadedSelector,
-  numberOfEnrolledUsersSelector,
-  pitchSelector,
-  selectedEnrollmentStatusSelector,
-  teamASelector,
-  teamBSelector,
-  unenrolledUsersSelector,
-  (isLoading, currentUserId, enrollAnotherUser, enrollments, game, gameId, hasGameLoaded, numberOfEnrolledUsers, pitch, selectedEnrollmentStatus, teamA, teamB, unenrolledUsers) => ({
-    currentUserId,
-    enrollAnotherUser,
-    enrollments,
-    game,
-    gameId,
-    hasGameLoaded,
-    isEnrollAnotherUserEditing: enrollAnotherUser.isEditing,
-    isLoading,
-    numberOfEnrolledUsers,
-    pitch,
-    selectedEnrollmentStatus,
-    teamA,
-    teamB,
-    unenrolledUsers
-  })
-);
+export default createStructuredSelector({
+  currentUserId: currentUserIdSelector,
+  enrollAnotherUser: enrollAnotherUserSelector,
+  enrolledUsersPerStatus: enrolledUsersPerStatusSelector,
+  game: gameSelector,
+  gameId: gameIdSelector,
+  hasGameLoaded: hasGameLoadedSelector,
+  isEnrollAnotherUserEditing: isEnrollAnotherUserEditingSelector,
+  isLoading: isUpcomingGameLoadingSelector,
+  numberOfEnrolledUsers: numberOfEnrolledUsersSelector,
+  pitch: pitchSelector,
+  selectedEnrollmentStatus: selectedEnrollmentStatusSelector,
+  teamA: teamASelector,
+  teamB: teamBSelector,
+  unenrolledUsers: unenrolledUsersSelector
+});

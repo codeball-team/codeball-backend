@@ -18,8 +18,8 @@ export default function GenerateUpcomingGame(getGameId) {
     static propTypes = {
       actions: PropTypes.object.isRequired,
       currentUserId: PropTypes.number,
-      enrollments: PropTypes.array.isRequired,
       enrollAnotherUser: PropTypes.object.isRequired,
+      enrolledUsersPerStatus: PropTypes.array.isRequired,
       game: PropTypes.object.isRequired,
       gameId: PropTypes.number,
       hasGameLoaded: PropTypes.bool.isRequired,
@@ -86,7 +86,7 @@ export default function GenerateUpcomingGame(getGameId) {
       const {
         hasPermission,
         enrollAnotherUser,
-        enrollments,
+        enrolledUsersPerStatus,
         game,
         game: {
           isEnrollmentOver,
@@ -157,20 +157,6 @@ export default function GenerateUpcomingGame(getGameId) {
             value={selectedEnrollmentStatus}
             onChange={this.onEnrollmentStatusChange} />
 
-          <GameLineupSection
-            renderWhen={[
-              hasGameLoaded,
-              isEnrollmentOver
-            ]}
-            title="Lineups"
-            teamA={teamA}
-            teamB={teamB} />
-
-          <GameEnrollmentSection
-            renderWhen={hasGameLoaded}
-            title={`Enrolled players (${numberOfEnrolledUsers})`}
-            enrollments={enrollments} />
-
           <GameEnrollAnotherUserFormSection
             renderWhen={[
               hasGameLoaded,
@@ -189,6 +175,20 @@ export default function GenerateUpcomingGame(getGameId) {
             onCancel={this.onEnrollAnotherUserCancel}
             onSave={this.onEnrollAnotherUserSubmit}
             onUserIdChange={this.onEnrollAnotherUserIdChange} />
+
+          <GameLineupSection
+            renderWhen={[
+              hasGameLoaded,
+              isEnrollmentOver
+            ]}
+            title="Lineups"
+            teamA={teamA}
+            teamB={teamB} />
+
+          <GameEnrollmentSection
+            renderWhen={hasGameLoaded}
+            title={`Enrolled players (${numberOfEnrolledUsers})`}
+            enrolledUsersPerStatus={enrolledUsersPerStatus} />
         </main>
       );
     }

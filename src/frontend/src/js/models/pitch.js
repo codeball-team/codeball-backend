@@ -12,10 +12,6 @@ const PitchModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if(!serverResponse) {
-      return new PitchModel();
-    }
-
     return new PitchModel({
       id: serverResponse.id,
       name: serverResponse.name,

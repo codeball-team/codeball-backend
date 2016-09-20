@@ -11,10 +11,6 @@ const UserModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if(!serverResponse) {
-      return new UserModel();
-    }
-
     return new UserModel({
       id: serverResponse.id,
       email: serverResponse.email,
