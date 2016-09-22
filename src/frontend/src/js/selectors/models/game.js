@@ -2,12 +2,18 @@ import { createSelector } from 'reselect';
 import { findById } from 'utils';
 import { ENROLLMENT_STATUSES, ENROLLMENT_STATUS_YES } from 'constants';
 import { currentUserIdSelector } from 'selectors/models/currentUser';
+import { pitchesSelector } from 'selectors/models/pitches';
+import { usersSelector } from 'selectors/models/users';
 
 export const enrolledUsersSelector = createSelector(
-  state => state.gameData.game.enrollments,
-  state => state.usersData.users,
+  enrollmentsSelector,
+  usersSelector,
   (enrollments, users) => enrollments.map(({ userId }) => findById(users, userId))
 );
+
+export function enrollmentsSelector(state) {
+  return state.gameData.game.enrollments;
+}
 
 export const editableGameSelector = createSelector(
   state => state.gameData,
@@ -17,7 +23,7 @@ export const editableGameSelector = createSelector(
 
 export const enrolledUsersPerStatusSelector = createSelector(
   enrolledUsersSelector,
-  state => state.gameData.game.enrollments,
+  enrollmentsSelector,
   (enrolledUsers, enrollments) => ENROLLMENT_STATUSES.reduce(
     (enrolledUsersPerStatus, enrollmentStatus) => ([
       ...enrolledUsersPerStatus,
@@ -51,7 +57,7 @@ export function isGameEditingSelector(state) {
 }
 
 export const numberOfEnrolledUsersSelector = createSelector(
-  state => state.gameData.game.enrollments,
+  enrollmentsSelector,
   enrollments => enrollments.filter(
     ({ enrollmentStatus }) => enrollmentStatus === ENROLLMENT_STATUS_YES
   ).length
@@ -59,34 +65,34 @@ export const numberOfEnrolledUsersSelector = createSelector(
 
 export const pitchSelector = createSelector(
   state => state.gameData.game.pitchId,
-  state => state.pitchesData.pitches,
+  pitchesSelector,
   (pitchId, pitches) => findById(pitches, pitchId)
 );
 
 export const selectedEnrollmentStatusSelector = createSelector(
   currentUserIdSelector,
-  state => state.gameData.game.enrollments,
+  enrollmentsSelector,
   (currentUserId, enrollments) => (enrollments.find(
     ({ userId }) => userId === currentUserId
   ) || {}).enrollmentStatus
 );
 
 export const teamASelector = createSelector(
-  state => state.usersData.users,
+  usersSelector,
   state => state.gameData.game.teamA,
   mapUsersIdsToUsers
 );
 
 export const teamBSelector = createSelector(
-  state => state.usersData.users,
+  usersSelector,
   state => state.gameData.game.teamB,
   mapUsersIdsToUsers
 );
 
 export const unenrolledUsersSelector = createSelector(
   currentUserIdSelector,
-  state => state.gameData.game.enrollments,
-  state => state.usersData.users,
+  enrollmentsSelector,
+  usersSelector,
   (currentUserId, enrollments, users) => users.filter(
     ({ id }) => id !== currentUserId && enrollments.findIndex(
       ({ userId }) => id === userId

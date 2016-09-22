@@ -1,7 +1,10 @@
+import { createSelector } from 'reselect';
+
 export function enrollAnotherUserSelector(state) {
   return state.enrollAnotherUser;
 }
 
-export function isEnrollAnotherUserEditingSelector(state) {
-  return state.enrollAnotherUser.isEditing;
-}
+export const isEnrollAnotherUserEditingSelector = createSelector(
+  enrollAnotherUserSelector,
+  enrollAnotherUser => enrollAnotherUser.isEditing
+);

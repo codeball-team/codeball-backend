@@ -1,20 +1,19 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isUserDataLoadingSelector
 } from 'selectors/isLoading';
+import {
+  hasUserLoadedSelector,
+  userSelector
+} from 'selectors/models/user';
 
 const isUserLoadingSelector = createIsLoadingSelector(
   isUserDataLoadingSelector
 );
 
-export default createSelector(
-  isUserLoadingSelector,
-  state => state.userData,
-
-  (isUserLoading, userData) => ({
-    isLoading: isUserLoading,
-    hasUserLoaded: userData.hasLoaded,
-    user: userData.user
-  })
-);
+export default createStructuredSelector({
+  isLoading: isUserLoadingSelector,
+  hasUserLoaded: hasUserLoadedSelector,
+  user: userSelector
+});

@@ -1,12 +1,11 @@
 import { createSelector } from 'reselect';
 import { sortByMany } from 'utils';
 
-export const usersSelector = createSelector(
-  state => state.usersData.users,
-  users => users
-);
+export function usersSelector(state) {
+  return state.usersData.users;
+}
 
 export const sortedUsersSelector = createSelector(
-  state => state.usersData.users,
-  users => sortByMany(users, ['lastName', 'firstName']).reverse()
+  usersSelector,
+  users => sortByMany(users, ['lastName', 'firstName'])
 );

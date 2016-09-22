@@ -1,19 +1,15 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isPitchesDataLoadingSelector
 } from 'selectors/isLoading';
+import { sortedPitchesSelector } from 'selectors/models/pitches';
 
 const arePitchesLoadingSelector = createIsLoadingSelector(
   isPitchesDataLoadingSelector
 );
 
-export default createSelector(
-  arePitchesLoadingSelector,
-  state => state.pitchesData.pitches,
-
-  (arePitchesLoading, pitches) => ({
-    isLoading: arePitchesLoading,
-    pitches
-  })
-);
+export default createStructuredSelector({
+  isLoading: arePitchesLoadingSelector,
+  pitches: sortedPitchesSelector
+});

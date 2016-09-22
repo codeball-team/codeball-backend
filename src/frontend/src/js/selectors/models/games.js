@@ -1,10 +1,9 @@
 import { createSelector } from 'reselect';
 import { sortByMany } from 'utils';
 
-export const gamesSelector = createSelector(
-  state => state.gamesData.games,
-  games => games
-);
+export function gamesSelector(state) {
+  return state.gamesData.games;
+}
 
 export const previousGamesSelector = createSelector(
   gamesSelector,
@@ -12,7 +11,7 @@ export const previousGamesSelector = createSelector(
 );
 
 export const sortedGamesSelector = createSelector(
-  state => state.gamesData.games,
+  gamesSelector,
   games => sortByMany(games, ['date']).reverse()
 );
 

@@ -1,20 +1,19 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isPitchDataLoadingSelector
 } from 'selectors/isLoading';
+import {
+  hasPitchLoadedSelector,
+  pitchSelector
+} from 'selectors/models/pitch';
 
 const isPitchLoadingSelector = createIsLoadingSelector(
   isPitchDataLoadingSelector
 );
 
-export default createSelector(
-  isPitchLoadingSelector,
-  state => state.pitchData,
-
-  (isPitchLoading, pitchData) => ({
-    isLoading: isPitchLoading,
-    hasPitchLoaded: pitchData.hasLoaded,
-    pitch: pitchData.pitch
-  })
-);
+export default createStructuredSelector({
+  hasPitchLoaded: hasPitchLoadedSelector,
+  isLoading: isPitchLoadingSelector,
+  pitch: pitchSelector
+});

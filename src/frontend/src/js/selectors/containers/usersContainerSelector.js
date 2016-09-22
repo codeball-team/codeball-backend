@@ -1,24 +1,17 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
-import {
-  sortedUsersSelector
-} from 'selectors/models/users';
+import { currentUserSelector } from 'selectors/models/currentUser';
+import { sortedUsersSelector } from 'selectors/models/users';
 
 const areUsersLoadingSelector = createIsLoadingSelector(
   isUsersDataLoadingSelector
 );
 
-export default createSelector(
-  areUsersLoadingSelector,
-  state => state.currentUserData.currentUser,
-  sortedUsersSelector,
-
-  (areUsersLoading, currentUser, users) => ({
-    isLoading: areUsersLoading,
-    currentUser,
-    users
-  })
-);
+export default createStructuredSelector({
+  isLoading: areUsersLoadingSelector,
+  currentUser: currentUserSelector,
+  users: sortedUsersSelector
+});
