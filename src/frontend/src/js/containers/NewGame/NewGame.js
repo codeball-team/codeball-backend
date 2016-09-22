@@ -88,6 +88,7 @@ class NewGame extends Component {
 
 export default ContainerComponent(NewGame, {
   mapStateToProps: newGameContainerSelector,
+  periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
     actions.pitchesLoad();

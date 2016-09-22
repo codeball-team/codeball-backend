@@ -83,6 +83,7 @@ class NewPitch extends Component {
 
 export default ContainerComponent(NewPitch, {
   mapStateToProps: newPitchContainerSelector,
+  periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
   }
