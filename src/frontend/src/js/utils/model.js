@@ -10,6 +10,14 @@ export default function model(options) {
   const validatorsNames = Object.keys(validators);
 
   class Model {
+    static getDefaultAttributes = getDefaultAttributes;
+
+    static isValid = modelInstance => validatorsNames.every(
+      validatorName => Boolean(Model[validatorName](modelInstance))
+    );
+
+    static fromServerFormat = wrapFromServerFormat(Model, fromServerFormat);
+
     constructor(attributes) {
       Object.assign(
         this,
@@ -18,24 +26,14 @@ export default function model(options) {
     }
   }
 
-  _(validators).each((validator, name) => {
-    Model[name] = validator.bind(Model);
+  return Object.assign(Model, {
+    ...validators,
+    ...otherStatic
   });
-
-  Object.assign(Model, {
-    ...otherStatic,
-    fromServerFormat: wrapFromServerFormat(Model, getDefaultAttributes, fromServerFormat)
-  });
-
-  Model.isValid = modelInstance => validatorsNames.every(
-    validatorName => Boolean(Model[validatorName](modelInstance))
-  );
-
-  return Model;
 }
 
-function wrapFromServerFormat(Model, getDefaultAttributes, fromServerFormat) {
-  const defaultEmptyArrays = createDefaultEmptyArrays(getDefaultAttributes);
+function wrapFromServerFormat(Model, fromServerFormat) {
+  const defaultEmptyArrays = createDefaultEmptyArrays(Model.getDefaultAttributes);
 
   return serverResponse => {
     if(!serverResponse) {
@@ -51,8 +49,8 @@ function wrapFromServerFormat(Model, getDefaultAttributes, fromServerFormat) {
 function createDefaultEmptyArrays(getDefaultAttributes) {
   const defaultObject = getDefaultAttributes();
   const defaultObjectKeys = Object.keys(defaultObject);
-  const arrayKeys = defaultObjectKeys.filter(key => Array.isArray(defaultObject[key]));
-  return arrayKeys.reduce((defaultArrays, key) => ({
+  const arrayAttributes = defaultObjectKeys.filter(key => Array.isArray(defaultObject[key]));
+  return arrayAttributes.reduce((defaultArrays, key) => ({
     ...defaultArrays,
     [key]: defaultObject[key]
   }), {});
