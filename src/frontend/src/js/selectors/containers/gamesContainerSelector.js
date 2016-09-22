@@ -1,26 +1,20 @@
-import { createSelector } from 'reselect';
-import { previousGamesSelector, upcomingGamesSelector } from 'selectors';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isGamesDataLoadingSelector,
   isPitchesDataLoadingSelector
 } from 'selectors/isLoading';
+import { previousGamesSelector, upcomingGamesSelector } from 'selectors/models/games';
+import { pitchesSelector } from 'selectors/models/pitches';
 
 const areGamesLoadingSelector = createIsLoadingSelector(
   isGamesDataLoadingSelector,
   isPitchesDataLoadingSelector
 );
 
-export default createSelector(
-  areGamesLoadingSelector,
-  state => state.pitchesData.pitches,
-  state => previousGamesSelector(state),
-  state => upcomingGamesSelector(state),
-
-  (areGamesLoading, pitches, previousGames, upcomingGames) => ({
-    isLoading: areGamesLoading,
-    pitches,
-    previousGames,
-    upcomingGames
-  })
-);
+export default createStructuredSelector({
+  areGamesLoading: areGamesLoadingSelector,
+  pitches: pitchesSelector,
+  previousGames: previousGamesSelector,
+  upcomingGames: upcomingGamesSelector
+});
