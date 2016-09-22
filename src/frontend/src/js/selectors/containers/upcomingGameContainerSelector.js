@@ -6,11 +6,11 @@ import {
   isPitchesDataLoadingSelector,
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
+import { currentUserIdSelector } from 'selectors/models/currentUser';
 import {
   enrollAnotherUserSelector,
   isEnrollAnotherUserEditingSelector
 } from 'selectors/models/enrollAnotherUser';
-import { currentUserIdSelector } from 'selectors/models/currentUser';
 import {
   enrolledUsersPerStatusSelector,
   gameSelector,

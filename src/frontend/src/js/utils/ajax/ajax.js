@@ -1,5 +1,5 @@
 import { _, now, safeGet } from 'utils';
-import { AJAX_ABORT, AJAX_START, AJAX_SUCCESS, AJAX_FAILURE } from 'constants/actionTypes';
+import { AJAX_ABORT, AJAX_FAILURE, AJAX_START, AJAX_SUCCESS } from 'constants/actionTypes';
 import requestManager from './requestManager';
 
 const manager = requestManager();
@@ -14,18 +14,18 @@ const requestManagerHandlers = {
 export default function ajax(getParams) {
   return dispatch => {
     const options = {
-      successCallback: _.noop,
       failureCallback: _.noop,
+      successCallback: _.noop,
       ...getParams(dispatch)
     };
     const {
+      actionsData = {},
       request,
+      failureAction,
+      failureCallback,
       startAction,
       successAction,
-      failureAction,
-      successCallback,
-      failureCallback,
-      actionsData = {}
+      successCallback
     } = options;
     const timestamp = now();
 
@@ -33,28 +33,27 @@ export default function ajax(getParams) {
     applyRequestEnhancers(requestManagerHandlers, request, options).then(() => {
       request.end((error, response = {}) => {
         manager.forget(startAction);
-
-        const [title, message] = safeGet(error, ['message'], '').split('\n');
-        const body = nullToUndefined(safeGet(response, ['body'], { error: title, message }));
+        const body = nullToUndefined(safeGet(response, ['body']));
 
         if(error || !response.ok) {
+          const errorResponse = createErrorResponse(error, body);
           dispatch({
             type: failureAction,
             ...actionsData,
-            timestamp,
-            response: body
+            response: errorResponse,
+            timestamp
           });
           dispatch({
             type: AJAX_FAILURE,
-            response: body
+            response: errorResponse
           });
           failureCallback(response);
         } else {
           dispatch({
             type: successAction,
             ...actionsData,
-            timestamp,
-            response
+            response: body,
+            timestamp
           });
           dispatch({ type: AJAX_SUCCESS });
           successCallback(response);
@@ -108,6 +107,12 @@ function applyRequestEnhancers(enhancers, request, options) {
       []
     )
   );
+}
+
+function createErrorResponse(error, body) {
+  const [title, message] = safeGet(error, ['message'], '').split('\n');
+  const errorResponse = body || { error: title, message };
+  return errorResponse;
 }
 
 function nullToUndefined(value) {

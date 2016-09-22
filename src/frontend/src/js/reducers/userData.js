@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet } from 'utils';
+import { ajaxReducer } from 'utils';
 import { UserModel } from 'models';
 import { USER_LOAD, USER_LOAD_FAILURE, USER_LOAD_SUCCESS } from 'constants/actionTypes';
 
@@ -15,8 +15,8 @@ export default ajaxReducer(
   },
   {
     [USER_LOAD_SUCCESS]: (state, action) => {
-      const responseUser = safeGet(action, ['response', 'body'], {});
-      const user = UserModel.fromServerFormat(responseUser);
+      const { response } = action;
+      const user = UserModel.fromServerFormat(response);
 
       return {
         ...initialState,

@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet, sortByMany } from 'utils';
+import { ajaxReducer, sortByMany } from 'utils';
 import {
   NEW_PITCH_SUBMIT_SUCCESS,
   PITCHES_LOAD, PITCHES_LOAD_FAILURE, PITCHES_LOAD_SUCCESS
@@ -18,22 +18,22 @@ export default ajaxReducer(
   },
   {
     [NEW_PITCH_SUBMIT_SUCCESS]: (state, action) => {
-      const responsePitch = safeGet(action, ['response', 'body'], {});
-      const mappedPitch = PitchModel.fromServerFormat(responsePitch);
+      const { response } = action;
+      const pitch = PitchModel.fromServerFormat(response);
 
       return {
         ...state,
         pitches: [
           ...state.pitches,
-          mappedPitch
+          pitch
         ]
       };
     },
 
     [PITCHES_LOAD_SUCCESS]: (state, action) => {
-      const responsePitches = safeGet(action, ['response', 'body'], []);
-      const mappedPitches = responsePitches.map(PitchModel.fromServerFormat);
-      const sortedPitches = sortByMany(mappedPitches, ['name']);
+      const { response = [] } = action;
+      const pitches = response.map(PitchModel.fromServerFormat);
+      const sortedPitches = sortByMany(pitches, ['name']);
 
       return {
         ...initialState,

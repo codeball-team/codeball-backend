@@ -5,6 +5,7 @@ export findById from './findById';
 export findLabelByValue from './findLabelByValue';
 export formatRange from './formatRange';
 export getDomain from './getDomain';
+export getObjectHash from './getObjectHash';
 export md5 from 'js-md5';
 export model from './model';
 export moment from 'moment';

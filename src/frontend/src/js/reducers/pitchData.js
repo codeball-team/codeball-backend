@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet } from 'utils';
+import { ajaxReducer } from 'utils';
 import { PitchModel } from 'models';
 import { PITCH_LOAD, PITCH_LOAD_FAILURE, PITCH_LOAD_SUCCESS } from 'constants/actionTypes';
 
@@ -15,8 +15,8 @@ export default ajaxReducer(
   },
   {
     [PITCH_LOAD_SUCCESS]: (state, action) => {
-      const responsePitch = safeGet(action, ['response', 'body'], {});
-      const pitch = PitchModel.fromServerFormat(responsePitch);
+      const { response } = action;
+      const pitch = PitchModel.fromServerFormat(response);
 
       return {
         ...initialState,

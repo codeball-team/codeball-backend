@@ -1,18 +1,17 @@
-import { reducer, safeGet } from 'utils';
-import md5 from 'js-md5';
+import { getObjectHash, reducer } from 'utils';
 
 const ajaxReducerInitialState = {
   isLoading: false,
   hasLoaded: false,
   lastUpdateTimestamp: undefined,
-  lastUpdateHash: md5(JSON.stringify(''))
+  lastUpdateHash: undefined
 };
 
 export default function ajaxReducer(initialState, ajaxActions, handlers) {
-  const { startAction, failureAction, successAction } = ajaxActions;
+  const { failureAction, startAction, successAction } = ajaxActions;
   const ajaxHandlers = {
-    [startAction]: onAjaxStart,
     [failureAction]: onAjaxFail,
+    [startAction]: onAjaxStart,
     [successAction]: onAjaxSuccess
   };
 
@@ -70,8 +69,8 @@ function onAjaxFail(state, action) {
 }
 
 function onAjaxEnd(state, action) {
-  const responseBody = safeGet(action, ['response', 'body'], '');
-  const responseHash = md5(JSON.stringify(responseBody));
+  const { response } = action;
+  const responseHash = getObjectHash(response);
   return onUpdate({
     ...state,
     isLoading: false,

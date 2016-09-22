@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet } from 'utils';
+import { ajaxReducer } from 'utils';
 import {
   CURRENT_USER_LOAD_SUCCESS, NEW_USER_SUBMIT_SUCCESS,
   USERS_LOAD, USERS_LOAD_FAILURE, USERS_LOAD_SUCCESS
@@ -18,9 +18,9 @@ export default ajaxReducer(
   },
   {
     [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
-      const responseUser = safeGet(action, ['response', 'body'], {});
-      const mappedUser = UserModel.fromServerFormat(responseUser);
-      const { id: userId } = mappedUser;
+      const { response } = action;
+      const user = UserModel.fromServerFormat(response);
+      const { id: userId } = user;
       const currentUsers = state.users;
       const userIndex = currentUsers.findIndex(({ id }) => id === userId);
 
@@ -28,32 +28,32 @@ export default ajaxReducer(
         ...state,
         users: [
           ...state.users.slice(0, userIndex),
-          mappedUser,
+          user,
           ...state.users.slice(userIndex + 1)
         ]
       };
     },
 
     [NEW_USER_SUBMIT_SUCCESS]: (state, action) => {
-      const responseUser = safeGet(action, ['response', 'body'], {});
-      const mappedUser = UserModel.fromServerFormat(responseUser);
+      const { response } = action;
+      const user = UserModel.fromServerFormat(response);
 
       return {
         ...state,
         users: [
           ...state.users,
-          mappedUser
+          user
         ]
       };
     },
 
     [USERS_LOAD_SUCCESS]: (state, action) => {
-      const responseUsers = safeGet(action, ['response', 'body'], []);
-      const mappedUsers = responseUsers.map(UserModel.fromServerFormat);
+      const { response = [] } = action;
+      const users = response.map(UserModel.fromServerFormat);
 
       return {
         ...initialState,
-        users: mappedUsers
+        users
       };
     }
   }

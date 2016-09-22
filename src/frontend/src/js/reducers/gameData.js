@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet, parseNumber } from 'utils';
+import { ajaxReducer, parseNumber } from 'utils';
 import { GameModel } from 'models';
 import {
   GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
@@ -87,8 +87,8 @@ export default ajaxReducer(
 );
 
 function gameLoaded(state, action) {
-  const responseGame = safeGet(action, ['response', 'body'], {});
-  const game = GameModel.fromServerFormat(responseGame);
+  const { response } = action;
+  const game = GameModel.fromServerFormat(response);
 
   return {
     ...initialState,
