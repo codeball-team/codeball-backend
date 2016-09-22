@@ -10,8 +10,8 @@ import {
   enrollAnotherUserSelector,
   isEnrollAnotherUserEditingSelector
 } from 'selectors/models/enrollAnotherUser';
+import { currentUserIdSelector } from 'selectors/models/currentUser';
 import {
-  currentUserIdSelector,
   enrolledUsersPerStatusSelector,
   gameSelector,
   gameIdSelector,

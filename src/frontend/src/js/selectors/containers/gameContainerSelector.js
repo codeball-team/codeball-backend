@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect';
 import {
   createIsLoadingSelector,
   isGameDataLoadingSelector,
@@ -6,6 +6,9 @@ import {
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
 import {
+  editableGameSelector,
+  hasGameLoadedSelector,
+  isGameEditingSelector,
   pitchSelector,
   teamASelector,
   teamBSelector
@@ -17,25 +20,12 @@ const isGameLoadingSelector = createIsLoadingSelector(
   isUsersDataLoadingSelector
 );
 
-export default createSelector(
-  state => state.gameData,
-  isGameLoadingSelector,
-  pitchSelector,
-  teamASelector,
-  teamBSelector,
-
-  (gameData, isGameLoading, pitch, teamA, teamB) => {
-    const isGameEditing = gameData.isEditing;
-    const game = isGameEditing ? gameData.editedGame : gameData.game;
-
-    return {
-      game,
-      hasGameLoaded: gameData.hasLoaded,
-      isGameEditing,
-      isLoading: isGameLoading,
-      pitch,
-      teamA,
-      teamB
-    };
-  }
-);
+export default createStructuredSelector({
+  game: editableGameSelector,
+  hasGameLoaded: hasGameLoadedSelector,
+  isGameEditing: isGameEditingSelector,
+  isGameLoading: isGameLoadingSelector,
+  pitch: pitchSelector,
+  teamA: teamASelector,
+  teamB: teamBSelector
+});

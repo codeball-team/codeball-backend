@@ -1,16 +1,18 @@
 import { createSelector } from 'reselect';
 import { findById } from 'utils';
 import { ENROLLMENT_STATUSES, ENROLLMENT_STATUS_YES } from 'constants';
-
-export const currentUserIdSelector = createSelector(
-  state => state.currentUserData.currentUser.id,
-  currentUserId => currentUserId
-);
+import { currentUserIdSelector } from 'selectors/models/currentUser';
 
 export const enrolledUsersSelector = createSelector(
   state => state.gameData.game.enrollments,
   state => state.usersData.users,
   (enrollments, users) => enrollments.map(({ userId }) => findById(users, userId))
+);
+
+export const editableGameSelector = createSelector(
+  state => state.gameData,
+  isGameEditingSelector,
+  (gameData, isGameEditing) => (isGameEditing ? gameData.editedGame : gameData.game)
 );
 
 export const enrolledUsersPerStatusSelector = createSelector(
@@ -32,20 +34,21 @@ export const enrolledUsersPerStatusSelector = createSelector(
   )
 );
 
-export const gameSelector = createSelector(
-  state => state.gameData.game,
-  game => game
-);
+export function gameSelector(state) {
+  return state.gameData.game;
+}
 
-export const gameIdSelector = createSelector(
-  state => state.gameData.game.id,
-  gameId => gameId
-);
+export function gameIdSelector(state) {
+  return gameSelector(state).id;
+}
 
-export const hasGameLoadedSelector = createSelector(
-  state => state.gameData.hasLoaded,
-  hasLoaded => hasLoaded
-);
+export function hasGameLoadedSelector(state) {
+  return state.gameData.hasLoaded;
+}
+
+export function isGameEditingSelector(state) {
+  return state.gameData.isEditing;
+}
 
 export const numberOfEnrolledUsersSelector = createSelector(
   state => state.gameData.game.enrollments,
