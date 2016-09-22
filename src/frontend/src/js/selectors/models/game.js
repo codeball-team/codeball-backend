@@ -12,7 +12,7 @@ export const enrolledUsersSelector = createSelector(
 );
 
 export function enrollmentsSelector(state) {
-  return state.gameData.game.enrollments;
+  return gameSelector(state).enrollments;
 }
 
 export const editableGameSelector = createSelector(
@@ -64,7 +64,7 @@ export const numberOfEnrolledUsersSelector = createSelector(
 );
 
 export const pitchSelector = createSelector(
-  state => state.gameData.game.pitchId,
+  state => gameSelector(state).pitchId,
   pitchesSelector,
   (pitchId, pitches) => findById(pitches, pitchId)
 );
@@ -79,13 +79,13 @@ export const selectedEnrollmentStatusSelector = createSelector(
 
 export const teamASelector = createSelector(
   usersSelector,
-  state => state.gameData.game.teamA,
+  state => gameSelector(state).teamA,
   mapUsersIdsToUsers
 );
 
 export const teamBSelector = createSelector(
   usersSelector,
-  state => state.gameData.game.teamB,
+  state => gameSelector(state).teamB,
   mapUsersIdsToUsers
 );
 
