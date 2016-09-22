@@ -3,7 +3,7 @@ import { isInteger } from 'utils/validation';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 
 const EnrollAnotherUserModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     userId: undefined,
     enrollmentStatus: ENROLLMENT_STATUS_YES
   }),

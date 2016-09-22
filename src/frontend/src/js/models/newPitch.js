@@ -2,7 +2,7 @@ import { model } from 'utils';
 import { isInteger, isNotEmptyString } from 'utils/validation';
 
 const NewPitchModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     address: undefined,
     minNumberOfPlayers: 6,
     maxNumberOfPlayers: 10,

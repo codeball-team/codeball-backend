@@ -3,7 +3,7 @@ import { isNotEmptyString } from 'utils/validation';
 import { ROLES } from 'constants';
 
 const NewUserModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     email: undefined,
     firstName: undefined,
     lastName: undefined,

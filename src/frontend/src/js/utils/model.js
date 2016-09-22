@@ -2,7 +2,7 @@ import { _ } from 'utils';
 
 export default function model(options) {
   const {
-    defaultAttributes,
+    getDefaultAttributes,
     fromServerFormat = _.noop,
     validators = {},
     ...otherStatic
@@ -13,7 +13,7 @@ export default function model(options) {
     constructor(attributes) {
       Object.assign(
         this,
-        _({ ...attributes }).defaults(defaultAttributes())
+        _({ ...attributes }).defaults(getDefaultAttributes())
       );
     }
   }
@@ -24,7 +24,7 @@ export default function model(options) {
 
   Object.assign(Model, {
     ...otherStatic,
-    fromServerFormat: wrapFromServerFormat(Model, defaultAttributes, fromServerFormat)
+    fromServerFormat: wrapFromServerFormat(Model, getDefaultAttributes, fromServerFormat)
   });
 
   Model.isValid = modelInstance => validatorsNames.every(
@@ -34,8 +34,8 @@ export default function model(options) {
   return Model;
 }
 
-function wrapFromServerFormat(Model, defaultAttributes, fromServerFormat) {
-  const defaultEmptyArrays = createDefaultEmptyArrays(defaultAttributes);
+function wrapFromServerFormat(Model, getDefaultAttributes, fromServerFormat) {
+  const defaultEmptyArrays = createDefaultEmptyArrays(getDefaultAttributes);
 
   return serverResponse => {
     if(!serverResponse) {
@@ -48,8 +48,8 @@ function wrapFromServerFormat(Model, defaultAttributes, fromServerFormat) {
   };
 }
 
-function createDefaultEmptyArrays(defaultAttributes) {
-  const defaultObject = defaultAttributes();
+function createDefaultEmptyArrays(getDefaultAttributes) {
+  const defaultObject = getDefaultAttributes();
   const defaultObjectKeys = Object.keys(defaultObject);
   const arrayKeys = defaultObjectKeys.filter(key => Array.isArray(defaultObject[key]));
   return arrayKeys.reduce((defaultArrays, key) => ({

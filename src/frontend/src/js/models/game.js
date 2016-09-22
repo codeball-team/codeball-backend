@@ -3,7 +3,7 @@ import { DATE_FORMAT, TIME_FORMAT } from 'constants';
 import { EnrollmentModel } from 'models';
 
 const GameModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     date: '1970/01/01',
     duration: 0,
     enrollments: [],

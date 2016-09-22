@@ -2,7 +2,7 @@ import { model } from 'utils';
 import { ENROLLMENT_STATUS_YES } from 'constants';
 
 const EnrollmentModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     enrollmentStatus: ENROLLMENT_STATUS_YES,
     userId: undefined
   }),

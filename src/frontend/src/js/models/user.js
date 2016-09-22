@@ -1,7 +1,7 @@
 import { model } from 'utils';
 
 const UserModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     id: undefined,
     firstName: undefined,
     lastName: undefined,

@@ -1,7 +1,7 @@
 import { model } from 'utils';
 
 const PitchModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     id: undefined,
     name: '',
     type: undefined,
