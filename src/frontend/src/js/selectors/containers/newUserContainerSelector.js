@@ -1,9 +1,3 @@
-import { createSelector } from 'reselect';
+import { newUserSelector } from 'selectors/models/newUser';
 
-export default createSelector(
-  state => state.newUser,
-
-  newUser => ({
-    newUser
-  })
-);
+export default newUserSelector;

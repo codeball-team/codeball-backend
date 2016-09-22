@@ -1,9 +1,3 @@
-import { createSelector } from 'reselect';
+import { newPitchSelector } from 'selectors/models/newPitch';
 
-export default createSelector(
-  state => state.newPitch,
-
-  newPitch => ({
-    newPitch
-  })
-);
+export default newPitchSelector;
