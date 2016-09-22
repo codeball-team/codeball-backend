@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { gamesSelector } from 'selectors/containers';
+import { gamesContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { GamesListSection } from 'components/sections';
 import { ButtonAddGame } from 'components/codeball';
@@ -47,7 +47,7 @@ class Games extends Component {
 }
 
 export default ContainerComponent(Games, {
-  mapStateToProps: gamesSelector,
+  mapStateToProps: gamesContainerSelector,
   periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();

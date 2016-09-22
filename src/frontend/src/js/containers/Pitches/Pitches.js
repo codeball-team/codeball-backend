@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_PITCH } from 'constants';
-import { pitchesSelector } from 'selectors/containers';
+import { pitchesContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { PitchesListSection } from 'components/sections';
 import { ButtonAddPitch } from 'components/codeball';
@@ -31,7 +31,7 @@ class Pitches extends Component {
 }
 
 export default ContainerComponent(Pitches, {
-  mapStateToProps: pitchesSelector,
+  mapStateToProps: pitchesContainerSelector,
   periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();

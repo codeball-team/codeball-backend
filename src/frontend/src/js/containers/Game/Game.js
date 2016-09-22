@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_GAME, PERMISSION_EDIT_GAME_SCORE } from 'constants';
-import { gameSelector } from 'selectors/containers';
+import { gameContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { GameLineupSection, GameScoreSection } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
@@ -94,7 +94,7 @@ export default function GenerateGame(getGameId) {
   }
 
   return ContainerComponent(Game, {
-    mapStateToProps: gameSelector,
+    mapStateToProps: gameContainerSelector,
     periodicDataUpdates: true,
     updateData: ({ actions, ...props }) => {
       actions.currentUserLoad();

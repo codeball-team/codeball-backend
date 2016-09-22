@@ -4,18 +4,18 @@ import { BaseComponent } from 'components/base';
 import { List } from 'components/ui';
 import GameEnrollmentListItem from './GameEnrollmentListItem';
 
-class GameEnrollmentListItems extends Component {
+class GameEnrollmentList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    enrolledUsers: PropTypes.array.isRequired,
-    enrollmentStatus: PropTypes.string.isRequired
+    enrollmentStatus: PropTypes.string.isRequired,
+    users: PropTypes.array.isRequired
   };
 
   render() {
     const {
       className,
-      enrolledUsers,
-      enrollmentStatus
+      enrollmentStatus,
+      users
     } = this.props;
 
     return (
@@ -24,7 +24,7 @@ class GameEnrollmentListItems extends Component {
           'game-enrollment-list',
           className
         )}>
-        {enrolledUsers.map(user => {
+        {users.map(user => {
           const { id } = user;
 
           return (
@@ -39,4 +39,4 @@ class GameEnrollmentListItems extends Component {
   }
 }
 
-export default BaseComponent(GameEnrollmentListItems);
+export default BaseComponent(GameEnrollmentList);

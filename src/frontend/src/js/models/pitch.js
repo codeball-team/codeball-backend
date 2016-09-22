@@ -1,7 +1,7 @@
 import { model } from 'utils';
 
 const PitchModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     id: undefined,
     name: '',
     type: undefined,
@@ -12,10 +12,6 @@ const PitchModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if(!serverResponse) {
-      return new PitchModel();
-    }
-
     return new PitchModel({
       id: serverResponse.id,
       name: serverResponse.name,

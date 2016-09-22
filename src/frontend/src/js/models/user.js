@@ -1,7 +1,7 @@
 import { model } from 'utils';
 
 const UserModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     id: undefined,
     firstName: undefined,
     lastName: undefined,
@@ -11,10 +11,6 @@ const UserModel = model({
   }),
 
   fromServerFormat(serverResponse) {
-    if(!serverResponse) {
-      return new UserModel();
-    }
-
     return new UserModel({
       id: serverResponse.id,
       email: serverResponse.email,

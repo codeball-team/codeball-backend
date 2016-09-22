@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_PITCH } from 'constants';
-import { newPitchSelector } from 'selectors/containers';
+import { newPitchContainerSelector } from 'selectors/containers';
 import { NewPitchModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { NewPitchSection } from 'components/sections';
@@ -82,7 +82,7 @@ class NewPitch extends Component {
 }
 
 export default ContainerComponent(NewPitch, {
-  mapStateToProps: newPitchSelector,
+  mapStateToProps: newPitchContainerSelector,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
   }

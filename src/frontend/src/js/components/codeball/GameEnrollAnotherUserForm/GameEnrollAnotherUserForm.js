@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { classNames, findLabelByValue } from 'utils';
-import { EnrollUserModel } from 'models';
+import { EnrollAnotherUserModel } from 'models';
 import { BaseComponent } from 'components/base';
 import { Form, Select } from 'components/ui';
 
-class GameEnrollUserForm extends Component {
+class GameEnrollAnotherUserForm extends Component {
   static propTypes = {
     className: PropTypes.string,
-    enrollUser: PropTypes.object,
+    enrollAnotherUser: PropTypes.object,
     isEditing: PropTypes.bool,
     users: PropTypes.array.isRequired,
     onUserIdChange: PropTypes.func.isRequired
@@ -21,8 +21,8 @@ class GameEnrollUserForm extends Component {
   render() {
     const {
       className,
-      enrollUser,
-      enrollUser: {
+      enrollAnotherUser,
+      enrollAnotherUser: {
         userId
       },
       isEditing,
@@ -46,7 +46,7 @@ class GameEnrollUserForm extends Component {
             {
               label: 'Player',
               displayValue: findLabelByValue(usersOptions, userId),
-              isValid: EnrollUserModel.isUserIdValid(enrollUser),
+              isValid: EnrollAnotherUserModel.isUserIdValid(enrollAnotherUser),
               component: (
                 <Select
                   noResultsText="There are no players"
@@ -64,4 +64,4 @@ class GameEnrollUserForm extends Component {
   }
 }
 
-export default BaseComponent(GameEnrollUserForm);
+export default BaseComponent(GameEnrollAnotherUserForm);

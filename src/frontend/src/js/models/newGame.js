@@ -2,7 +2,7 @@ import { model, moment, unixToJavaTimestamp } from 'utils';
 import { isId, isInRange, isInteger, isPositiveInteger } from 'utils/validation';
 
 const NewGameModel = model({
-  defaultAttributes: () => ({
+  getDefaultAttributes: () => ({
     date: undefined,
     duration: undefined,
     hour: 18,

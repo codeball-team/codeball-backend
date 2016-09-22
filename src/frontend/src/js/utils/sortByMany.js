@@ -9,7 +9,7 @@ export default function sortByMany(list, attributes, options = {}) {
 
   return reversedAttributes.reduce(
     (sortedList, attribute) => sortedList.sort(attributeComparatorCreator(attributeGetterCreator(attribute))),
-    list
+    [...list]
   );
 }
 

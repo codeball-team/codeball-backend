@@ -8,7 +8,7 @@ export const isPitchesDataLoadingSelector = state => state.pitchesData.isLoading
 export const isUserDataLoadingSelector = state => state.userData.isLoading;
 export const isUsersDataLoadingSelector = state => state.usersData.isLoading;
 
-export function isLoadingSelector(...selectors) {
+export function createIsLoadingSelector(...selectors) {
   return createSelector(
     ...selectors,
     (...indicators) => indicators.some(Boolean)
