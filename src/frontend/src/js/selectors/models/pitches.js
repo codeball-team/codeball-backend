@@ -6,7 +6,7 @@ export const pitchesSelector = createSelector(
   pitches => pitches
 );
 
-export const sortedUsersSelector = createSelector(
+export const sortedPitchesSelector = createSelector(
   state => state.pitchesData.pitches,
   pitches => sortByMany(pitches, ['name']).reverse()
 );
