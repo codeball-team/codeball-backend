@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
 import {
-  isLoadingSelector,
+  createIsLoadingSelector,
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
 import {
   sortedUsersSelector
 } from 'selectors/models/users';
 
-const areUsersLoadingSelector = isLoadingSelector(
+const areUsersLoadingSelector = createIsLoadingSelector(
   isUsersDataLoadingSelector
 );
 

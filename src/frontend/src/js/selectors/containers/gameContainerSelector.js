@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import {
-  isLoadingSelector,
+  createIsLoadingSelector,
   isGameDataLoadingSelector,
   isPitchesDataLoadingSelector,
   isUsersDataLoadingSelector
@@ -11,7 +11,7 @@ import {
   teamBSelector
 } from 'selectors/models/game';
 
-const isGameLoadingSelector = isLoadingSelector(
+const isGameLoadingSelector = createIsLoadingSelector(
   isGameDataLoadingSelector,
   isPitchesDataLoadingSelector,
   isUsersDataLoadingSelector

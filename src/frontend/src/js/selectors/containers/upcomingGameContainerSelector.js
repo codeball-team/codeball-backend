@@ -1,6 +1,6 @@
 import { createStructuredSelector } from 'reselect';
 import {
-  isLoadingSelector,
+  createIsLoadingSelector,
   isCurrentUserLoadingSelector,
   isGameDataLoadingSelector,
   isPitchesDataLoadingSelector,
@@ -24,7 +24,7 @@ import {
   unenrolledUsersSelector
 } from 'selectors/models/game';
 
-const isUpcomingGameLoadingSelector = isLoadingSelector(
+const isUpcomingGameLoadingSelector = createIsLoadingSelector(
   isCurrentUserLoadingSelector,
   isGameDataLoadingSelector,
   isPitchesDataLoadingSelector,

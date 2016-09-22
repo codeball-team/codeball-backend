@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect';
 import { previousGamesSelector, upcomingGamesSelector } from 'selectors';
 import {
-  isLoadingSelector,
+  createIsLoadingSelector,
   isGamesDataLoadingSelector,
   isPitchesDataLoadingSelector
 } from 'selectors/isLoading';
 
-const areGamesLoadingSelector = isLoadingSelector(
+const areGamesLoadingSelector = createIsLoadingSelector(
   isGamesDataLoadingSelector,
   isPitchesDataLoadingSelector
 );
