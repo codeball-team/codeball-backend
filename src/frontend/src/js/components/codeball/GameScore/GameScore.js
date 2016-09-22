@@ -64,17 +64,17 @@ class GameScore extends Component {
             onChange={this.onGameScoreBChanged} />
         </div>
 
-        <div className="details">
+        <div className="details" title="Pitch">
           <Link to={`/pitches/${pitchId}`}>
             {pitchName}
           </Link>
         </div>
 
-        <div className="details">
+        <div className="details" title="Game date">
           {date}
         </div>
 
-        <div className="details">
+        <div className="details" title="Game time">
           {time}
         </div>
       </div>

@@ -34,12 +34,12 @@ class UserProfile extends Component {
           }} />
 
         <div className="info">
-          <div className="ellipsis">
+          <div className="ellipsis" title="Role">
             <Icon name="access" />
             {ROLE_STRING[role]}
           </div>
 
-          <div className="ellipsis">
+          <div className="ellipsis" title="Email">
             <Icon name="email" />
             <a href={`mailto:${email}`}>{email}</a>
           </div>
