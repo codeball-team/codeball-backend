@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ajaxSpinnerSelector } from 'selectors/containers';
+import { ajaxSpinnerContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { Spinner } from 'components/ui';
 
@@ -20,5 +20,5 @@ class AjaxSpinner extends Component {
 }
 
 export default ContainerComponent(AjaxSpinner, {
-  mapStateToProps: ajaxSpinnerSelector
+  mapStateToProps: ajaxSpinnerContainerSelector
 });

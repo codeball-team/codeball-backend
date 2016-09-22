@@ -3,7 +3,7 @@ import {
   PERMISSION_ADD_GAME, PERMISSION_CLOSE_ENROLMENT, PERMISSION_DRAW_TEAMS,
   PERMISSION_END_GAME, PERMISSION_ENROLL, PERMISSION_ENROLL_ANOTHER_USER
 } from 'constants';
-import { upcomingGameSelector } from 'selectors/containers';
+import { upcomingGameContainerSelector } from 'selectors/containers';
 import { EnrollAnotherUserModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { ButtonSave, ButtonShuffle } from 'components/ui';
@@ -195,7 +195,7 @@ export default function GenerateUpcomingGame(getGameId) {
   }
 
   return ContainerComponent(UpcomingGame, {
-    mapStateToProps: upcomingGameSelector,
+    mapStateToProps: upcomingGameContainerSelector,
     periodicDataUpdates: true,
     updateData: ({ actions, ...props }) => {
       actions.currentUserLoad();

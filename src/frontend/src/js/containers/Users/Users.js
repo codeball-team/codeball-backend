@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_USER } from 'constants';
-import { usersSelector } from 'selectors/containers';
+import { usersContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { UsersListSection } from 'components/sections';
 import { ButtonAddUser } from 'components/codeball';
@@ -34,7 +34,7 @@ class Users extends Component {
 }
 
 export default ContainerComponent(Users, {
-  mapStateToProps: usersSelector,
+  mapStateToProps: usersContainerSelector,
   periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();

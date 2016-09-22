@@ -20,7 +20,7 @@ export default ajaxReducer(
     [CURRENT_USER_LOAD_SUCCESS]: (state, action) => {
       const responseUser = safeGet(action, ['response', 'body'], {});
       const mappedUser = UserModel.fromServerFormat(responseUser);
-      const { id: userId } = responseUser;
+      const { id: userId } = mappedUser;
       const currentUsers = state.users;
       const userIndex = currentUsers.findIndex(({ id }) => id === userId);
 

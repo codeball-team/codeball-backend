@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { newGameSelector } from 'selectors/containers';
+import { newGameContainerSelector } from 'selectors/containers';
 import { NewGameModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { ButtonCancel, ButtonSave } from 'components/ui';
@@ -87,7 +87,7 @@ class NewGame extends Component {
 }
 
 export default ContainerComponent(NewGame, {
-  mapStateToProps: newGameSelector,
+  mapStateToProps: newGameContainerSelector,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
     actions.pitchesLoad();
