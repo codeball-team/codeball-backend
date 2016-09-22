@@ -124,4 +124,3 @@ function release1() {
 }
 
 export default ContainerComponent(Changelog);
-
