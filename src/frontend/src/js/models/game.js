@@ -10,6 +10,7 @@ const GameModel = model({
     id: undefined,
     isEnrollmentOver: undefined,
     isGameOver: undefined,
+    pitch: {},
     pitchId: undefined,
     teamA: [],
     teamAScore: undefined,

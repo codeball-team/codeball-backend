@@ -2,23 +2,23 @@ import { model } from 'utils';
 
 const PitchModel = model({
   getDefaultAttributes: () => ({
+    address: undefined,
     id: undefined,
+    maxNumberOfPlayers: 0,
+    minNumberOfPlayers: 0,
     name: '',
     type: undefined,
-    address: undefined,
-    url: undefined,
-    minNumberOfPlayers: 0,
-    maxNumberOfPlayers: 0
+    url: undefined
   }),
 
   fromServerFormat(serverResponse) {
     return new PitchModel({
-      id: serverResponse.id,
-      name: serverResponse.name,
-      type: serverResponse.pitchType,
       address: serverResponse.address,
+      id: serverResponse.id,
+      maxNumberOfPlayers: serverResponse.maxNumberOfPlayers,
       minNumberOfPlayers: serverResponse.minNumberOfPlayers,
-      maxNumberOfPlayers: serverResponse.maxNumberOfPlayers
+      name: serverResponse.name,
+      type: serverResponse.pitchType
     });
   }
 });

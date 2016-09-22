@@ -2,22 +2,22 @@ import { model } from 'utils';
 
 const UserModel = model({
   getDefaultAttributes: () => ({
-    id: undefined,
-    firstName: undefined,
-    lastName: undefined,
     email: undefined,
+    firstName: undefined,
+    id: undefined,
+    lastName: undefined,
     pictureUrl: undefined,
     role: 'ROLE_USER'
   }),
 
   fromServerFormat(serverResponse) {
     return new UserModel({
-      id: serverResponse.id,
       email: serverResponse.email,
       firstName: serverResponse.firstName,
+      id: serverResponse.id,
       lastName: serverResponse.lastName,
-      role: serverResponse.role,
-      pictureUrl: serverResponse.pictureUrl
+      pictureUrl: serverResponse.pictureUrl,
+      role: serverResponse.role
     });
   }
 });

@@ -4,8 +4,8 @@ import { ENROLLMENT_STATUS_YES } from 'constants';
 
 const EnrollAnotherUserModel = model({
   getDefaultAttributes: () => ({
-    userId: undefined,
-    enrollmentStatus: ENROLLMENT_STATUS_YES
+    enrollmentStatus: ENROLLMENT_STATUS_YES,
+    userId: undefined
   }),
 
   validators: {

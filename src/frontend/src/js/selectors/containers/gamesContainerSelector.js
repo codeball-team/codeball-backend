@@ -7,7 +7,6 @@ import {
   isUsersDataLoadingSelector
 } from 'selectors/isLoading';
 import { previousGamesSelector, upcomingGamesSelector } from 'selectors/models/games';
-import { pitchesSelector } from 'selectors/models/pitches';
 
 const areGamesLoadingSelector = createIsLoadingSelector(
   isCurrentUserLoadingSelector,
@@ -18,7 +17,6 @@ const areGamesLoadingSelector = createIsLoadingSelector(
 
 export default createStructuredSelector({
   isLoading: areGamesLoadingSelector,
-  pitches: pitchesSelector,
   previousGames: previousGamesSelector,
   upcomingGames: upcomingGamesSelector
 });
