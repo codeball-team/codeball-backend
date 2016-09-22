@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ContainerComponent } from 'components/base';
-import './Changelog.scss';
 
 class Changelog extends Component {
   render() {
