@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Builder
 @Entity
 @AllArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Enrollment {
 
     @Id
@@ -43,8 +42,7 @@ public class Enrollment {
     private User enroller;
 
     @Tolerate
-    public Enrollment() {
-
+    private Enrollment() {
     }
 
     public Enrollment(Game game, User user, EnrollmentStatus enrollmentStatus, User enroller) {

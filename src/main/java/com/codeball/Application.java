@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class Application {
 
+    Application() {}
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

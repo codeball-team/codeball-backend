@@ -1,7 +1,10 @@
 package com.codeball.config;
 
 import com.codeball.repositories.resolvers.EntityByIdResolver;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.cfg.MapperConfig;
 import com.fasterxml.jackson.databind.introspect.Annotated;
@@ -28,9 +31,39 @@ public class JacksonConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        final MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-        final ObjectMapper objectMapper = new ObjectMapper();
+        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper configuredObjectMapper = createAndConfigureObjectMapper();
+        messageConverter.setObjectMapper(configuredObjectMapper);
+        converters.add(messageConverter);
+        super.configureMessageConverters(converters);
+    }
 
+    private ObjectMapper createAndConfigureObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        configureEntityManagerAutoInjectionForObjectIdResolvers(objectMapper);
+        configureDeserializationFeatures(objectMapper);
+        configureDefaultObjectMapperBehaviour(objectMapper);
+        return objectMapper;
+    }
+
+    private void configureDefaultObjectMapperBehaviour(ObjectMapper objectMapper) {
+        objectMapper.setVisibility(PropertyAccessor.CREATOR, JsonAutoDetect.Visibility.ANY);
+        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE);
+        objectMapper.setVisibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE);
+        objectMapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
+        objectMapper.setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE);
+    }
+
+    private void configureDeserializationFeatures(ObjectMapper objectMapper) {
+        objectMapper.configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, true);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    private void configureEntityManagerAutoInjectionForObjectIdResolvers(ObjectMapper objectMapper) {
         objectMapper.setHandlerInstantiator(new SpringHandlerInstantiator(this.applicationContext.getAutowireCapableBeanFactory()) {
             @Override
             public ObjectIdResolver resolverIdGeneratorInstance(
@@ -45,10 +78,6 @@ public class JacksonConfiguration extends WebMvcConfigurerAdapter {
                 return null;
             }
         });
-
-        messageConverter.setObjectMapper(objectMapper);
-        converters.add(messageConverter);
-        super.configureMessageConverters(converters);
     }
 
 

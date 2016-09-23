@@ -3,24 +3,32 @@ package com.codeball.model;
 import com.codeball.repositories.resolvers.EntityByIdResolver;
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.Lists;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Entity
 @Getter
 @Builder
-@Entity
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Game {
 
     @Id
     @Setter
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("id")
     private Long id;
+
+
+
+    @JsonProperty("startTimestamp")
     private long startTimestamp;
+    @JsonProperty("durationInMinutes")
     private int durationInMinutes;
     @JsonProperty("pitchId")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = Pitch.class)
@@ -43,6 +51,7 @@ public class Game {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "teamA", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> teamA = Lists.newArrayList();
+    @JsonProperty("teamAScore")
     private int teamAScore;
     @JsonProperty("teamBIds")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", resolver = EntityByIdResolver.class, scope = User.class)
@@ -50,6 +59,7 @@ public class Game {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "teamB", joinColumns = @JoinColumn(name = "game_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> teamB = Lists.newArrayList();
+    @JsonProperty("teamBScore")
     private int teamBScore;
 
     @Tolerate

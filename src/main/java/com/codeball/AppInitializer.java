@@ -32,7 +32,7 @@ public class AppInitializer implements CommandLineRunner {
 
     @Transactional
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
         if (developmentProperties.getDataInitializer().isEnabled()) {
             populateSampleData();
         }
