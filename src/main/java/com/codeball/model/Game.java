@@ -3,9 +3,7 @@ package com.codeball.model;
 import com.codeball.repositories.resolvers.EntityByIdResolver;
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.collect.Lists;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
@@ -13,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Entity
 @Getter
 @Builder
+@Entity
 public class Game {
 
     @Id
@@ -23,8 +21,6 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
     private Long id;
-
-
 
     @JsonProperty("startTimestamp")
     private long startTimestamp;
@@ -63,8 +59,7 @@ public class Game {
     private int teamBScore;
 
     @Tolerate
-    private Game() {
-    }
+    private Game() {}
 
     @JsonIgnore
     public List<User> getEnrolledUsers() {

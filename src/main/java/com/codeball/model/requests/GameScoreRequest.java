@@ -2,10 +2,12 @@ package com.codeball.model.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.experimental.Tolerate;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameScoreRequest {
 
     @JsonProperty("teamAScore")
@@ -20,8 +22,5 @@ public class GameScoreRequest {
         this.teamAScore = teamAScore;
         this.teamBScore = teamBScore;
     }
-
-    @Tolerate
-    private GameScoreRequest() { }
 
 }

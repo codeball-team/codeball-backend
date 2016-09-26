@@ -44,7 +44,7 @@ public class AppInitializer implements CommandLineRunner {
                 .address("ul. Piastowska 69, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(6)
-                .pitchType(PitchType.FIRM_GROUND)
+                .type(PitchType.FIRM_GROUND)
                 .build();
         pitchRepository.save(pitch1);
 
@@ -53,7 +53,7 @@ public class AppInitializer implements CommandLineRunner {
                 .address("ul. Św. Filipa 15, Kraków")
                 .minNumberOfPlayers(6)
                 .maxNumberOfPlayers(10)
-                .pitchType(PitchType.HARD_GROUND)
+                .type(PitchType.HARD_GROUND)
                 .build();
         pitchRepository.save(pitch2);
 
