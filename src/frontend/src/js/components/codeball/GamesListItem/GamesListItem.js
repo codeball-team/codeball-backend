@@ -6,8 +6,7 @@ import './GamesListItem.scss';
 class GamesListItem extends Component {
   static propTypes = {
     formatUrl: PropTypes.func.isRequired,
-    game: PropTypes.object.isRequired,
-    pitch: PropTypes.object.isRequired
+    game: PropTypes.object.isRequired
   };
 
   render() {
@@ -16,12 +15,12 @@ class GamesListItem extends Component {
       game: {
         id,
         date,
+        pitch: {
+          name: pitchName
+        },
         teamAScore,
         teamBScore,
         time
-      },
-      pitch: {
-        name: pitchName
       }
     } = this.props;
 

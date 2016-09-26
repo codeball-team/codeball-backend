@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  ENROLLMENT_STATUS_YES, ENROLLMENT_STATUS_MAYBE, ENROLLMENT_STATUS_NO
+  ENROLLMENT_STATUSES, ENROLLMENT_STATUS_MAYBE,
+  ENROLLMENT_STATUS_NO, ENROLLMENT_STATUS_YES
 } from 'constants';
 import { classNames } from 'utils';
 import { BaseComponent } from 'components/base';
@@ -28,11 +29,7 @@ const GAME_ENROLLMENT_FORM_OPTIONS = [
 class GameEnrollmentForm extends Component {
   static propTypes = {
     className: PropTypes.string,
-    value: PropTypes.oneOf([
-      ENROLLMENT_STATUS_YES,
-      ENROLLMENT_STATUS_MAYBE,
-      ENROLLMENT_STATUS_NO
-    ]),
+    value: PropTypes.oneOf(ENROLLMENT_STATUSES),
     onChange: PropTypes.func.isRequired
   };
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_USER, ROLE_OPTIONS } from 'constants';
-import { newUserSelector } from 'selectors/containers';
+import { newUserContainerSelector } from 'selectors/containers';
 import { NewUserModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { NewUserSection } from 'components/sections';
@@ -80,7 +80,8 @@ class NewUser extends Component {
 }
 
 export default ContainerComponent(NewUser, {
-  mapStateToProps: newUserSelector,
+  mapStateToProps: newUserContainerSelector,
+  periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();
   }

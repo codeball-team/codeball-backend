@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { ajaxErrorsSelector } from 'selectors/containers';
+import { ajaxErrorsContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { Errors } from 'components/ui';
 
@@ -26,5 +26,5 @@ class AjaxErrors extends Component {
 }
 
 export default ContainerComponent(AjaxErrors, {
-  mapStateToProps: ajaxErrorsSelector
+  mapStateToProps: ajaxErrorsContainerSelector
 });

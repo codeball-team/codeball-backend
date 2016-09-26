@@ -1,6 +1,6 @@
 export * from './buttons';
 
-export GameEnrollUserForm from './GameEnrollUserForm/GameEnrollUserForm';
+export GameEnrollAnotherUserForm from './GameEnrollAnotherUserForm/GameEnrollAnotherUserForm';
 export GameEnrollment from './GameEnrollment/GameEnrollment';
 export GameEnrollmentForm from './GameEnrollmentForm/GameEnrollmentForm';
 export GameInfo from './GameInfo/GameInfo';

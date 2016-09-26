@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { PERMISSION_ADD_GAME } from 'constants';
-import { gamesSelector } from 'selectors/containers';
+import { gamesContainerSelector } from 'selectors/containers';
 import { ContainerComponent } from 'components/base';
 import { GamesListSection } from 'components/sections';
 import { ButtonAddGame } from 'components/codeball';
@@ -11,7 +11,6 @@ const formatPreviousGameUrl = id => `/games/previous/${id}`;
 class Games extends Component {
   static propTypes = {
     hasPermission: PropTypes.func.isRequired,
-    pitches: PropTypes.array.isRequired,
     previousGames: PropTypes.array.isRequired,
     upcomingGames: PropTypes.array.isRequired
   };
@@ -19,7 +18,6 @@ class Games extends Component {
   render() {
     const {
       hasPermission,
-      pitches,
       previousGames,
       upcomingGames
     } = this.props;
@@ -31,7 +29,6 @@ class Games extends Component {
           title={`Upcoming games (${upcomingGames.length})`}
           formatUrl={formatUpcomingGameUrl}
           games={upcomingGames}
-          pitches={pitches}
           buttons={[
             <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
           ]} />
@@ -39,15 +36,14 @@ class Games extends Component {
         <GamesListSection
           title={`Previous games (${previousGames.length})`}
           formatUrl={formatPreviousGameUrl}
-          games={previousGames}
-          pitches={pitches} />
+          games={previousGames} />
       </main>
     );
   }
 }
 
 export default ContainerComponent(Games, {
-  mapStateToProps: gamesSelector,
+  mapStateToProps: gamesContainerSelector,
   periodicDataUpdates: true,
   updateData: ({ actions }) => {
     actions.currentUserLoad();

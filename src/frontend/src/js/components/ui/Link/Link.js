@@ -11,7 +11,7 @@ export default class Link extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node
-    ]).isRequired,
+    ]),
     to: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
   };

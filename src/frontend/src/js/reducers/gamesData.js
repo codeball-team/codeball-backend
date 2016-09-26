@@ -1,4 +1,4 @@
-import { ajaxReducer, safeGet, sortByMany } from 'utils';
+import { ajaxReducer } from 'utils';
 import { GameModel } from 'models';
 import { GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS } from 'constants/actionTypes';
 
@@ -15,13 +15,12 @@ export default ajaxReducer(
   },
   {
     [GAMES_LOAD_SUCCESS]: (state, action) => {
-      const responseGames = safeGet(action, ['response', 'body'], []);
-      const mappedGames = responseGames.map(GameModel.fromServerFormat);
-      const sortedGames = sortByMany(mappedGames, ['date']).reverse();
+      const { response = [] } = action;
+      const games = response.map(GameModel.fromServerFormat);
 
       return {
         ...initialState,
-        games: sortedGames
+        games
       };
     }
   }
