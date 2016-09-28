@@ -9,7 +9,7 @@ export function currentUserLoad() {
     json: true,
     throttle: true,
     startAction: CURRENT_USER_LOAD,
-    successAction: CURRENT_USER_LOAD_SUCCESS,
-    failureAction: CURRENT_USER_LOAD_FAILURE
+    failureAction: CURRENT_USER_LOAD_FAILURE,
+    successAction: CURRENT_USER_LOAD_SUCCESS
   }));
 }

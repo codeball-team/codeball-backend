@@ -2,9 +2,8 @@ import request from 'superagent';
 import { ajax, safeGet } from 'utils';
 import { push } from 'react-router-redux';
 import {
-  NEW_USER_CHANGE_EMAIL, NEW_USER_CHANGE_FIRST_NAME,
-  NEW_USER_CHANGE_LAST_NAME, NEW_USER_CHANGE_ROLE,
-  NEW_USER_RESET,
+  NEW_USER_CHANGE_EMAIL, NEW_USER_CHANGE_FIRST_NAME, NEW_USER_CHANGE_LAST_NAME,
+  NEW_USER_CHANGE_ROLE, NEW_USER_RESET,
   NEW_USER_SUBMIT, NEW_USER_SUBMIT_FAILURE, NEW_USER_SUBMIT_SUCCESS
 } from 'constants/actionTypes';
 import { usersUrl } from 'constants';
@@ -52,8 +51,8 @@ export function newUserSubmit(newUser) {
     json: true,
     debounce: true,
     startAction: NEW_USER_SUBMIT,
-    successAction: NEW_USER_SUBMIT_SUCCESS,
     failureAction: NEW_USER_SUBMIT_FAILURE,
+    successAction: NEW_USER_SUBMIT_SUCCESS,
     successCallback: response => {
       const userId = safeGet(response, ['body', 'id']);
       dispatch(push(`/players/${userId}`));

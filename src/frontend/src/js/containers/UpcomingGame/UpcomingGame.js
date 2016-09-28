@@ -8,8 +8,8 @@ import { EnrollAnotherUserModel } from 'models';
 import { ContainerComponent } from 'components/base';
 import { ButtonSave, ButtonShuffle } from 'components/ui';
 import {
-  GameEnrollmentSection, GameEnrollAnotherUserFormSection, GameEnrollmentFormSection,
-  GameInfoSection, GameLineupSection
+  GameEnrollAnotherUserFormSection, GameEnrollmentFormSection,
+  GameEnrollmentSection, GameInfoSection, GameLineupSection
 } from 'components/sections';
 import { GameNotLoaded } from 'components/codeball';
 

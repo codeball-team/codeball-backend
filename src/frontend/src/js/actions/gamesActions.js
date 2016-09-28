@@ -2,6 +2,7 @@ import request from 'superagent';
 import { ajax } from 'utils';
 import { push } from 'react-router-redux';
 import {
+  GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS,
   GAME_CHANGE_ENROLLMENT_STATUS, GAME_CHANGE_ENROLLMENT_STATUS_FAILURE, GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
   GAME_CLOSE_ENROLLMENT, GAME_CLOSE_ENROLLMENT_FAILURE, GAME_CLOSE_ENROLLMENT_SUCCESS,
   GAME_DRAW_TEAMS, GAME_DRAW_TEAMS_FAILURE, GAME_DRAW_TEAMS_SUCCESS,
@@ -11,8 +12,7 @@ import {
   GAME_ENROLL_ANOTHER_USER_RESET, GAME_ENROLL_ANOTHER_USER_SUBMIT,
   GAME_ENROLL_ANOTHER_USER_SUBMIT_FAILURE, GAME_ENROLL_ANOTHER_USER_SUBMIT_SUCCESS,
   GAME_LOAD, GAME_LOAD_FAILURE, GAME_LOAD_SUCCESS,
-  GAME_SET_SCORE, GAME_SET_SCORE_SUCCESS, GAME_SET_SCORE_FAILURE,
-  GAMES_LOAD, GAMES_LOAD_FAILURE, GAMES_LOAD_SUCCESS
+  GAME_SET_SCORE, GAME_SET_SCORE_FAILURE, GAME_SET_SCORE_SUCCESS
 } from 'constants/actionTypes';
 import {
   gameCloseEnrollmentUrl,
@@ -31,12 +31,12 @@ export function gameChangeEnrollmentStatus(gameId, userId, enrollmentStatus) {
     json: true,
     debounce: true,
     startAction: GAME_CHANGE_ENROLLMENT_STATUS,
-    successAction: GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
     failureAction: GAME_CHANGE_ENROLLMENT_STATUS_FAILURE,
+    successAction: GAME_CHANGE_ENROLLMENT_STATUS_SUCCESS,
     actionsData: {
+      enrollmentStatus,
       gameId,
-      userId,
-      enrollmentStatus
+      userId
     }
   }));
 }
@@ -47,8 +47,8 @@ export function gameCloseEnrollment(gameId) {
     json: true,
     throttle: true,
     startAction: GAME_CLOSE_ENROLLMENT,
-    successAction: GAME_CLOSE_ENROLLMENT_SUCCESS,
     failureAction: GAME_CLOSE_ENROLLMENT_FAILURE,
+    successAction: GAME_CLOSE_ENROLLMENT_SUCCESS,
     actionsData: {
       gameId
     }
@@ -61,8 +61,8 @@ export function gameDrawTeams(gameId) {
     json: true,
     throttle: true,
     startAction: GAME_DRAW_TEAMS,
-    successAction: GAME_DRAW_TEAMS_SUCCESS,
     failureAction: GAME_DRAW_TEAMS_FAILURE,
+    successAction: GAME_DRAW_TEAMS_SUCCESS,
     actionsData: {
       gameId
     }
@@ -127,8 +127,8 @@ export function gameEnrollAnotherUserSubmit(gameId, userId, enrollmentStatus) {
     json: true,
     debounce: true,
     startAction: GAME_ENROLL_ANOTHER_USER_SUBMIT,
-    successAction: GAME_ENROLL_ANOTHER_USER_SUBMIT_SUCCESS,
     failureAction: GAME_ENROLL_ANOTHER_USER_SUBMIT_FAILURE,
+    successAction: GAME_ENROLL_ANOTHER_USER_SUBMIT_SUCCESS,
     successCallback: () => {
       dispatch(gameEnrollAnotherUserReset());
     }
@@ -141,8 +141,8 @@ export function gameEnd(gameId) {
     json: true,
     throttle: true,
     startAction: GAME_END,
-    successAction: GAME_END_SUCCESS,
     failureAction: GAME_END_FAILURE,
+    successAction: GAME_END_SUCCESS,
     actionsData: {
       gameId
     },
@@ -158,8 +158,8 @@ export function gameLoad(gameId) {
     json: true,
     debounce: true,
     startAction: GAME_LOAD,
-    successAction: GAME_LOAD_SUCCESS,
     failureAction: GAME_LOAD_FAILURE,
+    successAction: GAME_LOAD_SUCCESS,
     actionsData: {
       gameId
     }
@@ -173,8 +173,8 @@ export function gameSetScore(gameId, teamAScore, teamBScore) {
     json: true,
     debounce: true,
     startAction: GAME_SET_SCORE,
-    successAction: GAME_SET_SCORE_SUCCESS,
-    failureAction: GAME_SET_SCORE_FAILURE
+    failureAction: GAME_SET_SCORE_FAILURE,
+    successAction: GAME_SET_SCORE_SUCCESS
   }));
 }
 
@@ -184,7 +184,7 @@ export function gamesLoad() {
     json: true,
     throttle: true,
     startAction: GAMES_LOAD,
-    successAction: GAMES_LOAD_SUCCESS,
-    failureAction: GAMES_LOAD_FAILURE
+    failureAction: GAMES_LOAD_FAILURE,
+    successAction: GAMES_LOAD_SUCCESS
   }));
 }

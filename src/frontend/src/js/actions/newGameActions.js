@@ -58,8 +58,8 @@ export function newGameSubmit(newGame) {
     json: true,
     debounce: true,
     startAction: NEW_GAME_SUBMIT,
-    successAction: NEW_GAME_SUBMIT_SUCCESS,
     failureAction: NEW_GAME_SUBMIT_FAILURE,
+    successAction: NEW_GAME_SUBMIT_SUCCESS,
     successCallback: response => {
       const gameId = safeGet(response, ['body', 'id']);
       dispatch(push(`/games/upcoming/${gameId}`));

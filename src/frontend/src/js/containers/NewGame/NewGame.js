@@ -3,8 +3,8 @@ import { PERMISSION_ADD_GAME } from 'constants';
 import { newGameContainerSelector } from 'selectors/containers';
 import { NewGameModel } from 'models';
 import { ContainerComponent } from 'components/base';
-import { ButtonCancel, ButtonSave } from 'components/ui';
 import { NewGameSection } from 'components/sections';
+import { ButtonCancel, ButtonSave } from 'components/ui';
 
 class NewGame extends Component {
   static propTypes = {
