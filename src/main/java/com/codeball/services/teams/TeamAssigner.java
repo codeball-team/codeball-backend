@@ -15,7 +15,7 @@ public interface TeamAssigner {
 
     default void drawAndAssignNewTeams(Game game) {
         if (game.isGameOver()) {
-            throw new GameOverException(game.getId());
+            throw new GameOverException(game.id().get());
         }
 
         TeamAssignment teamAssignment = assignTeams(game.getEnrolledUsers());

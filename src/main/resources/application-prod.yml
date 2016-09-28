@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/codeball
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+
+flyway:
+  enabled: true
+  locations: db/migration/common,db/migration/postgres
+
+development:
+  dataInitializer:
+    enabled: false
+  securityContext:
+    enabled: false

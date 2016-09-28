@@ -29,7 +29,7 @@ function release2() {
         <li>
           Backend
           <ul>
-            <li>TODO</li>
+            <li>Not drawing same team combinations twice in a row</li>
           </ul>
         </li>
 
@@ -49,7 +49,8 @@ function release2() {
         <li>
           Backend
           <ul>
-            <li>TODO</li>
+            <li>Code refinements and refactoring of persistence layer</li>
+            <li>Using Spring JPA's support for Java 8 Optionals</li>
           </ul>
         </li>
 

@@ -1,19 +1,23 @@
 package com.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TeamAssignment {
 
     @JsonProperty("teamA")
-    private final List<User> teamA;
+    private List<User> teamA = Lists.newArrayList();
     @JsonProperty("teamB")
-    private final List<User> teamB;
+    private List<User> teamB = Lists.newArrayList();
 
     public TeamAssignment(List<User> teamA, List<User> teamB) {
         this.teamA = teamA;

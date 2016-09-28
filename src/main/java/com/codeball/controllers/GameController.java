@@ -11,6 +11,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/game", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class GameController {
@@ -64,7 +66,7 @@ public class GameController {
     }
 
     @RequestMapping(value = "/{gameId}/score", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Game setGameScore(@PathVariable("gameId") long gameId, @RequestBody GameScoreRequest gameScoreRequest) {
+    public Game setGameScore(@PathVariable("gameId") long gameId, @Valid @RequestBody GameScoreRequest gameScoreRequest) {
         return gameService.updateGameScore(gameId, gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
     }
 
@@ -75,7 +77,7 @@ public class GameController {
 
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/{gameId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Game updateGame(@PathVariable long gameId, @RequestBody Game game) {
+    public Game updateGame(@PathVariable long gameId, @Valid @RequestBody Game game) {
         return gameService.updateGame(gameId, game);
     }
 

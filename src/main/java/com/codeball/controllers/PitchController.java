@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/pitch", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class PitchController {
@@ -27,13 +29,13 @@ public class PitchController {
 
     @Secured("ROLE_ADMIN")
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Pitch createPitch(@RequestBody Pitch pitch) {
+    public Pitch createPitch(@Valid @RequestBody Pitch pitch) {
         return pitchService.createPitch(pitch);
     }
 
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Pitch updatePitch(@PathVariable long id, @RequestBody Pitch pitch) {
+    public Pitch updatePitch(@PathVariable long id, @Valid @RequestBody Pitch pitch) {
         return pitchService.updatePitch(id, pitch);
     }
 

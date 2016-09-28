@@ -58,18 +58,17 @@ public class SecurityContextUtils {
     }
 
     public long getCurrentUserId() {
-        return getCurrentUser().getId();
+        return getCurrentUser().id().get();
     }
 
     private User createUserOf(Authentication authentication) {
         Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
-        return User.builder()
-                .email(this.extractEmail(authenticationDetails))
-                .firstName(this.extractFirstName(authenticationDetails))
-                .lastName(this.extractLastName(authenticationDetails))
-                .pictureUrl(this.extractPictureUrl(authenticationDetails))
-                .role(this.extractUserRole(authenticationDetails))
-                .build();
+        return User.newUser(
+                this.extractEmail(authenticationDetails),
+                this.extractFirstName(authenticationDetails),
+                this.extractLastName(authenticationDetails),
+                this.extractUserRole(authenticationDetails),
+                this.extractPictureUrl(authenticationDetails));
     }
 
     private String extractFirstName(Map<String, String> authenticationDetails) {
@@ -96,11 +95,11 @@ public class SecurityContextUtils {
         }
     }
 
-    private String extractUserRole(Map<String, String> authenticationDetails) {
+    private UserRole extractUserRole(Map<String, String> authenticationDetails) {
         if (authenticationDetails.containsKey(AUTH_DETAILS_ROLE)) {
-            return authenticationDetails.get(AUTH_DETAILS_ROLE);
+            return UserRole.valueOf(authenticationDetails.get(AUTH_DETAILS_ROLE));
         } else {
-            return UserRole.ROLE_USER.name();
+            return UserRole.ROLE_USER;
         }
     }
 

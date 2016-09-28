@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User createNormalUser(User user) {
-        user.setRole(UserRole.ROLE_USER.name());
+        user.setRole(UserRole.ROLE_USER);
         return createAnyUser(user);
     }
 

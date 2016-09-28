@@ -2,13 +2,14 @@ package com.codeball.controllers;
 
 import com.codeball.exceptions.GameNotFoundException;
 import com.codeball.model.User;
-import com.codeball.model.UserRole;
 import com.codeball.services.UserService;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -36,8 +37,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public User createUser(@RequestBody User user) {
-        if (user.getRole().equals(UserRole.ROLE_USER.name())) {
+    public User createUser(@Valid @RequestBody User user) {
+        if (user.hasRoleUser()) {
             return userService.createNormalUser(user);
         } else {
             return userService.createAnyUser(user);
@@ -46,7 +47,7 @@ public class UserController {
 
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public User updateUser(@PathVariable long id, @RequestBody User user) {
+    public User updateUser(@PathVariable long id, @Valid @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 

@@ -61,7 +61,7 @@ class DevelopmentAuthentication implements Authentication, Principal {
     }
 
     @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+    public void setAuthenticated(boolean isAuthenticated) {
         // dummy
     }
 
