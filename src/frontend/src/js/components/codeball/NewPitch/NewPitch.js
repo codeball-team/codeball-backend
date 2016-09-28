@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  MIN_PITCH_CAPACITY, MAX_PITCH_CAPACITY,
+  PITCH_MAX_CAPACITY, PITCH_MIN_CAPACITY,
   PITCH_TYPE_OPTIONS, PITCH_TYPE_STRING
 } from 'constants';
 import { _, classNames, formatRange } from 'utils';
@@ -26,8 +26,8 @@ class NewPitch extends Component {
       newPitch,
       newPitch: {
         address,
-        minNumberOfPlayers,
         maxNumberOfPlayers,
+        minNumberOfPlayers,
         name,
         type
       },
@@ -89,9 +89,9 @@ class NewPitch extends Component {
               component: (
                 <RangePicker
                   min={minNumberOfPlayers}
-                  minOptions={_.range(MIN_PITCH_CAPACITY, maxNumberOfPlayers + 1, 2)}
+                  minOptions={_.range(PITCH_MIN_CAPACITY, maxNumberOfPlayers + 1, 2)}
                   max={maxNumberOfPlayers}
-                  maxOptions={_.range(minNumberOfPlayers, MAX_PITCH_CAPACITY + 1, 2)}
+                  maxOptions={_.range(minNumberOfPlayers, PITCH_MAX_CAPACITY + 1, 2)}
                   orientation="vertical"
                   separator="-"
                   onMinChange={onMinNumberOfPlayersChange}

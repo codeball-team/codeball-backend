@@ -1,10 +1,5 @@
-const CURRENT_USER = 'me';
-const GAMES = 'game';
-const PITCHES = 'pitch';
-const USERS = 'user';
-
 export function currentUserUrl() {
-  return `${usersUrl()}/${CURRENT_USER}`;
+  return `${usersUrl()}/me`;
 }
 
 export function gameCloseEnrollmentUrl(gameId) {
@@ -35,7 +30,7 @@ export function gameUrl(gameId) {
 }
 
 export function gamesUrl() {
-  return `${API_URL}/${GAMES}`;
+  return `${API_URL}/game`;
 }
 
 export function pitchUrl(pitchId) {
@@ -43,7 +38,7 @@ export function pitchUrl(pitchId) {
 }
 
 export function pitchesUrl() {
-  return `${API_URL}/${PITCHES}`;
+  return `${API_URL}/pitch`;
 }
 
 export function userUrl(userId) {
@@ -51,5 +46,5 @@ export function userUrl(userId) {
 }
 
 export function usersUrl() {
-  return `${API_URL}/${USERS}`;
+  return `${API_URL}/user`;
 }
