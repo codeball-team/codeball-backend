@@ -1,7 +1,8 @@
 import { reducer } from 'utils';
+import { ErrorModel } from 'models';
 import {
-  AJAX_ABORT, AJAX_ERROR_ACKNOWLEDGE,
-  AJAX_FAILURE, AJAX_START, AJAX_SUCCESS
+  AJAX_ABORT, AJAX_ERROR_ACKNOWLEDGE, AJAX_FAILURE,
+  AJAX_START, AJAX_SUCCESS
 } from 'constants/actionTypes';
 
 const initialState = {
@@ -29,18 +30,15 @@ export default reducer(initialState, {
   },
 
   [AJAX_FAILURE]: (state, action) => {
-    const { response: { error, message, isSilent } = {} } = action;
+    const { response } = action;
     const { errors } = state;
+    const error = ErrorModel.fromServerFormat(response);
 
     return {
       ...state,
       errors: [
         ...errors,
-        {
-          title: error,
-          message,
-          isSilent
-        }
+        error
       ],
       numberOfPendingRequests: state.numberOfPendingRequests - 1
     };
