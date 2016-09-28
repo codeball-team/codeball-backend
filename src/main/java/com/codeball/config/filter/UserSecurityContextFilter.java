@@ -42,7 +42,7 @@ public class UserSecurityContextFilter implements Filter {
     }
 
     private UsernamePasswordAuthenticationToken cloneAuthenticationWithAdditionalInfo(Authentication authentication, User applicationUser) {
-        ArrayList<SimpleGrantedAuthority> userRoles = Lists.newArrayList(new SimpleGrantedAuthority(applicationUser.getRole()));
+        ArrayList<SimpleGrantedAuthority> userRoles = Lists.newArrayList(new SimpleGrantedAuthority(applicationUser.getRole().name()));
         UsernamePasswordAuthenticationToken updatedAuthentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), userRoles);
         updatedAuthentication.setDetails(securityContextUtils.getAuthenticationDetails(authentication));
         return updatedAuthentication;

@@ -1,6 +1,7 @@
 package com.codeball.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,9 @@ import java.util.List;
 public class TeamAssignment {
 
     @JsonProperty("teamA")
-    private List<User> teamA;
+    private List<User> teamA = Lists.newArrayList();
     @JsonProperty("teamB")
-    private List<User> teamB;
+    private List<User> teamB = Lists.newArrayList();
 
     public TeamAssignment(List<User> teamA, List<User> teamB) {
         this.teamA = teamA;

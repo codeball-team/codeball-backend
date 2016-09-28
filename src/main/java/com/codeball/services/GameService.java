@@ -47,7 +47,7 @@ public class GameService {
     }
 
     public Iterable<Game> getSortedGames() {
-        return gameRepository.findAllByOrderByStartTimestampDesc();
+        return gameRepository.findAllByOrderByStartTimeDesc();
     }
 
     @Transactional
@@ -69,7 +69,7 @@ public class GameService {
 
     public Game finishEnrollment(long gameId) {
         Game game = gameRepository.getOne(gameId);
-        game.setEnrollmentOver(true);
+        game.endEnrollment();
         teamAssigner.drawAndAssignNewTeams(game);
         return gameRepository.save(game);
     }
@@ -92,7 +92,7 @@ public class GameService {
     @Transactional
     public Game endGame(long gameId) {
         Game game = gameRepository.getOne(gameId);
-        game.setGameOver(true);
+        game.endGame();
         return game;
     }
 

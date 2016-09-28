@@ -9,18 +9,18 @@ import java.util.Optional;
 @Repository
 public interface GameRepository extends PagingAndSortingRepositoryWithOptionals<Game, Long> {
 
-    Optional<Game> findTop1ByGameOverOrderByStartTimestampDesc(boolean gameOver);
+    Optional<Game> findTop1ByGameOverOrderByStartTimeDesc(boolean gameOver);
 
-    Optional<Game> findTop1ByGameOverOrderByStartTimestampAsc(boolean gameOver);
+    Optional<Game> findTop1ByGameOverOrderByStartTimeAsc(boolean gameOver);
 
     default Optional<Game> findLastGame() {
-        return this.findTop1ByGameOverOrderByStartTimestampDesc(true);
+        return this.findTop1ByGameOverOrderByStartTimeDesc(true);
     }
 
     default Optional<Game> findUpcomingGame() {
-        return this.findTop1ByGameOverOrderByStartTimestampAsc(false);
+        return this.findTop1ByGameOverOrderByStartTimeAsc(false);
     }
 
-    Iterable<Game> findAllByOrderByStartTimestampDesc();
+    Iterable<Game> findAllByOrderByStartTimeDesc();
     
 }

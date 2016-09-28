@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+flyway:
+  enabled: true
+  locations: db/migration/common,db/migration/h2
+
+development:
+  dataInitializer:
+    enabled: true
+  securityContext:
+    enabled: true
+  user:
+    email: development@codeball.com
+    firstName: Codeball
+    lastName: Developer
+    pictureUrl: https://gpkt.files.wordpress.com/2008/05/012.jpg
+    role: ROLE_ADMIN
