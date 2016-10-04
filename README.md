@@ -1,6 +1,6 @@
 # codeball
 ## Frontend environment
-Location: `src/frontend/`
+Working directory: `src/frontend/`
 ### Installation
 `npm install`
 ### Building
