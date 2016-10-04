@@ -1,5 +1,5 @@
 import { _, now, safeGet } from 'utils';
-import { AJAX_ABORT, AJAX_FAILURE, AJAX_START, AJAX_SUCCESS } from 'constants/actionTypes';
+import { AJAX, AJAX_ABORT } from 'constants/actionTypes';
 import requestManager from './requestManager';
 
 const manager = requestManager();
@@ -7,8 +7,8 @@ const requestOptionsHandlers = {
   json: request => request.set('Content-Type', 'application/json')
 };
 const requestManagerHandlers = {
-  debounce: (request, { startAction }) => manager.debounce(startAction, request),
-  throttle: (request, { startAction }) => manager.throttle(startAction, request)
+  debounce: (request, startAction) => manager.debounce(startAction, request),
+  throttle: (request, startAction) => manager.throttle(startAction, request)
 };
 
 export default function ajax(getParams) {
@@ -19,12 +19,10 @@ export default function ajax(getParams) {
       ...getParams(dispatch)
     };
     const {
+      actionType,
       actionsData = {},
       request,
-      failureAction,
       failureCallback,
-      startAction,
-      successAction,
       successCallback
     } = options;
     const timestamp = now();
@@ -32,46 +30,46 @@ export default function ajax(getParams) {
     applyRequestOptions(requestOptionsHandlers, request, options);
     applyRequestEnhancers(requestManagerHandlers, request, options).then(() => {
       request.end((error, response = {}) => {
-        manager.forget(startAction);
+        manager.forget(actionType);
         const body = nullToUndefined(safeGet(response, ['body']));
 
         if(error || !response.ok) {
           const errorResponse = createErrorResponse(error, body);
           dispatch({
-            type: failureAction,
+            type: actionType.FAILURE,
             ...actionsData,
             response: errorResponse,
             timestamp
           });
           dispatch({
-            type: AJAX_FAILURE,
+            type: AJAX.FAILURE,
             response: errorResponse
           });
           failureCallback(response);
         } else {
           dispatch({
-            type: successAction,
+            type: actionType.SUCCESS,
             ...actionsData,
             response: body,
             timestamp
           });
-          dispatch({ type: AJAX_SUCCESS });
+          dispatch({ type: AJAX.SUCCESS });
           successCallback(response);
         }
       });
 
       request.xhr.onabort = () => {
         dispatch({ type: AJAX_ABORT });
-        dispatch({ type: failureAction, timestamp });
+        dispatch({ type: actionType.FAILURE, timestamp });
       };
 
       dispatch({
-        type: startAction,
+        type: actionType,
         ...actionsData
       });
-      dispatch({ type: AJAX_START });
+      dispatch({ type: AJAX });
     }, () => {
-      manager.forget(startAction);
+      manager.forget(actionType);
     });
 
     return request;

@@ -25,7 +25,7 @@ class GamesListItem extends Component {
     } = this.props;
 
     return (
-      <Link key={id} to={formatUrl(id)}>
+      <Link to={formatUrl(id)}>
         <ListItem className="games-list-item">
           <div className="date-time ellipsis">
             {date} {time}

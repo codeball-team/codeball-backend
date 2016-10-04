@@ -19,7 +19,7 @@ class PitchesListItem extends Component {
     } = this.props;
 
     return (
-      <Link key={id} to={`/pitches/${id}`}>
+      <Link to={`/pitches/${id}`}>
         <ListItem className="pitches-list-item">
           <div className="name ellipsis">
             {name}

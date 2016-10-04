@@ -25,16 +25,12 @@ class GamesList extends Component {
           'games-list',
           className
         )}>
-        {games.map(game => {
-          const { id } = game;
-
-          return (
-            <GamesListItem
-              key={id}
-              formatUrl={formatUrl}
-              game={game} />
-          );
-        })}
+        {games.map((game, index) => (
+          <GamesListItem
+            key={index}
+            formatUrl={formatUrl}
+            game={game} />
+        ))}
       </List>
     );
   }

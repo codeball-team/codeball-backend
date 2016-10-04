@@ -24,16 +24,12 @@ class GameEnrollmentList extends Component {
           'game-enrollment-list',
           className
         )}>
-        {users.map(user => {
-          const { id } = user;
-
-          return (
-            <GameEnrollmentListItem
-              key={id}
-              user={user}
-              enrollmentStatus={enrollmentStatus} />
-          );
-        })}
+        {users.map((user, index) => (
+          <GameEnrollmentListItem
+            key={index}
+            user={user}
+            enrollmentStatus={enrollmentStatus} />
+        ))}
       </List>
     );
   }

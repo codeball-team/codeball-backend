@@ -2,9 +2,12 @@ import request from 'superagent';
 import { ajax, safeGet } from 'utils';
 import { push } from 'react-router-redux';
 import {
-  NEW_USER_CHANGE_EMAIL, NEW_USER_CHANGE_FIRST_NAME, NEW_USER_CHANGE_LAST_NAME,
-  NEW_USER_CHANGE_ROLE, NEW_USER_RESET,
-  NEW_USER_SUBMIT, NEW_USER_SUBMIT_FAILURE, NEW_USER_SUBMIT_SUCCESS
+  NEW_USER_CHANGE_EMAIL,
+  NEW_USER_CHANGE_FIRST_NAME,
+  NEW_USER_CHANGE_LAST_NAME,
+  NEW_USER_CHANGE_ROLE,
+  NEW_USER_RESET,
+  NEW_USER_SUBMIT
 } from 'constants/actionTypes';
 import { usersUrl } from 'constants';
 import { NewUserModel } from 'models';
@@ -46,13 +49,11 @@ export function newUserReset() {
 export function newUserSubmit(newUser) {
   const data = NewUserModel.toServerFormat(newUser);
   return ajax(dispatch => ({
+    actionType: NEW_USER_SUBMIT,
     request: request('POST', usersUrl())
       .send(JSON.stringify(data)),
     json: true,
     debounce: true,
-    startAction: NEW_USER_SUBMIT,
-    failureAction: NEW_USER_SUBMIT_FAILURE,
-    successAction: NEW_USER_SUBMIT_SUCCESS,
     successCallback: response => {
       const userId = safeGet(response, ['body', 'id']);
       dispatch(push(`/players/${userId}`));

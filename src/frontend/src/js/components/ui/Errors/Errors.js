@@ -24,11 +24,11 @@ class Errors extends Component {
           'errors',
           className
         )}>
-        {errors.map((error, errorIndex) => (
+        {errors.map((error, index) => (
           <Error
-            key={errorIndex}
+            key={index}
             error={error}
-            errorIndex={errorIndex}
+            errorIndex={index}
             onErrorAcknowledge={onErrorAcknowledge} />
         ))}
       </div>

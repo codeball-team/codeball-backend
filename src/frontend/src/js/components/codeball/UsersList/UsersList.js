@@ -22,13 +22,9 @@ class UsersList extends Component {
           'users-list',
           className
         )}>
-        {users.map(user => {
-          const { id } = user;
-
-          return (
-            <UsersListItem key={id} user={user} />
-          );
-        })}
+        {users.map((user, index) => (
+          <UsersListItem key={index} user={user} />
+        ))}
       </List>
     );
   }

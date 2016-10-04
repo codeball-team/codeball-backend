@@ -1,9 +1,10 @@
 import { reducer } from 'utils';
-import { ErrorModel } from 'models';
 import {
-  AJAX_ABORT, AJAX_ERROR_ACKNOWLEDGE, AJAX_FAILURE,
-  AJAX_START, AJAX_SUCCESS
+  AJAX,
+  AJAX_ABORT,
+  AJAX_ERROR_ACKNOWLEDGE
 } from 'constants/actionTypes';
+import { ErrorModel } from 'models';
 
 const initialState = {
   numberOfPendingRequests: 0,
@@ -11,6 +12,31 @@ const initialState = {
 };
 
 export default reducer(initialState, {
+  [AJAX]: state => ({
+    ...state,
+    numberOfPendingRequests: state.numberOfPendingRequests + 1
+  }),
+
+  [AJAX.FAILURE]: (state, action) => {
+    const { response } = action;
+    const { errors } = state;
+    const error = ErrorModel.fromServerFormat(response);
+
+    return {
+      ...state,
+      errors: [
+        ...errors,
+        error
+      ],
+      numberOfPendingRequests: state.numberOfPendingRequests - 1
+    };
+  },
+
+  [AJAX.SUCCESS]: state => ({
+    ...state,
+    numberOfPendingRequests: state.numberOfPendingRequests - 1
+  }),
+
   [AJAX_ABORT]: state => ({
     ...state,
     numberOfPendingRequests: state.numberOfPendingRequests - 1
@@ -27,30 +53,5 @@ export default reducer(initialState, {
         ...errors.slice(errorIndex + 1)
       ]
     };
-  },
-
-  [AJAX_FAILURE]: (state, action) => {
-    const { response } = action;
-    const { errors } = state;
-    const error = ErrorModel.fromServerFormat(response);
-
-    return {
-      ...state,
-      errors: [
-        ...errors,
-        error
-      ],
-      numberOfPendingRequests: state.numberOfPendingRequests - 1
-    };
-  },
-
-  [AJAX_START]: state => ({
-    ...state,
-    numberOfPendingRequests: state.numberOfPendingRequests + 1
-  }),
-
-  [AJAX_SUCCESS]: state => ({
-    ...state,
-    numberOfPendingRequests: state.numberOfPendingRequests - 1
-  })
+  }
 });

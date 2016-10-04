@@ -46,11 +46,11 @@ class GameEnrollmentForm extends Component {
           'game-enrollment-form',
           className
         )}>
-        {GAME_ENROLLMENT_FORM_OPTIONS.map(option => {
+        {GAME_ENROLLMENT_FORM_OPTIONS.map((option, index) => {
           const { value: optionValue } = option;
           return (
             <GameEnrollmentFormOption
-              key={optionValue}
+              key={index}
               inactive={value !== undefined && optionValue !== value}
               value={optionValue}
               onClick={onChange}

@@ -25,7 +25,7 @@ class UsersListItem extends Component {
     } = this.props;
 
     return (
-      <Link key={id} to={`/players/${id}`}>
+      <Link to={`/players/${id}`}>
         <ListItem
           className={classNames(
             'users-list-item',

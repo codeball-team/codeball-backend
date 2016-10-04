@@ -32,9 +32,9 @@ class GameEnrollment extends Component {
           'game-enrollment',
           className
         )}>
-        {enrolledUsersPerStatus.map(({ enrollmentStatus, enrolledUsers }) => (
+        {enrolledUsersPerStatus.map(({ enrollmentStatus, enrolledUsers }, index) => (
           <GameEnrollmentList
-            key={enrollmentStatus}
+            key={index}
             renderWhen={enrolledUsers.length > 0}
             className={ENROLLMENT_STATUS_CLASSNAMES[enrollmentStatus]}
             enrollmentStatus={ENROLLMENT_STATUS_STRING[enrollmentStatus]}

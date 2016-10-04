@@ -23,13 +23,9 @@ class PitchesList extends Component {
           'pitches-list',
           className
         )}>
-        {pitches.map(pitch => {
-          const { id } = pitch;
-
-          return (
-            <PitchesListItem key={id} pitch={pitch} />
-          );
-        })}
+        {pitches.map((pitch, index) => (
+          <PitchesListItem key={index} pitch={pitch} />
+        ))}
       </List>
     );
   }

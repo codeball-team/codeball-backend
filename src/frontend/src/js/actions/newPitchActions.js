@@ -2,10 +2,13 @@ import request from 'superagent';
 import { ajax, safeGet } from 'utils';
 import { push } from 'react-router-redux';
 import {
-  NEW_PITCH_CHANGE_ADDRESS, NEW_PITCH_CHANGE_MAX_NUMBER_OF_PLAYERS,
-  NEW_PITCH_CHANGE_MIN_NUMBER_OF_PLAYERS, NEW_PITCH_CHANGE_NAME,
-  NEW_PITCH_CHANGE_TYPE, NEW_PITCH_RESET,
-  NEW_PITCH_SUBMIT, NEW_PITCH_SUBMIT_FAILURE, NEW_PITCH_SUBMIT_SUCCESS
+  NEW_PITCH_CHANGE_ADDRESS,
+  NEW_PITCH_CHANGE_MAX_NUMBER_OF_PLAYERS,
+  NEW_PITCH_CHANGE_MIN_NUMBER_OF_PLAYERS,
+  NEW_PITCH_CHANGE_NAME,
+  NEW_PITCH_CHANGE_TYPE,
+  NEW_PITCH_RESET,
+  NEW_PITCH_SUBMIT
 } from 'constants/actionTypes';
 import { pitchesUrl } from 'constants';
 import { NewPitchModel } from 'models';
@@ -54,13 +57,11 @@ export function newPitchReset() {
 export function newPitchSubmit(newPitch) {
   const data = NewPitchModel.toServerFormat(newPitch);
   return ajax(dispatch => ({
+    actionType: NEW_PITCH_SUBMIT,
     request: request('POST', pitchesUrl())
       .send(JSON.stringify(data)),
     json: true,
     debounce: true,
-    startAction: NEW_PITCH_SUBMIT,
-    failureAction: NEW_PITCH_SUBMIT_FAILURE,
-    successAction: NEW_PITCH_SUBMIT_SUCCESS,
     successCallback: response => {
       const pitchId = safeGet(response, ['body', 'id']);
       dispatch(push(`/pitches/${pitchId}`));

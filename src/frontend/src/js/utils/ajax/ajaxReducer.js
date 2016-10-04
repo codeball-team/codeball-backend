@@ -7,12 +7,11 @@ const ajaxReducerInitialState = {
   lastUpdateHash: undefined
 };
 
-export default function ajaxReducer(initialState, ajaxActions, handlers) {
-  const { failureAction, startAction, successAction } = ajaxActions;
+export default function ajaxReducer(initialState, actionType, handlers) {
   const ajaxHandlers = {
-    [failureAction]: onAjaxFail,
-    [startAction]: onAjaxStart,
-    [successAction]: onAjaxSuccess
+    [actionType]: onAjaxStart,
+    [actionType.FAILURE]: onAjaxFail,
+    [actionType.SUCCESS]: onAjaxSuccess
   };
 
   const reducerInitialState = {
