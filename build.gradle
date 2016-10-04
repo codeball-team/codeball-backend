@@ -35,7 +35,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-configuration-processor"
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.8.3'
     compile group: 'org.hibernate', name: 'hibernate-java8', version: '5.1.0.Final'
 
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1209'
