@@ -7,16 +7,16 @@ import './NumberPicker.scss';
 class NumberPicker extends Component {
   static propTypes = {
     className: PropTypes.string,
-    formatter: PropTypes.func,
     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
     value: PropTypes.number.isRequired,
+    valueFormatter: PropTypes.func,
     values: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    formatter: String,
-    orientation: 'horizontal'
+    orientation: 'horizontal',
+    valueFormatter: String
   };
 
   onAdd = () => {
@@ -39,9 +39,9 @@ class NumberPicker extends Component {
   render() {
     const {
       className,
-      formatter,
       orientation,
-      value
+      value,
+      valueFormatter
     } = this.props;
 
     return (
@@ -59,7 +59,7 @@ class NumberPicker extends Component {
           className="value"
           isDisabled={true}
           isEditing={true}
-          text={formatter(value)} />
+          text={valueFormatter(value)} />
 
         <Button className="add" onClick={this.onAdd}>
           <Icon name="add" />

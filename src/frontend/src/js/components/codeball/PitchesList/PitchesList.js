@@ -12,10 +12,7 @@ class PitchesList extends Component {
   };
 
   render() {
-    const {
-      className,
-      pitches
-    } = this.props;
+    const { className, pitches } = this.props;
 
     return (
       <List

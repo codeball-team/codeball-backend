@@ -12,10 +12,7 @@ class Pitches extends Component {
   };
 
   render() {
-    const {
-      hasPermission,
-      pitches
-    } = this.props;
+    const { hasPermission, pitches } = this.props;
 
     return (
       <main>

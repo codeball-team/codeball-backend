@@ -32,7 +32,7 @@ class LoadableContent extends Component {
   };
 
   render() {
-    const { ComponentClass, childProps, isLoading } = this.props;
+    const { childProps, ComponentClass, isLoading } = this.props;
     const { hasBeenFullyLoaded } = this.state;
     const displayLoadingState = !hasBeenFullyLoaded && isLoading;
 

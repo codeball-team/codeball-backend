@@ -12,11 +12,7 @@ class Errors extends Component {
   };
 
   render() {
-    const {
-      className,
-      errors,
-      onErrorAcknowledge
-    } = this.props;
+    const { className, errors, onErrorAcknowledge } = this.props;
 
     return (
       <div

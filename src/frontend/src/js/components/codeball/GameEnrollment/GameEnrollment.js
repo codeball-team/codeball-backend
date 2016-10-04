@@ -21,10 +21,7 @@ class GameEnrollment extends Component {
   };
 
   render() {
-    const {
-      className,
-      enrolledUsersPerStatus
-    } = this.props;
+    const { className, enrolledUsersPerStatus } = this.props;
 
     return (
       <div

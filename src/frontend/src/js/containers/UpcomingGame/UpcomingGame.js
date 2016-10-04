@@ -154,7 +154,7 @@ export default function GenerateUpcomingGame(getGameId) {
               hasPermission(PERMISSION_ENROLL)
             ]}
             title="Are you going?"
-            value={selectedEnrollmentStatus}
+            enrollmentStatus={selectedEnrollmentStatus}
             onChange={this.onEnrollmentStatusChange} />
 
           <GameEnrollAnotherUserFormSection

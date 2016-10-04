@@ -12,11 +12,7 @@ class GameLineup extends Component {
   };
 
   render() {
-    const {
-      className,
-      teamA,
-      teamB
-    } = this.props;
+    const { className, teamA, teamB } = this.props;
 
     return (
       <div

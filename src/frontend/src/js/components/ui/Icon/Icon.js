@@ -9,6 +9,7 @@ class Icon extends Component {
     className: PropTypes.string,
     name: PropTypes.string.isRequired
   };
+
   render() {
     const { className, name, ...restProps } = this.props;
     const IconComponent = icons[name];

@@ -16,11 +16,7 @@ class Spinner extends Component {
   };
 
   render() {
-    const {
-      className,
-      placement,
-      show
-    } = this.props;
+    const { className, placement, show } = this.props;
 
     return (
       <div

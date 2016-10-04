@@ -12,11 +12,7 @@ class TeamLineup extends Component {
   };
 
   render() {
-    const {
-      className,
-      teamName,
-      users
-    } = this.props;
+    const { className, teamName, users } = this.props;
 
     return (
       <div

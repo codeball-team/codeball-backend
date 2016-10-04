@@ -27,16 +27,16 @@ class Games extends Component {
         <GamesListSection
           className="upcoming-games"
           title={`Upcoming games (${upcomingGames.length})`}
-          formatUrl={formatUpcomingGameUrl}
           games={upcomingGames}
+          urlFormatter={formatUpcomingGameUrl}
           buttons={[
             <ButtonAddGame key="new" renderWhen={hasPermission(PERMISSION_ADD_GAME)} />
           ]} />
 
         <GamesListSection
           title={`Previous games (${previousGames.length})`}
-          formatUrl={formatPreviousGameUrl}
-          games={previousGames} />
+          games={previousGames}
+          urlFormatter={formatPreviousGameUrl} />
       </main>
     );
   }

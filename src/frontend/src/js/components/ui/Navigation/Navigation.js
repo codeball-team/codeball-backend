@@ -12,7 +12,11 @@ export default class Navigation extends Component {
     const { className } = this.props;
 
     return (
-      <nav className={classNames('navigation', className)}>
+      <nav
+        className={classNames(
+          'navigation',
+          className
+        )}>
         <div className="menu-logo">
           Codeball
         </div>

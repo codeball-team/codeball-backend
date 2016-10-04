@@ -11,10 +11,7 @@ class UsersList extends Component {
   };
 
   render() {
-    const {
-      className,
-      users
-    } = this.props;
+    const { className, users } = this.props;
 
     return (
       <List

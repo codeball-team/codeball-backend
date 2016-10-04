@@ -10,10 +10,7 @@ class ButtonsPanel extends Component {
   };
 
   render() {
-    const {
-      children,
-      className
-    } = this.props;
+    const { children, className } = this.props;
 
     return (
       <div

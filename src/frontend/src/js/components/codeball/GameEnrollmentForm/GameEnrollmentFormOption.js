@@ -18,11 +18,7 @@ class GameEnrollmentFormOption extends Component {
   };
 
   render() {
-    const {
-      className,
-      inactive,
-      text
-    } = this.props;
+    const { className, inactive, text } = this.props;
 
     return (
       <Button

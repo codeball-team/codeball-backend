@@ -20,33 +20,31 @@ export default class Link extends Component {
     onClick: _.noop
   };
 
+  onClick = (...args) => {
+    const { to, onClick } = this.props;
+    this.context.router.push(to);
+    onClick(...args);
+  };
+
   render() {
-    const {
-      children,
-      to,
-      onClick
-    } = this.props;
+    const { children } = this.props;
 
     if(!children) {
       return null;
     }
 
     const { type } = children;
-    const onClickCallback = (...args) => {
-      this.context.router.push(to);
-      onClick(...args);
-    };
 
     if(!type) {
       return (
-        <a className="link" onClick={onClickCallback}>
+        <a className="link" onClick={this.onClick}>
           {children}
         </a>
       );
     }
 
     return cloneElement(children, {
-      onClick: onClickCallback
+      onClick: this.onClick
     });
   }
 }

@@ -29,16 +29,12 @@ const GAME_ENROLLMENT_FORM_OPTIONS = [
 class GameEnrollmentForm extends Component {
   static propTypes = {
     className: PropTypes.string,
-    value: PropTypes.oneOf(ENROLLMENT_STATUSES),
+    enrollmentStatus: PropTypes.oneOf(ENROLLMENT_STATUSES),
     onChange: PropTypes.func.isRequired
   };
 
   render() {
-    const {
-      className,
-      value,
-      onChange
-    } = this.props;
+    const { className, enrollmentStatus, onChange } = this.props;
 
     return (
       <div
@@ -51,7 +47,7 @@ class GameEnrollmentForm extends Component {
           return (
             <GameEnrollmentFormOption
               key={index}
-              inactive={value !== undefined && optionValue !== value}
+              inactive={enrollmentStatus !== undefined && optionValue !== enrollmentStatus}
               value={optionValue}
               onClick={onChange}
               {...option} />

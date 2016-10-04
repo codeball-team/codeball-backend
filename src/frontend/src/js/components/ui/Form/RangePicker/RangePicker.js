@@ -7,13 +7,13 @@ import './RangePicker.scss';
 class RangePicker extends Component {
   static propTypes = {
     className: PropTypes.string,
-    formatter: PropTypes.func,
     max: PropTypes.number,
     maxOptions: PropTypes.array,
     min: PropTypes.number,
     minOptions: PropTypes.array,
     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
     separator: PropTypes.string,
+    valueFormatter: PropTypes.func,
     onMaxChange: PropTypes.func.isRequired,
     onMinChange: PropTypes.func.isRequired
   };
@@ -26,13 +26,13 @@ class RangePicker extends Component {
   render() {
     const {
       className,
-      formatter,
       max,
       maxOptions,
       min,
       minOptions,
       orientation,
       separator,
+      valueFormatter,
       onMaxChange,
       onMinChange
     } = this.props;
@@ -48,7 +48,7 @@ class RangePicker extends Component {
           orientation={orientation}
           values={minOptions}
           value={min}
-          formatter={formatter}
+          valueFormatter={valueFormatter}
           onChange={onMinChange} />
 
         <span className="separator"> {separator} </span>
@@ -58,7 +58,7 @@ class RangePicker extends Component {
           orientation={orientation}
           values={maxOptions}
           value={max}
-          formatter={formatter}
+          valueFormatter={valueFormatter}
           onChange={onMaxChange} />
       </div>
     );

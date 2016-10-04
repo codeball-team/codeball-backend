@@ -13,12 +13,7 @@ class Form extends Component {
   };
 
   render() {
-    const {
-      className,
-      inputs,
-      onSubmit
-    } = this.props;
-
+    const { className, inputs, onSubmit } = this.props;
     const visibleInputs = inputs.reduce((inputsToRender, input) => {
       const haveAllInputsBeenValidSoFar = inputsToRender.every(({ isValid }) => isValid);
       if(haveAllInputsBeenValidSoFar) {

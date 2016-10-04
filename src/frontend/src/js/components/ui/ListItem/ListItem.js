@@ -11,11 +11,7 @@ class ListItem extends Component {
   };
 
   render() {
-    const {
-      children,
-      className,
-      onClick
-    } = this.props;
+    const { children, className, onClick } = this.props;
 
     return (
       <div

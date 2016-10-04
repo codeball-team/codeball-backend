@@ -54,10 +54,7 @@ class NewGame extends Component {
   };
 
   render() {
-    const {
-      newGame,
-      pitches
-    } = this.props;
+    const { newGame, pitches } = this.props;
 
     return (
       <main>

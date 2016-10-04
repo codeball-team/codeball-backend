@@ -5,13 +5,12 @@ import './GamesListItem.scss';
 
 class GamesListItem extends Component {
   static propTypes = {
-    formatUrl: PropTypes.func.isRequired,
-    game: PropTypes.object.isRequired
+    game: PropTypes.object.isRequired,
+    urlFormatter: PropTypes.func.isRequired
   };
 
   render() {
     const {
-      formatUrl,
       game: {
         id,
         date,
@@ -21,11 +20,12 @@ class GamesListItem extends Component {
         teamAScore,
         teamBScore,
         time
-      }
+      },
+      urlFormatter
     } = this.props;
 
     return (
-      <Link to={formatUrl(id)}>
+      <Link to={urlFormatter(id)}>
         <ListItem className="games-list-item">
           <div className="date-time ellipsis">
             {date} {time}

@@ -8,16 +8,12 @@ import './GamesList.scss';
 class GamesList extends Component {
   static propTypes = {
     className: PropTypes.string,
-    formatUrl: PropTypes.func.isRequired,
-    games: PropTypes.array.isRequired
+    games: PropTypes.array.isRequired,
+    urlFormatter: PropTypes.func.isRequired
   };
 
   render() {
-    const {
-      className,
-      formatUrl,
-      games
-    } = this.props;
+    const { className, games, urlFormatter } = this.props;
 
     return (
       <List
@@ -28,8 +24,8 @@ class GamesList extends Component {
         {games.map((game, index) => (
           <GamesListItem
             key={index}
-            formatUrl={formatUrl}
-            game={game} />
+            game={game}
+            urlFormatter={urlFormatter} />
         ))}
       </List>
     );

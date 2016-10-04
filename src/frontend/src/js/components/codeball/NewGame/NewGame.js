@@ -6,7 +6,7 @@ import { BaseComponent } from 'components/base';
 import { Calendar, Form, RangePicker, Select, ValuePicker } from 'components/ui';
 
 const onClickOutside = _.noop;
-const formatter = value => padLeft(value, 2);
+const valueFormatter = value => padLeft(value, 2);
 
 class NewGame extends Component {
   static propTypes = {
@@ -96,13 +96,13 @@ class NewGame extends Component {
               isValid: NewGameModel.isStartTimeValid(newGame),
               component: (
                 <RangePicker
-                  formatter={formatter}
                   min={hour}
                   minOptions={HOUR_OPTIONS}
                   max={minute}
                   maxOptions={MINUTE_OPTIONS}
                   orientation="vertical"
                   separator=":"
+                  valueFormatter={valueFormatter}
                   onMinChange={onHourChange}
                   onMaxChange={onMinuteChange} />
               )

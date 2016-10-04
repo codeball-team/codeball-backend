@@ -12,11 +12,7 @@ class GameEnrollmentList extends Component {
   };
 
   render() {
-    const {
-      className,
-      enrollmentStatus,
-      users
-    } = this.props;
+    const { className, enrollmentStatus, users } = this.props;
 
     return (
       <List

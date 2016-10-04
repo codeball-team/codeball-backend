@@ -21,7 +21,7 @@ class Error extends Component {
     const {
       className,
       error: {
-        title = 'Error',
+        title,
         message
       }
     } = this.props;

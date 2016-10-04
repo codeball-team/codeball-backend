@@ -11,11 +11,7 @@ class NotLoaded extends Component {
   };
 
   render() {
-    const {
-      children,
-      className,
-      message
-    } = this.props;
+    const { children, className, message } = this.props;
 
     return (
       <div

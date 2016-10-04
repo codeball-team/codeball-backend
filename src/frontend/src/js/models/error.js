@@ -9,7 +9,7 @@ const ErrorModel = model({
 
   fromServerFormat(serverResponse) {
     return new ErrorModel({
-      title: serverResponse.error,
+      title: serverResponse.error || 'Error',
       message: serverResponse.message,
       isSilent: serverResponse.isSilent
     });
