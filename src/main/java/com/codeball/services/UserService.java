@@ -3,6 +3,7 @@ package com.codeball.services;
 import com.codeball.exceptions.UserEmailAlreadyExistsException;
 import com.codeball.model.User;
 import com.codeball.model.UserRole;
+import com.codeball.model.annotations.security.AdminRoleRequired;
 import com.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -29,7 +30,7 @@ public class UserService {
         return createAnyUser(user);
     }
 
-    @Secured("ROLE_ADMIN")
+    @AdminRoleRequired
     public User createAnyUser(User user) {
         Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
         if (existingUserByEmail.isPresent()) {

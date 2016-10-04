@@ -2,12 +2,12 @@ package com.codeball.controllers;
 
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
+import com.codeball.model.annotations.security.AdminRoleRequired;
 import com.codeball.model.requests.GameScoreRequest;
 import com.codeball.services.GameService;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class GameController {
     private SecurityContextUtils securityContextUtils;
 
     @RequestMapping(value = "/{gameId}", method = RequestMethod.GET)
-    public Game getGameById(@PathVariable long gameId) {
+    public Game getGameById(@PathVariable("gameId") long gameId) {
         return gameService.getGameById(gameId);
     }
 
@@ -75,21 +75,21 @@ public class GameController {
         return gameService.createGame(game);
     }
 
-    @Secured("ROLE_ADMIN")
+    @AdminRoleRequired
     @RequestMapping(value = "/{gameId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Game updateGame(@PathVariable long gameId, @Valid @RequestBody Game game) {
+    public Game updateGame(@PathVariable("gameId") long gameId, @Valid @RequestBody Game game) {
         return gameService.updateGame(gameId, game);
     }
 
-    @Secured("ROLE_ADMIN")
+    @AdminRoleRequired
     @RequestMapping(value = "/{gameId}/end", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Game endGame(@PathVariable long gameId) {
+    public Game endGame(@PathVariable("gameId") long gameId) {
         return gameService.endGame(gameId);
     }
 
-    @Secured("ROLE_ADMIN")
+    @AdminRoleRequired
     @RequestMapping(value = "/{gameId}", method = RequestMethod.DELETE)
-    public void deleteGame(@PathVariable long gameId) {
+    public void deleteGame(@PathVariable("gameId") long gameId) {
         gameService.deleteGame(gameId);
     }
 

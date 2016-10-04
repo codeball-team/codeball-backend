@@ -1,12 +1,12 @@
 package com.codeball.controllers;
 
-import com.codeball.exceptions.GameNotFoundException;
+import com.codeball.exceptions.UserNotFoundException;
 import com.codeball.model.User;
+import com.codeball.model.annotations.security.AdminRoleRequired;
 import com.codeball.services.UserService;
 import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,9 +31,9 @@ public class UserController {
         return userService.listUsers();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable long id) {
-        return userService.findUserById(id).orElseThrow(() -> new GameNotFoundException(id));
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable("userId") long userId) {
+        return userService.findUserById(userId).orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -45,16 +45,16 @@ public class UserController {
         }
     }
 
-    @Secured("ROLE_ADMIN")
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public User updateUser(@PathVariable long id, @Valid @RequestBody User user) {
-        return userService.updateUser(id, user);
+    @AdminRoleRequired
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public User updateUser(@PathVariable("userId") long userId, @Valid @RequestBody User user) {
+        return userService.updateUser(userId, user);
     }
 
-    @Secured("ROLE_ADMIN")
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteUser(@PathVariable long id) {
-        userService.deleteUser(id);
+    @AdminRoleRequired
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable("userId") long userId) {
+        userService.deleteUser(userId);
     }
 
 }
