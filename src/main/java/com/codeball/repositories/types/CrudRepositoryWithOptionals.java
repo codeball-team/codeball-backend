@@ -3,6 +3,7 @@ package com.codeball.repositories.types;
 import com.codeball.exceptions.ResourceNotFoundException;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -45,6 +46,7 @@ public interface CrudRepositoryWithOptionals<T, ID extends Serializable> extends
      * @param id ID of the requested entity
      * @return the entity with the given id or Optional.empty()
      */
+    @Transactional(noRollbackFor = ResourceNotFoundException.class)
     default T getOne(ID id) {
         return findOne(id).orElseThrow(ResourceNotFoundException::new);
     }

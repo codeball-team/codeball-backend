@@ -50,7 +50,7 @@ public class GameService {
         return gameRepository.findAllByOrderByStartTimeDesc();
     }
 
-    @Transactional
+    @Transactional(noRollbackFor = EnrollmentOverException.class)
     public Game setEnrollmentStatus(long gameId, long userId, EnrollmentStatus status) {
         User userToEnroll = userRepository.getOne(userId);
         Game game = gameRepository.getOne(gameId);
