@@ -14,10 +14,11 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.function.Supplier;
 
-public class UserSecurityContextFilter implements Filter {
+public abstract class UserSecurityContextFilter implements Filter {
 
-    private SecurityContextUtils securityContextUtils;
+    protected final SecurityContextUtils securityContextUtils;
 
     public UserSecurityContextFilter(SecurityContextUtils securityContextUtils) {
         this.securityContextUtils = securityContextUtils;
@@ -44,9 +45,11 @@ public class UserSecurityContextFilter implements Filter {
     private UsernamePasswordAuthenticationToken cloneAuthenticationWithAdditionalInfo(Authentication authentication, User applicationUser) {
         ArrayList<SimpleGrantedAuthority> userRoles = Lists.newArrayList(new SimpleGrantedAuthority(applicationUser.getRole().name()));
         UsernamePasswordAuthenticationToken updatedAuthentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), userRoles);
-        updatedAuthentication.setDetails(securityContextUtils.getAuthenticationDetails(authentication));
+        updatedAuthentication.setDetails(provideAuthenticationDetails(authentication));
         return updatedAuthentication;
     }
+
+    protected abstract Object provideAuthenticationDetails(Authentication authentication);
 
     @Override
     public void destroy() {

@@ -1,4 +1,7 @@
 codeball:
+  security:
+    admin-access-urls: /api/admin/**
+    permit-all-urls: /login,/webjars/**,/management/**
   authorizationDomain:
   time-zone-offset: +2
 

@@ -26,13 +26,18 @@ public class SecurityContextUtils {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional(readOnly = true)
-    public User getCurrentUser() {
+    @Transactional(noRollbackFor = AuthenticationException.class)
+    public User currentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Map<String, String> authenticationDetails = getAuthenticationDetailsMap(authentication);
         String userEmail = this.extractEmail(authenticationDetails);
+
         Optional<User> user = userRepository.findByEmail(userEmail);
         return user.orElseThrow(AuthenticationException::new);
+    }
+
+    public long currentUserId() {
+        return currentUser().takeId();
     }
 
     public User getOrCreateAppUser(Authentication authentication) {
@@ -55,10 +60,6 @@ public class SecurityContextUtils {
             User newUser = this.createUserOf(authentication);
             return userRepository.save(newUser);
         }
-    }
-
-    public long getCurrentUserId() {
-        return getCurrentUser().id().get();
     }
 
     private User createUserOf(Authentication authentication) {
@@ -90,17 +91,15 @@ public class SecurityContextUtils {
     private String extractPrincipalProperty(Map<String, String> authenticationDetails, String property) {
         if (authenticationDetails.containsKey(property)) {
             return authenticationDetails.get(property);
-        } else {
-            throw new AuthenticationException("Missing authentication information: " + property);
         }
+        throw new AuthenticationException("Missing authentication information: " + property);
     }
 
     private UserRole extractUserRole(Map<String, String> authenticationDetails) {
         if (authenticationDetails.containsKey(AUTH_DETAILS_ROLE)) {
             return UserRole.valueOf(authenticationDetails.get(AUTH_DETAILS_ROLE));
-        } else {
-            return UserRole.ROLE_USER;
         }
+        return UserRole.ROLE_USER;
     }
 
     @SuppressWarnings("unchecked")

@@ -13,7 +13,6 @@ import com.codeball.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -42,7 +41,7 @@ public class GameService {
         return upcomingGame.orElseThrow(NoUpcomingGameException::new);
     }
 
-    public Game getGameById(@PathVariable long id) {
+    public Game getGameById(long id) {
         return gameRepository.getOne(id);
     }
 
@@ -57,7 +56,7 @@ public class GameService {
         if (game.isEnrollmentOver()) {
             throw new EnrollmentOverException(gameId);
         }
-        game.enrollUser(userToEnroll, status, securityContextUtils.getCurrentUser());
+        game.enrollUser(userToEnroll, status, securityContextUtils.currentUser());
         return game;
     }
 
@@ -100,4 +99,5 @@ public class GameService {
         game.setId(null);
         return gameRepository.save(game);
     }
+
 }

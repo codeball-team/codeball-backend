@@ -1,5 +1,6 @@
 package com.codeball.model;
 
+import com.codeball.exceptions.ArgumentNotPresentException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -75,6 +76,10 @@ public class User {
     @Transient
     public Optional<Long> id() {
         return Optional.ofNullable(id);
+    }
+
+    public long takeId() {
+        return id().orElseThrow(ArgumentNotPresentException::new);
     }
 
     public Optional<String> getAvatarUrl() {

@@ -29,6 +29,7 @@ public class DevelopmentSecurityContextFilter implements Filter {
     @Transactional
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
+
         DevelopmentProperties.SecurityContext developmentSecurityContext = developmentProperties.getSecurityContext();
         if (developmentSecurityContext.isEnabled()) {
             SecurityContext springSecurityContext = SecurityContextHolder.getContext();

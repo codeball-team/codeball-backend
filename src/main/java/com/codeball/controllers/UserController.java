@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "/me", method = RequestMethod.GET)
     public User getCurrentUser() {
-        return securityContextUtils.getCurrentUser();
+        return securityContextUtils.currentUser();
     }
 
     @RequestMapping(method = RequestMethod.GET)

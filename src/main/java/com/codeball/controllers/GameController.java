@@ -46,7 +46,7 @@ public class GameController {
     @Transactional
     @RequestMapping(value = "/{gameId}/enrollment", method = RequestMethod.PUT)
     public Game setEnrollmentStatus(@PathVariable("gameId") long gameId, @RequestBody EnrollmentStatus status) {
-        return gameService.setEnrollmentStatus(gameId, securityContextUtils.getCurrentUserId(), status);
+        return gameService.setEnrollmentStatus(gameId, securityContextUtils.currentUserId(), status);
     }
 
     @Transactional
