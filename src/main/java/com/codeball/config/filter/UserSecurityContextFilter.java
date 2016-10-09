@@ -14,7 +14,6 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public abstract class UserSecurityContextFilter implements Filter {
 
@@ -29,12 +28,11 @@ public abstract class UserSecurityContextFilter implements Filter {
     }
 
     @Override
-    @Transactional
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         if (Objects.nonNull(authentication)) {
-            User applicationUser = securityContextUtils.getOrCreateAppUser(authentication);
+            User applicationUser = securityContextUtils.findOrCreateAppUser(authentication);
             UsernamePasswordAuthenticationToken updatedAuthentication = cloneAuthenticationWithAdditionalInfo(authentication, applicationUser);
             securityContext.setAuthentication(updatedAuthentication);
         }

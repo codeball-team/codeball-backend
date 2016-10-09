@@ -1,13 +1,14 @@
 package com.codeball.services;
 
 import com.codeball.exceptions.UserEmailAlreadyExistsException;
+import com.codeball.exceptions.UserNotFoundException;
 import com.codeball.model.User;
 import com.codeball.model.UserRole;
 import com.codeball.model.annotations.security.AdminRoleRequired;
 import com.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
