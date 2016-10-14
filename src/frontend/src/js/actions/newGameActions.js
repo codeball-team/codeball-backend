@@ -55,11 +55,11 @@ export function newGameReset() {
 }
 
 export function newGameSubmit(newGame) {
-  const data = NewGameModel.toServerFormat(newGame);
+  const payload = NewGameModel.toServerFormat(newGame);
   return ajax(dispatch => ({
     actionType: NEW_GAME_SUBMIT,
     request: request('POST', gamesUrl())
-      .send(JSON.stringify(data)),
+      .send(JSON.stringify(payload)),
     json: true,
     debounce: true,
     successCallback: response => {

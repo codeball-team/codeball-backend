@@ -47,11 +47,11 @@ export function newUserReset() {
 }
 
 export function newUserSubmit(newUser) {
-  const data = NewUserModel.toServerFormat(newUser);
+  const payload = NewUserModel.toServerFormat(newUser);
   return ajax(dispatch => ({
     actionType: NEW_USER_SUBMIT,
     request: request('POST', usersUrl())
-      .send(JSON.stringify(data)),
+      .send(JSON.stringify(payload)),
     json: true,
     debounce: true,
     successCallback: response => {

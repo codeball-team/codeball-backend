@@ -55,11 +55,11 @@ export function newPitchReset() {
 }
 
 export function newPitchSubmit(newPitch) {
-  const data = NewPitchModel.toServerFormat(newPitch);
+  const payload = NewPitchModel.toServerFormat(newPitch);
   return ajax(dispatch => ({
     actionType: NEW_PITCH_SUBMIT,
     request: request('POST', pitchesUrl())
-      .send(JSON.stringify(data)),
+      .send(JSON.stringify(payload)),
     json: true,
     debounce: true,
     successCallback: response => {
