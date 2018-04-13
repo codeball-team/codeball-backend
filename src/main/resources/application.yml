@@ -18,7 +18,7 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     show-sql: true
   profiles:
-    active: dev
+    active: demo
 
 flyway:
   enabled: true
@@ -45,7 +45,7 @@ security:
 management:
   context-path: /management
   security:
-    enabled: false
+    enabled: true
 logging:
   file: codeball-spring.log
   level: debug

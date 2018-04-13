@@ -1,5 +1,6 @@
 package com.codeball.controllers;
 
+import com.codeball.exceptions.DemoVersionException;
 import com.codeball.exceptions.UserNotFoundException;
 import com.codeball.model.User;
 import com.codeball.model.annotations.security.AdminRoleRequired;
@@ -48,13 +49,13 @@ public class UserController {
     @AdminRoleRequired
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public User updateUser(@PathVariable("userId") long userId, @Valid @RequestBody User user) {
-        return userService.updateUser(userId, user);
+        throw new DemoVersionException();
     }
 
     @AdminRoleRequired
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("userId") long userId) {
-        userService.deleteUser(userId);
+        throw new DemoVersionException();
     }
 
 }

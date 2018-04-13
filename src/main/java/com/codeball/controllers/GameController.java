@@ -1,5 +1,6 @@
 package com.codeball.controllers;
 
+import com.codeball.exceptions.DemoVersionException;
 import com.codeball.model.EnrollmentStatus;
 import com.codeball.model.Game;
 import com.codeball.model.annotations.security.AdminRoleRequired;
@@ -52,12 +53,12 @@ public class GameController {
     @Transactional
     @RequestMapping(value = "/{gameId}/enrollment/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setEnrollmentStatus(@PathVariable("gameId") long gameId, @PathVariable("userId") long userId, @RequestBody EnrollmentStatus status) {
-        return gameService.setEnrollmentStatus(gameId, userId, status);
+        throw new DemoVersionException();
     }
 
     @RequestMapping(value = "/{gameId}/finishEnrollment", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game finishEnrollment(@PathVariable("gameId") long gameId) {
-        return gameService.finishEnrollment(gameId);
+        throw new DemoVersionException();
     }
 
     @RequestMapping(value = "/{gameId}/team", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -67,30 +68,30 @@ public class GameController {
 
     @RequestMapping(value = "/{gameId}/score", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game setGameScore(@PathVariable("gameId") long gameId, @Valid @RequestBody GameScoreRequest gameScoreRequest) {
-        return gameService.updateGameScore(gameId, gameScoreRequest.getTeamAScore(), gameScoreRequest.getTeamBScore());
+        throw new DemoVersionException();
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game createGame(@RequestBody Game game) {
-        return gameService.createGame(game);
+        throw new DemoVersionException();
     }
 
     @AdminRoleRequired
     @RequestMapping(value = "/{gameId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game updateGame(@PathVariable("gameId") long gameId, @Valid @RequestBody Game game) {
-        return gameService.updateGame(gameId, game);
+        throw new DemoVersionException();
     }
 
     @AdminRoleRequired
     @RequestMapping(value = "/{gameId}/end", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Game endGame(@PathVariable("gameId") long gameId) {
-        return gameService.endGame(gameId);
+        throw new DemoVersionException();
     }
 
     @AdminRoleRequired
     @RequestMapping(value = "/{gameId}", method = RequestMethod.DELETE)
     public void deleteGame(@PathVariable("gameId") long gameId) {
-        gameService.deleteGame(gameId);
+        throw new DemoVersionException();
     }
 
 }
