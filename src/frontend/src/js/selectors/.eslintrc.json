@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "../../../.eslintrc.js"
-  ],
-  "rules": {
-    "max-nested-callbacks": "off",
-    "max-params": "off"
-  }
-}
