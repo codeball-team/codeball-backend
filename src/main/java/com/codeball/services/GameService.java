@@ -42,7 +42,7 @@ public class GameService {
     }
 
     public Game getGameById(long id) {
-        return gameRepository.getOne(id);
+        return gameRepository.getById(id);
     }
 
     public Iterable<Game> getSortedGames() {
@@ -51,8 +51,8 @@ public class GameService {
 
     @Transactional(noRollbackFor = EnrollmentOverException.class)
     public Game setEnrollmentStatus(long gameId, long userId, EnrollmentStatus status) {
-        User userToEnroll = userRepository.getOne(userId);
-        Game game = gameRepository.getOne(gameId);
+        User userToEnroll = userRepository.getById(userId);
+        Game game = gameRepository.getById(gameId);
         if (game.isEnrollmentOver()) {
             throw new EnrollmentOverException(gameId);
         }
@@ -61,26 +61,26 @@ public class GameService {
     }
 
     public Game drawTeams(long gameId) {
-        Game game = gameRepository.getOne(gameId);
+        Game game = gameRepository.getById(gameId);
         teamAssigner.drawAndAssignNewTeams(game);
         return gameRepository.save(game);
     }
 
     public Game finishEnrollment(long gameId) {
-        Game game = gameRepository.getOne(gameId);
+        Game game = gameRepository.getById(gameId);
         game.endEnrollment();
         teamAssigner.drawAndAssignNewTeams(game);
         return gameRepository.save(game);
     }
 
     public Game updateGameScore(long gameId, int teamAScore, int teamBScore) {
-        Game game = gameRepository.getOne(gameId);
+        Game game = gameRepository.getById(gameId);
         game.setScore(teamAScore, teamBScore);
         return gameRepository.save(game);
     }
 
     public void deleteGame(long gameId) {
-        gameRepository.delete(gameId);
+        gameRepository.deleteById(gameId);
     }
 
     public Game updateGame(long gameId, Game game) {
@@ -90,7 +90,7 @@ public class GameService {
 
     @Transactional
     public Game endGame(long gameId) {
-        Game game = gameRepository.getOne(gameId);
+        Game game = gameRepository.getById(gameId);
         game.endGame();
         return game;
     }

@@ -2,7 +2,8 @@ package com.codeball.config;
 
 import com.codeball.exceptions.*;
 import com.codeball.model.responses.ErrorMessage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionController {
 
-    private static final Logger LOGGER = Logger.getLogger(GlobalExceptionController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionController.class);
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({NoLastGameException.class, NoUpcomingGameException.class})

@@ -1,10 +1,10 @@
 package com.codeball.repositories;
 
 import com.codeball.model.Pitch;
-import com.codeball.repositories.types.CrudRepositoryWithOptionals;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PitchRepository extends CrudRepositoryWithOptionals<Pitch, Long> {
+public interface PitchRepository extends CrudRepository<Pitch, Long> {
 
 }

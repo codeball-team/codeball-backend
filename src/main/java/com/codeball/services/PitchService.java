@@ -18,7 +18,7 @@ public class PitchService {
     }
 
     public Optional<Pitch> findPitchById(long id) {
-        return pitchRepository.findOne(id);
+        return pitchRepository.findById(id);
     }
 
     public Pitch createPitch(Pitch pitch) {
@@ -31,7 +31,7 @@ public class PitchService {
     }
 
     public void deletePitch(long id) {
-        pitchRepository.delete(id);
+        pitchRepository.deleteById(id);
     }
 
 }

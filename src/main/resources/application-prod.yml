@@ -6,9 +6,8 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
 
-flyway:
-  enabled: true
-  locations: db/migration/common,db/migration/postgres
+  flyway:
+    locations: db/migration/common,db/migration/postgres
 
 development:
   dataInitializer:

@@ -1,13 +1,14 @@
 package com.codeball.repositories;
 
+import com.codeball.exceptions.GameNotFoundException;
 import com.codeball.model.Game;
-import com.codeball.repositories.types.PagingAndSortingRepositoryWithOptionals;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface GameRepository extends PagingAndSortingRepositoryWithOptionals<Game, Long> {
+public interface GameRepository extends PagingAndSortingRepository<Game, Long> {
 
     Optional<Game> findTop1ByGameOverOrderByStartTimeDesc(boolean gameOver);
 
@@ -22,5 +23,8 @@ public interface GameRepository extends PagingAndSortingRepositoryWithOptionals<
     }
 
     Iterable<Game> findAllByOrderByStartTimeDesc();
-    
+
+    default Game getById(long id) {
+        return findById(id).orElseThrow(() -> new GameNotFoundException(id));
+    }
 }

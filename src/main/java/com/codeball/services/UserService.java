@@ -1,14 +1,12 @@
 package com.codeball.services;
 
 import com.codeball.exceptions.UserEmailAlreadyExistsException;
-import com.codeball.exceptions.UserNotFoundException;
 import com.codeball.model.User;
 import com.codeball.model.UserRole;
 import com.codeball.model.annotations.security.AdminRoleRequired;
 import com.codeball.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -23,7 +21,7 @@ public class UserService {
     }
 
     public Optional<User> findUserById(long id) {
-        return userRepository.findOne(id);
+        return userRepository.findById(id);
     }
 
     public User createNormalUser(User user) {
@@ -48,7 +46,7 @@ public class UserService {
     }
 
     public void deleteUser(long id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 
 }

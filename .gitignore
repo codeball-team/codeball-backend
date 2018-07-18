@@ -8,6 +8,7 @@ build
 .gradle
 *.log
 *spring.log*
+_database.mv*
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml

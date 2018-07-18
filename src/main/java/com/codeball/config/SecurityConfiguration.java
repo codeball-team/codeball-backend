@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.csrf().disable();
-
+        http.headers().frameOptions().disable();
         http.addFilterAfter(new UserDetailsSettingFilter(securityContextUtils), SecurityContextPersistenceFilter.class);
     }
 

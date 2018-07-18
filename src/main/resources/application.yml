@@ -1,13 +1,11 @@
 codeball:
   security:
     admin-access-urls: /api/admin/**
-    permit-all-urls: /login,/webjars/**,/management/**
+    permit-all-urls: /login,/webjars/**,/management/**,/h2-console/**
   authorizationDomain:
   time-zone-offset: +2
 
 spring:
-  application:
-    index: index.html
   resources:
     static-locations: classpath:/frontend/static/,classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
   jpa:
@@ -20,32 +18,28 @@ spring:
   profiles:
     active: dev
 
-flyway:
-  enabled: true
+  flyway:
+    enabled: true
+    check-location: false
 
-security:
-  basic:
-    enabled: false
-  user:
-    name: user
-    password: pass
-  oauth2:
-    client:
-      clientId: 645433820383-ks9c1u94qujptei3n7v6tuas2k4m9l1u.apps.googleusercontent.com
-      clientSecret: QycJ9l6BRJvKtiuJJGPfLiS2
-      accessTokenUri: https://accounts.google.com/o/oauth2/token
-      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth?hd=${codeball.authorizationDomain}
-      authenticationScheme: query
-      clientAuthenticationScheme: query
-      scope: profile email
-    resource:
-      userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
-      preferTokenInfo: false
-
-management:
-  context-path: /management
   security:
-    enabled: false
+    oauth2:
+      client:
+        clientId: 645433820383-ks9c1u94qujptei3n7v6tuas2k4m9l1u.apps.googleusercontent.com
+        clientSecret: QycJ9l6BRJvKtiuJJGPfLiS2
+        accessTokenUri: https://accounts.google.com/o/oauth2/token
+        userAuthorizationUri: https://accounts.google.com/o/oauth2/auth?hd=${codeball.authorizationDomain}
+        authenticationScheme: query
+        clientAuthenticationScheme: query
+        scope: profile email
+      resource:
+        userInfoUri: https://www.googleapis.com/oauth2/v1/userinfo
+        preferTokenInfo: false
+
+  management:
+    context-path: /management
+    security:
+      enabled: false
+
 logging:
   file: codeball-spring.log
-  level: debug
