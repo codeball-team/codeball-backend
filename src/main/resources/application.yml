@@ -1,4 +1,5 @@
 codeball:
+  frontend-files: file:///ABSOLUTE_PATH
   security:
     admin-access-urls: /api/admin/**
     permit-all-urls: /login,/webjars/**,/management/**,/h2-console/**
@@ -7,7 +8,7 @@ codeball:
 
 spring:
   resources:
-    static-locations: classpath:/frontend/static/,classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
+    static-locations: ${codeball.frontend-files},classpath:/resources/,classpath:/static/,classpath:/META-INF/resources/
   jpa:
     hibernate:
       ddl-auto: validate
@@ -42,4 +43,4 @@ spring:
       enabled: false
 
 logging:
-  file: codeball-spring.log
+  file: logs/codeball-spring.log

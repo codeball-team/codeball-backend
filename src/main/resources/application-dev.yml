@@ -11,6 +11,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  profiles:
+    include: local
 
 development:
   dataInitializer:

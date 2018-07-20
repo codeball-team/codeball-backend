@@ -5,10 +5,13 @@
 .idea
 *.iml
 build
+build-frontend
 .gradle
 *.log
 *spring.log*
 _database.mv*
+application-local.yml
+logs/
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
