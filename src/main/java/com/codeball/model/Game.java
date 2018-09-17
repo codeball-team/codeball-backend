@@ -11,7 +11,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,7 +30,6 @@ public class Game {
     private Long id;
 
     @NotNull
-    @JsonProperty("startTimestamp")
     private LocalDateTime startTime;
 
     @Min(30)
@@ -144,6 +145,16 @@ public class Game {
     public void endGame() {
         endEnrollment();
         this.gameOver = true;
+    }
+
+    @JsonGetter("startTimestamp")
+    private long getStartTimestamp() {
+        return startTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
+    }
+
+    @JsonSetter("startTimestamp")
+    private void getStartTimestamp(long timestamp) {
+        startTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.systemDefault());
     }
 
 }
